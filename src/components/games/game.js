@@ -124,10 +124,10 @@ const GameInfo = styled.div`
 
 export default function Game({state}) {
   //const state = {"id":1,"game_id":2484,"date":"2020-02-10T00:00:00+00:00","timestamp":"1581292800","status":"FT","home_team":"Houston Rockets","away_team":"Utah Jazz","home_score":113,"away_score":114}
-  console.log(state)
-
-  const homeTeam = teamData(state.home_team)
-  const awayTeam = teamData(state.away_team)
+  if (state.length === 0)
+    return <div></div>
+  const homeTeam = teamData(state[0].home_team)
+  const awayTeam = teamData(state[0].away_team)
 
   return (
     <Article homeColor={homeTeam.colors} awayColor={awayTeam.colors} arena={homeTeam.arena} >

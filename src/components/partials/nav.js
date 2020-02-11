@@ -1,4 +1,5 @@
 import React from "react"
+import {Link} from "react-router-dom"
 import styled from "styled-components"
 
 /* EXAMPLE PROPS
@@ -39,7 +40,7 @@ const Links = styled.div`
 
 `
 
-const Link = styled.a`
+const _Link = styled(Link)`
  cursor:pointer;
  padding-right: 15px;
 
@@ -82,8 +83,8 @@ export default function Navigation({ userid, username, userphoto, balance }) {
         </Logo>
 
         <Links>
-          <Link href="/groups">My Groups</Link>
-          <Link href="/games">Games</Link>
+          <_Link to="/groups">My Groups</_Link>
+          <_Link to="/games">Games</_Link>
           &nbsp; &nbsp;
           <Userinfo>
             <User>
