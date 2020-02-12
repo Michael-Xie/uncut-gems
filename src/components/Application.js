@@ -1,23 +1,12 @@
-import React, {Fragment, useState, useEffect} from 'react'
+import React, {Fragment} from 'react'
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Navigation from './partials/nav'
 import Game from './games/game'
 import axios from "axios"
+import useApplicationData from "../hooks/useApplicationData"
 
 const Application = () => {
-  const [state, setState] = useState({
-    games: []
-  })
-
-  useEffect(() => {
-    axios.get("http://localhost:8001/api/games")
-      .then(res => setState({games: res.data}))
-  }, [])
-
-  setInterval(() => {
-    axios.get("http://localhost:8001/api/games")
-      .then(res => setState({games: res.data}))  
-  }, 10000)
+  const { state, dispatch } = useApplicationData()
 
   return (
     <Fragment>
