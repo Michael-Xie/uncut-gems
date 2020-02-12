@@ -15,7 +15,7 @@ const useApplicationData = () => {
   setInterval(() => {
     axios.get("http://localhost:8001/api/games")
       .then(res => dispatch({type: "SET_GAMES", games: res.data}))  
-  }, 10000)
+  }, 60000)
 
   return {state, dispatch}
 }
