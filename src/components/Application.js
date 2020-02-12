@@ -26,7 +26,7 @@ const Application = () => {
           <Route path="/games">
             {
               state.games.map(game => {
-                return <Game state={game} />
+                return <Game game={game} />
               })
             }
           </Route>

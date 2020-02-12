@@ -1,19 +1,6 @@
 import React from "react";
 import styled from "styled-components"
 
-/*{ <Game
-      homeName="Toronto Raptors"
-      awayName="Los Angeles Lakers"
-      homeLogo="https://www.stickpng.com/assets/images/58419bf3a6515b1e0ad75a59.png"
-      awayLogo="https://www.stickpng.com/assets/images/58419d0aa6515b1e0ad75a6c.png"
-      gameStatus="7:30"
-      homePoints="20"
-      awayPoints="11"
-      homeCity="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/toronto-background.png"
-      homeColor="195, 14, 47, 0.701"
-      awayColor="253, 184, 39, 0.701"
-/> }*/
-
 /* --------------------------
  *    helper functions
  * --------------------------
@@ -231,11 +218,11 @@ const GameInfo = styled.div`
 
 // ---------------------------
 
-export default function Game({ state }) {
-  if (state === undefined)
+export default function Game({ game }) {
+  if (game === undefined)
     return <div></div>
-  const homeTeam = teamData(state.home_team)
-  const awayTeam = teamData(state.away_team)
+  const homeTeam = teamData(game.home_team)
+  const awayTeam = teamData(game.away_team)
   if (homeTeam === undefined)
     return <div></div>
 
@@ -243,23 +230,23 @@ export default function Game({ state }) {
     <Article homeColor={homeTeam.colors} awayColor={awayTeam.colors} arena={homeTeam.arena} >
 
       <Section>
-        <h1>{state.away_team}</h1>
+        <h1>{game.away_team}</h1>
         <ScoreLogo>
-          {showPointsIfActive(state.away_score)}
-          <img src={awayTeam.logo} alt={state.away_team} height="100px" width="auto" />
+          {showPointsIfActive(game.away_score)}
+          <img src={awayTeam.logo} alt={game.away_team} height="100px" width="auto" />
         </ScoreLogo>
       </Section>
 
       <GameInfo>
 
-        <h3>{state.status}</h3>
+        <h3>{game.status}</h3>
         {/* <button type="button">Show More</button> */}
       </GameInfo>
       <Section>
-        <h1>{state.home_team}</h1>
+        <h1>{game.home_team}</h1>
         <ScoreLogo>
-          <img src={homeTeam.logo} alt={state.home_team} height="100px" width="auto" />
-          {showPointsIfActive(state.home_score)}
+          <img src={homeTeam.logo} alt={game.home_team} height="100px" width="auto" />
+          {showPointsIfActive(game.home_score)}
         </ScoreLogo>
       </Section>
     </Article>
