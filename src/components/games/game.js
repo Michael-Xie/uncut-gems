@@ -232,7 +232,7 @@ export default function Game({ game }) {
       <Section>
         <h1>{game.away_team}</h1>
         <ScoreLogo>
-          {showPointsIfActive(game.away_score)}
+          {showPointsIfActive(game.away_total)}
           <img src={awayTeam.logo} alt={game.away_team} height="100px" width="auto" />
         </ScoreLogo>
       </Section>
@@ -246,7 +246,7 @@ export default function Game({ game }) {
         <h1>{game.home_team}</h1>
         <ScoreLogo>
           <img src={homeTeam.logo} alt={game.home_team} height="100px" width="auto" />
-          {showPointsIfActive(game.home_score)}
+          {showPointsIfActive(game.home_total)}
         </ScoreLogo>
       </Section>
     </Article>
