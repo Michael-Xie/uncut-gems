@@ -232,11 +232,12 @@ const GameInfo = styled.div`
 // ---------------------------
 
 export default function Game({ state }) {
-  //const state = {"id":1,"game_id":2484,"date":"2020-02-10T00:00:00+00:00","timestamp":"1581292800","status":"FT","home_team":"Houston Rockets","away_team":"Utah Jazz","home_score":113,"away_score":114}
-  if (state.length === 0)
+  if (state === undefined)
     return <div></div>
-  const homeTeam = teamData(state[0].home_team)
-  const awayTeam = teamData(state[0].away_team)
+  const homeTeam = teamData(state.home_team)
+  const awayTeam = teamData(state.away_team)
+  if (homeTeam === undefined)
+    return <div></div>
 
   return (
     <Article homeColor={homeTeam.colors} awayColor={awayTeam.colors} arena={homeTeam.arena} >
@@ -254,7 +255,6 @@ export default function Game({ state }) {
         <h3>{state.status}</h3>
         {/* <button type="button">Show More</button> */}
       </GameInfo>
-
       <Section>
         <h1>{state.home_team}</h1>
         <ScoreLogo>

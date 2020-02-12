@@ -24,7 +24,11 @@ const Application = () => {
         />
         <Switch>
           <Route path="/games">
-            <Game state={state.games} />
+            {
+              state.games.map(game => {
+                return <Game state={game} />
+              })
+            }
           </Route>
         </Switch>
       </Router>
