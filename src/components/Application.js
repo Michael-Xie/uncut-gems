@@ -14,6 +14,11 @@ const Application = () => {
       .then(res => setState({games: res.data}))
   }, [])
 
+  setInterval(() => {
+    axios.get("http://localhost:8001/api/games")
+      .then(res => setState({games: res.data}))
+  }, 10000)
+
   return (
     <Fragment>
       <Router>
