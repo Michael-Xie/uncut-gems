@@ -27,7 +27,132 @@ const teamData = (team) => {
       arena: "",
       colors: ""
     },
+    Boston_Celtics: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Brooklyn_Nets: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Charlotte_Hornets: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Chicago_Bulls: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Cleveland_Cavaliers: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Dallas_Mavericks: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Denver_Nuggets: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Detroit_Pistons: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Golden_State_Warriors: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
     Houston_Rockets: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Indiana_Pacers: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Los_Angeles_Clippers: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Memphis_Grizzlies: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Miami_Heat: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Milwaukee_Bucks: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Minnesota_Timberwolves: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    New_Orleans_Pelicans: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    New_York_Knicks: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Oklahoma_City_Thunder: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Orlando_Magic: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Philadelphia_76ers: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Phoenix_Suns: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Portland_Trail_Blazers: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Sacramento_Kings: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    San_Antonio_Spurs: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    },
+    Toronto_Raptors: {
       logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
       arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
       colors: "111, 200, 111, 0.701"
@@ -37,33 +162,12 @@ const teamData = (team) => {
       arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
       colors: "111, 200, 111, 0.701"
     },
-    Boston_Celtics: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/celtics.png",
-    Brooklyn_Nets: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/nets.png",
-    Charlotte_Hornets: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/charlotte-hornets.png",
-    Chicago_Bulls: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/bulls.png",
-    Cleveland_Cavaliers: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/cavaliers.png",
-    Dallas_Mavericks: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/mavericks.gif",
-    Denver_Nuggets: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/nuggets.gif",
-    Detroit_Pistons: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/pistons.png",
-    Golden_State_Warriors: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/warriors.gif",
-    Indiana_Pacers: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/pacers.png",
-    Los_Angeles_Clippers: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/clippers.gif",
-    Los_Angeles_Lakers: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/lakers.gif",
-    Memphis_Grizzlies: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/grizzlies.gif",
-    Miami_Heat: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/heat.png",
-    Milwaukee_Bucks: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/bucks.png",
-    Minnesota_Timberwolves: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/timberwolves.gif",
-    New_Orleans_Pelicans: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/pelicans.png",
-    New_York_Knicks: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/knicks.png",
-    Oklahoma_City_Thunder: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/thunder.gif",
-    Orlando_Magic: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/magic.gif",
-    Philadelphia_76ers: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/76ers.png",
-    Phoenix_Suns: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/suns.gif",
-    Portland_Trail_Blazers: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/trail_blazers.gif",
-    Sacramento_Kings: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/kings.gif",
-    San_Antonio_Spurs: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/spurs.gif",
-    Toronto_Raptors: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/raptors.png",
-    Washington_Wizards: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/wizzards.png"
+    Washingtion_Wizards: {
+      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      colors: "111, 200, 111, 0.701"
+    }
+
   }
   return data[team]
 }
