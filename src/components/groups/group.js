@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
-
 import React from "react";
 import styled from "styled-components"
 
@@ -18,15 +16,16 @@ const Article = styled.article`
 
 const Header = styled.section`
   display:flex;
-  justify-content: center;
 `
 
 const Title = styled.h1`
- display:flex;
- align-items:center;
- margin: 0 0 0 0;
-  
+  font-size: 20px;
+  margin: 20px 30px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
 `
+
 const Admin = styled.div`
   display:flex;
   border:1px solid black;
@@ -34,7 +33,6 @@ const Admin = styled.div`
 
 const User = styled.div`
   display:flex;
-
   align-items:center;
   cursor:pointer;
   font-size: small;
@@ -49,7 +47,6 @@ const Divider = styled.hr`
   margin-right: auto;
   border-style: inset;
   border-width: 1px;
- 
 `
 
 const Body = styled.div`
@@ -57,8 +54,6 @@ const Body = styled.div`
 `
 
 const Section = styled.div`
-  display:flex;
-  flex-direction: column;
   width:50%;
 `
 
@@ -89,30 +84,25 @@ export default function Group({ groupName, username, userphoto }) {
       <Header>
 
         <Title>{groupName}</Title>
-        {/* <Admin>
-            <User>
-              <img src={userphoto} alt={username} height="24px" width="24px"></img>
-              &nbsp; 
+        <Admin>
+          <User>
+            <img src={userphoto} alt={username} height="24px" width="24px"></img>
+            &nbsp;
               {username}
-            </User>
-        </Admin> */}
+          </User>
+        </Admin>
       </Header>
-      <Divider />
+      {/* <Divider /> */}
       <Body>
         <Section>
-          <Heading>Active Parlays</Heading>
-          <ActiveParlays>
-            5
-           </ActiveParlays>
+          <Heading>5 Total Bets</Heading>
         </Section>
-        <Section>
+        
+      
 
-        </Section>
-      </Body>
- 
-      <Divider />
+      {/* <Divider /> */}
 
-      <Footer>
+      <Section>
         <User>
           <img src={userphoto} alt={username} height="20px" width="20px"></img>
           &nbsp;
@@ -130,8 +120,8 @@ export default function Group({ groupName, username, userphoto }) {
         </User>
 
         <UserList>... 5 more</UserList>
-      </Footer>
-
+      </Section>
+      </Body>
     </Article>
   );
 
