@@ -23,149 +23,154 @@ const teamData = (team) => {
   team = team.replace(/\s/g, '_')
   const data = {
     Atlanta_Hawks: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/hawks.png",
-      arena: "",
-      colors: ""
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419be4a6515b1e0ad75a58.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/atlanta.png",
+      colors: "208,32,45, 0.701"
     },
     Boston_Celtics: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c6aa6515b1e0ad75a61.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/boston.png",
+      colors: "1,130,72, 0.701"
     },
     Brooklyn_Nets: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c7ba6515b1e0ad75a62.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/brooklyn.png",
+      colors: "0,0,0, 0.701"
     },
     Charlotte_Hornets: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419bd7a6515b1e0ad75a57.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/charlotte.png",
+      colors: "28,14,93, 0.701"
     },
     Chicago_Bulls: {
       logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/chicago.png",
+      colors: "210,20,58, 0.701"
     },
     Cleveland_Cavaliers: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c8da6515b1e0ad75a63.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/cleveland.png",
+      colors: "134,0,56, 0.701"
     },
     Dallas_Mavericks: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419cd6a6515b1e0ad75a68.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/dallas.png",
       colors: "111, 200, 111, 0.701"
     },
     Denver_Nuggets: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419b70a6515b1e0ad75a50.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/denver.png",
+      colors: "253,184,39, 0.701"
     },
     Detroit_Pistons: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c4ca6515b1e0ad75a5f.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/detroit.png",
+      colors: "0,103,177, 0.701"
     },
     Golden_State_Warriors: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419ce2a6515b1e0ad75a69.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/golden-state.png",
+      colors: "252,190,22, 0.701"
     },
     Houston_Rockets: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419ceda6515b1e0ad75a6a.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/houston.png",
+      colors: "211,13,76, 0.701"
     },
     Indiana_Pacers: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419b8da6515b1e0ad75a52.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/indiana.png",
+      colors: "0,45,98, 0.701"
     },
     Los_Angeles_Clippers: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c59a6515b1e0ad75a60.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/LA.png",
+      colors: "18,108,181, 0.701"
+    },
+    Los_Angeles_Lakers: {
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419d0aa6515b1e0ad75a6c.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/LA.png",
+      colors: "85,38,130, 0.701"
     },
     Memphis_Grizzlies: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c00a6515b1e0ad75a5a.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/memphis.png",
+      colors: "33,54,89, 0.701"
     },
     Miami_Heat: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419cafa6515b1e0ad75a65.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/miami.png",
+      colors: "242,110,63, 0.701"
     },
     Milwaukee_Bucks: {
       logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/milwakee.png",
+      colors: "0,71,28, 0.701"
     },
     Minnesota_Timberwolves: {
       logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/minneapolis.png",
+      colors: "5,34,49, 0.701"
     },
     New_Orleans_Pelicans: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419b9ba6515b1e0ad75a53.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/new_orleans.png",
+      colors: "182,152,87, 0.701"
     },
     New_York_Knicks: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419cc8a6515b1e0ad75a67.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/new_york.png",
+      colors: "246,131,40, 0.701"
     },
     Oklahoma_City_Thunder: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c20a6515b1e0ad75a5c.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/okc.png",
+      colors: "8,126,194, 0.701"
     },
     Orlando_Magic: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419b7da6515b1e0ad75a51.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/orlando.png",
+      colors: "1,115,188, 0.701"
     },
     Philadelphia_76ers: {
       logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/orlando.png",
+      colors: "237,21,75, 0.701"
     },
     Phoenix_Suns: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419d52a6515b1e0ad75a6d.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/pheonix.png",
+      colors: "250,161,33, 0.701"
     },
     Portland_Trail_Blazers: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c2fa6515b1e0ad75a5d.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/portland.png",
+      colors: "224,56,62, 0.701"
     },
     Sacramento_Kings: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c3da6515b1e0ad75a5e.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/sacramento.png",
+      colors: "58,63,148, 0.701"
     },
     San_Antonio_Spurs: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419cbca6515b1e0ad75a66.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/san_antonio.png",
+      colors: "196,206,212, 0.701"
     },
     Toronto_Raptors: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419bf3a6515b1e0ad75a59.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/toronto.png",
+      colors: "198,15,48, 0.701"
     },
     Utah_Jazz: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/jazz.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419bb6a6515b1e0ad75a55.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/utah.png",
+      colors: "231,150,29, 0.701"
     },
     Washingtion_Wizards: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
-      arena: "https://i.cdn.turner.com/dr/nba/teamsites-nbateams/release/jazz/sites/jazz/files/imagecache/jazz_standard/content/images-top/2012/04/2014-energysolutionsarena-640.jpg",
-      colors: "111, 200, 111, 0.701"
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c12a6515b1e0ad75a5b.png",
+      arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/washington.png",
+      colors: "208,60,71, 0.701"
     }
 
   }
@@ -189,7 +194,7 @@ const Article = styled.article`
   height: 200px;
   margin: 30px auto 0;
   background: linear-gradient(
-      to right,
+      to left,
       rgba(${props => props.homeColor}),
       rgba(${props => props.awayColor})  
     ),
@@ -226,7 +231,7 @@ const GameInfo = styled.div`
 
 // ---------------------------
 
-export default function Game({state}) {
+export default function Game({ state }) {
   //const state = {"id":1,"game_id":2484,"date":"2020-02-10T00:00:00+00:00","timestamp":"1581292800","status":"FT","home_team":"Houston Rockets","away_team":"Utah Jazz","home_score":113,"away_score":114}
   if (state.length === 0)
     return <div></div>
@@ -235,25 +240,26 @@ export default function Game({state}) {
 
   return (
     <Article homeColor={homeTeam.colors} awayColor={awayTeam.colors} arena={homeTeam.arena} >
-      <Section>
-        <h1>{state.home_team}</h1>
-        <ScoreLogo>
-          <img src={homeTeam.logo} alt={state.home_team} height="100px" width="auto" />
-          {showPointsIfActive(state.home_score)}
-        </ScoreLogo>
-      </Section>
-
-      <GameInfo>
-      
-      <h3>{state.status}</h3>
-      {/* <button type="button">Show More</button> */}
-      </GameInfo>
 
       <Section>
         <h1>{state.away_team}</h1>
         <ScoreLogo>
           {showPointsIfActive(state.away_score)}
           <img src={awayTeam.logo} alt={state.away_team} height="100px" width="auto" />
+        </ScoreLogo>
+      </Section>
+
+      <GameInfo>
+
+        <h3>{state.status}</h3>
+        {/* <button type="button">Show More</button> */}
+      </GameInfo>
+
+      <Section>
+        <h1>{state.home_team}</h1>
+        <ScoreLogo>
+          <img src={homeTeam.logo} alt={state.home_team} height="100px" width="auto" />
+          {showPointsIfActive(state.home_score)}
         </ScoreLogo>
       </Section>
     </Article>
