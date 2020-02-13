@@ -216,8 +216,6 @@ const GameInfo = styled.div`
 `
 const TeamName = styled.h1`
   margin: 20px;
-  
-  
 `
 
 const GameStatus = styled.h3`
@@ -231,8 +229,6 @@ const Logo = styled.img`
 // ---------------------------
 
 export default function Game({ game }) {
-  console.log(game)
-  
   if (game.length === 0 || !game)
     return <div></div>
   const homeTeam = teamData(game.home_team)
