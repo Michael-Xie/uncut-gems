@@ -3,14 +3,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Navigation from './partials/nav'
 import Game from './games/game'
 import Group from './groups/group'
-<<<<<<< HEAD
 import Form from './sessions/registration'
-=======
 
 import AddGroup from './groups/addGroup'
 import axios from "axios"
 
->>>>>>> b1af0fc267d7761cf241f9926eab59c0ad2c0d9b
 import useApplicationData from "../hooks/useApplicationData"
 
 import "./Application.css"
