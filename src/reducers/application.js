@@ -2,7 +2,7 @@ const SET_GAMES = "SET_GAMES"
 
 const handlers = {
   [SET_GAMES]: (prevState, action) => {
-    return {...prevState, games: action.games}
+    return {games: action.games}
   }
 }
 
