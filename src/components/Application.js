@@ -20,7 +20,7 @@ const Application = () => {
           <Route path="/games">
             {
               state.games.map(game => {
-                return <Game game={game} />
+                return <Game key={game.game_id} game={game} />
               })
             }
           </Route>

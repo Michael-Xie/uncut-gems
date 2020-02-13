@@ -166,7 +166,7 @@ const teamData = (team) => {
 
 const showPointsIfActive = (pointsProp) => {
   if (pointsProp) return pointsProp;
-  return null
+  return 0
 }
 
 
@@ -219,11 +219,11 @@ const GameInfo = styled.div`
 // ---------------------------
 
 export default function Game({ game }) {
-  if (game === undefined)
+  if (game.length === 0 || !game)
     return <div></div>
   const homeTeam = teamData(game.home_team)
   const awayTeam = teamData(game.away_team)
-  if (homeTeam === undefined)
+  if (homeTeam === undefined || awayTeam === undefined)
     return <div></div>
 
   return (
