@@ -1,7 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
-
 import React from "react";
 import styled from "styled-components"
+
+// EXAMPLE PROPS
+// groupName
+// totalGroupBets
+// groupMembers
+// AdminName
+// AdminPhoto
+// UsersActive total
+
+
 
 const Article = styled.article` 
   background-color: #fff;
@@ -22,24 +30,18 @@ const Header = styled.section`
 `
 
 const Title = styled.h1`
- display:flex;
- align-items:center;
- margin: 0 0 0 0;
-  
+  font-size: 20px;
+  margin: 15px 0 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 `
+
 const Admin = styled.div`
   display:flex;
   border:1px solid black;
 `
 
-const User = styled.div`
-  display:flex;
 
-  align-items:center;
-  cursor:pointer;
-  font-size: small;
-  padding-right: 10px;
-`
 
 const Divider = styled.hr`
   width: 90%;
@@ -49,7 +51,6 @@ const Divider = styled.hr`
   margin-right: auto;
   border-style: inset;
   border-width: 1px;
- 
 `
 
 const Body = styled.div`
@@ -57,9 +58,7 @@ const Body = styled.div`
 `
 
 const Section = styled.div`
-  display:flex;
-  flex-direction: column;
-  width:50%;
+  width:60%;
 `
 
 const Heading = styled.h2`
@@ -78,9 +77,24 @@ const Footer = styled.footer`
   justify-content: center;
 `
 
-const UserList = styled.a`
-  padding-top: 5px;
-  font-size: 11px;
+const UserList = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width:30%;
+  border-left: 1px solid black;
+`
+
+const User = styled.div`
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  padding:5px 8px;
+  cursor:pointer;
+
+  &:hover {
+    color: grey;
+  }
 `
 
 export default function Group({ groupName, username, userphoto }) {
@@ -90,48 +104,51 @@ export default function Group({ groupName, username, userphoto }) {
 
         <Title>{groupName}</Title>
         {/* <Admin>
-            <User>
-              <img src={userphoto} alt={username} height="24px" width="24px"></img>
-              &nbsp; 
+          <User>
+            <img src={userphoto} alt={username} height="24px" width="24px"></img>
+            &nbsp;
               {username}
-            </User>
+          </User>
         </Admin> */}
       </Header>
       <Divider />
       <Body>
         <Section>
-          <Heading>Active Parlays</Heading>
-          <ActiveParlays>
-            5
-           </ActiveParlays>
-        </Section>
-        <Section>
+          <Heading>You have 5 Active parlays</Heading>
+          <Heading>5 Total Bets</Heading>
 
         </Section>
+
+
+        <UserList>
+          Friends in this group
+          <User>
+            <img src={userphoto} alt={username} height="30px" width="30px"></img>
+            &nbsp;
+              {username}
+          </User>
+          <User>
+            <img src={userphoto} alt={username} height="30px" width="30px"></img>
+            &nbsp;
+              {username}
+          </User>
+          <User>
+            <img src={userphoto} alt={username} height="30px" width="30px"></img>
+            &nbsp;
+              {username}
+          </User>
+          <User>
+            <img src={userphoto} alt={username} height="30px" width="30px"></img>
+            &nbsp;
+              {username}
+          </User>
+
+
+        </UserList>
+
+
+
       </Body>
- 
-      <Divider />
-
-      <Footer>
-        <User>
-          <img src={userphoto} alt={username} height="20px" width="20px"></img>
-          &nbsp;
-              {username}
-        </User>
-        <User>
-          <img src={userphoto} alt={username} height="20px" width="20px"></img>
-          &nbsp;
-              {username}
-        </User>
-        <User>
-          <img src={userphoto} alt={username} height="20px" width="20px"></img>
-          &nbsp;
-              {username}
-        </User>
-
-        <UserList>... 5 more</UserList>
-      </Footer>
-
     </Article>
   );
 
