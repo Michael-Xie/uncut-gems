@@ -7,6 +7,9 @@ const handleRegister = (event) => {
   event.preventDefault()
   const user = event.target.username.value
   const password = event.target.password.value
+  //[TODO] validate username and password
+
+  //
   axios.post("http://localhost:8001/api/users", {
     user_name: user,
     password: password,
