@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Navigation from './partials/nav'
 import Game from './games/game'
 import Group from './groups/group'
+import Form from './sessions/registration'
 
 import AddGroup from './groups/addGroup'
 import axios from "axios"
-
 import useApplicationData from "../hooks/useApplicationData"
 
 import "./Application.css"
@@ -22,6 +22,7 @@ const Application = () => {
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
           balance="14.56"
         />
+        <Form dispatch={dispatch} />
         <Switch>
           <Route path="/games">
             { state.games.length > 0 && (
