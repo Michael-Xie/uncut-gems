@@ -216,8 +216,6 @@ const GameInfo = styled.div`
 `
 const TeamName = styled.h1`
   margin: 20px;
-  
-  
 `
 
 const GameStatus = styled.h3`
