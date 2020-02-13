@@ -4,6 +4,9 @@ import Navigation from './partials/nav'
 import Game from './games/game'
 import Group from './groups/group'
 import Form from './sessions/registration'
+
+import AddGroup from './groups/addGroup'
+import axios from "axios"
 import useApplicationData from "../hooks/useApplicationData"
 
 import "./Application.css"
@@ -31,7 +34,12 @@ const Application = () => {
           </Route>
         </Switch>
         <Switch>
+          
           <Route path="/groups">
+            <AddGroup 
+              onClick="?"
+            />
+
             <Group
               // EXAMPLE PROPS NOT SURE YET
               // groupName
