@@ -90,12 +90,12 @@ const teamData = (team) => {
       colors: "242,110,63, 0.701"
     },
     Milwaukee_Bucks: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419ba7a6515b1e0ad75a54.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/milwakee.png",
       colors: "0,71,28, 0.701"
     },
     Minnesota_Timberwolves: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419bc5a6515b1e0ad75a56.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/minneapolis.png",
       colors: "5,34,49, 0.701"
     },
@@ -232,8 +232,9 @@ export default function Game({ game }) {
       <Section>
         <h1>{game.away_team}</h1>
         <ScoreLogo>
-          {showPointsIfActive(game.away_total)}
+          
           <img src={awayTeam.logo} alt={game.away_team} height="100px" width="auto" />
+          {showPointsIfActive(game.away_total)}
         </ScoreLogo>
       </Section>
 
@@ -245,8 +246,9 @@ export default function Game({ game }) {
       <Section>
         <h1>{game.home_team}</h1>
         <ScoreLogo>
-          <img src={homeTeam.logo} alt={game.home_team} height="100px" width="auto" />
-          {showPointsIfActive(game.home_total)}
+        {showPointsIfActive(game.home_total)}
+         <img src={homeTeam.logo} alt={game.home_team} height="100px" width="auto" />
+         
         </ScoreLogo>
       </Section>
     </Article>
