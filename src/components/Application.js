@@ -4,6 +4,8 @@ import Navigation from './partials/nav'
 import Game from './games/game'
 import StatsBox from './games/statsBox'
 import Group from './groups/group'
+import Register from './sessions/registration'
+import Login from './sessions/login'
 
 import AddGroup from './groups/addGroup'
 import axios from "axios"
@@ -23,6 +25,8 @@ const Application = () => {
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
           balance="14.56"
         />
+        <Register dispatch={dispatch} />
+        <Login dispatch={dispatch} />
         <Switch>
           <Route path="/games">
             {state.games.length > 0 && (
