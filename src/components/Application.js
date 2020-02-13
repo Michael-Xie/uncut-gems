@@ -1,5 +1,5 @@
-import React, {Fragment} from 'react'
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
+import React, { Fragment } from 'react'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Navigation from './partials/nav'
 import Game from './games/game'
 import Group from './groups/group'
@@ -31,12 +31,19 @@ const Application = () => {
 
         <Switch>
           <Route path="/groups">
-            <Group 
-            groupName="Super Sports Group"
-            username="Jamie"
-            userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
+            <Group
+              // EXAMPLE PROPS NOT SURE YET
+              // groupName
+              // totalGroupBets
+              // groupMembers
+              // AdminName
+              // AdminPhoto
+              // UsersActive total
+              groupName="Super Sports Group"
+              username="Jamie"
+              userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
             />
-    
+
           </Route>
         </Switch>
       </Router>

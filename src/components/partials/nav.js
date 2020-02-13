@@ -19,9 +19,10 @@ const Header = styled.header`
 
 const Nav = styled.nav`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 15px 0;
+  margin: 0 auto;
 `
 
 const Logo = styled.div`

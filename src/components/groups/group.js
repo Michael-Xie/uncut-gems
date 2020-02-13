@@ -1,6 +1,16 @@
 import React from "react";
 import styled from "styled-components"
 
+// EXAMPLE PROPS
+// groupName
+// totalGroupBets
+// groupMembers
+// AdminName
+// AdminPhoto
+// UsersActive total
+
+
+
 const Article = styled.article` 
   background-color: #fff;
   width: 600px;
@@ -16,14 +26,14 @@ const Article = styled.article`
 
 const Header = styled.section`
   display:flex;
+  justify-content: center;
 `
 
 const Title = styled.h1`
   font-size: 20px;
-  margin: 20px 30px;
+  margin: 15px 0 0;
   letter-spacing: 2px;
   text-transform: uppercase;
-
 `
 
 const Admin = styled.div`
@@ -31,13 +41,7 @@ const Admin = styled.div`
   border:1px solid black;
 `
 
-const User = styled.div`
-  display:flex;
-  align-items:center;
-  cursor:pointer;
-  font-size: small;
-  padding-right: 10px;
-`
+
 
 const Divider = styled.hr`
   width: 90%;
@@ -54,7 +58,7 @@ const Body = styled.div`
 `
 
 const Section = styled.div`
-  width:50%;
+  width:60%;
 `
 
 const Heading = styled.h2`
@@ -73,9 +77,24 @@ const Footer = styled.footer`
   justify-content: center;
 `
 
-const UserList = styled.a`
-  padding-top: 5px;
-  font-size: 11px;
+const UserList = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width:30%;
+  border-left: 1px solid black;
+`
+
+const User = styled.div`
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  padding:5px 8px;
+  cursor:pointer;
+
+  &:hover {
+    color: grey;
+  }
 `
 
 export default function Group({ groupName, username, userphoto }) {
@@ -84,43 +103,51 @@ export default function Group({ groupName, username, userphoto }) {
       <Header>
 
         <Title>{groupName}</Title>
-        <Admin>
+        {/* <Admin>
           <User>
             <img src={userphoto} alt={username} height="24px" width="24px"></img>
             &nbsp;
               {username}
           </User>
-        </Admin>
+        </Admin> */}
       </Header>
-      {/* <Divider /> */}
+      <Divider />
       <Body>
         <Section>
+          <Heading>You have 5 Active parlays</Heading>
           <Heading>5 Total Bets</Heading>
+
         </Section>
-        
-      
 
-      {/* <Divider /> */}
 
-      <Section>
-        <User>
-          <img src={userphoto} alt={username} height="20px" width="20px"></img>
-          &nbsp;
+        <UserList>
+          Friends in this group
+          <User>
+            <img src={userphoto} alt={username} height="30px" width="30px"></img>
+            &nbsp;
               {username}
-        </User>
-        <User>
-          <img src={userphoto} alt={username} height="20px" width="20px"></img>
-          &nbsp;
+          </User>
+          <User>
+            <img src={userphoto} alt={username} height="30px" width="30px"></img>
+            &nbsp;
               {username}
-        </User>
-        <User>
-          <img src={userphoto} alt={username} height="20px" width="20px"></img>
-          &nbsp;
+          </User>
+          <User>
+            <img src={userphoto} alt={username} height="30px" width="30px"></img>
+            &nbsp;
               {username}
-        </User>
+          </User>
+          <User>
+            <img src={userphoto} alt={username} height="30px" width="30px"></img>
+            &nbsp;
+              {username}
+          </User>
 
-        <UserList>... 5 more</UserList>
-      </Section>
+
+        </UserList>
+
+
+
       </Body>
     </Article>
   );
