@@ -31,7 +31,7 @@ const Application = () => {
               })
             )
             }
-            <StatsBox
+            {/* <StatsBox
               homeFirstQ="12"
               homeSecondQ="43"
               homeThirdQ="0"
@@ -40,7 +40,7 @@ const Application = () => {
               awaySecondQ="0"
               awayThirdQ="0"
               awayFourthQ="0"
-            />
+            /> */}
           </Route>
         </Switch>
         <Switch>

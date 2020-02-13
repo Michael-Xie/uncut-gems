@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components"
 import teamData from "../../helpers/teamData"
+
+import StatsBox from './statsBox'
 
 const showPointsIfActive = (pointsProp) => {
   if (pointsProp) return pointsProp;
@@ -26,10 +28,11 @@ const Article = styled.article`
    url(${props => props.arena ? props.arena : 'https://previews.123rf.com/images/enterline/enterline1311/enterline131100002/24220420-a-realistic-vector-hardwood-textured-basketball-court-.jpg'});
   background-blend-mode: multiply;
   display: flex;
+  cursor: pointer;
 
   &:hover {
     box-shadow: 0 8px 6px -6px black;
-    cursor: pointer;
+
   }
 
 `
@@ -64,44 +67,80 @@ const GameStatus = styled.h3`
 const Logo = styled.img` 
 
 `
+
+const Stats = styled.div`
+
+`
 // ---------------------------
 
 export default function Game({ game }) {
+  const [statsBoxVisible, setStatsBoxVisible] = useState(false);
+
   if (game.length === 0 || !game)
     return <div></div>
   const homeTeam = teamData(game.home_team)
   const awayTeam = teamData(game.away_team)
+
+  
+
   if (homeTeam === undefined || awayTeam === undefined)
     return <div></div>
 
   return (
-    <Article homeColor={homeTeam.colors} awayColor={awayTeam.colors} arena={homeTeam.arena} >
+    <div>
+      <Article
+        onClick={() => setStatsBoxVisible(!statsBoxVisible)}
+        homeColor={homeTeam.colors}
+        awayColor={awayTeam.colors}
+        arena={homeTeam.arena}
+      >
+        <Section>
+          <TeamName>{game.away_team}</TeamName>
 
-      <Section>
-        <TeamName>{game.away_team}</TeamName>
-       
-        <ScoreLogo>
-          
-          <Logo src={awayTeam.logo} alt={game.away_team} height="100px" width="auto" />
-          {showPointsIfActive(game.away_total)}
-        </ScoreLogo>
-      </Section>
+          <ScoreLogo>
+            <Logo
+              src={awayTeam.logo}
+              alt={game.away_team}
+              height="100px"
+              width="auto"
+            />
+            {showPointsIfActive(game.away_total)}
+          </ScoreLogo>
+        </Section>
 
-      <GameInfo>
+        <GameInfo>
+          <GameStatus>{game.status}</GameStatus>
+          {/* <button type="button">Show More</button> */}
+        </GameInfo>
+        <Section>
+          <TeamName>{game.home_team}</TeamName>
 
-        <GameStatus>{game.status}</GameStatus>
-        {/* <button type="button">Show More</button> */}
-      </GameInfo>
-      <Section>
-      <TeamName>{game.home_team}</TeamName>
+          <ScoreLogo>
+            {showPointsIfActive(game.home_total)}
+            <img
+              src={homeTeam.logo}
+              alt={game.home_team}
+              height="100px"
+              width="auto"
+            />
+          </ScoreLogo>
+        </Section>
+      </Article>
+     
+      {statsBoxVisible && (
+        <StatsBox
+          homeFirstQ={game.home_first}
+          homeSecondQ={game.home_second}
+          homeThirdQ={game.home_third}
+          homeFourthQ={game.home_fourth}
+          awayFirstQ={game.away_first}
+          awaySecondQ={game.away_second}
+          awayThirdQ={game.away_third}
+          awayFourthQ={game.away_fourth}
+        />
+      )}
    
-        <ScoreLogo>
-        {showPointsIfActive(game.home_total)}
-         <img src={homeTeam.logo} alt={game.home_team} height="100px" width="auto" />
-         
-        </ScoreLogo>
-      </Section>
-    </Article>
+    </div>
   );
 
 }

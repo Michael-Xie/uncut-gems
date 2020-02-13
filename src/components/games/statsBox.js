@@ -17,11 +17,10 @@ const QuarterPoints = styled.div`
 
 `
 const Quarter = styled.h4`
-
 `
 
 
-export default function StatsBox ({ homeFirstQ, homeSecondQ, homeThirdQ, homeFourthQ, awayFirstQ, awaySecondQ, awayThirdQ, awayFourthQ, homeTotal, awayTotal }) {
+export default function StatsBox ({ homeFirstQ, homeSecondQ, homeThirdQ, homeFourthQ, awayFirstQ, awaySecondQ, awayThirdQ, awayFourthQ }) {
   return (
     <Wrapper>
       <QuarterPoints>
