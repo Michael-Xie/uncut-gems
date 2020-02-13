@@ -4,7 +4,8 @@ import reducer from "../reducers/application"
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, {
-    games: []
+    games: [],
+    user: ""
   })
 
   useEffect(() => {
@@ -16,10 +17,12 @@ const useApplicationData = () => {
       })
   }, [])
   
+  let i = 0
   setInterval(() => {
     axios.get("http://localhost:8001/api/games")
       .then(res => {
-        console.log(`Games Updated`)
+        i++
+        console.log(`Games Updated #${i}`)
         const games = res.data.sort((a, b) => b.date - a.date)
         dispatch(() => ({type: "SET_GAMES", games: games}))
       })

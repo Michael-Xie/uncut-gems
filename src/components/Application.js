@@ -28,7 +28,6 @@ const Application = () => {
             }
           </Route>
         </Switch>
-
         <Switch>
           <Route path="/groups">
             <Group
