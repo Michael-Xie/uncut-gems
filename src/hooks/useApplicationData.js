@@ -9,12 +9,20 @@ const useApplicationData = () => {
 
   useEffect(() => {
     axios.get("http://localhost:8001/api/games")
-      .then(res => dispatch({type: "SET_GAMES", games: res.data}))
+      .then(res => {
+        console.log("called")
+        const games = res.data.sort((a, b) => b.date - a.date)
+        dispatch({type: "SET_GAMES", games: games})
+      })
   }, [])
   
   setInterval(() => {
     axios.get("http://localhost:8001/api/games")
-      .then(res => dispatch({type: "SET_GAMES", games: res.data}))  
+      .then(res => {
+        console.log(`Games Updated`)
+        const games = res.data.sort((a, b) => b.date - a.date)
+        dispatch(() => ({type: "SET_GAMES", games: games}))
+      })
   }, 30000)
 
   return {state, dispatch}
