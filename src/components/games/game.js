@@ -12,7 +12,7 @@ const teamData = (team) => {
     Atlanta_Hawks: {
       logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419be4a6515b1e0ad75a58.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/atlanta.png",
-      colors: "208,32,45, 0.701"
+      colors: "255,255,255, 0.701"
     },
     Boston_Celtics: {
       logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c6aa6515b1e0ad75a61.png",
@@ -57,7 +57,7 @@ const teamData = (team) => {
     Golden_State_Warriors: {
       logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419ce2a6515b1e0ad75a69.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/golden-state.png",
-      colors: "252,190,22, 0.701"
+      colors: "25,100,183, 0.701"
     },
     Houston_Rockets: {
       logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419ceda6515b1e0ad75a6a.png",
@@ -82,7 +82,7 @@ const teamData = (team) => {
     Memphis_Grizzlies: {
       logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c00a6515b1e0ad75a5a.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/memphis.png",
-      colors: "33,54,89, 0.701"
+      colors: "35,55,91, 0.701"
     },
     Miami_Heat: {
       logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419cafa6515b1e0ad75a65.png",
@@ -90,12 +90,12 @@ const teamData = (team) => {
       colors: "242,110,63, 0.701"
     },
     Milwaukee_Bucks: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419ba7a6515b1e0ad75a54.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/milwakee.png",
       colors: "0,71,28, 0.701"
     },
     Minnesota_Timberwolves: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419bc5a6515b1e0ad75a56.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/minneapolis.png",
       colors: "5,34,49, 0.701"
     },
@@ -117,7 +117,7 @@ const teamData = (team) => {
     Orlando_Magic: {
       logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419b7da6515b1e0ad75a51.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/orlando.png",
-      colors: "1,115,188, 0.701"
+      colors: "197,204,208, 0.701"
     },
     Philadelphia_76ers: {
       logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
@@ -152,7 +152,7 @@ const teamData = (team) => {
     Utah_Jazz: {
       logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419bb6a6515b1e0ad75a55.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/utah.png",
-      colors: "231,150,29, 0.701"
+      colors: "11,35,64, 0.701"
     },
     Washingtion_Wizards: {
       logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c12a6515b1e0ad75a5b.png",
@@ -210,15 +210,29 @@ const ScoreLogo = styled.div`
 `
 const GameInfo = styled.div`
   display: flex;
-  flex-direction: column;
-  text-align: center;
+  align-items: center;
   width: 20%;
   font-weight: bold;
 `
+const TeamName = styled.h1`
+  margin: 20px;
+  
+  
+`
 
+const GameStatus = styled.h3`
+  text-align: center;
+  margin: 0 auto;
+`
+
+const Logo = styled.img` 
+
+`
 // ---------------------------
 
 export default function Game({ game }) {
+  console.log(game)
+  
   if (game.length === 0 || !game)
     return <div></div>
   const homeTeam = teamData(game.home_team)
@@ -230,23 +244,27 @@ export default function Game({ game }) {
     <Article homeColor={homeTeam.colors} awayColor={awayTeam.colors} arena={homeTeam.arena} >
 
       <Section>
-        <h1>{game.away_team}</h1>
+        <TeamName>{game.away_team}</TeamName>
+       
         <ScoreLogo>
+          
+          <Logo src={awayTeam.logo} alt={game.away_team} height="100px" width="auto" />
           {showPointsIfActive(game.away_total)}
-          <img src={awayTeam.logo} alt={game.away_team} height="100px" width="auto" />
         </ScoreLogo>
       </Section>
 
       <GameInfo>
 
-        <h3>{game.status}</h3>
+        <GameStatus>{game.status}</GameStatus>
         {/* <button type="button">Show More</button> */}
       </GameInfo>
       <Section>
-        <h1>{game.home_team}</h1>
+      <TeamName>{game.home_team}</TeamName>
+   
         <ScoreLogo>
-          <img src={homeTeam.logo} alt={game.home_team} height="100px" width="auto" />
-          {showPointsIfActive(game.home_total)}
+        {showPointsIfActive(game.home_total)}
+         <img src={homeTeam.logo} alt={game.home_team} height="100px" width="auto" />
+         
         </ScoreLogo>
       </Section>
     </Article>
