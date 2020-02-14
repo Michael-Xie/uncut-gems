@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Navigation from './partials/nav'
 import Game from './games/game'
+import StatsBox from './games/statsBox'
 import Group from './groups/group'
 import Register from './sessions/registration'
 import Login from './sessions/login'
@@ -20,7 +21,7 @@ const Application = () => {
     <Fragment>
       <Router>
         <Navigation
-          username="Jamie"
+          username={state.user}
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
           balance="14.56"
         />
@@ -28,18 +29,28 @@ const Application = () => {
         <Login dispatch={dispatch} />
         <Switch>
           <Route path="/games">
-            { state.games.length > 0 && (
+            {state.games.length > 0 && (
               state.games.map(game => {
                 return <Game key={game.game_id} game={game} />
               })
             )
             }
+            {/* <StatsBox
+              homeFirstQ="12"
+              homeSecondQ="43"
+              homeThirdQ="0"
+              homeFourthQ="0"
+              awayFirstQ="12"
+              awaySecondQ="0"
+              awayThirdQ="0"
+              awayFourthQ="0"
+            /> */}
           </Route>
         </Switch>
         <Switch>
-          
+
           <Route path="/groups">
-            <AddGroup 
+            <AddGroup
               onClick="?"
             />
 
