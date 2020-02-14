@@ -21,7 +21,7 @@ const Application = () => {
     <Fragment>
       <Router>
         <Navigation
-          username="Jamie"
+          username={state.user}
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
           balance="14.56"
         />
