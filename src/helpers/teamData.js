@@ -112,7 +112,7 @@ const teamData = (team) => {
       colors: "197,204,208, 0.701"
     },
     Philadelphia_76ers: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419ca3a6515b1e0ad75a64.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/orlando.png",
       colors: "237,21,75, 0.701"
     },
