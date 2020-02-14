@@ -5,7 +5,7 @@ import reducer from "../reducers/application"
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, {
     games: [],
-    user: ""
+    user: {}
   })
 
   useEffect(() => {

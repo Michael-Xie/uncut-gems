@@ -10,7 +10,7 @@ const handlers = {
     return {...prevState, games: action.games}
   },
   [SET_USER]: (prevState, action) => {
-    return {...prevState, user: action.value.username}
+    return {...prevState, user: action.value}
   }
 }
 

@@ -16,12 +16,11 @@ import "./Application.css"
 
 const Application = () => {
   const { state, dispatch } = useApplicationData()
-
   return (
     <Fragment>
       <Router>
         <Navigation
-          username={state.user}
+          username={localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')).user_name: ""}
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
           balance="14.56"
         />
