@@ -18,18 +18,13 @@ export default function Login({ dispatch }) {
       password: password,
     })
       .then(res => {
-        console.log("client receive data from db", res.data, Object.keys(res.data));
-        // console.log("login status", validateLogin(user, password, res.data));
-        console.log("getting info from DB");
         if (Object.keys(res.data).length>0) {
           localStorage.setItem('user', JSON.stringify(res.data));
-          console.log("inside dispatch", res.data);
           dispatch({
             type: "SET_USER",
             value: res.data
           });
         } else {
-          console.log("inside error")
           setError((prev) => [...prev, "Error logging in. Please check your user name and password"]);
           
         }

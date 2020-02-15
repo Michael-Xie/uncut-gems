@@ -23,10 +23,6 @@ export default function Register({ dispatch }) {
     if (user.length === 0) {
       setError((prev) => [...prev, "Username is empty."]);
     }
-    console.log("user", user);
-    console.log("password", password);
-    console.log("password_confirmation", password_confirmation);
-    console.log("error register", error);
 
     if (error.length === 0) {
       axios.post("http://localhost:8001/api/users", {
@@ -36,23 +32,19 @@ export default function Register({ dispatch }) {
         stripe_charge_id: null
       })
         .then(res => {
-          console.log("added to DB")
-          console.log("client receive data from db", res.data, Object.keys(res.data));
-          // console.log("login status", validateLogin(user, password, res.data));
-          console.log("getting info from DB");
           if (Object.keys(res.data).length > 0) {
             localStorage.setItem('user', JSON.stringify(res.data));
-            console.log("inside dispatch", res.data);
             dispatch({
               type: "SET_USER",
               value: res.data
             });
+          } else {
+            setError((prev) => [...prev, "User name already exists."]);
+            
           }
         })
         .catch(err => console.log(err))
     }
-
-
   }
 
   return (
