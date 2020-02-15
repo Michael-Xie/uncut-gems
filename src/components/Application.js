@@ -31,7 +31,7 @@ const Application = () => {
           <Route path="/login">
             <Login dispatch={dispatch} />
           </Route>
-          <Route path="/login">
+          <Route path="/register">
             <Register dispatch={dispatch} />
           </Route>
 

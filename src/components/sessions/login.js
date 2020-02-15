@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components"
 import axios from "axios"
-
+import {Link} from "react-router-dom"
 
 export default function Login({ dispatch }) {
   const [error, setError] = useState([]);
@@ -51,6 +51,7 @@ export default function Login({ dispatch }) {
         </label>
         <button type="submit">Submit</button>
       </form>
+      <Link to="/register">Register</Link>
     </>
   )
 }
