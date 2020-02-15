@@ -16,43 +16,48 @@ const Article = styled.article`
 `
 const Rankings = styled.section`
   display: flex;
-  width:30%;
+  justify-content: center;
+  width:50%;
 `
 
 const User = styled.div`
   display:flex;
   flex-direction: column;
   align-items:center;
+  padding: 0 10px;
   cursor:pointer;
+
 
   &:hover {
     color: grey;
   }
 `
+const Info = styled.p`
 
+`
 
 export default function parlay({}) {
   return (
     <Article>
-      4 active parlays
-      Ranking
+     <Info>4 total bets</Info>
+     <Info>Closes in 30 minutes (730 pm)</Info>
     
     <Rankings>
       <User>
-            <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-            &nbsp;
-              Mikey
+            <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img> 
+            J_Dog
       </User>
       <User>
             <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-            &nbsp;
-              Mikey
+            Sand Pills
       </User>
       <User>
             <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-            &nbsp;
-              Mikey
+            Pizani
       </User>
+
+
+    
       </Rankings>
     </Article>
   );
