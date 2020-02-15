@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory, useLocation } from "react-router-dom"
 import Navigation from './partials/nav'
 import Game from './games/game'
 import StatsBox from './games/statsBox'
@@ -20,19 +20,27 @@ const Application = () => {
     <Fragment>
       <Router>
         <Navigation
-          username={localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')).user_name: ""}
+          username={localStorage.getItem('user')!==null ? JSON.parse(localStorage.getItem('user')).user_name : ""}
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
           balance="14.56"
         />
-        <Register dispatch={dispatch} />
-        <Login dispatch={dispatch} />
+        {localStorage.getItem('user') ?
+          <Redirect to={{ pathname: "/games" }}/>:
+          <Redirect to={{ pathname: "/login" }} /> }
         <Switch>
+          <Route path="/login">
+            <Login dispatch={dispatch} />
+          </Route>
+          <Route path="/login">
+            <Register dispatch={dispatch} />
+          </Route>
+
           <Route path="/games">
             {state.games.length > 0 && (
               state.games.map(game => {
                 return (
-                  <Game 
-                    key={game.game_id} 
+                  <Game
+                    key={game.game_id}
                     game={game}
                     score={state.scores[state.games.indexOf(game)]}
                   />
