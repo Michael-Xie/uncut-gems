@@ -20,6 +20,7 @@ export default function Login({ dispatch }) {
       .then(res => {
         if (Object.keys(res.data).length>0) {
           localStorage.setItem('user', JSON.stringify(res.data));
+          console.log("logged in:", localStorage.getItem('user'));
           dispatch({
             type: "SET_USER",
             value: res.data

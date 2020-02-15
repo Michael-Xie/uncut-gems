@@ -1,5 +1,5 @@
 import React from "react"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 /* EXAMPLE PROPS
@@ -91,16 +91,25 @@ export default function Navigation({ userid, username, userphoto, balance }) {
           <LinkStyle to="/groups">My Groups</LinkStyle>
           <LinkStyle to="/games">Games</LinkStyle>
           &nbsp; &nbsp;
-          <Userinfo>
-            <User>
-              <img src="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/wallet.png" alt="wallet" height="24px" width="24px"></img>
-              {balance}
-            </User>
-            <User>
-              <img src={userphoto} alt={username} height="24px" width="24px"></img>
-              {username}
-            </User>
-          </Userinfo>
+          {localStorage.getItem('user') ?
+
+            <Userinfo>
+              <User>
+                <img src="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/wallet.png" alt="wallet" height="24px" width="24px"></img>
+                {balance}
+              </User>
+              <User>
+                <img src={userphoto} alt={username} height="24px" width="24px"></img>
+                {username}
+              </User>
+              <LinkStyle to="/logout">Logout</LinkStyle>
+            </Userinfo>
+            :
+            <>
+              <LinkStyle to="/login"> Login </LinkStyle>
+              <LinkStyle to="/register"> Register </LinkStyle>
+            </>
+          }
         </Links>
       </Nav>
     </Header>

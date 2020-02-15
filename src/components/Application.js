@@ -6,6 +6,7 @@ import StatsBox from './games/statsBox'
 import Group from './groups/group'
 import Register from './sessions/registration'
 import Login from './sessions/login'
+import Logout from './sessions/logout'
 
 import AddGroup from './groups/addGroup'
 import axios from "axios"
@@ -20,22 +21,20 @@ const Application = () => {
     <Fragment>
       <Router>
         <Navigation
-          username={localStorage.getItem('user')!==null ? JSON.parse(localStorage.getItem('user')).user_name : ""}
+          username={localStorage.getItem('user') !== null ? JSON.parse(localStorage.getItem('user')).user_name : ""}
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
           balance="14.56"
         />
         {localStorage.getItem('user') ?
-          <Redirect to={{ pathname: "/games" }}/>:
-          <Redirect to={{ pathname: "/login" }} /> }
+          <Redirect to={{ pathname: "/games" }} /> :
+          <Redirect to={{ pathname: "/login" }} />}
+
         <Switch>
           <Route path="/login">
             <Login dispatch={dispatch} />
           </Route>
           <Route path="/register">
             <Register dispatch={dispatch} />
-          </Route>
-          <Route path="/logout"> 
-            {localStorage.clear('user')}
           </Route>
           <Route path="/games">
             {state.games.length > 0 && (
@@ -61,6 +60,11 @@ const Application = () => {
               awayFourthQ="0"
             /> */}
           </Route>
+          <Route path="/logout">
+            <Logout/>
+            <Redirect to={{ pathname: "/login" }} />
+          </Route>
+
         </Switch>
         <Switch>
 
