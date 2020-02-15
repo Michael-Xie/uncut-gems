@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import styled from "styled-components"
 
 const Article = styled.div` 
@@ -17,8 +17,8 @@ const Article = styled.div`
     width: 60vw;
   }
 
-  &:hover {
-    box-shadow: 0px 8px 6px -6px #000;
+  &:active {
+    box-shadow:inset 0 0 10px #000000;
   }
 `
 
@@ -27,7 +27,6 @@ const Button = styled.div`
   justify-content: center;
   align-content: center;
   height: 100%;
-  
 `
 
 const Img = styled.img`
@@ -41,10 +40,10 @@ const Img = styled.img`
   }
 `
 
-export default function AddGroup({onClick}) {
+export default function Loading() {
   return (
     <Article>
-      <Button><Img onClick={onClick} src="https://cdn2.iconfinder.com/data/icons/mixed-communication-and-ui-pack/48/general_pack_NEW__add-512.png"/></Button>
+      <img src="https://i.gifer.com/YCZH.gif"/>
     </Article>
   );
 

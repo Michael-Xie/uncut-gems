@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Navigation from './partials/nav'
 import Game from './games/game'
 import StatsBox from './games/statsBox'
-import Group from './groups/group'
+import Groups from './groups/groups'
 import Register from './sessions/registration'
 import Login from './sessions/login'
 
@@ -24,8 +24,8 @@ const Application = () => {
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
           balance="14.56"
         />
-        <Register dispatch={dispatch} />
-        <Login dispatch={dispatch} />
+        {null && <Register dispatch={dispatch} />}
+        {null && <Login dispatch={dispatch} />}
         <Switch>
           <Route path="/games">
             {state.games.length > 0 && (
@@ -55,22 +55,7 @@ const Application = () => {
         <Switch>
 
           <Route path="/groups">
-            <AddGroup
-              onClick="?"
-            />
-
-            <Group
-              // EXAMPLE PROPS NOT SURE YET
-              // groupName
-              // totalGroupBets
-              // groupMembers
-              // AdminName
-              // AdminPhoto
-              // UsersActive total
-              groupName="Super Sports Group"
-              username="Jamie"
-              userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
-            />
+            <Groups username={state.user} />
           </Route>
         </Switch>
       </Router>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import styled from "styled-components"
 
 // EXAMPLE PROPS
@@ -9,12 +9,9 @@ import styled from "styled-components"
 // AdminPhoto
 // UsersActive total
 
-
-
 const Article = styled.article` 
   background-color: #fff;
-  width: 600px;
-  height: 200px;
+  width: 100vw;
   margin: 30px auto 0;
   border: 1px solid rgba(219,219,219);
 
@@ -40,9 +37,6 @@ const Admin = styled.div`
   display:flex;
   border:1px solid black;
 `
-
-
-
 const Divider = styled.hr`
   width: 90%;
   margin-top: 0.5em;
@@ -55,6 +49,7 @@ const Divider = styled.hr`
 
 const Body = styled.div`
   display:flex;
+  margin-bottom: 1vh;
 `
 
 const Section = styled.div`
@@ -99,7 +94,7 @@ const User = styled.div`
 
 export default function Group({ groupName, username, userphoto }) {
   return (
-    <Article  >
+    <Article>
       <Header>
 
         <Title>{groupName}</Title>
