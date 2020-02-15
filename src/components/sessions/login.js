@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import styled from "styled-components"
-//import handleRegister from "../../models/register"
 import axios from "axios"
 
 
@@ -11,9 +10,8 @@ export default function Login({ dispatch }) {
     event.preventDefault()
     const user = event.target.username.value
     const password = event.target.password.value
-    //[TODO] validate username and password
 
-    //
+    // reset error on next onSubmit
     setError([]);
     axios.post("http://localhost:8001/api/login", {
       user_name: user,
