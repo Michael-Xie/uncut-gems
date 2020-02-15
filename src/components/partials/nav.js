@@ -77,6 +77,7 @@ const User = styled.div`
 `
 
 export default function Navigation({ userid, username, userphoto, balance }) {
+
   return (
     <Header>
       <Nav>

@@ -34,7 +34,9 @@ const Application = () => {
           <Route path="/register">
             <Register dispatch={dispatch} />
           </Route>
-
+          <Route path="/logout"> 
+            {localStorage.clear('user')}
+          </Route>
           <Route path="/games">
             {state.games.length > 0 && (
               state.games.map(game => {
