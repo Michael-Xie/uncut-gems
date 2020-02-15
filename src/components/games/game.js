@@ -9,7 +9,6 @@ const showPointsIfActive = (pointsProp) => {
   return 0
 }
 
-
 /* ---------------------------
  *    start of styled CSS 
  * ---------------------------
@@ -32,7 +31,6 @@ const Article = styled.article`
 
   &:hover {
     box-shadow: 0 8px 6px -6px black;
-
   }
 
 `
@@ -73,15 +71,14 @@ const Stats = styled.div`
 `
 // ---------------------------
 
-export default function Game({ game }) {
+export default function Game({ game, score }) {
   const [statsBoxVisible, setStatsBoxVisible] = useState(false);
 
   if (game.length === 0 || !game)
     return <div></div>
+
   const homeTeam = teamData(game.home_team)
   const awayTeam = teamData(game.away_team)
-
-  
 
   if (homeTeam === undefined || awayTeam === undefined)
     return <div></div>
@@ -104,19 +101,19 @@ export default function Game({ game }) {
               height="100px"
               width="auto"
             />
-            {showPointsIfActive(game.away_total)}
+            {showPointsIfActive(score.away_total)}
           </ScoreLogo>
         </Section>
 
         <GameInfo>
-          <GameStatus>{game.status}</GameStatus>
+          <GameStatus>{score.status}</GameStatus>
           {/* <button type="button">Show More</button> */}
         </GameInfo>
         <Section>
           <TeamName>{game.home_team}</TeamName>
 
           <ScoreLogo>
-            {showPointsIfActive(game.home_total)}
+            {showPointsIfActive(score.home_total)}
             <img
               src={homeTeam.logo}
               alt={game.home_team}
@@ -129,14 +126,14 @@ export default function Game({ game }) {
      
       {statsBoxVisible && (
         <StatsBox
-          homeFirstQ={game.home_first}
-          homeSecondQ={game.home_second}
-          homeThirdQ={game.home_third}
-          homeFourthQ={game.home_fourth}
-          awayFirstQ={game.away_first}
-          awaySecondQ={game.away_second}
-          awayThirdQ={game.away_third}
-          awayFourthQ={game.away_fourth}
+          homeFirstQ  = {score.home_first}
+          homeSecondQ = {score.home_second}
+          homeThirdQ  = {score.home_third}
+          homeFourthQ = {score.home_fourth}
+          awayFirstQ  = {score.away_first}
+          awaySecondQ = {score.away_second}
+          awayThirdQ  = {score.away_third}
+          awayFourthQ = {score.away_fourth}
         />
       )}
    
