@@ -100,14 +100,23 @@ export default function Form({games}) {
     })
   }
 
-  const handleSubmit = (bets) => {
+  const handleSubmit = (event, bets) => {
     axios.post("http://localhost:8001/api/parlays", {
       fee: 20,
       status: 'open'
     })
-    .then(() => {
-      bets.map(res => {
-        console.log(res)
+    .then(res => {
+      const id = res.data[0].id
+      bets.map(result => {
+        const game_id = result.game_id
+        result.bets.forEach(bet => {
+          if (bet.selected)
+            axios.post("http://localhost:8001/api/bets", {
+              type:      bet.type,
+              parlay_id: id,
+              game_id:   game_id
+            })
+        })
       })
     })
   }
@@ -132,7 +141,7 @@ export default function Form({games}) {
             
             // ensure that the teams data is populated
             if (!home_team || !away_team)
-              return <div></div>
+              return <div key={game.id}></div>
 
             return (
               <Game key={game.game_id} arena={home_team.arena}>
@@ -191,7 +200,7 @@ export default function Form({games}) {
             ) 
           })
         }
-      <Button onClick={() => handleSubmit(selected)}>Submit Parlay</Button>
+      <Button onClick={(event) => handleSubmit(event, selected)}>Submit Parlay</Button>
     </Wrapper>
   );
 
