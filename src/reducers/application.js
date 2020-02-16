@@ -1,12 +1,20 @@
-const SET_GAMES = "SET_GAMES"
-const SET_USER  = "SET_USER"
+const SET_GAMES  = "SET_GAMES"
+const SET_SCORES = "SET_SCORES"
+const SET_USER   = "SET_USER"
 
 const handlers = {
   [SET_GAMES]: (prevState, action) => {
-    return {...prevState, games: action.games}
+    if (action.games.length > 0)
+      return {...prevState, games: action.games}
+    return null
+  },
+  [SET_SCORES]: (prevState, action) => {
+    if (action.scores.length > 0)
+      return {...prevState, scores: action.scores}
+    return null
   },
   [SET_USER]: (prevState, action) => {
-    return {...prevState, user: action.value.username}
+    return {...prevState, user: action.value}
   }
 }
 

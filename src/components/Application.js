@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react'
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory, useLocation } from "react-router-dom"
 import Navigation from './partials/nav'
 import Game from './games/game'
 import StatsBox from './games/statsBox'
 import Group from './groups/group'
 import Register from './sessions/registration'
 import Login from './sessions/login'
+import Logout from './sessions/logout'
 
 import Parlay from './parlays/parlay'
 import FillParlay from './parlays/fillParlay'
@@ -19,22 +20,35 @@ import "./Application.css"
 
 const Application = () => {
   const { state, dispatch } = useApplicationData()
-
   return (
     <Fragment>
       <Router>
         <Navigation
-          username={state.user}
+          username={localStorage.getItem('user') !== null ? JSON.parse(localStorage.getItem('user')).user_name : ""}
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
           balance="14.56"
         />
-        <Register dispatch={dispatch} />
-        <Login dispatch={dispatch} />
+        {localStorage.getItem('user') ?
+          <Redirect to={{ pathname: "/games" }} /> :
+          <Redirect to={{ pathname: "/login" }} />}
+
         <Switch>
+          <Route path="/login">
+            <Login dispatch={dispatch} />
+          </Route>
+          <Route path="/register">
+            <Register dispatch={dispatch} />
+          </Route>
           <Route path="/games">
             {state.games.length > 0 && (
               state.games.map(game => {
-                return <Game key={game.game_id} game={game} />
+                return (
+                  <Game
+                    key={game.game_id}
+                    game={game}
+                    score={state.scores[state.games.indexOf(game)]}
+                  />
+                )
               })
             )
             }
@@ -49,6 +63,11 @@ const Application = () => {
               awayFourthQ="0"
             /> */}
           </Route>
+          <Route path="/logout">
+            <Logout/>
+            <Redirect to={{ pathname: "/login" }} />
+          </Route>
+
         </Switch>
         <Switch>
 
