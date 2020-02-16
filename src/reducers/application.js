@@ -4,10 +4,14 @@ const SET_USER   = "SET_USER"
 
 const handlers = {
   [SET_GAMES]: (prevState, action) => {
-    return {...prevState, games: action.games}
+    if (action.games.length > 0)
+      return {...prevState, games: action.games}
+    return null
   },
   [SET_SCORES]: (prevState, action) => {
-    return {...prevState, scores: action.scores}
+    if (action.scores.length > 0)
+      return {...prevState, scores: action.scores}
+    return null
   },
   [SET_USER]: (prevState, action) => {
     return {...prevState, user: action.value}
