@@ -40,6 +40,7 @@ const Section = styled.section`
   width: 40%;
   text-align: center;
 `
+
 const ScoreLogo = styled.div`
   margin: 0 auto;
   display: flex;
@@ -47,6 +48,7 @@ const ScoreLogo = styled.div`
   justify-content: space-evenly;
   font-size: 2rem;
 `
+
 const GameInfo = styled.div`
   display: flex;
   align-items: center;
