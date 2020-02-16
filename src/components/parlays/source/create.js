@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import styled from "styled-components"
 
 const Article = styled.div` 
@@ -41,7 +41,7 @@ const Img = styled.img`
   }
 `
 
-export default function AddGroup({onClick}) {
+export default function Create({onClick}) {
   return (
     <Article>
       <Button><Img onClick={onClick} src="https://cdn2.iconfinder.com/data/icons/mixed-communication-and-ui-pack/48/general_pack_NEW__add-512.png"/></Button>

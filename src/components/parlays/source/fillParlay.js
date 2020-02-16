@@ -32,7 +32,6 @@ const Button = styled.button`
 `
 
 const ParlayCode = styled.div`
-
 `
 
 export default function FillParlay({ }) {

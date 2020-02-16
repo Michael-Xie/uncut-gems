@@ -3,10 +3,9 @@ import styled from "styled-components"
 
 import useVisualMode from "../../hooks/useVisualMode"
 
-import AddGroup from "./addGroup"
-import Form from "./form"
-import Loading from "./loading"
-import Group from "./group"
+import Create from "./source/create"
+import Loading from "./source/loading"
+import Form from "./source/form"
 
 const Container = styled.div`
   display: flex;
@@ -24,14 +23,7 @@ const Div = styled.div`
   justify-content: center;
   align-content: center;
 `
-
-// [TODO] make a function that queries the username.
-const userGroups = (username) => {
-  const groups = []
-  return groups
-}
-
-const Groups = ({}) => {
+const Parlays = ({userInfo, games}) => {
   const ADD     = "ADD"
   const FORM    = "FORM"
   const CONFIRM = "CONFIRM"
@@ -48,19 +40,11 @@ const Groups = ({}) => {
 
   return (
     <Container>
-      <Div>{mode === ADD && <AddGroup onClick={() => buffer(FORM)} />}</Div>
-      <Div>{mode === FORM  && <Form onSubmit={() => buffer(CONFIRM)}/>}</Div>
+      <Div>{mode === ADD && <Create onClick={() => buffer(FORM)} />}</Div>
+      <Div>{mode === FORM && <Form games={games} onSubmit={() => buffer(CONFIRM)} />}</Div>
       <Div>{mode === LOADING  && <Loading />}</Div>
-      
-      <Div>
-        <Group 
-          groupName="uncut" 
-          username="jamie" 
-          userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
-        />
-      </Div>
     </Container>
   )
 }
 
-export default Groups
+export default Parlays
