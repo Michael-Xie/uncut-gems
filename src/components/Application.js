@@ -57,7 +57,7 @@ const Application = () => {
         </Switch>
         <Switch>
           <Route path="/parlays">
-            <Parlays userInfo={state.user} games={state.games}/>
+            <Parlays user={state.user} games={state.games}/>
           </Route>
         </Switch>
       </Router>

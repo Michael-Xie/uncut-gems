@@ -23,7 +23,7 @@ const Div = styled.div`
   justify-content: center;
   align-content: center;
 `
-const Parlays = ({userInfo, games}) => {
+const Parlays = ({user, games}) => {
   const ADD     = "ADD"
   const FORM    = "FORM"
   const CONFIRM = "CONFIRM"
@@ -37,6 +37,10 @@ const Parlays = ({userInfo, games}) => {
       transition(new_mode)
     }, 2000)
   }
+
+  // if user is not logged in return null [TODO] redirect.
+  if (Object.keys(user).length === 0)
+    return <div></div>
 
   return (
     <Container>

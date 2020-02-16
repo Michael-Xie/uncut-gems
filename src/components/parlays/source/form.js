@@ -105,14 +105,11 @@ export default function Form({games}) {
       fee: 20,
       status: 'open'
     })
-    /*
     .then(() => {
       bets.map(res => {
-        res.bets.forEach(bet => {
-          if (bet.selected)
-        })
+        console.log(res)
       })
-    */
+    })
   }
         
   return (
@@ -132,6 +129,11 @@ export default function Form({games}) {
                ]
               }
             )
+            
+            // ensure that the teams data is populated
+            if (!home_team || !away_team)
+              return <div></div>
+
             return (
               <Game key={game.game_id} arena={home_team.arena}>
                 <Teams>
