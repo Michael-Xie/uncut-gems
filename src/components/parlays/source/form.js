@@ -1,8 +1,10 @@
 import React from "react"
+import {Redirect} from "react-router-dom"
 import styled from "styled-components"
 import axios from "axios"
 
 import InputSlider from "../../partials/slider"
+import TransitionsModal from "../../partials/popup"
 import teamData from "../../../helpers/teamData"
 
 const Wrapper = styled.article`
@@ -86,8 +88,8 @@ const Logo = styled.img`
   flex-direction: flex-end;
   width: 20%;
 `
-export default function Form({games}) {
-  const selected = []
+export default function Form({games, onSubmit}) {
+  let selected = []
 
   const addBet = (betInfo) => {
     selected.map(bet => {
@@ -100,27 +102,6 @@ export default function Form({games}) {
     })
   }
 
-  const handleSubmit = (event, bets) => {
-    axios.post("http://localhost:8001/api/parlays", {
-      fee: 20,
-      status: 'open'
-    })
-    .then(res => {
-      const id = res.data[0].id
-      bets.map(result => {
-        const game_id = result.game_id
-        result.bets.forEach(bet => {
-          if (bet.selected)
-            axios.post("http://localhost:8001/api/bets", {
-              type:      bet.type,
-              parlay_id: id,
-              game_id:   game_id
-            })
-        })
-      })
-    })
-  }
-        
   return (
     <Wrapper>
         {
@@ -200,7 +181,7 @@ export default function Form({games}) {
             ) 
           })
         }
-      <Button onClick={(event) => handleSubmit(event, selected)}>Submit Parlay</Button>
+      <TransitionsModal data={selected} onSubmit={onSubmit}>Submit Parlay</TransitionsModal>
     </Wrapper>
   );
 

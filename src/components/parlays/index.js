@@ -26,8 +26,8 @@ const Div = styled.div`
 const Parlays = ({user, games}) => {
   const ADD     = "ADD"
   const FORM    = "FORM"
-  const CONFIRM = "CONFIRM"
   const LOADING = "LOADING"
+  const REFRESH = "REFRESH"
   // get the visual mode for create button.
   const {mode, transition, back} = useVisualMode(ADD)
   // transitions
@@ -45,7 +45,7 @@ const Parlays = ({user, games}) => {
   return (
     <Container>
       <Div>{mode === ADD && <Create onClick={() => buffer(FORM)} />}</Div>
-      <Div>{mode === FORM && <Form games={games} onSubmit={() => buffer(CONFIRM)} />}</Div>
+      <Div>{mode === FORM && <Form games={games} onSubmit={() => buffer(ADD)} />}</Div>
       <Div>{mode === LOADING  && <Loading />}</Div>
     </Container>
   )
