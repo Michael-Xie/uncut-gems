@@ -76,7 +76,7 @@ const Stats = styled.div`
 export default function Game({ game, score }) {
   const [statsBoxVisible, setStatsBoxVisible] = useState(false);
 
-  if (game.length === 0 || !game)
+  if (game.length === 0 || !score)
     return <div></div>
 
   const homeTeam = teamData(game.home_team)

@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import axios from "axios"
 
 import InputSlider from "../../partials/slider"
 import teamData from "../../../helpers/teamData"
@@ -99,14 +100,25 @@ export default function Form({games}) {
     })
   }
 
-  const handleSubmit = (event) => {
-    
+  const handleSubmit = (bets) => {
+    axios.post("http://localhost:8001/api/parlays", {
+      fee: 20,
+      status: 'open'
+    })
+    /*
+    .then(() => {
+      bets.map(res => {
+        res.bets.forEach(bet => {
+          if (bet.selected)
+        })
+      })
+    */
   }
         
   return (
     <Wrapper>
         {
-          games.map(game => {
+          (games || []).map(game => {
             const home_team = teamData(game.home_team)
             const away_team = teamData(game.away_team)
             selected.push(
@@ -177,7 +189,7 @@ export default function Form({games}) {
             ) 
           })
         }
-      <Button onClick={handleSubmit}>Submit Parlay</Button>
+      <Button onClick={() => handleSubmit(selected)}>Submit Parlay</Button>
     </Wrapper>
   );
 
