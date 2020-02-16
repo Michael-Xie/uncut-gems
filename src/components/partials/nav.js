@@ -2,14 +2,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-/* EXAMPLE PROPS
-{ <Navigation
-    username="Jamie"
-    userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
-    balance="14.56"
-/> }*/
-
-
 const Header = styled.header` 
   background-color: #fff;
   width: 100%;
@@ -38,7 +30,6 @@ const Logo = styled.div`
 const Links = styled.div`
   display: flex;
   align-items:center;
-
 `
 
 const LinkStyle = styled(Link)`
@@ -46,7 +37,6 @@ const LinkStyle = styled(Link)`
   padding-right: 15px;
   text-decoration: none;
   color: #000;
-
 
   &:hover {
     color: grey;
@@ -57,12 +47,6 @@ const Userinfo = styled.div`
   margin-right: 10px;
   display:flex;
 `
-
-// const Wallet = styled.div`
-//   display:flex;
-//   flex-direction: column;
-//   align-items:center;
-// `
 
 const User = styled.div`
   display:flex;
@@ -88,7 +72,7 @@ export default function Navigation({ userid, username, userphoto, balance }) {
         </Logo>
 
         <Links>
-          <LinkStyle to="/groups">My Groups</LinkStyle>
+          <LinkStyle to="/parlays">Parlays</LinkStyle>
           <LinkStyle to="/games">Games</LinkStyle>
           &nbsp; &nbsp;
           {localStorage.getItem('user') ?
