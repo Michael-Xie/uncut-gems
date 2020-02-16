@@ -32,7 +32,7 @@ export default function Form({onSubmit}) {
   return (
     <Article>
       <FormStyled onSubmit={handleForm}>
-        <placeholder>Group Name</placeholder>
+        <span>Group Name</span>
           <input type="text" name="name" />
       </FormStyled>
     </Article>

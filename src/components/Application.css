@@ -9,3 +9,23 @@
 body {
   background-color: #fafafa;
 }
+
+/* Seperator Line  */
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+}
+.separator::before, .separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #000;
+}
+.separator::before {
+  margin-right: .25em;
+}
+.separator::after {
+  margin-left: .25em;
+}
