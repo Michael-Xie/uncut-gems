@@ -26,7 +26,7 @@ const Application = () => {
         />
         {
           localStorage.getItem('user') ?
-          <Redirect to={{ pathname: "/parlays" }} /> :
+          <Redirect to={{ pathname: "/games" }} /> :
           <Redirect to={{ pathname: "/login" }} />
         }
 
