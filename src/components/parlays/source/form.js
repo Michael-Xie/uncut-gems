@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import axios from "axios"
 
 import InputSlider from "../../partials/slider"
 import teamData from "../../../helpers/teamData"
@@ -99,8 +100,8 @@ export default function Form({games}) {
     })
   }
 
-  const handleSubmit = (event) => {
-    
+  const handleSubmit = (bets) => {
+
   }
         
   return (
@@ -177,7 +178,7 @@ export default function Form({games}) {
             ) 
           })
         }
-      <Button onClick={handleSubmit}>Submit Parlay</Button>
+      <Button onClick={() => handleSubmit(selected)}>Submit Parlay</Button>
     </Wrapper>
   );
 
