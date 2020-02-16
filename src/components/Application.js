@@ -38,18 +38,16 @@ const Application = () => {
             <Register dispatch={dispatch} />
           </Route>
           <Route path="/games">
-            {
-              state.games.length > 0 && (
-                state.games.map(game => {
-                  return (
-                    <Game
-                      key={game.game_id}
-                      game={game}
-                      score={state.scores[state.games.indexOf(game)]}
-                    />
-                  )
-                })
-              )
+            { 
+              (state.games || []).map(game => {
+                return (
+                  <Game
+                    key={game.game_id}
+                    game={game}
+                    score={state.scores[state.games.indexOf(game)]}
+                  />
+                )
+              })
             }
           </Route>
           <Route path="/logout">
