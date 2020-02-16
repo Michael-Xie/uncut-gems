@@ -8,6 +8,9 @@ import Register from './sessions/registration'
 import Login from './sessions/login'
 import Logout from './sessions/logout'
 
+import Parlay from './parlays/parlay'
+import FillParlay from './parlays/fillParlay'
+
 import AddGroup from './groups/addGroup'
 import axios from "axios"
 
@@ -73,6 +76,8 @@ const Application = () => {
               onClick="?"
             />
 
+            <Parlay />
+            <FillParlay />
             <Group
               // EXAMPLE PROPS NOT SURE YET
               // groupName
