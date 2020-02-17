@@ -45,7 +45,7 @@ const Parlays = ({user, games}) => {
   return (
     <Container>
       <Div>{mode === ADD && <Create onClick={() => buffer(FORM)} />}</Div>
-      <Div>{mode === FORM && <Form games={games} onSubmit={() => buffer(CONFIRM)} />}</Div>
+      <Div>{mode === FORM && <Form games={games} onSubmit={() => buffer(ADD)} />}</Div>
       <Div>{mode === LOADING  && <Loading />}</Div>
     </Container>
   )
