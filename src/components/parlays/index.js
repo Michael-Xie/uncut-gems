@@ -37,6 +37,8 @@ const Parlays = ({user, games}) => {
       transition(new_mode)
     }, 2000)
   }
+  // check if user is in any active parlays.
+
 
   // if user is not logged in return null [TODO] redirect.
   if (Object.keys(user).length === 0)
@@ -45,7 +47,7 @@ const Parlays = ({user, games}) => {
   return (
     <Container>
       <Div>{mode === ADD && <Create onClick={() => buffer(FORM)} />}</Div>
-      <Div>{mode === FORM && <Form games={games} onSubmit={() => buffer(ADD)} />}</Div>
+      <Div>{mode === FORM && <Form user={user} games={games} onSubmit={() => buffer(ADD)} />}</Div>
       <Div>{mode === LOADING  && <Loading />}</Div>
     </Container>
   )

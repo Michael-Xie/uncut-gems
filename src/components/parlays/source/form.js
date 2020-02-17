@@ -126,7 +126,7 @@ const BubbleLetter = styled.span`
 
 const ButtonContent = styled.span`
 `
-export default function Form({ games, onSubmit }) {
+export default function Form({ user, games, onSubmit }) {
   const selected = []
 
   const addBet = (betInfo) => {
@@ -199,7 +199,7 @@ export default function Form({ games, onSubmit }) {
           )
         })
       }
-      <TransitionsModal data={selected} onSubmit={onSubmit}>Submit Parlay</TransitionsModal>
+      <TransitionsModal data={selected} onSubmit={onSubmit} user={user}>Submit Parlay</TransitionsModal>
     </Wrapper>
   );
 

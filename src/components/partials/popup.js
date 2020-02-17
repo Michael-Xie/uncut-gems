@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TransitionsModal({data, onSubmit}) {
+export default function TransitionsModal({data, onSubmit, user}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -50,7 +50,15 @@ export default function TransitionsModal({data, onSubmit}) {
             })
         })
       })
+      return id
     })
+    .then(id => {
+      axios.post("http://localhost:8001/api/participants", {
+        user_name: user.user_name,
+        parlay_id: id
+      })
+    })
+    .catch(err => console.log(err))
   }
 
   return (
