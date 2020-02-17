@@ -3,6 +3,7 @@ import styled from "styled-components"
 import axios from "axios"
 
 import InputSlider from "../../partials/slider"
+import TransitionsModal from "../../partials/popup"
 import teamData from "../../../helpers/teamData"
 
 const Wrapper = styled.article`
@@ -83,7 +84,6 @@ const Bet = styled.button`
     border-color: #224370 !important;
     transition: all 0.4s ease 0s;
   }
-
 `
 
 const BetSelected = styled.button`
@@ -106,17 +106,12 @@ const BetSelected = styled.button`
     border-color: #224370 !important;
     transition: all 0.4s ease 0s;
   }
-
 `
-
-
-
 
 const Explanation = styled.span`
   margin: 10px 0 0;
   text-align:center;
 `
-
 
 const BetType = styled.div`
   display: flex;
@@ -126,50 +121,24 @@ const BetType = styled.div`
 
 const BubbleLetter = styled.span`
 
-  
 `
-
 
 const ButtonContent = styled.span`
-
 `
 
 
-export default function Form({ games }) {
+export default function Form({ games, onSubmit }) {
   const selected = []
 
   const addBet = (betInfo) => {
-
     selected.map(bet => {
       if (bet.game_id === betInfo.game_id) {
         bet.bets.map(res => {
-          console.log(selected[0])
           if (res.type === betInfo.type)
             res.selected = !res.selected
         })
       }
     })
-  }
-
-  const handleSubmit = (event, bets) => {
-    axios.post("http://localhost:8001/api/parlays", {
-      fee: 20,
-      status: 'open'
-    })
-      .then(res => {
-        const id = res.data[0].id
-        bets.map(result => {
-          const game_id = result.game_id
-          result.bets.forEach(bet => {
-            if (bet.selected)
-              axios.post("http://localhost:8001/api/bets", {
-                type: bet.type,
-                parlay_id: id,
-                game_id: game_id
-              })
-          })
-        })
-      })
   }
 
   return (
@@ -182,10 +151,10 @@ export default function Form({ games }) {
             {
               game_id: game.game_id,
               bets: [
-                { type: 'pickem', selected: false },
-                { type: 'points_tf', selected: false },
-                { type: 'points_th', selected: false },
-                { type: 'race_to_10', selected: false },
+                { type: 'pickem',      selected: false },
+                { type: 'points_tf',   selected: false },
+                { type: 'points_th',   selected: false },
+                { type: 'race_to_10',  selected: false },
                 { type: 'race_to_100', selected: false }
               ]
             }
@@ -212,13 +181,12 @@ export default function Form({ games }) {
                  </BetSelected> */}
                  <img alt="pickem" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEi%0D%0AIGJhc2VQcm9maWxlPSJ0aW55IiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3Jn%0D%0ALzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIKCSB4%0D%0APSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMCA5OCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+%0D%0ACjxnPgoJPGVsbGlwc2UgZmlsbD0iI0ZGRkZGRiIgY3g9IjUwIiBjeT0iNDkiIHJ4PSI0Ny41IiBy%0D%0AeT0iNDYuNSIvPgoJPHBhdGggZD0iTTUwLDRjMjUuMzYsMCw0NiwyMC4xOSw0Niw0NVM3NS4zNiw5%0D%0ANCw1MCw5NFM0LDczLjgxLDQsNDlTMjQuNjQsNCw1MCw0IE01MCwxQzIyLjk0LDEsMSwyMi40OSwx%0D%0ALDQ5czIxLjk0LDQ4LDQ5LDQ4CgkJczQ5LTIxLjQ5LDQ5LTQ4Uzc3LjA2LDEsNTAsMUw1MCwxeiIv%0D%0APgo8L2c+Cjx0ZXh0IHRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIDEgMjkuMDI0NCA4MC4wMzQyKSIg%0D%0AZm9udC1mYW1pbHk9IidNeXJpYWRQcm8tUmVndWxhciciIGZvbnQtc2l6ZT0iODcuODY2OHB4Ij5Q%0D%0APC90ZXh0Pgo8L3N2Zz4K" width="12px" height="12px"/>
                 </BetType>
-                <Explanation> Point Perdiction </Explanation>
+                <Explanation> Point Prediction </Explanation>
                 <BetType>
                   <Bet type="submit" onClick={() => addBet({ type: 'points_tf', game_id: game.game_id })}>
                     Total Point
                   </Bet>
                   <Bet type="submit" onClick={() => addBet({ type: 'points_th', game_id: game.game_id })} >
-
                     Half Time Points
                   </Bet>
                 </BetType>
@@ -236,7 +204,7 @@ export default function Form({ games }) {
           )
         })
       }
-      <Button onClick={(event) => handleSubmit(event, selected)}>Submit Parlay</Button>
+      <TransitionsModal data={selected} onSubmit={onSubmit}>Submit Parlay</TransitionsModal>
     </Wrapper>
   );
 
