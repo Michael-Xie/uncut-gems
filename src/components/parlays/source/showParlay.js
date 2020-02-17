@@ -80,7 +80,7 @@ export default function ShowParlay({name, bets, participants, entry}) {
         {
           participants.map(player => {
             return (
-              <User>
+              <User key={player}>
                 <img 
                   src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' 
                   alt='#' 
