@@ -59,37 +59,75 @@ const AwayColor = styled.span`
 `
 
 const Bets = styled.div`
-  display: flex;
+  display: flex ;
   flex-direction: column;
-`
-
-const Bet = styled.span`
-  display: flex;
   justify-content: center;
-  margin-bottom: 1vh;
+
+  margin: 5px 0 5px;
+
 `
 
-const BetName = styled.span`
-  width: 25%;
-  margin-right: 1vw;
+const Bet = styled.button`
+  display: flex;
+  margin: 5px 5px;
+  display:flex;
+  align-items: center;
+  background-color: transparent;
+  border: 2px solid black;
+  padding: 10px 13px;
+  font-size: 15px;
+
+  cursor:pointer;
+
+  &:hover {
+    color: #ffffff !important;
+    background: #224370;
+    border-color: #224370 !important;
+    transition: all 0.4s ease 0s;
+  }
+`
+
+const BetSelected = styled.button`
+  display: flex;
+  margin: 5px 5px;
+  display:flex;
+  align-items: center;
+  color: #ffffff;
+  background-color: transparent;
+  border: 2px solid #007F00;
+  padding: 10px 13px;
+  font-size: 15px;
+  background-color: #007F00;
+
+  cursor:pointer;
+
+  &:hover {
+    color: #ffffff !important;
+    background: #224370;
+    border-color: #224370 !important;
+    transition: all 0.4s ease 0s;
+  }
 `
 
 const Explanation = styled.span`
-  width: 60%;
-  margin-right: 1vw;
+  margin: 10px 0 0;
+  text-align:center;
 `
 
-const Check = styled.span`
-  width: 15%;
-`
-
-const Logo = styled.img`
+const BetType = styled.div`
   display: flex;
-  flex-direction: flex-end;
-  width: 20%;
+  justify-content:center;
+  
 `
-export default function Form({games, onSubmit}) {
-  let selected = []
+
+const BubbleLetter = styled.span`
+
+`
+
+const ButtonContent = styled.span`
+`
+export default function Form({ games, onSubmit }) {
+  const selected = []
 
   const addBet = (betInfo) => {
     selected.map(bet => {
@@ -104,83 +142,63 @@ export default function Form({games, onSubmit}) {
 
   return (
     <Wrapper>
-        {
-          (games || []).map(game => {
-            const home_team = teamData(game.home_team)
-            const away_team = teamData(game.away_team)
-            selected.push(
-              {game_id: game.game_id,
-               bets: [
-                {type: 'pickem',      selected: false},
-                {type: 'points_tf',   selected: false},
-                {type: 'points_th',   selected: false},
-                {type: 'race_to_10',  selected: false},
-                {type: 'race_to_100', selected: false}
-               ]
-              }
-            )
-            
-            // ensure that the teams data is populated
-            if (!home_team || !away_team)
-              return <div key={game.id}></div>
+      {
+        (games || []).map(game => {
+          const home_team = teamData(game.home_team)
+          const away_team = teamData(game.away_team)
+          selected.push(
+            {
+              game_id: game.game_id,
+              bets: [
+                { type: 'pickem',      selected: false },
+                { type: 'points_tf',   selected: false },
+                { type: 'points_th',   selected: false },
+                { type: 'race_to_10',  selected: false },
+                { type: 'race_to_100', selected: false }
+              ]
+            }
+          )
 
-            return (
-              <Game key={game.game_id} arena={home_team.arena}>
-                <Teams>
-                  <HomeColor color={home_team.colors}>{game.home_team}</HomeColor> &nbsp; vs. &nbsp;
+          // ensure that the teams data is populated
+          if (!home_team || !away_team)
+            return <div key={game.id}></div>
+
+          return (
+            <Game key={game.game_id} arena={home_team.arena}>
+              <Teams>
+                <HomeColor color={home_team.colors}>{game.home_team}</HomeColor> &nbsp; vs. &nbsp;
                   <AwayColor color={away_team.colors}>{game.away_team}</AwayColor>
-                </Teams>
-                <Bets>
-                  <Bet>
-                    <BetName>Pick`Em</BetName>
-                    <Explanation>
-                      Select the winner of the game
-                    </Explanation>
-                    <Check>
-                      <input type="checkbox" onClick={() => addBet({type: 'pickem', game_id: game.game_id})} />
-                    </Check>
+              </Teams>
+              <Bets>
+                <Explanation> Pick a team </Explanation>
+                <BetType>
+                  <Bet type="submit" onClick={() => addBet({ type: 'pickem', game_id: game.game_id })}>
+                    Pick'em
                   </Bet>
-                  <Bet>
-                    <BetName>Total Points @ FT</BetName>
-                    <Explanation>
-                      Select the combined total of points scored this game.
-                    </Explanation>
-                    <Check>
-                      <input type="checkbox" onClick={() => addBet({type: 'points_tf', game_id: game.game_id})} />
-                    </Check>
+                </BetType>
+                <Explanation> Point Prediction </Explanation>
+                <BetType>
+                  <Bet type="submit" onClick={() => addBet({ type: 'points_tf', game_id: game.game_id })}>
+                    Total Point
                   </Bet>
-                  <Bet>
-                    <BetName>Total Points @ HT</BetName>
-                    <Explanation>
-                      Select the combined total of points scored by half-time.
-                    </Explanation>
-                    <Check>
-                      <input type="checkbox" onClick={() => addBet({type: 'points_th', game_id: game.game_id})} />
-                    </Check>
+                  <Bet type="submit" onClick={() => addBet({ type: 'points_th', game_id: game.game_id })} >
+                    Half Time Points
                   </Bet>
-                  <Bet>
-                    <BetName>Race to 10 points</BetName>
-                    <Explanation>
-                      Select which team will score 10 points first.
-                    </Explanation>
-                    <Check>
-                      <input type="checkbox" onClick={() => addBet({type: 'race_to_10', game_id: game.game_id})} />
-                    </Check>
+                </BetType>
+                <Explanation> Race </Explanation>
+                <BetType>
+                  <Bet type="submit" onClick={() => addBet({ type: 'race_to_10', game_id: game.game_id })}>
+                    10 Points
                   </Bet>
-                  <Bet>
-                    <BetName>Race to 100</BetName>
-                    <Explanation>
-                      Select which team (if any) will score 100 points first.
-                    </Explanation>
-                    <Check>
-                      <input type="checkbox" onClick={() => addBet({type: 'race_to_100', game_id: game.game_id})} />
-                    </Check>
-                  </Bet>
-                </Bets>
-              </Game>
-            ) 
-          })
-        }
+                  <Bet type="submit" onClick={() => addBet({ type: 'race_to_100', game_id: game.game_id })}>
+                    100 Points
+                </Bet>
+                </BetType>
+              </Bets>
+            </Game>
+          )
+        })
+      }
       <TransitionsModal data={selected} onSubmit={onSubmit}>Submit Parlay</TransitionsModal>
     </Wrapper>
   );
