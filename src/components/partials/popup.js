@@ -23,7 +23,6 @@ export default function TransitionsModal({data, onSubmit, user}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -34,6 +33,7 @@ export default function TransitionsModal({data, onSubmit, user}) {
 
   const handleSubmit = (bets) => {
     axios.post("http://localhost:8001/api/parlays", {
+      name: "hello",
       fee: 20,
       status: 'open'
     })
@@ -48,6 +48,7 @@ export default function TransitionsModal({data, onSubmit, user}) {
               parlay_id: id,
               game_id:   game_id
             })
+            .catch(err => console.log(err))
         })
       })
       return id

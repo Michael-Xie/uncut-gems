@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect, useHistory, useLocation } from "react-router-dom"
+import React from "react";
+import { Redirect } from "react-router-dom"
 
 export default function Logout() {
   localStorage.clear('user');

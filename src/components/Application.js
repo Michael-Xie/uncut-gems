@@ -1,14 +1,11 @@
 import React, { Fragment } from 'react'
-import { BrowserRouter as Router, Switch, Route, Redirect, useHistory, useLocation } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 import Navigation from './partials/nav'
 import Game from './games/game'
-import StatsBox from './games/statsBox'
 import Parlays from './parlays/index'
 import Register from './sessions/registration'
 import Login from './sessions/login'
 import Logout from './sessions/logout'
-
-import axios from "axios"
 
 import useApplicationData from "../hooks/useApplicationData"
 

@@ -1,6 +1,5 @@
-import React from "react";
+import React from "react"
 import styled from "styled-components"
-
 
 const Article = styled.article` 
   background-color: #fff;
@@ -60,26 +59,24 @@ const Info = styled.h1`
   margin: 5px;
 `
 
-export default function parlay({ }) {
+export default function ShowParlay({name, bets, participants, entry}) {
   return (
     <Article>
-
       <Title>
         <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
         &nbsp;  &nbsp;
-       <h1>J_Dog's Parlay</h1>
+       <h1>{name}</h1>
       </Title>
 
       <ParlayInfo>
         <Info>Closes in 30 minutes (730 pm)</Info>
-        <Info>4 total bets</Info>
-        <Info>5$ Entry</Info>
-        <Info>20$ PotSize</Info>
+        <Info>{bets}</Info>
+        <Info>{entry}</Info>
+        <Info>{participants * entry}</Info>
 
       </ParlayInfo>
-      <div class="separator">4 paticipants</div>
+      <div className="separator">{participants.length} participants</div>
       <Rankings>
-
         <User>
           <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
           J_Dog
