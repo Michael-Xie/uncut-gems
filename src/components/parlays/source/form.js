@@ -205,12 +205,12 @@ export default function Form({ games }) {
                 <Explanation> Pick a team </Explanation>
                 <BetType>
                   <Bet type="submit" onClick={() => addBet({ type: 'pickem', game_id: game.game_id })}>
-
                     Pick'em
                   </Bet>
-                  <BetSelected type="submit" onClick={() => addBet({ type: 'pickem', game_id: game.game_id })}>
-                    Pick'em
-                 </BetSelected>
+                  {/* <BetSelected type="submit" onClick={() => addBet({ type: 'pickem', game_id: game.game_id })}>
+                    Pick'em 
+                 </BetSelected> */}
+                 <img alt="pickem" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEi%0D%0AIGJhc2VQcm9maWxlPSJ0aW55IiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3Jn%0D%0ALzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIKCSB4%0D%0APSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMCA5OCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+%0D%0ACjxnPgoJPGVsbGlwc2UgZmlsbD0iI0ZGRkZGRiIgY3g9IjUwIiBjeT0iNDkiIHJ4PSI0Ny41IiBy%0D%0AeT0iNDYuNSIvPgoJPHBhdGggZD0iTTUwLDRjMjUuMzYsMCw0NiwyMC4xOSw0Niw0NVM3NS4zNiw5%0D%0ANCw1MCw5NFM0LDczLjgxLDQsNDlTMjQuNjQsNCw1MCw0IE01MCwxQzIyLjk0LDEsMSwyMi40OSwx%0D%0ALDQ5czIxLjk0LDQ4LDQ5LDQ4CgkJczQ5LTIxLjQ5LDQ5LTQ4Uzc3LjA2LDEsNTAsMUw1MCwxeiIv%0D%0APgo8L2c+Cjx0ZXh0IHRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIDEgMjkuMDI0NCA4MC4wMzQyKSIg%0D%0AZm9udC1mYW1pbHk9IidNeXJpYWRQcm8tUmVndWxhciciIGZvbnQtc2l6ZT0iODcuODY2OHB4Ij5Q%0D%0APC90ZXh0Pgo8L3N2Zz4K" width="12px" height="12px"/>
                 </BetType>
                 <Explanation> Point Perdiction </Explanation>
                 <BetType>
