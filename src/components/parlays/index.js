@@ -35,9 +35,10 @@ const Parlay = styled.div`
 `
 
 const Parlays = ({user, games}) => {
-  const ADD     = "ADD"
-  const FORM    = "FORM"
-  const LOADING = "LOADING"
+  const ADD      = "ADD"
+  const FORM     = "FORM"
+  const LOADING  = "LOADING"
+  const COMPLETE = "COMPLETE"
   // get the visual mode for create button.
   const {mode, transition} = useVisualMode(ADD)
   const [activeParlays, setParlays] = useState([])
@@ -46,27 +47,25 @@ const Parlays = ({user, games}) => {
     transition(LOADING)
     setTimeout(() => {
       transition(new_mode)
-    }, 2000)
+    }, 1200)
   }
   // get all the parlays the user has participated in.
   useEffect(() => {
     setParlays([])
-    axios.get(`http://localhost:8001/api/participants`)
+    axios.get(`http://localhost:8001/api/participants/${user.user_name}`)
       .then(res => {
         res.data.forEach(parlay => {
-          if (parlay.user_name === user.user_name) {
-            const participantInfo = parlay
-            axios.get(`http://localhost:8001/api/parlays/${parlay.parlay_id}`)
-              .then(res => {
-                const parlayInfo = res.data[0]
-                participantInfo["fee"]  = parlayInfo.fee
-                participantInfo["name"] = parlayInfo.name
-                setParlays(prev => ([...prev, participantInfo]))
-              })
-          }
+          const participantInfo = parlay
+          axios.get(`http://localhost:8001/api/parlays/${parlay.parlay_id}`)
+            .then(res => {
+              const parlayInfo = res.data[0]
+              participantInfo["fee"]  = parlayInfo.fee
+              participantInfo["name"] = parlayInfo.name
+              setParlays(prev => ([...prev, participantInfo]))
+            })
         })
       })
-  }, [mode, user.user_name])
+  }, [mode === "COMPLETE"])
 
   // if user is not logged in return null [TODO] redirect.
   if (Object.keys(user).length === 0)
@@ -75,8 +74,9 @@ const Parlays = ({user, games}) => {
   return (
     <Container>
       <Div>{mode === ADD && <Create onClick={() => buffer(FORM)} />}</Div>
-      <Div>{mode === FORM && <Form user={user} games={games} onSubmit={() => buffer(ADD)} />}</Div>
+      <Div>{mode === FORM && <Form user={user} games={games} onSubmit={() => buffer(COMPLETE)} />}</Div>
       <Div>{mode === LOADING  && <Loading />}</Div>
+      <Div>{mode === COMPLETE && <Create onClick={() => buffer(FORM)} />}</Div>
       <Parlay>
         {
           activeParlays.map(parlay => {
@@ -94,6 +94,7 @@ const Parlays = ({user, games}) => {
           })
         }
       </Parlay>
+      <br/><br/>
     </Container>
   )
 }
