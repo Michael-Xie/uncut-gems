@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" viewBox="0 0 100 98" xml:space="preserve">
+<g>
+	<ellipse fill="#FFFFFF" cx="50" cy="49" rx="47.5" ry="46.5"/>
+	<path d="M50,4c25.36,0,46,20.19,46,45S75.36,94,50,94S4,73.81,4,49S24.64,4,50,4 M50,1C22.94,1,1,22.49,1,49s21.94,48,49,48
+		s49-21.49,49-48S77.06,1,50,1L50,1z"/>
+</g>
+<text transform="matrix(1 0 0 1 29.0244 80.0342)" font-family="'MyriadPro-Regular'" font-size="87.8668px">P</text>
+</svg>
