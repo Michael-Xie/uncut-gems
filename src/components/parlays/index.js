@@ -54,14 +54,28 @@ const Parlays = ({user, games}) => {
     setParlays([])
     axios.get(`http://localhost:8001/api/participants/${user.user_name}`)
       .then(res => {
-        res.data.forEach(parlay => {
+        res.data.map(parlay => {
           const participantInfo = parlay
           axios.get(`http://localhost:8001/api/parlays/${parlay.parlay_id}`)
             .then(res => {
               const parlayInfo = res.data[0]
-              participantInfo["fee"]  = parlayInfo.fee
-              participantInfo["name"] = parlayInfo.name
-              setParlays(prev => ([...prev, participantInfo]))
+              participantInfo["fee"]   = parlayInfo.fee
+              participantInfo["name"]  = parlayInfo.name
+              participantInfo["users"] = []
+              participantInfo["bets"] = []
+              axios.get(`http://localhost:8001/api/participants`)
+                .then(res => {
+                  res.data.map(participant => {
+                    if (participant.parlay_id === participantInfo.parlay_id) {
+                      participantInfo.users.push(participant.user_name)
+                      axios.get(`http://localhost:8001/api/bets/${participant.parlay_id}`)
+                        .then(res => {
+                          res.data.map(bet => participantInfo.bets.push(bet))
+                        })
+                        .then(() => setParlays(prev => ([...prev, participantInfo])))
+                    }
+                  })
+                })
             })
         })
       })
@@ -85,8 +99,8 @@ const Parlays = ({user, games}) => {
               <Div key={parlay.id}>
                 <ShowParlay 
                   name={parlay.name} 
-                  bets={2}
-                  participants={2}
+                  bets={parlay.bets.length}
+                  participants={parlay.users}
                   entry={parlay.fee}
                 />
               </Div>

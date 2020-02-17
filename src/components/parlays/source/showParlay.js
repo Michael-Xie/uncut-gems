@@ -70,31 +70,28 @@ export default function ShowParlay({name, bets, participants, entry}) {
 
       <ParlayInfo>
         <Info>Closes in 30 minutes (730 pm)</Info>
-        <Info>{bets}</Info>
-        <Info>{entry}</Info>
-        <Info>{participants * entry}</Info>
+        <Info># of bets: {bets}</Info>
+        <Info># of entries: {entry}</Info>
+        <Info>total pot: {participants.length * entry}</Info>
 
       </ParlayInfo>
-      <div className="separator">{participants.length} participants</div>
+      <div className="separator">{participants.length} participant(s)</div>
       <Rankings>
-        <User>
-          <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-          J_Dog
-      </User>
-        <User>
-          <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-          Sand Pills
-      </User>
-        <User>
-          <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-          Pizani
-      </User>
-        <User>
-          <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-          Pizani
-      </User>
-        <MoreUsers>... 5 more</MoreUsers>
-
+        {
+          participants.map(player => {
+            return (
+              <User>
+                <img 
+                  src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' 
+                  alt='#' 
+                  height="30px" 
+                  width="30px" 
+                />
+                {player}
+              </User>
+            )
+          })
+        }
       </Rankings>
     </Article>
   );
