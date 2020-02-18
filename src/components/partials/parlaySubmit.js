@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ParlaySubmit({data, user_id, parlay_id, expected}) {
+export default function ParlaySubmit({data, user_id, parlay_id, expected, onSubmit}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -71,6 +71,7 @@ export default function ParlaySubmit({data, user_id, parlay_id, expected}) {
             <button onClick={() => {
               handleSubmit(data) 
               handleClose()
+              onSubmit()
             }}>
               Confirm
             </button>

@@ -30,7 +30,7 @@ const Button = styled.button`
 const ParlayCode = styled.div`
 `
 
-export default function FillParlay({user_id, parlay_id, games}) {
+export default function FillParlay({user_id, parlay_id, games, onSubmit}) {
   // keep bets in state.
   const [bets, setBets] = useState([])
   const [betSelection, setBetSelection] = useState([])
@@ -131,6 +131,7 @@ export default function FillParlay({user_id, parlay_id, games}) {
         user_id={user_id} 
         data={betSelection} 
         expected={bets.length}
+        onSubmit={onSubmit}
       >
         Submit Bet
       </ParlaySubmit>

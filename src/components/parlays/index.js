@@ -127,6 +127,7 @@ const Parlays = ({user, games}) => {
                     user_id={user.id}
                     parlay_id={parlay.id}
                     games={games}
+                    onSubmit={() => buffer(COMPLETE)}
                   />
                 </Div>
               )
