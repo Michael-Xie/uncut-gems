@@ -15,11 +15,6 @@ const Wrapper = styled.article`
   box-shadow: 0 8px 6px -6px black;
 `
 
-
-
-
-
-
 export default function Form({ games, onSubmit }) {
 
 
@@ -35,44 +30,61 @@ export default function Form({ games, onSubmit }) {
       },
       game_id: game.game_id,
       bets: [
-        { type: 'pickem', selected: false },
-        { type: 'points_tf', selected: false },
-        { type: 'points_th', selected: false },
-        { type: 'race_to_10', selected: false },
-        { type: 'race_to_100', selected: false }
+        {
+          type: "pickem",
+          betName: 'Pickem',
+          explanation: 'Select the winner of the game',
+          selected: false,
+        },
+        {
+          type: "points_tf",
+          betName: 'Total Points',
+          explanation: 'Select the combined total of points scored this game.',
+          selected: false,
+        },
+        {
+          type: "points_th",
+          betName: 'Points By Half',
+          explanation: 'Select the combined total of points scored by half-time.',
+          selected: false,
+        },
+        {
+          betName: 'Race to 10',
+          explanation: 'Select which team will score 10 points first.',
+          type: "race_to_10",
+          selected: false,
+        },
+        {
+          betName: 'Race to 100',
+          explanation: 'Select which team will score 100 points first.',
+          type: "race_to_100",
+          selected: false,
+        }
       ]
-    }
+    };
   }))
 
-  const setBet = (replace, gameId) => {
-    const newData = []
-    for (let game in data) {
-      if (data[game].game_id === gameId) {
-        data[game].bets.map(bet => {
-          if (bet.type === replace.type) {
-            replace.selected = !replace.selected
-            newData.push(replace)
-          } else {
-            newData.push(bet)
-          }
-        })
-      }
+  const setBet = (betType, gameId) => () => {
+    const selectedGame = data.filter(game => game.game_id === gameId)[0];
+
+    if (selectedGame) {
+        selectedGame.bets = selectedGame.bets.reduce((acc, bet) => {
+          acc.push({
+            ...bet,
+            selected: bet.type === betType ? !bet.selected : bet.selected
+          });
+          return acc;
+        }, []);
+
+      setData(data.map(game => {
+        return game.game_id === selectedGame.game_id ? {...selectedGame} : {...game}
+      }));
     }
-    
-    setData(data.map(game => {
-      if (game.game_id !== gameId) {
-        return game
-      } else {
-        return { ...game, bets: newData }
-      }
-    })); 
   }
 
   return (
     <Wrapper>
-      {console.log(data)}
       {
-        
         data.map(game =>
           <GameListItem
             game={game}
@@ -84,3 +96,4 @@ export default function Form({ games, onSubmit }) {
   );
 
 }
+

@@ -25,19 +25,12 @@ const Check = styled.input`
 `
 
 
-export default function BetType ({ betName, explanation , betType, setBet, game}) {
-  console.log(betType)
-
+export default function BetType({ betName, explanation, betSelected, setBet }) {
   return (
-   
-  
-   <Bet>
-          <BetName>{betName}</BetName>
-          <Explanation>
-            {explanation}
-         </Explanation>
-          <Check type="checkbox" onClick={() => setBet( {betType} , game.game_id)} />
-        </Bet>
-  )
-
+    <Bet>
+      <BetName>{betName}</BetName>
+      <Explanation>{explanation}</Explanation>
+      <Check type="checkbox" checked={betSelected} onClick={() => setBet()} />
+    </Bet>
+  );
 };
