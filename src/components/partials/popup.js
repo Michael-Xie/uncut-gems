@@ -44,7 +44,7 @@ export default function TransitionsModal({data, onSubmit, user}) {
         const game_id = result.game_id
         result.bets.forEach(bet => {
           if (bet.selected)
-            Promise.resolve(axios.post(`http://localhost:8001/api/parlay/bet`, {
+            Promise.resolve(axios.post(`http://localhost:8001/api/parlay/bets`, {
               type:      bet.type,
               parlay_id: id,
               game_id:   game_id

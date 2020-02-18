@@ -91,7 +91,7 @@ const Parlays = ({user, games}) => {
               .then(res => {
                 if (res.data.length === 0) {
                   parlayInformation["state"] = "FILL"
-                  parlayInformation["parlay_id"] = parlay.id
+                  parlayInformation["id"]    = parlay.id
                   setParlays(prev => [...prev, parlayInformation])
                 } else {
                   showParlay(parlay, parlayInformation)
@@ -121,7 +121,11 @@ const Parlays = ({user, games}) => {
             if (parlay.state === "FILL")
               return (
                 <Div key={parlay.id}>
-                  <FillParlay />
+                  <FillParlay 
+                    user_id={user.id}
+                    parlay_id={parlay.id}
+                    games={games}
+                  />
                 </Div>
               )
             else 

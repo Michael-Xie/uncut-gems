@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import styled from "styled-components"
 import axios from "axios"
 
@@ -16,7 +16,7 @@ const Wrapper = styled.article`
 `
 
 export default function Form({ games, onSubmit, user }) {
-  const [data, setData] = React.useState((games || []).map(game => {
+  const [data, setData] = useState((games || []).map(game => {
     return {
       home_team: {
         ...teamData(game.home_team),
@@ -90,7 +90,7 @@ export default function Form({ games, onSubmit, user }) {
           />
         )
       }
-      <TransitionsModal onSubmit={onSubmit} user={user}/>
+      <TransitionsModal onSubmit={onSubmit} user={user} data={data}/>
     </Wrapper>
   );
 
