@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components"
 import axios from "axios"
 import InputSlider from '../../partials/slider'
+import ParlaySubmit from '../../partials/parlaySubmit'
 import { RadioGroup, RadioButton } from 'react-radio-buttons'
 
 const Wrapper = styled.article`
@@ -33,7 +34,7 @@ export default function FillParlay({user_id, parlay_id, games}) {
   // keep bets in state.
   const [bets, setBets] = useState([])
   const [betSelection, setBetSelection] = useState([])
-
+  
   // checkboxes or sliders
   const checkboxes = ["race_to_100", "race_to_10", "pickem"]
   const sliders    = ["points_tf", "points_th"]
@@ -89,6 +90,11 @@ export default function FillParlay({user_id, parlay_id, games}) {
       return setBetSelection(prev => [...prev, {bet_id: betId, selection: value}])
   }
 
+  const handleSubmit = () => {
+    if (betSelection.length !== 4)
+      alert("Must fill out entire form!")
+  }
+
   return (
     <Wrapper>
       {
@@ -112,7 +118,7 @@ export default function FillParlay({user_id, parlay_id, games}) {
                 sliders.map(bType => {
                   if (bType === bet.type)
                     return (
-                    <input type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} />
+                    <input key={bet.id} type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} />
                     )
                 })
               }
@@ -120,7 +126,14 @@ export default function FillParlay({user_id, parlay_id, games}) {
           )
         })
       }
-      <Button>Submit Bet</Button>
+      <ParlaySubmit 
+        parlay_id={parlay_id} 
+        user_id={user_id} 
+        data={betSelection} 
+        expected={bets.length}
+      >
+        Submit Bet
+      </ParlaySubmit>
     </Wrapper>
 
   );
