@@ -15,9 +15,7 @@ const Wrapper = styled.article`
   box-shadow: 0 8px 6px -6px black;
 `
 
-export default function Form({ games, onSubmit }) {
-
-
+export default function Form({ games, onSubmit, user }) {
   const [data, setData] = React.useState((games || []).map(game => {
     return {
       home_team: {
@@ -92,6 +90,7 @@ export default function Form({ games, onSubmit }) {
           />
         )
       }
+      <TransitionsModal onSubmit={onSubmit} user={user}/>
     </Wrapper>
   );
 

@@ -1,6 +1,5 @@
-import React from "react";
+import React from "react"
 import styled from "styled-components"
-
 
 const Article = styled.article` 
   background-color: #fff;
@@ -60,44 +59,38 @@ const Info = styled.h1`
   margin: 5px;
 `
 
-export default function parlay({ }) {
+export default function ShowParlay({name, bets, participants, entry}) {
   return (
     <Article>
-
       <Title>
         <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
         &nbsp;  &nbsp;
-       <h1>J_Dog's Parlay</h1>
+       <h1>{name}</h1>
       </Title>
-
       <ParlayInfo>
         <Info>Closes in 30 minutes (730 pm)</Info>
-        <Info>4 total bets</Info>
-        <Info>5$ Entry</Info>
-        <Info>20$ PotSize</Info>
+        <Info># of bets: {bets}</Info>
+        <Info>entry fee: ${entry}.00</Info>
+        <Info>total pot: ${participants.length * entry}.00</Info>
 
       </ParlayInfo>
-      <div class="separator">4 paticipants</div>
+      <div className="separator">{participants.length} participant(s)</div>
       <Rankings>
-
-        <User>
-          <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-          J_Dog
-      </User>
-        <User>
-          <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-          Sand Pills
-      </User>
-        <User>
-          <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-          Pizani
-      </User>
-        <User>
-          <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-          Pizani
-      </User>
-        <MoreUsers>... 5 more</MoreUsers>
-
+        {
+          participants.map(player => {
+            return (
+              <User key={player}>
+                <img 
+                  src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' 
+                  alt='#' 
+                  height="30px" 
+                  width="30px" 
+                />
+                {player}
+              </User>
+            )
+          })
+        }
       </Rankings>
     </Article>
   );

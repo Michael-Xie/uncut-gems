@@ -1,14 +1,12 @@
 import React, { Fragment } from 'react'
-import { BrowserRouter as Router, Switch, Route, Redirect, useHistory, useLocation } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 import Navigation from './partials/nav'
 import Game from './games/game'
+import Parlays from './parlays/index'
 import StatsBox from './games/statsBox'
 import Register from './sessions/registration'
 import Login from './sessions/login'
 import Logout from './sessions/logout'
-import Parlays from './parlays'
-
-import axios from "axios"
 
 import useApplicationData from "../hooks/useApplicationData"
 
@@ -64,7 +62,7 @@ const Application = () => {
             /> */}
           </Route>
           <Route path="/parlays">
-            <Parlays games={state.games} user={localStorage.getItem("user")} />
+            <Parlays games={state.games} user={JSON.parse(localStorage.getItem("user"))} />
           </Route>
             
           <Route path="/logout">

@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import styled from "styled-components"
 
 import useVisualMode from "../../hooks/useVisualMode"
@@ -6,6 +6,10 @@ import useVisualMode from "../../hooks/useVisualMode"
 import Create from "./source/create"
 import Loading from "./source/loading"
 import Form from "./source/form"
+import ShowParlay from "./source/showParlay"
+import FillParlay from "./source/fillParlay"
+
+import axios from "axios"
 
 const Container = styled.div`
   display: flex;
@@ -23,20 +27,82 @@ const Div = styled.div`
   justify-content: center;
   align-content: center;
 `
+
+const Parlay = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+`
+
 const Parlays = ({user, games}) => {
-  const ADD     = "ADD"
-  const FORM    = "FORM"
-  const CONFIRM = "CONFIRM"
-  const LOADING = "LOADING"
+  const ADD      = "ADD"
+  const FORM     = "FORM"
+  const LOADING  = "LOADING"
+  const COMPLETE = "COMPLETE"
+
+  const showParlay = (parlay, parlayInformation) => {
+    parlayInformation["state"] = "SHOW"
+    Promise.resolve(
+      axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants/${user.user_name}`))
+      .then(res => {
+        if (res.data.length !== 0) {
+          parlayInformation["id"]    = parlay.id
+          parlayInformation["name"]  = parlay.name
+          parlayInformation["fee"]   = parlay.fee
+          parlayInformation["users"] = []
+          parlayInformation["bets"]  = []
+          // get the rest of the participants.
+          axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants`)
+            .then(player => {
+              if (player.user_name !== user.user_name)
+                parlayInformation.users.push(player.user_name)
+            })
+          // get the bets.
+          axios.get(`http://localhost:8001/api/parlay/bet/${parlay.id}`)
+            .then(res => {
+              res.data.map(bet => parlayInformation.bets.push(bet))
+            })
+            .then(res => setParlays(prev => [...prev, parlayInformation]))
+        }
+      })
+  }
   // get the visual mode for create button.
-  const {mode, transition, back} = useVisualMode(ADD)
+  const {mode, transition} = useVisualMode(ADD)
+  const [activeParlays, setParlays] = useState([])
   // transitions
   const buffer = (new_mode) => {
     transition(LOADING)
     setTimeout(() => {
       transition(new_mode)
-    }, 2000)
+    }, 1200)
   }
+  // get all the parlays the user has participated in.
+  useEffect(() => {
+    setParlays([])
+    const parlayInformation = {}
+    // check to see if the admin has filled out his parlay.
+    axios.get(`http://localhost:8001/api/parlays`)
+      .then(res => {
+        res.data.map(parlay => {
+          // ensure that the user has filled out the bet form for his own parlays.
+          if (parlay.admin === user.id) {
+            axios.get(`http://localhost:8001/api/parlay/bet/fill/${user.id}`)
+              .then(res => {
+                if (res.data.length === 0) {
+                  parlayInformation["state"] = "FILL"
+                  parlayInformation["parlay_id"] = parlay.id
+                  setParlays(prev => [...prev, parlayInformation])
+                } else {
+                  showParlay(parlay, parlayInformation)
+                }
+              })
+          } else {
+            showParlay(parlay, parlayInformation)
+          }
+        })
+      })
+  }, [mode === "COMPLETE"])
 
   // if user is not logged in return null [TODO] redirect.
   if (Object.keys(user).length === 0)
@@ -45,8 +111,34 @@ const Parlays = ({user, games}) => {
   return (
     <Container>
       <Div>{mode === ADD && <Create onClick={() => buffer(FORM)} />}</Div>
-      <Div>{mode === FORM && <Form games={games} onSubmit={() => buffer(ADD)} />}</Div>
+      <Div>{mode === FORM && <Form user={user} games={games} onSubmit={() => buffer(COMPLETE)} />}</Div>
       <Div>{mode === LOADING  && <Loading />}</Div>
+      <Div>{mode === COMPLETE && <Create onClick={() => buffer(FORM)} />}</Div>
+      <Parlay>
+        {
+          activeParlays.map(parlay => {
+            // get parlay information
+            if (parlay.state === "FILL")
+              return (
+                <Div key={parlay.id}>
+                  <FillParlay />
+                </Div>
+              )
+            else 
+              return (
+                <Div key={parlay.id}>
+                  <ShowParlay 
+                    name={parlay.name} 
+                    bets={parlay.bets.length}
+                    participants={parlay.users}
+                    entry={parlay.fee}
+                  />
+                </Div>
+            )
+          })
+        }
+      </Parlay>
+      <br/><br/>
     </Container>
   )
 }
