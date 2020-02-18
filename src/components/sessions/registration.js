@@ -11,19 +11,19 @@ export default function Register({ dispatch }) {
     const password = event.target.password.value
     const password_confirmation = event.target.password_confirmation.value
 
-    setError([]);
-
+    const errors = [];
+    
     if (password !== password_confirmation) {
-      setError((prev) => [...prev, "Passwords do not match."]);
+      errors.push("Passwords do not match.");
     }
     if (password.length === 0) {
-      setError((prev) => [...prev, "Password is empty."]);
+      errors.push("Password is empty.");
     }
     if (user.length === 0) {
-      setError((prev) => [...prev, "Username is empty."]);
+      errors.push("Username is empty.");
     }
-
-    if (error.length === 0) {
+    console.log("errors aray", errors);
+    if (errors.length === 0) {
       axios.post("http://localhost:8001/api/users", {
         user_name: user,
         password: password,
@@ -46,8 +46,10 @@ export default function Register({ dispatch }) {
         })
         .catch(err => console.log(err))
     }
-  }
+    setError(errors);
 
+  }
+  console.log("error", error);
   return (
     <>
       <h2>Register</h2>

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components"
-import teamData from "../../../helpers/teamData"
 
 
 
@@ -11,8 +10,10 @@ import teamData from "../../../helpers/teamData"
  */
 
 const Article = styled.article` 
-  color: #fff;
-  width: 600px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  max-width: 600px;
   height: 100px;
   margin: 30px auto 0;
   background: linear-gradient(
@@ -21,98 +22,71 @@ const Article = styled.article`
       rgba(${props => props.awayColor})  
     ),
    url(${props => props.arena ? props.arena : 'https://previews.123rf.com/images/enterline/enterline1311/enterline131100002/24220420-a-realistic-vector-hardwood-textured-basketball-court-.jpg'});
-  background-blend-mode: multiply;
-  display: flex;
-  cursor: pointer;
+   background-position: 0px -50px;
+   background-blend-mode: multiply;
+  
+  color: #fff;
+  
 
-  &:hover {
-    box-shadow: 0 8px 6px -6px black;
-  }
 
 `
 
 const Section = styled.section`
+  display: flex;
+  align-items:center;
   justify-content: space-between;
-  width: 40%;
-  text-align: center;
 `
 
-const ScoreLogo = styled.div`
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  font-size: 2rem;
-`
 
-const GameInfo = styled.div`
-  display: flex;
-  align-items: center;
-  width: 20%;
-  font-weight: bold;
-`
 const TeamName = styled.h1`
-  margin: 20px;
+ margin: 0 10px;
 `
 
-const GameStatus = styled.h3`
-  text-align: center;
-  margin: 0 auto;
-`
-
-
-const Logo = styled.img `
+const Logo = styled.img`
 `
 // ---------------------------
 
 export default function Headline({ game }) {
 
 
-  // console.log(game)
 
 
-  // if (homeTeam === undefined || awayTeam === undefined)
-  //   return <div></div>
+
+  if (game.home_team === undefined || game.away_team === undefined)
+    return <div></div>
 
   return (
-  
-      <Article
-   
-      // homeColor={homeTeam.colors}
-        // awayColor={awayTeam.colors}
-        // arena={homeTeam.arena}
-      >
-        <Section>
-          {/* <TeamName>{game.away_team.name}</TeamName>  */}
-          
-          <ScoreLogo>
-            <Logo
-              // src={awayTeam.logo}
-              // alt={game.away_team}
-              // height="25px"
-              // width="auto"
-            />
-         
-          </ScoreLogo>
-        </Section>
 
-     
-        <Section>
-          {/* <TeamName>{game.home_team}</TeamName> */}
+    <Article
+      homeColor={game.home_team.colors}
+      awayColor={game.away_team.colors}
+      arena={game.home_team.arena}
+    >
 
-          <ScoreLogo>
-            <img
-              // src={homeTeam.logo}
-              // alt={game.home_team}
-              // height="25px"
-              // width="auto"
-            />
-          </ScoreLogo>
-        </Section>
-      </Article>
-     
-   
-   
+      <Section>
+        <Logo
+          src={game.away_team.logo}
+          alt={game.away_team.name}
+          height="75px"
+          width="auto"
+        />
+
+        <TeamName>{game.away_team.name}</TeamName>
+      </Section>
+
+
+      <Section>
+        <TeamName>{game.home_team.name}</TeamName>
+
+        <Logo
+          src={game.home_team.logo}
+          alt={game.home_team.name}
+          height="75px"
+          width="auto"
+        />
+      </Section>
+
+    </Article>
   );
 
 }

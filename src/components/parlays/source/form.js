@@ -7,16 +7,55 @@ import TransitionsModal from "../../partials/popup"
 import teamData from "../../../helpers/teamData"
 
 import GameListItem from "./gameListItem"
+import InfoBox from "./infobox"
 
 const Wrapper = styled.article`
-  width: 600px;
-  background-color: #fff;
-  margin: 0 auto 30px;
-  box-shadow: 0 8px 6px -6px black;
+ display: flex;
+ flex-direction: column;
+ justify-content:center;
+
 `
 
+const Title = styled.h1`
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  padding: 15px 20px;
+  margin: 20px auto;
+  
+  border-bottom: 1px solid #dbdbdb;
+  background-color: #fff;
+
+  
+`
+
+const MoreInfo = styled.button`
+  margin: 0 auto;
+  width: 20%;
+
+  padding: 5px 10px;
+
+  color: #fff;
+  background-color: #000;
+  
+
+  cursor: pointer;
+
+  &:focus {
+    outline:0;
+  }
+
+  &:hover {
+    color: #fff;
+  }
+`
+
+
+  
+
 export default function Form({ games, onSubmit, user }) {
-  const [data, setData] = useState((games || []).map(game => {
+  const [infoBoxVisible, setInfoBoxVisible] = useState(false);
+  const [data, setData] = React.useState((games || []).map(game => {
     return {
       home_team: {
         ...teamData(game.home_team),
@@ -66,22 +105,32 @@ export default function Form({ games, onSubmit, user }) {
     const selectedGame = data.filter(game => game.game_id === gameId)[0];
 
     if (selectedGame) {
-        selectedGame.bets = selectedGame.bets.reduce((acc, bet) => {
-          acc.push({
-            ...bet,
-            selected: bet.type === betType ? !bet.selected : bet.selected
-          });
-          return acc;
-        }, []);
+      selectedGame.bets = selectedGame.bets.reduce((acc, bet) => {
+        acc.push({
+          ...bet,
+          selected: bet.type === betType ? !bet.selected : bet.selected
+        });
+        return acc;
+      }, []);
 
       setData(data.map(game => {
-        return game.game_id === selectedGame.game_id ? {...selectedGame} : {...game}
+        return game.game_id === selectedGame.game_id ? { ...selectedGame } : { ...game }
       }));
     }
+
   }
 
   return (
     <Wrapper>
+      <Title>Create a Parlay</Title>
+
+      <MoreInfo onClick={() => setInfoBoxVisible(!infoBoxVisible)}>More Info</MoreInfo>
+
+      {infoBoxVisible && (
+        <InfoBox />
+      )}
+
+
       {
         data.map(game =>
           <GameListItem
@@ -95,4 +144,3 @@ export default function Form({ games, onSubmit, user }) {
   );
 
 }
-
