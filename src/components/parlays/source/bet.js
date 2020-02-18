@@ -7,6 +7,8 @@ const Bet = styled.article`
   align-items: center;
   padding: 10px 5px;
   font-size: 15px;
+  background-color: ${props => props.betSelected ? '#9DFF89' : 'white'};
+
 `
 
 const Explanation = styled.span`
@@ -26,8 +28,11 @@ const Check = styled.input`
 
 
 export default function BetType({ betName, explanation, betSelected, setBet }) {
+
   return (
-    <Bet>
+    <Bet
+      betSelected={betSelected}
+    >
       <BetName>{betName}</BetName>
       <Explanation>{explanation}</Explanation>
       <Check type="checkbox" checked={betSelected} onClick={() => setBet()} />

@@ -7,11 +7,11 @@ import Bet from './bet'
 
 
 const Wrapper = styled.div`
-  display:flex;
-  flex-direction: column;
-  margin: 2vh;
-  border: 2px ridge #000;
-  
+ display:flex;
+ flex-direction: column;
+ max-width: 600px;
+ width: 100%;
+ border: 1px solid black;
 `
 
 const Teams = styled.h3`
@@ -53,7 +53,7 @@ export default function GameListItem({ game, setBet }) {
 
   return (
     <Wrapper key={game.game_id} arena={game.home_team.arena}>
-      <Teams>
+      {/* <Teams>
         <HomeColor color={game.home_team.colors}>
           {game.home_team.name}
         </HomeColor>{" "}
@@ -61,10 +61,16 @@ export default function GameListItem({ game, setBet }) {
         <AwayColor color={game.away_team.colors}>
           {game.away_team.name}
         </AwayColor>
-      </Teams>
+      </Teams> */}
+      <Headline />
       <Bets>
         {game.bets.map(bet => (
-          <Bet {...bet} setBet={setBet(bet.type, game.game_id)}
+          <Bet
+            betName={bet.betName}
+            explanation={bet.explanation}
+            betType={bet.betType}
+            betSelected={bet.selected}
+            setBet={setBet(bet.type, game.game_id)}
           />
         ))}
       </Bets>

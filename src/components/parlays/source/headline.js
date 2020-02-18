@@ -12,7 +12,8 @@ import teamData from "../../../helpers/teamData"
 
 const Article = styled.article` 
   color: #fff;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   height: 100px;
   margin: 30px auto 0;
   background: linear-gradient(
