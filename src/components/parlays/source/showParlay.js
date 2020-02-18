@@ -67,12 +67,11 @@ export default function ShowParlay({name, bets, participants, entry}) {
         &nbsp;  &nbsp;
        <h1>{name}</h1>
       </Title>
-
       <ParlayInfo>
         <Info>Closes in 30 minutes (730 pm)</Info>
         <Info># of bets: {bets}</Info>
-        <Info># of entries: {entry}</Info>
-        <Info>total pot: {participants.length * entry}</Info>
+        <Info>entry fee: ${entry}.00</Info>
+        <Info>total pot: ${participants.length * entry}.00</Info>
 
       </ParlayInfo>
       <div className="separator">{participants.length} participant(s)</div>

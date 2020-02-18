@@ -32,32 +32,34 @@ export default function TransitionsModal({data, onSubmit, user}) {
   };
 
   const handleSubmit = (bets) => {
-    axios.post("http://localhost:8001/api/parlays", {
+    Promise.resolve(axios.post(`http://localhost:8001/api/parlay`, {
+      admin: user.id,
       name: "hello",
       fee: 20,
       status: 'open'
-    })
+    }))
     .then(res => {
       const id = res.data[0].id
       bets.map(result => {
         const game_id = result.game_id
         result.bets.forEach(bet => {
           if (bet.selected)
-            axios.post("http://localhost:8001/api/bets", {
+            Promise.resolve(axios.post(`http://localhost:8001/api/parlay/bet`, {
               type:      bet.type,
               parlay_id: id,
               game_id:   game_id
-            })
+            }))
             .catch(err => console.log(err))
         })
       })
       return id
     })
     .then(id => {
-      axios.post("http://localhost:8001/api/participants", {
+      axios.post(`http://localhost:8001/api/parlay/${id}/participants`, {
         user_name: user.user_name,
         parlay_id: id
       })
+      .catch(err => console.log(err))
     })
     .catch(err => console.log(err))
   }

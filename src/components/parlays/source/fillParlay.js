@@ -1,11 +1,7 @@
 import React from "react";
 import styled from "styled-components"
 
-
-import InputSlider from '../partials/slider'
-
-
-
+import InputSlider from '../../partials/slider'
 
 const Wrapper = styled.article`
   width: 600px;
@@ -13,8 +9,6 @@ const Wrapper = styled.article`
   margin: 0 auto 30px;
   box-shadow: 0 8px 6px -6px black;
 `
-
-
 
 const Pickem = styled.div`
 `
@@ -34,11 +28,9 @@ const Button = styled.button`
 const ParlayCode = styled.div`
 `
 
-export default function FillParlay({ }) {
+export default function FillParlay({user_id, parlay_id}) {
   return (
     <Wrapper>
-
-
       <Game>
         <h1>Toronto vs Lakers</h1>
         <h3>Pickem</h3>
@@ -48,9 +40,7 @@ export default function FillParlay({ }) {
         </Pickem>
         <h3>Total Points</h3>
         <InputSlider />
-
       </Game>
-
       <Button>Submit Bet</Button>
     </Wrapper>
 
