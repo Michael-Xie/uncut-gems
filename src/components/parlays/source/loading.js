@@ -22,28 +22,10 @@ const Article = styled.div`
   }
 `
 
-const Button = styled.div`
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  height: 100%;
-`
-
-const Img = styled.img`
-  display: flex;
-  align-self: center;
-  width: 15%;
-  height: 50%;
-
-  @media only screen and (min-width: 768px) {
-    width: 20%;
-  }
-`
-
 export default function Loading() {
   return (
     <Article>
-      <img src="https://i.gifer.com/YCZH.gif"/>
+      <img src="https://i.gifer.com/YCZH.gif" alt="loading"/>
     </Article>
   );
 

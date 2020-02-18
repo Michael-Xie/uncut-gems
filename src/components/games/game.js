@@ -67,10 +67,6 @@ const GameStatus = styled.h3`
 const Logo = styled.img` 
 
 `
-
-const Stats = styled.div`
-
-`
 // ---------------------------
 
 export default function Game({ game, score }) {

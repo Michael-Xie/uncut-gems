@@ -50,9 +50,11 @@ const MoreInfo = styled.button`
   }
 `
 
-export default function Form({ games, onSubmit }) {
-  const [infoBoxVisible, setInfoBoxVisible] = useState(false);
 
+  
+
+export default function Form({ games, onSubmit, user }) {
+  const [infoBoxVisible, setInfoBoxVisible] = useState(false);
   const [data, setData] = React.useState((games || []).map(game => {
     return {
       home_team: {
@@ -137,6 +139,7 @@ export default function Form({ games, onSubmit }) {
           />
         )
       }
+      <TransitionsModal onSubmit={onSubmit} user={user}/>
     </Wrapper>
   );
 
