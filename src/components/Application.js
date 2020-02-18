@@ -68,7 +68,9 @@ const Application = () => {
           </Route>
             
           <Route path="/logout">
-            <Logout />
+
+            <Logout dispatch={dispatch}/>
+
             <Redirect to={{ pathname: "/login" }} />
           </Route>
         </Switch>
