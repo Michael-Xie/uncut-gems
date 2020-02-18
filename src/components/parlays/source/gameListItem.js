@@ -11,7 +11,6 @@ const Wrapper = styled.div`
  flex-direction: column;
  max-width: 600px;
  width: 100%;
- border: 1px solid black;
 `
 
 

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components"
-import teamData from "../../../helpers/teamData"
 
 
 
@@ -53,8 +52,8 @@ export default function Headline({ game }) {
 
 
 
-  // if (homeTeam === undefined || awayTeam === undefined)
-  //   return <div></div>
+  if (game.home_team === undefined || game.away_team === undefined)
+    return <div></div>
 
   return (
 
