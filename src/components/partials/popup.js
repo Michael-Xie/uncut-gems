@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TransitionsModal({data, onSubmit, user}) {
+export default function TransitionsModal({data, onSubmit, user, buyIn, betName}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -34,8 +34,8 @@ export default function TransitionsModal({data, onSubmit, user}) {
   const handleSubmit = (bets) => {
     Promise.resolve(axios.post(`http://localhost:8001/api/parlay`, {
       admin: user.id,
-      name: "world",
-      fee: 20,
+      name: betName,
+      fee: buyIn,
       status: 'open'
     }))
     .then(res => {
