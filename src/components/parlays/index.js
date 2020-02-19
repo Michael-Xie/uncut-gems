@@ -83,9 +83,10 @@ const Parlays = ({user, games, parlays}) => {
           parlayInformation["bets"]  = []
           // get the rest of the participants.
           axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants`)
-            .then(player => {
-              if (player.user_name !== user.user_name)
+            .then(res => {
+              res.data.map(player => {
                 parlayInformation.users.push(player.user_name)
+              })
             })
             .then(res => {
               axios.get(`http://localhost:8001/api/parlay/bet/${parlay.id}`)

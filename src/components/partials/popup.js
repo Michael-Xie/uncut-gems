@@ -34,7 +34,7 @@ export default function TransitionsModal({data, onSubmit, user}) {
   const handleSubmit = (bets) => {
     Promise.resolve(axios.post(`http://localhost:8001/api/parlay`, {
       admin: user.id,
-      name: "hello",
+      name: "world",
       fee: 20,
       status: 'open'
     }))

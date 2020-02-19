@@ -50,9 +50,6 @@ const MoreInfo = styled.button`
   }
 `
 
-
-  
-
 export default function Form({ games, onSubmit, user }) {
   const [infoBoxVisible, setInfoBoxVisible] = useState(false);
   const [data, setData] = React.useState((games || []).map(game => {
@@ -129,7 +126,6 @@ export default function Form({ games, onSubmit, user }) {
       {infoBoxVisible && (
         <InfoBox />
       )}
-
 
       {
         data.map(game =>
