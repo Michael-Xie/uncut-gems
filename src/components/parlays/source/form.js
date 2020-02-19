@@ -51,10 +51,27 @@ const MoreInfo = styled.button`
 `
 
 export default function Form({ games, onSubmit, user }) {
+  
+  //  ------  Show InfoBox      ------  //
   const [infoBoxVisible, setInfoBoxVisible] = useState(false);
-
+  
+  //  ------  Parlay Name      ------  //
   const [nameValue, setNameValue] = React.useState('');
 
+  //  ------  SliderStuff      ------  //
+  const [value, setValue] = React.useState(30);
+
+  const handleSliderChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const handleInputChange = event => {
+    setValue(event.target.value === '' ? '' : Number(event.target.value));
+  };
+
+
+
+  //  ------  Choose Parlays  ------  //
   const [data, setData] = React.useState((games || []).map(game => {
     return {
       home_team: {
@@ -97,9 +114,7 @@ export default function Form({ games, onSubmit, user }) {
           type: "race_to_100",
           selected: false,
         }
-      ],
-      bet_name: nameValue,
-      bet_amount: 0,
+      ]
     };
   }))
 
@@ -122,6 +137,8 @@ export default function Form({ games, onSubmit, user }) {
     }
   }
 
+  
+
   return (
     <Wrapper>
       <Title>Create a Parlay</Title>
@@ -131,6 +148,13 @@ export default function Form({ games, onSubmit, user }) {
       {infoBoxVisible && (
         <InfoBox />
       )}
+
+      <InputSlider
+        value={value}
+        setValue={setValue}
+        handleSliderChange={handleSliderChange}
+        handleInputChange={handleInputChange}
+      />
 
       <ParlayName
         value={nameValue}
@@ -145,7 +169,7 @@ export default function Form({ games, onSubmit, user }) {
           />
         )
       }
-      <TransitionsModal onSubmit={onSubmit} user={user} data={data} betName={nameValue} buyIn={'0'} />
+      <TransitionsModal onSubmit={onSubmit} user={user} data={data} betName={nameValue} buyIn={value} />
     </Wrapper>
   );
 
