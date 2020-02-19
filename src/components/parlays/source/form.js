@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import axios from "axios"
 
@@ -8,12 +8,12 @@ import teamData from "../../../helpers/teamData"
 
 import GameListItem from "./gameListItem"
 import InfoBox from "./infobox"
+import ParlayName from './parlayName'
 
 const Wrapper = styled.article`
  display: flex;
  flex-direction: column;
  justify-content:center;
-
 `
 
 const Title = styled.h1`
@@ -50,11 +50,11 @@ const MoreInfo = styled.button`
   }
 `
 
-
-  
-
 export default function Form({ games, onSubmit, user }) {
   const [infoBoxVisible, setInfoBoxVisible] = useState(false);
+
+  const [nameValue, setNameValue] = React.useState('');
+
   const [data, setData] = React.useState((games || []).map(game => {
     return {
       home_team: {
@@ -97,9 +97,12 @@ export default function Form({ games, onSubmit, user }) {
           type: "race_to_100",
           selected: false,
         }
-      ]
+      ],
+      bet_name: nameValue,
+      bet_amount: 0,
     };
   }))
+
 
   const setBet = (betType, gameId) => () => {
     const selectedGame = data.filter(game => game.game_id === gameId)[0];
@@ -117,7 +120,6 @@ export default function Form({ games, onSubmit, user }) {
         return game.game_id === selectedGame.game_id ? { ...selectedGame } : { ...game }
       }));
     }
-
   }
 
   return (
@@ -130,6 +132,10 @@ export default function Form({ games, onSubmit, user }) {
         <InfoBox />
       )}
 
+      <ParlayName
+        value={nameValue}
+        setName={setNameValue}
+      />
 
       {
         data.map(game =>
@@ -139,7 +145,7 @@ export default function Form({ games, onSubmit, user }) {
           />
         )
       }
-      <TransitionsModal onSubmit={onSubmit} user={user} data={data}/>
+      <TransitionsModal onSubmit={onSubmit} user={user} data={data} betName={nameValue} buyIn={'0'} />
     </Wrapper>
   );
 
