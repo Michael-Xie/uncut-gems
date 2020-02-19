@@ -25,9 +25,7 @@ const Bet = styled.div`
 
 const BetType = styled.span`
   width: 25%;
-  
   color: #262626;
-
   font-size: 16px;
   
 `
