@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, {useState} from "react"
 import styled from "styled-components"
 import axios from "axios"
 
@@ -139,7 +139,7 @@ export default function Form({ games, onSubmit, user }) {
           />
         )
       }
-      <TransitionsModal onSubmit={onSubmit} user={user}/>
+      <TransitionsModal onSubmit={onSubmit} user={user} data={data}/>
     </Wrapper>
   );
 
