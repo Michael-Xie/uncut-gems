@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TransitionsModal({data, onSubmit, user}) {
+export default function ParlaySubmit({data, user_id, parlay_id, expected, onSubmit}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -32,36 +32,20 @@ export default function TransitionsModal({data, onSubmit, user}) {
   };
 
   const handleSubmit = (bets) => {
-    Promise.resolve(axios.post(`http://localhost:8001/api/parlay`, {
-      admin: user.id,
-      name: "hello",
-      fee: 20,
-      status: 'open'
-    }))
-    .then(res => {
-      const id = res.data[0].id
-      bets.map(result => {
-        const game_id = result.game_id
-        result.bets.forEach(bet => {
-          if (bet.selected)
-            Promise.resolve(axios.post(`http://localhost:8001/api/parlay/bets`, {
-              type:      bet.type,
-              parlay_id: id,
-              game_id:   game_id
-            }))
-            .catch(err => console.log(err))
+    if (expected === data.length)
+      bets.map(bet => {
+        axios.post("http://localhost:8001/api/parlay/bets/fill", {
+          selection: bet.selection,
+          bet_id: bet.bet_id,
+          parlay_id: parlay_id,
+          user_id: user_id
         })
+        .catch(err => console.log(err))
       })
-      return id
-    })
-    .then(id => {
-      axios.post(`http://localhost:8001/api/parlay/${id}/participants`, {
-        user_name: user.user_name,
-        parlay_id: id
-      })
-      .catch(err => console.log(err))
-    })
-    .catch(err => console.log(err))
+    else {
+      alert("fill out the entire form!")
+      return
+    }
   }
 
   return (

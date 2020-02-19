@@ -41,6 +41,10 @@ const Parlays = ({user, games}) => {
   const LOADING  = "LOADING"
   const COMPLETE = "COMPLETE"
 
+  // get the visual mode for create button.
+  const {mode, transition} = useVisualMode(ADD)
+  const [activeParlays, setParlays] = useState([])
+
   const showParlay = (parlay, parlayInformation) => {
     parlayInformation["state"] = "SHOW"
     Promise.resolve(
@@ -58,18 +62,16 @@ const Parlays = ({user, games}) => {
               if (player.user_name !== user.user_name)
                 parlayInformation.users.push(player.user_name)
             })
-          // get the bets.
-          axios.get(`http://localhost:8001/api/parlay/bet/${parlay.id}`)
             .then(res => {
-              res.data.map(bet => parlayInformation.bets.push(bet))
+              axios.get(`http://localhost:8001/api/parlay/bet/${parlay.id}`)
+                .then(res => {
+                  res.data.map(bet => parlayInformation.bets.push(bet))
+                })
+                .then(() => setParlays(prev => [...prev, parlayInformation]))
             })
-            .then(res => setParlays(prev => [...prev, parlayInformation]))
         }
       })
   }
-  // get the visual mode for create button.
-  const {mode, transition} = useVisualMode(ADD)
-  const [activeParlays, setParlays] = useState([])
   // transitions
   const buffer = (new_mode) => {
     transition(LOADING)
@@ -79,19 +81,19 @@ const Parlays = ({user, games}) => {
   }
   // get all the parlays the user has participated in.
   useEffect(() => {
-    setParlays([])
-    const parlayInformation = {}
+    setParlays(prev => [])
     // check to see if the admin has filled out his parlay.
     axios.get(`http://localhost:8001/api/parlays`)
       .then(res => {
         res.data.map(parlay => {
+          const parlayInformation = {}
           // ensure that the user has filled out the bet form for his own parlays.
           if (parlay.admin === user.id) {
-            axios.get(`http://localhost:8001/api/parlay/bet/fill/${user.id}`)
+            axios.get(`http://localhost:8001/api/parlay/${parlay.id}/bet/fill/${user.id}`)
               .then(res => {
                 if (res.data.length === 0) {
                   parlayInformation["state"] = "FILL"
-                  parlayInformation["parlay_id"] = parlay.id
+                  parlayInformation["id"]    = parlay.id
                   setParlays(prev => [...prev, parlayInformation])
                 } else {
                   showParlay(parlay, parlayInformation)
@@ -121,7 +123,12 @@ const Parlays = ({user, games}) => {
             if (parlay.state === "FILL")
               return (
                 <Div key={parlay.id}>
-                  <FillParlay />
+                  <FillParlay 
+                    user_id={user.id}
+                    parlay_id={parlay.id}
+                    games={games}
+                    onSubmit={() => buffer(COMPLETE)}
+                  />
                 </Div>
               )
             else 
