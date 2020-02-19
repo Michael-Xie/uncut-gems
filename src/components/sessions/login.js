@@ -77,7 +77,7 @@ export default function Login({ dispatch }) {
   }
   return (
     <Wrapper>
-      <Video src="https://github.com/pizzani/uncut-gems-client/blob/master/images/login.gif?raw=true" />
+      <Video  src="https://raw.githubusercontent.com/pizzani/uncut-gems-client/master/images/login_page.gif" />
      
 
       
@@ -93,7 +93,7 @@ export default function Login({ dispatch }) {
             Username
           <Input type="text" name="username" />
           </Label>
-       
+         
           <Label>
             Password
           <Input type="password" name="password" />

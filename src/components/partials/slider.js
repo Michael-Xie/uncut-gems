@@ -14,17 +14,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function InputSlider() {
+export default function InputSlider({ value, setValue, handleSliderChange, handleInputChange }) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(30);
-
-  const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const handleInputChange = event => {
-    setValue(event.target.value === '' ? '' : Number(event.target.value));
-  };
 
   const handleBlur = () => {
     if (value < 0) {
@@ -33,7 +24,7 @@ export default function InputSlider() {
       setValue(100);
     }
   };
-
+  
   return (
     <div className={classes.root}>
       <Typography id="input-slider" gutterBottom>
