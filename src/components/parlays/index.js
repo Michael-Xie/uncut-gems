@@ -35,7 +35,20 @@ const Parlay = styled.div`
   align-content: center;
 `
 
-const Parlays = ({user, games}) => {
+const SearchContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
+const ResultContainer = styled.div`
+  
+`
+
+const SearchResult = styled.div`
+`
+
+const Parlays = ({user, games, parlays}) => {
   const ADD      = "ADD"
   const FORM     = "FORM"
   const LOADING  = "LOADING"
@@ -44,7 +57,19 @@ const Parlays = ({user, games}) => {
   // get the visual mode for create button.
   const {mode, transition} = useVisualMode(ADD)
   const [activeParlays, setParlays] = useState([])
+  const [searchRes, setSearchRes] = useState([...parlays])
 
+  // helper function for the search feature.
+  const search = (value) => {
+    axios.get(`http://localhost:8001/api/parlays/${value}`)
+      .then(res => {
+        console.log(res)
+        return setSearchRes([...res.data])
+      })
+      .catch(err => console.log(err))
+  }
+  // if the user has participated in a parlay (filled out a bet form)
+  // show the parlay.
   const showParlay = (parlay, parlayInformation) => {
     parlayInformation["state"] = "SHOW"
     Promise.resolve(
@@ -112,6 +137,8 @@ const Parlays = ({user, games}) => {
 
   return (
     <Container>
+      <SearchContainer><input tpye="text" onChange={(e) => search(e.target.value)} /></SearchContainer>
+      <ResultContainer>{searchRes.map(search => <SearchResult><a href='#'>{search.name}</a></SearchResult>)}</ResultContainer>
       <Div>{mode === ADD && <Create onClick={() => buffer(FORM)} />}</Div>
       <Div>{mode === FORM && <Form user={user} games={games} onSubmit={() => buffer(COMPLETE)} />}</Div>
       <Div>{mode === LOADING  && <Loading />}</Div>
