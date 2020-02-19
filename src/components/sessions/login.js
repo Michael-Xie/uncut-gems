@@ -77,7 +77,7 @@ export default function Login({ dispatch }) {
   }
   return (
     <Wrapper>
-      <Video src="https://github.com/pizzani/uncut-gems-client/blob/master/images/login.gif?raw=true" />
+      <Video src="https://github.com/pizzani/uncut-gems-client/blob/master/images/login_page.gif?raw=true" />
      
 
       
