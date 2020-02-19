@@ -49,6 +49,7 @@ const SearchResult = styled.div`
 `
 
 const Parlays = ({user, games, parlays}) => {
+  // constants to handle visual transitions.
   const ADD      = "ADD"
   const FORM     = "FORM"
   const LOADING  = "LOADING"
@@ -56,14 +57,21 @@ const Parlays = ({user, games, parlays}) => {
 
   // get the visual mode for create button.
   const {mode, transition} = useVisualMode(ADD)
-  const [activeParlays, setParlays] = useState([])
-  const [searchRes, setSearchRes] = useState([...parlays])
+  // parlays that the user has participated in.
+  const [userParlays, setUserParlays] = useState([])
+  // state to handle search bar -- searching parlays by name (default shows all
+  const [openParlays, setOpenParlays] = useState([...parlays])
+  // open parlays that can be joined.
+  const [searchRes, setSearchRes] = useState([])
 
   // helper function for the search feature.
   const search = (value) => {
+    if (value === '')
+      return setSearchRes([])
     axios.get(`http://localhost:8001/api/parlays/${value}`)
       .then(res => {
-        console.log(res)
+        if (res.data.length === 0)
+          return setSearchRes([{name: "No results"}])
         return setSearchRes([...res.data])
       })
       .catch(err => console.log(err))
@@ -93,7 +101,7 @@ const Parlays = ({user, games, parlays}) => {
                 .then(res => {
                   res.data.map(bet => parlayInformation.bets.push(bet))
                 })
-                .then(() => setParlays(prev => [...prev, parlayInformation]))
+                .then(() => setUserParlays(prev => [...prev, parlayInformation]))
             })
         }
       })
@@ -107,7 +115,8 @@ const Parlays = ({user, games, parlays}) => {
   }
   // get all the parlays the user has participated in.
   useEffect(() => {
-    setParlays(prev => [])
+    setUserParlays([])
+    setOpenParlays([])
     // check to see if the admin has filled out his parlay.
     axios.get(`http://localhost:8001/api/parlays`)
       .then(res => {
@@ -120,7 +129,7 @@ const Parlays = ({user, games, parlays}) => {
                 if (res.data.length === 0) {
                   parlayInformation["state"] = "FILL"
                   parlayInformation["id"]    = parlay.id
-                  setParlays(prev => [...prev, parlayInformation])
+                  setUserParlays(prev => [...prev, parlayInformation])
                 } else {
                   showParlay(parlay, parlayInformation)
                 }
@@ -130,6 +139,14 @@ const Parlays = ({user, games, parlays}) => {
           }
         })
       })
+  // now update the parlays search table.
+  axios.get("http://localhost:8001/api/parlays/open")
+    .then(res => {
+      res.data.map(parlay => {
+        return setOpenParlays(prev => [...prev, parlay])
+      })
+    })
+
   }, [mode === "COMPLETE"])
 
   // if user is not logged in return null [TODO] redirect.
@@ -146,7 +163,7 @@ const Parlays = ({user, games, parlays}) => {
       <Div>{mode === COMPLETE && <Create onClick={() => buffer(FORM)} />}</Div>
       <Parlay>
         {
-          activeParlays.map(parlay => {
+          userParlays.map(parlay => {
             // get parlay information
             if (parlay.state === "FILL")
               return (

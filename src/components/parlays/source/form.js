@@ -50,7 +50,7 @@ const MoreInfo = styled.button`
   }
 `
 
-export default function Form({ games, onSubmit, user }) {
+export default function Form({ games, onSubmit, user, dispatch }) {
   
   //  ------  Show InfoBox      ------  //
   const [infoBoxVisible, setInfoBoxVisible] = useState(false);
@@ -169,7 +169,7 @@ export default function Form({ games, onSubmit, user }) {
           />
         )
       }
-      <TransitionsModal onSubmit={onSubmit} user={user} data={data} betName={nameValue} buyIn={value} />
+      <TransitionsModal onSubmit={onSubmit} user={user} data={data} betName={nameValue} buyIn={value} dispatch={dispatch} />
     </Wrapper>
   );
 

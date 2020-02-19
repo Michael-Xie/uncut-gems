@@ -18,7 +18,9 @@ const handlers = {
     return {...prevState, user: action.value}
   },
   [SET_PARLAY]: (prevState, action) => {
-    return {...prevState, parlays: action.parlays}
+    if (action.parlays.length > 0)
+      return {...prevState, parlays: action.parlays}
+    return null
   }
 }
 
