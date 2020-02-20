@@ -14,6 +14,8 @@ const Wrapper = styled.article`
  display: flex;
  flex-direction: column;
  justify-content:center;
+
+ margin: 0 auto;
 `
 
 const Title = styled.h1`
@@ -27,6 +29,12 @@ const Title = styled.h1`
   background-color: #fff;
 
   
+`
+
+const Center = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 `
 
 const MoreInfo = styled.button`
@@ -51,10 +59,10 @@ const MoreInfo = styled.button`
 `
 
 export default function CreateParlay({ games, onSubmit, user, dispatch }) {
-  
+
   //  ------  Show InfoBox      ------  //
   const [infoBoxVisible, setInfoBoxVisible] = useState(false);
-  
+
   //  ------  Parlay Name      ------  //
   const [nameValue, setNameValue] = React.useState('');
 
@@ -137,7 +145,7 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
     }
   }
 
-  
+
 
   return (
     <Wrapper>
@@ -148,19 +156,19 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
       {infoBoxVisible && (
         <InfoBox />
       )}
-
-      <InputSlider
-        value={value}
-        setValue={setValue}
-        handleSliderChange={handleSliderChange}
-        handleInputChange={handleInputChange}
-      />
-
+      <Center>
+        <InputSlider
+          value={value}
+          setValue={setValue}
+          handleSliderChange={handleSliderChange}
+          handleInputChange={handleInputChange}
+        />
+      
       <ParlayName
         value={nameValue}
         setName={setNameValue}
       />
-
+</Center>
       {
         data.map(game =>
           <GameListItem
