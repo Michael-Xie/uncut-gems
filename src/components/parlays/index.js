@@ -126,7 +126,7 @@ const Parlays = ({user, games}) => {
                   <FillParlay 
                     user_id={user.id}
                     parlay_id={parlay.id}
-                    games={games}
+                    games={games}                    
                     onSubmit={() => buffer(COMPLETE)}
                   />
                 </Div>
