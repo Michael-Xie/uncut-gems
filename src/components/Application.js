@@ -12,6 +12,13 @@ import useApplicationData from "../hooks/useApplicationData"
 
 import "./Application.css"
 
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+import CheckoutForm from './payment/CheckoutForm';
+
+const stripePromise = loadStripe("pk_test_PmFe0RYTJwj04yOubxzvdSkQ00oIYKFC0L");
+
 const Application = () => {
   const { state, dispatch } = useApplicationData()
 
@@ -31,16 +38,23 @@ const Application = () => {
         {localStorage.getItem("user") ? (
           <Redirect to={{ pathname: "/games" }} />
         ) : (
-          <Redirect to={{ pathname: "/login" }} />
-        )}
+            <Redirect to={{ pathname: "/login" }} />
+          )}
 
         <Switch>
+          <Route path="/pay">
+            <Elements stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
+          </Route>
           <Route path="/login">
             <Login dispatch={dispatch} />
           </Route>
           <Route path="/register">
             <Register dispatch={dispatch} />
           </Route>
+
+
           <Route path="/games">
             {state.games.length > 0 &&
               state.games.map(game => {
@@ -69,10 +83,10 @@ const Application = () => {
               user={JSON.parse(localStorage.getItem("user"))} 
             />
           </Route>
-            
+
           <Route path="/logout">
 
-            <Logout dispatch={dispatch}/>
+            <Logout dispatch={dispatch} />
 
             <Redirect to={{ pathname: "/login" }} />
           </Route>

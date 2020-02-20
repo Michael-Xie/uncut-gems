@@ -79,16 +79,16 @@ export default function Navigation({ userid, username, userphoto, balance }) {
           {localStorage.getItem('user') ?
 
             <Userinfo>
-             <User>
+              <LinkStyle to="/pay">
                 <img src="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/wallet.png" alt="wallet" height="24px" width="24px"></img>
                 {balance}
-              </User>
+              </LinkStyle>
               <User>
                 <img src={userphoto} alt={username} height="24px" width="24px"></img>
                 {username}
               </User>
-              <LinkStyle to="/logout">Logout</LinkStyle> 
-            </Userinfo> 
+              <LinkStyle to="/logout">Logout</LinkStyle>
+            </Userinfo>
             :
             <>
               <LinkStyle to="/login"> Login </LinkStyle>
