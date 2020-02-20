@@ -189,7 +189,10 @@ const Parlays = ({user, games}) => {
       {mode === CREATE && (
         <CreateParlay
           user={user}
-          games={games}
+          games={games.filter(game => {
+            if (game.status === "NS")
+              return game
+          })}
           onSubmit={() => buffer(OPEN)}
         />
       )}
