@@ -7,6 +7,8 @@ import { RadioGroup, RadioButton } from 'react-radio-buttons'
 
 import teamData from "../../../helpers/teamData"
 
+import PickTeam from './pickTeam'
+
 const Wrapper = styled.article`
   max-width: 600px;
   width: 100%;
@@ -118,43 +120,18 @@ export default function FillParlay({ user_id, parlay_id, games, onSubmit }) {
 
           return (
             <Game key={bet.id}>
-              <h1>Bet #{bet.id}</h1>
-              <h3>Bet Type: {betKeys[bet.type]}</h3>
+              <h3>{betKeys[bet.type]}</h3>
               {
                 checkboxes.map(bType => {
                   if (bType === bet.type) {
                     const teams = findTeams(bet.game_id)
                     return (
-                      <RadioGroup horizontal key={bet.id}>
-                        <RadioButton
-                          checked={getBetSelection(bet.id) === "home"}
-                          rootColor="#000"
-                          value="home"
-                          onChange={() => check("home", bet.id)}
-                        >
-                          {" "}
-                          <img
-                            src={teams.homeLogo}
-                            alt={teams.homeTeam}
-                            height="50px"
-                            width="auto"
-                          />
-                        </RadioButton>
-                        <RadioButton
-                          checked={getBetSelection(bet.id) === "away"}
-                          rootColor="#000"
-                          value="away"
-                          onChange={() => check("away", bet.id)}
-                        >
-                          {" "}
-                          <img
-                            src={teams.awayLogo}
-                            alt={teams.homeTeam}
-                            height="50px"
-                            width="auto"
-                          />
-                        </RadioButton>
-                      </RadioGroup>
+                      <PickTeam
+                        teams={teams}
+                        getBetSelection={getBetSelection}
+                        bet={bet}
+                        check={check}
+                      />
                     );
                   }
                 })

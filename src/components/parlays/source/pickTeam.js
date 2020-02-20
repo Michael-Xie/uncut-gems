@@ -1,44 +1,58 @@
 import React from "react"
 import styled from "styled-components"
 
-export default function PickTeam({ homeTeam, awayTeam, selected }) {
+const Wrapper = styled.div`
+  height: 75px;
+  
+`
+
+const Label = styled.label`
+  margin: auto 30px;
+`
+
+const Logo = styled.img`
+  height: 100%;
+  
+  opacity:0.6;
+
+  cursor: pointer;
+`
+
+
+export default function PickTeam({ getBetSelection, bet, check, teams }) {
   return (
-    <RadioGroup horizontal key={bet.id}>
-      <img src={teams.homeLogo} alt={teams.homeTeam} height="50px" width="auto" />
-      <img src={teams.awayLogo} alt={teams.homeTeam} height="50px" width="auto" />
-      {/* <RadioButton rootColor="#000" value="home" onChange={() => check("home", bet.id)}></RadioButton> */}
-      {/* <RadioButton rootColor="#000" value="away" onChange={() => check("away", bet.id)}>away</RadioButton> */}
-    </RadioGroup>
+    <Wrapper>
+     
+      <Label>
+        <input
+          type="radio"
+          checked={getBetSelection(bet.id) === "home"}
+          value="home"
+          onChange={() => check("home", bet.id)}
+        />
+
+        <Logo
+          src={teams.homeLogo}
+          alt={teams.homeTeam}
+        />
+      </Label>
+      
+      <Label>
+        <input
+          type="radio"
+          checked={getBetSelection(bet.id) === "away"}
+          value="away"
+          onChange={() => check("away", bet.id)}
+        />
+
+        <Logo
+          src={teams.awayLogo}
+          alt={teams.awayTeam}
+
+        />
+      </Label>
+    
+    </Wrapper>
   )
 }
 
-{/* <RadioGroup horizontal key={bet.id}>
-<RadioButton
-  checked={getBetSelection(bet.id) === "home"}
-  rootColor="#000"
-  value="home"
-  onChange={() => check("home", bet.id)}
->
-  {" "}
-  <img
-    src={teams.homeLogo}
-    alt={teams.homeTeam}
-    height="50px"
-    width="auto"
-  />
-</RadioButton>
-<RadioButton
-  checked={getBetSelection(bet.id) === "away"}
-  rootColor="#000"
-  value="away"
-  onChange={() => check("away", bet.id)}
->
-  {" "}
-  <img
-    src={teams.awayLogo}
-    alt={teams.homeTeam}
-    height="50px"
-    width="auto"
-  />
-</RadioButton>
-</RadioGroup> */}
