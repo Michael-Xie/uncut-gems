@@ -1,15 +1,7 @@
-import React, { Fragment, useState, useEffect } from "react"
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
+import React, {Fragment, useState, useEffect} from "react"
 import styled from "styled-components"
 import useVisualMode from "../../hooks/useVisualMode"
 
-import Create from "./source/create"
 import Loading from "./source/loading"
 import CreateParlay from "./source/createParlay"
 import ShowParlay from "./source/showParlay"
@@ -73,14 +65,13 @@ const Button = styled.button`
 
 const Parlays = ({ user, games }) => {
   // constants to handle visual transitions.
-  const CREATE = "CREATE"
-  const ACTIVE = "ACTIVE"
-  const OPEN = "OPEN"
-  const CLOSED = "CLOSED"
-  const SEARCH = "SEARCH"
-  const SUBMIT = "SUBMIT"
-  const LOADING = "LOADING"
-  const JOIN = "JOIN"
+  const CREATE   = "CREATE"
+  const ACTIVE   = "ACTIVE"
+  const OPEN     = "OPEN"
+  const CLOSED   = "CLOSED"
+  const SEARCH   = "SEARCH"
+  const LOADING  = "LOADING"
+  const JOIN     = "JOIN"
 
   // get the visual mode for create button.
   const { mode, transition } = useVisualMode(CREATE)
@@ -100,6 +91,7 @@ const Parlays = ({ user, games }) => {
     openParlays.map(parlay => {
       if (parlay.name.includes(value))
         return setSearchRes(prev => [...prev, parlay])
+      return null
     })
   }
   // if the user has participated in a parlay (filled out a bet form)
@@ -109,10 +101,11 @@ const Parlays = ({ user, games }) => {
     axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants/${user.user_name}`)
       .then(res => {
         if (res.data.length !== 0) {
-          parlayInformation["id"] = parlay.id
-          parlayInformation["status"] = parlay.current_status
-          parlayInformation["name"] = parlay.name
-          parlayInformation["fee"] = parlay.fee
+          parlayInformation["id"]    = parlay.id
+          parlayInformation["status"]= parlay.current_status
+          parlayInformation["start_time"]= parlay.start_time
+          parlayInformation["name"]  = parlay.name
+          parlayInformation["fee"]   = parlay.fee
           parlayInformation["users"] = []
           parlayInformation["bets"] = []
           // get the rest of the participants.
@@ -120,7 +113,9 @@ const Parlays = ({ user, games }) => {
             .then(res => {
               res.data.map(player => {
                 parlayInformation.users.push(player.user_name)
+                return null
               })
+              return null
             })
             .then(res => {
               axios.get(`http://localhost:8001/api/parlay/bet/${parlay.id}`)
@@ -135,17 +130,21 @@ const Parlays = ({ user, games }) => {
   // get all the parlays the user has participated in.
   useEffect(() => {
     setUserParlays([])
-
     setSearchRes([])
     setOpenParlays([])
+    const source = axios.CancelToken.source();
     // check to see if the admin has filled out his parlay.
-    axios.get(`http://localhost:8001/api/parlays`)
+    axios.get(`http://localhost:8001/api/parlays`, {
+      cancelToken: source.token
+    })
       .then(res => {
         res.data.map(parlay => {
           const parlayInformation = {}
           // ensure that the user has filled out the bet form for his own parlays.
           if (parlay.admin === user.id) {
-            axios.get(`http://localhost:8001/api/parlay/${parlay.id}/bet/fill/${user.id}`)
+            axios.get(`http://localhost:8001/api/parlay/${parlay.id}/bet/fill/${user.id}`, {
+              cancelToken: source.token
+            })
               .then(res => {
                 if (res.data.length === 0) {
                   parlayInformation["state"] = "FILL"
@@ -155,14 +154,25 @@ const Parlays = ({ user, games }) => {
                   showParlay(parlay, parlayInformation)
                 }
               })
+              .catch(error => {
+                if (axios.isCancel(error))
+                  console.log(error)
+                else throw error
+              })
           } else {
             showParlay(parlay, parlayInformation)
           }
+          return null
         })
+      })
+      .catch(error => {
+        if (axios.isCancel(error))
+          console.log("request cancelled")
+        else throw error
       })
     // now update the parlays search table
     // where the user is not in the parlay
-    axios.get("http://localhost:8001/api/parlays/open")
+    axios.get("http://localhost:8001/api/parlays/open", {cancelToken: source.token})
       .then(res => {
         res.data.map(parlay => {
           axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants`)
@@ -174,8 +184,18 @@ const Parlays = ({ user, games }) => {
               if (!participants.includes(user.user_name))
                 setOpenParlays(prev => [...prev, parlay])
             })
+          return null
         })
       })
+      .catch(error => {
+        if (axios.isCancel(error))
+          console.log("request cancelled")
+        else throw error
+      })
+    return () => {
+      source.cancel();
+    }
+      
   }, [mode === LOADING])
 
   // if user is not logged in return null [TODO] redirect.
@@ -211,18 +231,19 @@ const Parlays = ({ user, games }) => {
       )}
       {mode === ACTIVE && (
         userParlays.map(parlay => {
-          if (parlay.status === "in-progress")
-            return (
-              <Div key={parlay.id}>
-                <ShowParlay
-                  name={parlay.name}
-                  bets={parlay.bets.length}
-                  participants={parlay.users}
-                  entry={parlay.fee}
-                />
-              </Div>
-            )
-        })
+            if (parlay.status === "in-progress")
+              return (
+                <Div key={parlay.id}>
+                  <ShowParlay 
+                    name={parlay.name} 
+                    bets={parlay.bets.length}
+                    participants={parlay.users}
+                    entry={parlay.fee}
+                    start_time={parlay.start_time}
+                  />
+                </Div>
+              )
+          })
       )}
       {mode === OPEN && (
         <Parlay>
@@ -249,6 +270,7 @@ const Parlays = ({ user, games }) => {
                         bets={parlay.bets.length}
                         participants={parlay.users}
                         entry={parlay.fee}
+                        start_time={parlay.start_time}
                       />
                     </Div>
                   )

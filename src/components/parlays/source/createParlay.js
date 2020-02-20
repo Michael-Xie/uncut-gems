@@ -1,9 +1,8 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import axios from "axios"
 
 import InputSlider from "../../partials/slider"
-import TransitionsModal from "../../partials/popup"
+import FormSubmit from "../../partials/formSubmit"
 import teamData from "../../../helpers/teamData"
 
 import GameListItem from "./gameListItem"
@@ -185,9 +184,15 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
             )
         })
       }
-
-      <TransitionsModal onSubmit={onSubmit} user={user} data={data} betName={nameValue} buyIn={value} dispatch={dispatch} />
-
+      <FormSubmit
+        onSubmit={onSubmit} 
+        user={user} 
+        data={data} 
+        betName={nameValue} 
+        buyIn={value} 
+        dispatch={dispatch} 
+        games={games}
+      />
     </Wrapper>
   );
 
