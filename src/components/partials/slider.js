@@ -4,6 +4,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
+import styled from "styled-components"
+
+const Div = styled.div`
+  /* background-color: #fff; */
+`
+
 
 const useStyles = makeStyles({
   root: {
@@ -26,7 +32,7 @@ export default function InputSlider({ value, setValue, handleSliderChange, handl
   };
   
   return (
-    <div className={classes.root}>
+    <Div className={classes.root}>
       <Typography id="input-slider" gutterBottom>
      
       </Typography>
@@ -57,6 +63,6 @@ export default function InputSlider({ value, setValue, handleSliderChange, handl
           />
         </Grid>
       </Grid>
-    </div>
+    </Div>
   );
 }

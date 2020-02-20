@@ -14,6 +14,8 @@ const Wrapper = styled.article`
  display: flex;
  flex-direction: column;
  justify-content:center;
+
+ margin: 0 auto;
 `
 
 const Title = styled.h1`
@@ -25,8 +27,16 @@ const Title = styled.h1`
   
   border-bottom: 1px solid #dbdbdb;
   background-color: #fff;
+`
+const H2 = styled.h3`
+  text-align: center;
+  margin: 10px 0;
+`
 
-  
+const Center = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 `
 
 const MoreInfo = styled.button`
@@ -38,7 +48,6 @@ const MoreInfo = styled.button`
   color: #fff;
   background-color: #000;
   
-
   cursor: pointer;
 
   &:focus {
@@ -53,7 +62,7 @@ const MoreInfo = styled.button`
 export default function CreateParlay({ games, onSubmit, user, dispatch }) {
   //  ------  Show InfoBox      ------  //
   const [infoBoxVisible, setInfoBoxVisible] = useState(false);
-  
+
   //  ------  Parlay Name      ------  //
   const [nameValue, setNameValue] = React.useState('');
 
@@ -135,30 +144,35 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
     }
   }
 
-  
+
 
   return (
     <Wrapper>
+
       <Title>Create a Parlay</Title>
 
-      <MoreInfo onClick={() => setInfoBoxVisible(!infoBoxVisible)}>More Info</MoreInfo>
+      {/* <MoreInfo onClick={() => setInfoBoxVisible(!infoBoxVisible)}>More Info</MoreInfo> */}
 
-      {infoBoxVisible && (
-        <InfoBox />
-      )}
+      {/* {infoBoxVisible && (<InfoBox />)} */}
 
-      <InputSlider
-        value={value}
-        setValue={setValue}
-        handleSliderChange={handleSliderChange}
-        handleInputChange={handleInputChange}
-      />
+      <Center>
+       
+        <H2>Parlay Name</H2>
+        <ParlayName
+          value={nameValue}
+          setName={setNameValue}
+        />
+       
+        <H2>Buy-In amount</H2>
+        <InputSlider
+          value={value}
+          setValue={setValue}
+          handleSliderChange={handleSliderChange}
+          handleInputChange={handleInputChange}
+        />
 
-      <ParlayName
-        value={nameValue}
-        setName={setNameValue}
-      />
-
+      </Center>
+      <H2>Select Your Bets</H2>
       {
         data.map(game => {
           if (game)
@@ -170,7 +184,9 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
             )
         })
       }
+
       <TransitionsModal onSubmit={onSubmit} user={user} data={data} betName={nameValue} buyIn={value} dispatch={dispatch} />
+
     </Wrapper>
   );
 
