@@ -56,6 +56,7 @@ export default function ParlaySubmit({data, user_id, parlay_id, expected, onSubm
         })
         .catch(err => console.log(err))
       })
+    // [TODO] add the user to participants.
     else {
       alert("fill out the entire form!")
       return

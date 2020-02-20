@@ -13,6 +13,7 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  
   padding: 15px 0;
   margin: 0 auto;
 `
@@ -78,7 +79,7 @@ export default function Navigation({ userid, username, userphoto, balance }) {
           {localStorage.getItem('user') ?
 
             <Userinfo>
-              <User>
+             <User>
                 <img src="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/wallet.png" alt="wallet" height="24px" width="24px"></img>
                 {balance}
               </User>
@@ -86,8 +87,8 @@ export default function Navigation({ userid, username, userphoto, balance }) {
                 <img src={userphoto} alt={username} height="24px" width="24px"></img>
                 {username}
               </User>
-              <LinkStyle to="/logout">Logout</LinkStyle>
-            </Userinfo>
+              <LinkStyle to="/logout">Logout</LinkStyle> 
+            </Userinfo> 
             :
             <>
               <LinkStyle to="/login"> Login </LinkStyle>

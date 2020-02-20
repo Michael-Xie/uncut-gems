@@ -1,11 +1,17 @@
-import React, {useState, useEffect} from "react"
+import React, {Fragment, useState, useEffect} from "react"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import styled from "styled-components"
 
 import useVisualMode from "../../hooks/useVisualMode"
 
 import Create from "./source/create"
 import Loading from "./source/loading"
-import Form from "./source/form"
+import CreateParlay from "./source/createParlay"
 import ShowParlay from "./source/showParlay"
 import FillParlay from "./source/fillParlay"
 
@@ -35,16 +41,55 @@ const Parlay = styled.div`
   align-content: center;
 `
 
-const Parlays = ({user, games}) => {
-  const ADD      = "ADD"
-  const FORM     = "FORM"
+const SearchContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
+const ResultContainer = styled.div`
+  
+`
+
+const SearchResult = styled.div`
+`
+
+const Button = styled.button`
+  max-width: 100px;
+`
+
+const Parlays = ({user, games, parlays}) => {
+  // constants to handle visual transitions.
+  const CREATE   = "CREATE"
+  const ACTIVE   = "ACTIVE"
+  const OPEN     = "OPEN"
+  const CLOSED   = "CLOSED"
+  const SEARCH   = "SEARCH"
+  const SUBMIT   = "SUBMIT"
   const LOADING  = "LOADING"
-  const COMPLETE = "COMPLETE"
-
   // get the visual mode for create button.
-  const {mode, transition} = useVisualMode(ADD)
-  const [activeParlays, setParlays] = useState([])
+  const {mode, transition} = useVisualMode(CREATE)
+  // parlays that the user has participated in.
+  const [userParlays, setUserParlays] = useState([])
+  // state to handle search bar -- searching parlays by name (default shows all
+  const [openParlays, setOpenParlays] = useState([...parlays])
+  // open parlays that can be joined.
+  const [searchRes, setSearchRes] = useState([])
 
+  // helper function for the search feature.
+  const search = (value) => {
+    if (value === '')
+      return setSearchRes([])
+    axios.get(`http://localhost:8001/api/parlays/${value}`)
+      .then(res => {
+        if (res.data.length === 0)
+          return setSearchRes([{name: "No results"}])
+        return setSearchRes([...res.data])
+      })
+      .catch(err => console.log(err))
+  }
+  // if the user has participated in a parlay (filled out a bet form)
+  // show the parlay.
   const showParlay = (parlay, parlayInformation) => {
     parlayInformation["state"] = "SHOW"
     Promise.resolve(
@@ -52,36 +97,31 @@ const Parlays = ({user, games}) => {
       .then(res => {
         if (res.data.length !== 0) {
           parlayInformation["id"]    = parlay.id
+          parlayInformation["status"]= parlay.current_status
           parlayInformation["name"]  = parlay.name
           parlayInformation["fee"]   = parlay.fee
           parlayInformation["users"] = []
           parlayInformation["bets"]  = []
           // get the rest of the participants.
           axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants`)
-            .then(player => {
-              if (player.user_name !== user.user_name)
+            .then(res => {
+              res.data.map(player => {
                 parlayInformation.users.push(player.user_name)
+              })
             })
             .then(res => {
               axios.get(`http://localhost:8001/api/parlay/bet/${parlay.id}`)
                 .then(res => {
                   res.data.map(bet => parlayInformation.bets.push(bet))
                 })
-                .then(() => setParlays(prev => [...prev, parlayInformation]))
+                .then(() => setUserParlays(prev => [...prev, parlayInformation]))
             })
         }
       })
   }
-  // transitions
-  const buffer = (new_mode) => {
-    transition(LOADING)
-    setTimeout(() => {
-      transition(new_mode)
-    }, 1200)
-  }
   // get all the parlays the user has participated in.
   useEffect(() => {
-    setParlays(prev => [])
+    setUserParlays([])
     // check to see if the admin has filled out his parlay.
     axios.get(`http://localhost:8001/api/parlays`)
       .then(res => {
@@ -94,7 +134,7 @@ const Parlays = ({user, games}) => {
                 if (res.data.length === 0) {
                   parlayInformation["state"] = "FILL"
                   parlayInformation["id"]    = parlay.id
-                  setParlays(prev => [...prev, parlayInformation])
+                  setUserParlays(prev => [...prev, parlayInformation])
                 } else {
                   showParlay(parlay, parlayInformation)
                 }
@@ -104,34 +144,84 @@ const Parlays = ({user, games}) => {
           }
         })
       })
-  }, [mode === "COMPLETE"])
+  setOpenParlays([])
+  // now update the parlays search table.
+  axios.get("http://localhost:8001/api/parlays/open")
+    .then(res => {
+      res.data.map(parlay => {
+        return setOpenParlays(prev => [...prev, parlay])
+      })
+    })
+
+  }, [mode === LOADING])
 
   // if user is not logged in return null [TODO] redirect.
   if (Object.keys(user).length === 0)
     return <div></div>
 
+  const buffer = (newMode) => {
+    transition(LOADING)
+    setTimeout(() => {
+      transition(newMode)
+    }, 1250)
+  }
+
   return (
     <Container>
-      <Div>{mode === ADD && <Create onClick={() => buffer(FORM)} />}</Div>
-      <Div>{mode === FORM && <Form user={user} games={games} onSubmit={() => buffer(COMPLETE)} />}</Div>
-      <Div>{mode === LOADING  && <Loading />}</Div>
-      <Div>{mode === COMPLETE && <Create onClick={() => buffer(FORM)} />}</Div>
-      <Parlay>
-        {
-          activeParlays.map(parlay => {
-            // get parlay information
-            if (parlay.state === "FILL")
-              return (
-                <Div key={parlay.id}>
-                  <FillParlay 
-                    user_id={user.id}
-                    parlay_id={parlay.id}
-                    games={games}                    
-                    onSubmit={() => buffer(COMPLETE)}
-                  />
-                </Div>
-              )
-            else 
+      <Button onClick={() => buffer(CREATE)} >CREATE</Button>
+      <Button onClick={() => buffer(ACTIVE)} >ACTIVE</Button>
+      <Button onClick={() => buffer(OPEN)}   >OPEN  </Button>
+      <Button onClick={() => buffer(CLOSED)} >CLOSED</Button>
+      <Button onClick={() => buffer(SEARCH)} >SEARCH</Button>
+
+      {mode === LOADING && <Loading />}
+      {mode === CREATE && (
+        <CreateParlay
+          user={user}
+          games={games}
+          onSubmit={() => buffer(OPEN)}
+        />
+      )}
+      {mode === ACTIVE && (
+        <div>Hello</div>
+      )}
+      {mode === OPEN && (
+        <Parlay>
+          {
+            userParlays.map(parlay => {
+              // get parlay information
+              if (parlay.state === "FILL")
+                return (
+                  <Div key={parlay.id}>
+                    <FillParlay 
+                      user_id={user.id}
+                      parlay_id={parlay.id}
+                      games={games}
+                      onSubmit={() => buffer(OPEN)}
+                    />
+                  </Div>
+                )
+              else 
+                if (parlay.status === "open")
+                  return (
+                    <Div key={parlay.id}>
+                      <ShowParlay 
+                        name={parlay.name} 
+                        bets={parlay.bets.length}
+                        participants={parlay.users}
+                        entry={parlay.fee}
+                      />
+                    </Div>
+                  )
+                return <div></div>
+            })
+          }
+        </Parlay>
+      )}
+      {mode === CLOSED && (
+        userParlays.sort((a, b) => b.id - a.id)
+          .map(parlay => {
+            if (parlay.state === "close")
               return (
                 <Div key={parlay.id}>
                   <ShowParlay 
@@ -141,11 +231,24 @@ const Parlays = ({user, games}) => {
                     entry={parlay.fee}
                   />
                 </Div>
-            )
+              )
           })
-        }
-      </Parlay>
-      <br/><br/>
+      )}
+      {mode === SEARCH && (
+        <Fragment>
+          <SearchContainer>
+            <input type="text" onChange={(e) => search(e.target.value)} />
+          </SearchContainer>
+
+          <ResultContainer>
+            {
+              searchRes.map(search => {
+                return <SearchResult><button>{search.name}</button></SearchResult>
+              })
+            }
+          </ResultContainer>
+        </Fragment>
+      )}
     </Container>
   )
 }
