@@ -118,7 +118,6 @@ export default function FillParlay({user, parlay_id, games, onSubmit}) {
       awayLogo: awayLogo
     }
   }
-  console.log(betSelection)
 
   return (
     <Wrapper>
@@ -127,7 +126,6 @@ export default function FillParlay({user, parlay_id, games, onSubmit}) {
 
           return (
             <Game key={bet.id}>
-
               {
                 checkboxes.map(bType => {
                   if (bType === bet.type) {

@@ -22,7 +22,6 @@ export default function Register({ dispatch }) {
     if (user.length === 0) {
       errors.push("Username is empty.");
     }
-    console.log("errors aray", errors);
     if (errors.length === 0) {
       axios.post("http://localhost:8001/api/users", {
         user_name: user,
@@ -49,7 +48,6 @@ export default function Register({ dispatch }) {
     setError(errors);
 
   }
-  console.log("error", error);
   return (
     <>
       <h2>Register</h2>
