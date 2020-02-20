@@ -59,7 +59,7 @@ const Info = styled.h1`
   margin: 5px;
 `
 
-export default function ShowParlay({name, bets, participants, entry}) {
+export default function ShowParlay({name, bets, participants, entry, status}) {
   return (
     <Article>
       <Title>
@@ -68,7 +68,6 @@ export default function ShowParlay({name, bets, participants, entry}) {
        <h1>{name}</h1>
       </Title>
       <ParlayInfo>
-        <Info>Closes in 30 minutes (730 pm)</Info>
         <Info># of bets: {bets}</Info>
         <Info>entry fee: ${entry}.00</Info>
         <Info>total pot: ${participants.length * entry}.00</Info>

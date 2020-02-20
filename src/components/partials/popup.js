@@ -56,13 +56,6 @@ export default function TransitionsModal({data, onSubmit, user, buyIn, betName})
       })
       return id
     })
-    .then(id => {
-      axios.post(`http://localhost:8001/api/parlay/${id}/participants`, {
-        user_name: user.user_name,
-        parlay_id: id
-      })
-      .catch(err => console.log(err))
-    })
     .catch(err => console.log(err))
   }
 
