@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 
 import styled from "styled-components"
+
+import styled from "styled-components"
 import useVisualMode from "../../hooks/useVisualMode"
 
 import Create from "./source/create"
@@ -58,6 +60,7 @@ const Button = styled.button`
   max-width: 100px;
 `
 
+
 const Parlays = ({user, games}) => {
   // constants to handle visual transitions.
   const CREATE   = "CREATE"
@@ -68,11 +71,13 @@ const Parlays = ({user, games}) => {
   const SUBMIT   = "SUBMIT"
   const LOADING  = "LOADING"
   const JOIN     = "JOIN"
+
   // get the visual mode for create button.
   const {mode, transition} = useVisualMode(CREATE)
   // parlays that the user has participated in.
   const [userParlays, setUserParlays] = useState([])
   // state to handle search bar -- searching parlays by name (default shows all
+
   const [openParlays, setOpenParlays] = useState([])
   // open parlays that can be joined.
   const [searchRes, setSearchRes] = useState([])
@@ -86,15 +91,6 @@ const Parlays = ({user, games}) => {
       if (parlay.name.includes(value))
         return setSearchRes(prev => [...prev, parlay])
     })
-    /*
-    axios.get(`http://localhost:8001/api/parlays/${value}`)
-      .then(res => {
-        if (res.data.length === 0)
-          return setSearchRes([{name: "No results"}])
-        return setSearchRes([...res.data])
-      })
-      .catch(err => console.log(err))
-    */
   }
   // if the user has participated in a parlay (filled out a bet form)
   // show the parlay.
@@ -129,6 +125,7 @@ const Parlays = ({user, games}) => {
   // get all the parlays the user has participated in.
   useEffect(() => {
     setUserParlays([])
+
     setSearchRes([])
     setOpenParlays([])
     // check to see if the admin has filled out his parlay.

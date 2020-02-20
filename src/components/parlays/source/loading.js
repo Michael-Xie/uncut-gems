@@ -3,14 +3,15 @@ import styled from "styled-components"
 
 const Article = styled.div` 
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  width: 80vw;
-  height: 20vh;
-  margin: 2vw auto 0;
+  max-width: 300px;
+  width: 100%;
+  height: 100px;
+  margin: 10px 0;
   border: 1px solid rgba(219,219,219);
+  
   cursor: pointer;
 
   @media only screen and (min-width: 768px) {
