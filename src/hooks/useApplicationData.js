@@ -35,16 +35,18 @@ const useApplicationData = () => {
     })
 
     sock.addEventListener("message", function(msg) {
-      console.log("basket-ball api called to update scores")
       const event = JSON.parse(msg.data)
 
       if (event.type === "SET_GAMES") {
+        console.log("back-end api called to update games")
         return dispatch({...event})
       }
       if (event.type === "SET_SCORES") {
+        console.log("back-end api called to update scores")
         return dispatch({...event})
       }
       if (event.type === "SET_PARLAY") {
+        console.log("back-end api called to update parlays")
         return dispatch({...event})
       }
     })

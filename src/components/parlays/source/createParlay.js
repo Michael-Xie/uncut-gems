@@ -50,7 +50,7 @@ const MoreInfo = styled.button`
   }
 `
 
-export default function Form({ games, onSubmit, user, dispatch }) {
+export default function CreateParlay({ games, onSubmit, user, dispatch }) {
   
   //  ------  Show InfoBox      ------  //
   const [infoBoxVisible, setInfoBoxVisible] = useState(false);
