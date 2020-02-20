@@ -35,8 +35,7 @@ const Input = styled.input`
   box-sizing: border-box;
 `
 
-
-export default function FillParlay({ user_id, parlay_id, games, onSubmit }) {
+export default function FillParlay({user, parlay_id, games, onSubmit}) {
   // keep bets in state.
   const [bets, setBets] = useState([])
   const [betSelection, setBetSelection] = useState([])
@@ -164,10 +163,10 @@ export default function FillParlay({ user_id, parlay_id, games, onSubmit }) {
           )
         })
       }
-      <ParlaySubmit
-        parlay_id={parlay_id}
-        user_id={user_id}
-        data={betSelection}
+      <ParlaySubmit 
+        parlay_id={parlay_id} 
+        user={user} 
+        data={betSelection} 
         expected={bets.length}
         onSubmit={onSubmit}
       >

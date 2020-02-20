@@ -5,8 +5,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import styled from "styled-components"
 
+import styled from "styled-components"
 import useVisualMode from "../../hooks/useVisualMode"
 
 import Create from "./source/create"
@@ -58,7 +58,8 @@ const Button = styled.button`
   max-width: 100px;
 `
 
-const Parlays = ({user, games, parlays}) => {
+
+const Parlays = ({user, games}) => {
   // constants to handle visual transitions.
   const CREATE   = "CREATE"
   const ACTIVE   = "ACTIVE"
@@ -67,33 +68,33 @@ const Parlays = ({user, games, parlays}) => {
   const SEARCH   = "SEARCH"
   const SUBMIT   = "SUBMIT"
   const LOADING  = "LOADING"
+  const JOIN     = "JOIN"
+
   // get the visual mode for create button.
   const {mode, transition} = useVisualMode(CREATE)
   // parlays that the user has participated in.
   const [userParlays, setUserParlays] = useState([])
   // state to handle search bar -- searching parlays by name (default shows all
-  const [openParlays, setOpenParlays] = useState([...parlays])
+
+  const [openParlays, setOpenParlays] = useState([])
   // open parlays that can be joined.
   const [searchRes, setSearchRes] = useState([])
 
   // helper function for the search feature.
   const search = (value) => {
+    setSearchRes([])
     if (value === '')
       return setSearchRes([])
-    axios.get(`http://localhost:8001/api/parlays/${value}`)
-      .then(res => {
-        if (res.data.length === 0)
-          return setSearchRes([{name: "No results"}])
-        return setSearchRes([...res.data])
-      })
-      .catch(err => console.log(err))
+    openParlays.map(parlay => {
+      if (parlay.name.includes(value))
+        return setSearchRes(prev => [...prev, parlay])
+    })
   }
   // if the user has participated in a parlay (filled out a bet form)
   // show the parlay.
   const showParlay = (parlay, parlayInformation) => {
     parlayInformation["state"] = "SHOW"
-    Promise.resolve(
-      axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants/${user.user_name}`))
+    axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants/${user.user_name}`)
       .then(res => {
         if (res.data.length !== 0) {
           parlayInformation["id"]    = parlay.id
@@ -122,6 +123,9 @@ const Parlays = ({user, games, parlays}) => {
   // get all the parlays the user has participated in.
   useEffect(() => {
     setUserParlays([])
+
+    setSearchRes([])
+    setOpenParlays([])
     // check to see if the admin has filled out his parlay.
     axios.get(`http://localhost:8001/api/parlays`)
       .then(res => {
@@ -144,15 +148,22 @@ const Parlays = ({user, games, parlays}) => {
           }
         })
       })
-  setOpenParlays([])
-  // now update the parlays search table.
-  axios.get("http://localhost:8001/api/parlays/open")
-    .then(res => {
-      res.data.map(parlay => {
-        return setOpenParlays(prev => [...prev, parlay])
+    // now update the parlays search table
+    // where the user is not in the parlay
+    axios.get("http://localhost:8001/api/parlays/open")
+      .then(res => {
+        res.data.map(parlay => {
+          axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants`)
+            .then(res => {
+              const participants = res.data.map(user => user.user_name)
+              return participants
+            })
+            .then(participants => {
+              if (!participants.includes(user.user_name))
+                setOpenParlays(prev => [...prev, parlay])
+            })
+        })
       })
-    })
-
   }, [mode === LOADING])
 
   // if user is not logged in return null [TODO] redirect.
@@ -183,7 +194,19 @@ const Parlays = ({user, games, parlays}) => {
         />
       )}
       {mode === ACTIVE && (
-        <div>Hello</div>
+        userParlays.map(parlay => {
+            if (parlay.status === "in-progress")
+              return (
+                <Div key={parlay.id}>
+                  <ShowParlay 
+                    name={parlay.name} 
+                    bets={parlay.bets.length}
+                    participants={parlay.users}
+                    entry={parlay.fee}
+                  />
+                </Div>
+              )
+          })
       )}
       {mode === OPEN && (
         <Parlay>
@@ -194,7 +217,7 @@ const Parlays = ({user, games, parlays}) => {
                 return (
                   <Div key={parlay.id}>
                     <FillParlay 
-                      user_id={user.id}
+                      user={user}
                       parlay_id={parlay.id}
                       games={games}
                       onSubmit={() => buffer(OPEN)}
@@ -219,12 +242,11 @@ const Parlays = ({user, games, parlays}) => {
         </Parlay>
       )}
       {mode === CLOSED && (
-        userParlays.sort((a, b) => b.id - a.id)
-          .map(parlay => {
-            if (parlay.state === "close")
+        userParlays.map(parlay => {
+            if (parlay.status === "close")
               return (
                 <Div key={parlay.id}>
-                  <ShowParlay 
+                  <ShowParlay
                     name={parlay.name} 
                     bets={parlay.bets.length}
                     participants={parlay.users}
@@ -243,10 +265,35 @@ const Parlays = ({user, games, parlays}) => {
           <ResultContainer>
             {
               searchRes.map(search => {
-                return <SearchResult><button>{search.name}</button></SearchResult>
+                return (
+                  <SearchResult>
+                    <button onClick={() => {
+                      setSearchRes([search])
+                      transition(JOIN)
+                    }}>{search.name}</button>
+                  </SearchResult>
+                )
               })
             }
           </ResultContainer>
+        </Fragment>
+      )}
+      {mode === JOIN && (
+        <Fragment>
+        {
+          searchRes.map(parlay => {
+            return (
+              <Div key={parlay.fee * parlay.id}>
+                <FillParlay 
+                  user={user}
+                  parlay_id={parlay.id}
+                  games={games}
+                  onSubmit={() => buffer(OPEN)}
+                />
+              </Div>
+            )
+          })
+        }
         </Fragment>
       )}
     </Container>
