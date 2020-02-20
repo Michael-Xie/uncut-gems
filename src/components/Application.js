@@ -15,7 +15,6 @@ import "./Application.css"
 const Application = () => {
   const { state, dispatch } = useApplicationData()
 
-
   return (
     <Fragment>
       <Router>

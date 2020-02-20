@@ -99,6 +99,7 @@ const Parlays = ({user, games}) => {
         if (res.data.length !== 0) {
           parlayInformation["id"]    = parlay.id
           parlayInformation["status"]= parlay.current_status
+          parlayInformation["start_time"]= parlay.start_time
           parlayInformation["name"]  = parlay.name
           parlayInformation["fee"]   = parlay.fee
           parlayInformation["users"] = []
@@ -123,7 +124,6 @@ const Parlays = ({user, games}) => {
   // get all the parlays the user has participated in.
   useEffect(() => {
     setUserParlays([])
-
     setSearchRes([])
     setOpenParlays([])
     // check to see if the admin has filled out his parlay.
@@ -206,6 +206,7 @@ const Parlays = ({user, games}) => {
                     bets={parlay.bets.length}
                     participants={parlay.users}
                     entry={parlay.fee}
+                    start_time={parlay.start_time}
                   />
                 </Div>
               )
@@ -236,6 +237,7 @@ const Parlays = ({user, games}) => {
                         bets={parlay.bets.length}
                         participants={parlay.users}
                         entry={parlay.fee}
+                        start_time={parlay.start_time}
                       />
                     </Div>
                   )
