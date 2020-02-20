@@ -36,11 +36,13 @@ const useApplicationData = () => {
 
       if (event.type === "SET_GAMES") {
         console.log("back-end api called to update games")
-        return dispatch({...event})
+        const games = event.games.sort((a, b) => a.game_id - b.game_id)
+        return dispatch({...event, games: games})
       }
       if (event.type === "SET_SCORES") {
         console.log("back-end api called to update scores")
-        return dispatch({...event})
+        const scores = event.scores.sort((a, b) => a.game_id - b.game_id)
+        return dispatch({...event, scores: scores})
       }
       if (event.type === "SET_PARLAY") {
         console.log("back-end api called to update parlays")
