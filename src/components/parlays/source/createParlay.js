@@ -51,7 +51,6 @@ const MoreInfo = styled.button`
 `
 
 export default function CreateParlay({ games, onSubmit, user, dispatch }) {
-  
   //  ------  Show InfoBox      ------  //
   const [infoBoxVisible, setInfoBoxVisible] = useState(false);
   
@@ -69,53 +68,52 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
     setValue(event.target.value === '' ? '' : Number(event.target.value));
   };
 
-
-
   //  ------  Choose Parlays  ------  //
-  const [data, setData] = React.useState((games || []).map(game => {
-    return {
-      home_team: {
-        ...teamData(game.home_team),
-        name: game.home_team
-      },
-      away_team: {
-        ...teamData(game.away_team),
-        name: game.away_team
-      },
-      game_id: game.game_id,
-      bets: [
-        {
-          type: "pickem",
-          betName: 'Pickem',
-          explanation: 'Select the winner of the game',
-          selected: false,
+  const [data, setData] = useState((games || []).map(game => {
+    if (game)
+      return {
+        home_team: {
+          ...teamData(game.home_team),
+          name: game.home_team
         },
-        {
-          type: "points_tf",
-          betName: 'Total Points',
-          explanation: 'Select the combined total of points scored this game.',
-          selected: false,
+        away_team: {
+          ...teamData(game.away_team),
+          name: game.away_team
         },
-        {
-          type: "points_th",
-          betName: 'Points By Half',
-          explanation: 'Select the combined total of points scored by half-time.',
-          selected: false,
-        },
-        {
-          betName: 'Race to 10',
-          explanation: 'Select which team will score 10 points first.',
-          type: "race_to_10",
-          selected: false,
-        },
-        {
-          betName: 'Race to 100',
-          explanation: 'Select which team will score 100 points first.',
-          type: "race_to_100",
-          selected: false,
-        }
-      ]
-    };
+        game_id: game.game_id,
+        bets: [
+          {
+            type: "pickem",
+            betName: 'Pickem',
+            explanation: 'Select the winner of the game',
+            selected: false,
+          },
+          {
+            type: "points_tf",
+            betName: 'Total Points',
+            explanation: 'Select the combined total of points scored this game.',
+            selected: false,
+          },
+          {
+            type: "points_th",
+            betName: 'Points By Half',
+            explanation: 'Select the combined total of points scored by half-time.',
+            selected: false,
+          },
+          {
+            betName: 'Race to 10',
+            explanation: 'Select which team will score 10 points first.',
+            type: "race_to_10",
+            selected: false,
+          },
+          {
+            betName: 'Race to 100',
+            explanation: 'Select which team will score 100 points first.',
+            type: "race_to_100",
+            selected: false,
+          }
+        ]
+      };
   }))
 
 
@@ -162,12 +160,15 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
       />
 
       {
-        data.map(game =>
-          <GameListItem
-            game={game}
-            setBet={setBet}
-          />
-        )
+        data.map(game => {
+          if (game)
+            return (
+            <GameListItem
+              game={game}
+              setBet={setBet}
+            />
+            )
+        })
       }
       <TransitionsModal onSubmit={onSubmit} user={user} data={data} betName={nameValue} buyIn={value} dispatch={dispatch} />
     </Wrapper>
