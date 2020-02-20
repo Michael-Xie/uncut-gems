@@ -63,8 +63,8 @@ const Application = () => {
             /> */}
           </Route>
           <Route path="/parlays">
-            <Parlays 
-              games={state.games} 
+            <Parlays
+              games={state && state.games} 
               user={JSON.parse(localStorage.getItem("user"))} 
             />
           </Route>
