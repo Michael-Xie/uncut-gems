@@ -1,7 +1,7 @@
 const SET_GAMES  = "SET_GAMES"
 const SET_SCORES = "SET_SCORES"
 const SET_USER   = "SET_USER"
-const SET_PARLAY = "SET_PARLAY"
+const SET_ACTIVE = "SET_ACTIVE"
 
 const handlers = {
   [SET_GAMES]: (prevState, action) => {
@@ -17,9 +17,9 @@ const handlers = {
   [SET_USER]: (prevState, action) => {
     return {...prevState, user: action.value}
   },
-  [SET_PARLAY]: (prevState, action) => {
-    if (action.parlays.length > 0)
-      return {...prevState, parlays: action.parlays}
+  [SET_ACTIVE]: (prevState, action) => {
+    if (action.activeParlays.length > 0)
+      return {...prevState, activeParlays: action.activeParlays}
     return null
   }
 }

@@ -65,8 +65,6 @@ const Application = () => {
           </Route>
           <Route path="/parlays">
             <Parlays 
-              dispatch={dispatch} 
-              parlays={state.parlays} 
               games={state.games} 
               user={JSON.parse(localStorage.getItem("user"))} 
             />
