@@ -16,7 +16,8 @@ const showPointsIfActive = (pointsProp) => {
 
 const Article = styled.article` 
   color: #fff;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   height: 200px;
   margin: 30px auto 0;
   background: linear-gradient(
@@ -28,6 +29,7 @@ const Article = styled.article`
   background-blend-mode: multiply;
   display: flex;
   cursor: pointer;
+  overflow: hidden;
 
   &:hover {
     box-shadow: 0 8px 6px -6px black;
@@ -64,9 +66,9 @@ const GameStatus = styled.h3`
   margin: 0 auto;
 `
 
-const Logo = styled.img` 
-
-`
+const Logo = styled.img`
+  max-width: 100px;
+`;
 // ---------------------------
 
 export default function Game({ game, score }) {
@@ -89,16 +91,32 @@ export default function Game({ game, score }) {
         awayColor={awayTeam.colors}
         arena={homeTeam.arena}
       >
+        {/* <div className="teamNames">
+          {" "}
+        
+          <span>Team 1</span>
+          <span>Team 2</span>
+        </div>
+
+        <div className="scores">
+          <div className="score">
+            <div className="imgWrapper">
+              <img className="logo" />
+            </div>
+            <span>110</span>
+          </div>
+          <div className="status">FT</div>
+          <div className="score">
+            <img className="logo" />
+            <span>110</span>
+          </div>
+        </div> */}
+
         <Section>
           <TeamName>{game.away_team}</TeamName>
 
           <ScoreLogo>
-            <Logo
-              src={awayTeam.logo}
-              alt={game.away_team}
-              height="100px"
-              width="auto"
-            />
+            <Logo src={awayTeam.logo} alt={game.away_team} />
             {showPointsIfActive(score.away_total)}
           </ScoreLogo>
         </Section>
@@ -112,29 +130,23 @@ export default function Game({ game, score }) {
 
           <ScoreLogo>
             {showPointsIfActive(score.home_total)}
-            <img
-              src={homeTeam.logo}
-              alt={game.home_team}
-              height="100px"
-              width="auto"
-            />
+            <Logo src={homeTeam.logo} alt={game.home_team} />
           </ScoreLogo>
         </Section>
       </Article>
-     
+
       {statsBoxVisible && (
         <StatsBox
-          homeFirstQ  = {score.home_first}
-          homeSecondQ = {score.home_second}
-          homeThirdQ  = {score.home_third}
-          homeFourthQ = {score.home_fourth}
-          awayFirstQ  = {score.away_first}
-          awaySecondQ = {score.away_second}
-          awayThirdQ  = {score.away_third}
-          awayFourthQ = {score.away_fourth}
+          homeFirstQ={score.home_first}
+          homeSecondQ={score.home_second}
+          homeThirdQ={score.home_third}
+          homeFourthQ={score.home_fourth}
+          awayFirstQ={score.away_first}
+          awaySecondQ={score.away_second}
+          awayThirdQ={score.away_third}
+          awayFourthQ={score.away_fourth}
         />
       )}
-   
     </div>
   );
 
