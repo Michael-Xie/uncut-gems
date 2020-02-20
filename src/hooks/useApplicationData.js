@@ -19,7 +19,7 @@ const useApplicationData = () => {
         const games   = res[0].data.sort((a, b) => a.game_id - b.game_id)
         const scores  = res[1].data.sort((a, b) => a.game_id - b.game_id)
         dispatch({type: "SET_GAMES", games})
-        dispatch({type: "SET_SCORES", score})
+        dispatch({type: "SET_SCORES", scores})
       })
   }, [])
 
