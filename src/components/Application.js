@@ -22,7 +22,6 @@ const stripePromise = loadStripe("pk_test_PmFe0RYTJwj04yOubxzvdSkQ00oIYKFC0L");
 const Application = () => {
   const { state, dispatch } = useApplicationData()
 
-
   return (
     <Fragment>
       <Router>
@@ -78,8 +77,8 @@ const Application = () => {
             /> */}
           </Route>
           <Route path="/parlays">
-            <Parlays 
-              games={state.games} 
+            <Parlays
+              games={state && state.games} 
               user={JSON.parse(localStorage.getItem("user"))} 
             />
           </Route>

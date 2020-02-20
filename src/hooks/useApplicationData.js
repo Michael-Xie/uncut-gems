@@ -6,7 +6,6 @@ const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, {
     games: [],
     scores: [],
-    parlays: [],
     user: {}
   })
 
@@ -43,10 +42,6 @@ const useApplicationData = () => {
         console.log("back-end api called to update scores")
         const scores = event.scores.sort((a, b) => a.game_id - b.game_id)
         return dispatch({...event, scores: scores})
-      }
-      if (event.type === "SET_PARLAY") {
-        console.log("back-end api called to update parlays")
-        return dispatch({...event})
       }
     })
 
