@@ -27,8 +27,10 @@ const Title = styled.h1`
   
   border-bottom: 1px solid #dbdbdb;
   background-color: #fff;
-
-  
+`
+const H2 = styled.h3`
+  text-align: center;
+  margin: 10px 0;
 `
 
 const Center = styled.div`
@@ -46,7 +48,6 @@ const MoreInfo = styled.button`
   color: #fff;
   background-color: #000;
   
-
   cursor: pointer;
 
   &:focus {
@@ -149,26 +150,31 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
 
   return (
     <Wrapper>
+
       <Title>Create a Parlay</Title>
 
-      <MoreInfo onClick={() => setInfoBoxVisible(!infoBoxVisible)}>More Info</MoreInfo>
+      {/* <MoreInfo onClick={() => setInfoBoxVisible(!infoBoxVisible)}>More Info</MoreInfo> */}
 
-      {infoBoxVisible && (
-        <InfoBox />
-      )}
+      {/* {infoBoxVisible && (<InfoBox />)} */}
+
       <Center>
+       
+        <H2>Parlay Name</H2>
+        <ParlayName
+          value={nameValue}
+          setName={setNameValue}
+        />
+       
+        <H2>Buy-In amount</H2>
         <InputSlider
           value={value}
           setValue={setValue}
           handleSliderChange={handleSliderChange}
           handleInputChange={handleInputChange}
         />
-      
-      <ParlayName
-        value={nameValue}
-        setName={setNameValue}
-      />
-</Center>
+
+      </Center>
+      <H2>Select Your Bets</H2>
       {
         data.map(game =>
           <GameListItem
@@ -177,7 +183,9 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
           />
         )
       }
+
       <TransitionsModal onSubmit={onSubmit} user={user} data={data} betName={nameValue} buyIn={value} dispatch={dispatch} />
+
     </Wrapper>
   );
 
