@@ -100,8 +100,7 @@ const Parlays = ({user, games}) => {
   // show the parlay.
   const showParlay = (parlay, parlayInformation) => {
     parlayInformation["state"] = "SHOW"
-    Promise.resolve(
-      axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants/${user.user_name}`))
+    axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants/${user.user_name}`)
       .then(res => {
         if (res.data.length !== 0) {
           parlayInformation["id"]    = parlay.id
@@ -153,11 +152,20 @@ const Parlays = ({user, games}) => {
         })
       })
   setOpenParlays([])
-  // now update the parlays search table.
+  // now update the parlays search table
+  // where the user is not in the parlay
   axios.get("http://localhost:8001/api/parlays/open")
     .then(res => {
       res.data.map(parlay => {
-        return setOpenParlays(prev => [...prev, parlay])
+        axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants`)
+          .then(res => {
+            const participants = res.data.map(user => user.user_name)
+            return participants
+          })
+          .then(participants => {
+            if (!participants.includes(user.user_name))
+              setOpenParlays(prev => [...prev, parlay])
+          })
       })
     })
 
