@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import axios from "axios"
 
 import InputSlider from "../../partials/slider"
 import FormSubmit from "../../partials/formSubmit"

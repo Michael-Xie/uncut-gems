@@ -1,15 +1,7 @@
 import React, {Fragment, useState, useEffect} from "react"
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
 import styled from "styled-components"
 import useVisualMode from "../../hooks/useVisualMode"
 
-import Create from "./source/create"
 import Loading from "./source/loading"
 import CreateParlay from "./source/createParlay"
 import ShowParlay from "./source/showParlay"
@@ -66,7 +58,6 @@ const Parlays = ({user, games}) => {
   const OPEN     = "OPEN"
   const CLOSED   = "CLOSED"
   const SEARCH   = "SEARCH"
-  const SUBMIT   = "SUBMIT"
   const LOADING  = "LOADING"
   const JOIN     = "JOIN"
 
@@ -88,6 +79,7 @@ const Parlays = ({user, games}) => {
     openParlays.map(parlay => {
       if (parlay.name.includes(value))
         return setSearchRes(prev => [...prev, parlay])
+      return null
     })
   }
   // if the user has participated in a parlay (filled out a bet form)
@@ -109,7 +101,9 @@ const Parlays = ({user, games}) => {
             .then(res => {
               res.data.map(player => {
                 parlayInformation.users.push(player.user_name)
+                return null
               })
+              return null
             })
             .then(res => {
               axios.get(`http://localhost:8001/api/parlay/bet/${parlay.id}`)
@@ -146,6 +140,7 @@ const Parlays = ({user, games}) => {
           } else {
             showParlay(parlay, parlayInformation)
           }
+          return null
         })
       })
     // now update the parlays search table
@@ -162,6 +157,7 @@ const Parlays = ({user, games}) => {
               if (!participants.includes(user.user_name))
                 setOpenParlays(prev => [...prev, parlay])
             })
+          return null
         })
       })
   }, [mode === LOADING])
