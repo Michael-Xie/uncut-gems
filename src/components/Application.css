@@ -31,7 +31,7 @@ body {
   margin-left: .25em;
 }
 
-/* Button 5 */
+/* Login? */
 .btn-5 {
 	background: #823aa0;
 	color: #fff;
@@ -77,3 +77,23 @@ body {
 	color: #703b87;
 }
 
+.link {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+ /* Radio Buttons */
+input[type=radio] {
+  display: none;
+}
+
+ input[type=radio]:checked + img {
+	opacity: 1;
+	
+ }

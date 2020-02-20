@@ -14,6 +14,7 @@ import "./Application.css"
 
 const Application = () => {
   const { state, dispatch } = useApplicationData()
+
   return (
     <Fragment>
       <Router>
@@ -62,7 +63,10 @@ const Application = () => {
             /> */}
           </Route>
           <Route path="/parlays">
-            <Parlays games={state.games} user={JSON.parse(localStorage.getItem("user"))} />
+            <Parlays 
+              games={state.games} 
+              user={JSON.parse(localStorage.getItem("user"))} 
+            />
           </Route>
             
           <Route path="/logout">

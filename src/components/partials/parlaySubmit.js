@@ -5,6 +5,20 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import axios from 'axios';
 
+import styled from "styled-components"
+
+const Submit = styled.button`
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+`
+
+
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -19,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TransitionsModal({data, onSubmit, user}) {
+export default function ParlaySubmit({data, user, parlay_id, expected, onSubmit}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -32,43 +46,33 @@ export default function TransitionsModal({data, onSubmit, user}) {
   };
 
   const handleSubmit = (bets) => {
-    Promise.resolve(axios.post(`http://localhost:8001/api/parlay`, {
-      admin: user.id,
-      name: "hello",
-      fee: 20,
-      status: 'open'
-    }))
-    .then(res => {
-      const id = res.data[0].id
-      bets.map(result => {
-        const game_id = result.game_id
-        result.bets.forEach(bet => {
-          if (bet.selected)
-            Promise.resolve(axios.post(`http://localhost:8001/api/parlay/bet`, {
-              type:      bet.type,
-              parlay_id: id,
-              game_id:   game_id
-            }))
-            .catch(err => console.log(err))
+    if (expected === data.length) {
+      bets.map(bet => {
+        axios.post("http://localhost:8001/api/parlay/bets/fill", {
+          selection: bet.selection,
+          bet_id: bet.bet_id,
+          parlay_id: parlay_id,
+          user_id: user.id
         })
+        .catch(err => console.log(err))
       })
-      return id
-    })
-    .then(id => {
-      axios.post(`http://localhost:8001/api/parlay/${id}/participants`, {
+      axios.post(`http://localhost:8001/api/parlay/${parlay_id}/participants`, {
         user_name: user.user_name,
-        parlay_id: id
+        parlay_id: parlay_id
       })
       .catch(err => console.log(err))
-    })
-    .catch(err => console.log(err))
+
+    } else {
+      alert("fill out the entire form!")
+      return
+    }
   }
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        react-transition-group
-      </button>
+      <Submit type="button" onClick={handleOpen}>
+        Submit This Shit
+      </Submit>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
