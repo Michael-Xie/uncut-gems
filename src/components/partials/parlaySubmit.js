@@ -5,6 +5,20 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import axios from 'axios';
 
+import styled from "styled-components"
+
+const Submit = styled.button`
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+`
+
+
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -50,9 +64,9 @@ export default function ParlaySubmit({data, user_id, parlay_id, expected, onSubm
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        react-transition-group
-      </button>
+      <Submit type="button" onClick={handleOpen}>
+        Submit This Shit
+      </Submit>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

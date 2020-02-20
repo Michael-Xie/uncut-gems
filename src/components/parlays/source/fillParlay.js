@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 import axios from "axios"
-import InputSlider from '../../partials/slider'
-import ParlaySubmit from '../../partials/parlaySubmit'
-import { RadioGroup, RadioButton } from 'react-radio-buttons'
-
 import teamData from "../../../helpers/teamData"
 
+import ParlaySubmit from '../../partials/parlaySubmit'
 import PickTeam from './pickTeam'
+import SlidePoints from './slidePoints'
 
 const Wrapper = styled.article`
   max-width: 600px;
@@ -15,6 +13,7 @@ const Wrapper = styled.article`
   background-color: #fff;
   margin: 0 auto 30px;
   box-shadow: 0 8px 6px -6px black;
+  font-size: 18px;
 `
 
 
@@ -26,6 +25,15 @@ const Game = styled.div`
   padding: 10px 0;
 `
 
+const Input = styled.input`
+  
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+`
 
 
 export default function FillParlay({ user_id, parlay_id, games, onSubmit }) {
@@ -43,8 +51,8 @@ export default function FillParlay({ user_id, parlay_id, games, onSubmit }) {
     race_to_100: "Race to 100",
     race_to_10: "Race to 10",
     pickem: "Pick`Em",
-    points_tf: "Total Points (FT)",
-    points_th: "Total Points (HT)"
+    points_tf: "Total Points",
+    points_th: "Total Points by Half Time"
   }
   // grab all the bets for the parlay.
   useEffect(() => {
@@ -120,28 +128,36 @@ export default function FillParlay({ user_id, parlay_id, games, onSubmit }) {
 
           return (
             <Game key={bet.id}>
-              <h3>{betKeys[bet.type]}</h3>
+
               {
                 checkboxes.map(bType => {
                   if (bType === bet.type) {
                     const teams = findTeams(bet.game_id)
                     return (
-                      <PickTeam
-                        teams={teams}
-                        getBetSelection={getBetSelection}
-                        bet={bet}
-                        check={check}
-                      />
+                      <div>
+                        <h3>{betKeys[bet.type]}</h3>
+                        <PickTeam
+                          teams={teams}
+                          getBetSelection={getBetSelection}
+                          bet={bet}
+                          check={check}
+                        />
+                      </div>
                     );
                   }
                 })
               }
               {
                 sliders.map(bType => {
-                  if (bType === bet.type)
+                  if (bType === bet.type) {
+                    const teams = findTeams(bet.game_id)
                     return (
-                      <input key={bet.id} type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} />
+                      <div>
+                        <h3>{betKeys[bet.type]}</h3>
+                        <Input key={bet.id} type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} />
+                      </div>
                     )
+                  }
                 })
               }
             </Game>
