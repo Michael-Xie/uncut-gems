@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import UserButtons from "./userButtons"
 import NavButtons from "./navButtons"
+import LoggedOutMenu from "./loggedoutMenu"
 
 const Header = styled.header` 
   
@@ -51,7 +52,8 @@ const LinkStyle = styled(Link)`
 `
 
 const Userinfo = styled.div`
-  margin-right: 10px;
+  display: flex;
+ 
 
 `
 
@@ -81,7 +83,7 @@ export default function Navigation({ userid, username, userphoto, balance }) {
         </Logo>
 
         <Links>
-          <NavButtons />
+          
 
 
 
@@ -91,6 +93,7 @@ export default function Navigation({ userid, username, userphoto, balance }) {
           {localStorage.getItem('user') ?
 
             <Userinfo>
+             <NavButtons />
               {/* <User>
                 <img src="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/wallet.png" alt="wallet" height="24px" width="24px"></img>
                 {balance}
@@ -98,23 +101,17 @@ export default function Navigation({ userid, username, userphoto, balance }) {
               <UserButtons
                 username={username}
                 userPhoto={userphoto}
+                balance={balance}
               />
 
-              <LinkStyle to="/pay">
-                <img src="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/wallet.png" alt="wallet" height="24px" width="24px"></img>
-                {balance}
-              </LinkStyle>
-              <User>
-                <img src={userphoto} alt={username} height="24px" width="24px"></img>
-                {username}
-              </User>
-              <LinkStyle to="/logout">Logout</LinkStyle>
+
+
             </Userinfo>
             :
-            <>
-              <LinkStyle to="/login"> Login </LinkStyle>
-              <LinkStyle to="/register"> Register </LinkStyle>
-            </>
+          
+             <LoggedOutMenu />
+         
+            
           }
         </Links>
       </Nav>

@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function UserButtons({ username, userPhoto, balance }) {
+export default function LoggedOutMenu() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -76,8 +76,7 @@ export default function UserButtons({ username, userPhoto, balance }) {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          <img src={userPhoto} alt={username} height="20px" width="20px" />
-          {username}
+          Menu
         </Button>
         <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
           {({ TransitionProps, placement }) => (
@@ -88,16 +87,10 @@ export default function UserButtons({ username, userPhoto, balance }) {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem>
-                      <LinkStyle to="/pay">
-                        <img src="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/wallet.png" alt="wallet" height="24px" width="24px"></img>
-                        {balance}
-                      </LinkStyle>
-                    </MenuItem>
-                    <MenuItem>
-                      <LinkStyle to="/logout">Logout</LinkStyle>
-                    </MenuItem>
-
+                    
+                    <MenuItem><LinkStyle to="/games">Games</LinkStyle></MenuItem>
+                    <MenuItem><LinkStyle to="/login"> Login </LinkStyle></MenuItem>
+                    <MenuItem> <LinkStyle to="/register"> Register</LinkStyle></MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
