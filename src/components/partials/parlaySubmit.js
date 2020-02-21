@@ -47,8 +47,14 @@ export default function ParlaySubmit({data, user, parlay_id, expected, onSubmit}
 
   const handleSubmit = (bets) => {
     if (expected === data.length) {
+      axios.post("http://localhost:8001/api/parlays/participants", {
+        user_name: user.user_name,
+        parlay_id: parlay_id
+      })
+      .catch(err => console.log(err))
+
       bets.map(bet => {
-        axios.post("http://localhost:8001/api/parlay/bets/fill", {
+        axios.post("http://localhost:8001/api/parlays/bets/fill", {
           selection: bet.selection,
           bet_id: bet.bet_id,
           parlay_id: parlay_id,
@@ -56,11 +62,6 @@ export default function ParlaySubmit({data, user, parlay_id, expected, onSubmit}
         })
         .catch(err => console.log(err))
       })
-      axios.post(`http://localhost:8001/api/parlay/${parlay_id}/participants`, {
-        user_name: user.user_name,
-        parlay_id: parlay_id
-      })
-      .catch(err => console.log(err))
 
     } else {
       alert("fill out the entire form!")
