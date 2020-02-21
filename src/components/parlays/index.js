@@ -10,14 +10,12 @@ import FillParlay from "./source/fillParlay"
 import axios from "axios"
 
 const Container = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 80vw;
+  width: 600px; */
 
-  @media only screen and (min-width: 768px) {
-    width: 60vw;
-  }
+
 `
 
 const Div = styled.div`
@@ -46,8 +44,22 @@ const ResultContainer = styled.div`
 const SearchResult = styled.div`
 `
 
+const ButtonList = styled.div`
+  max-width: 600px;
+  width:100%;
+  margin: 0 auto;
+
+`
+
 const Button = styled.button`
-  max-width: 100px;
+  max-width: 120px;
+  width:100%;
+  
+  padding: 5px;
+
+  border: 1px solid #000;
+
+  cursor: pointer;
 `
 
 
@@ -62,7 +74,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
   const JOIN     = "JOIN"
 
   // get the visual mode for create button.
-  const {mode, transition} = useVisualMode(CREATE)
+  const { mode, transition } = useVisualMode(CREATE)
   // parlays that the user has participated in.
   const [searchRes, setSearchRes] = useState([])
 
@@ -174,12 +186,13 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
 
   return (
     <Container>
-      <Button onClick={() => buffer(CREATE)} >CREATE</Button>
-      <Button onClick={() => buffer(ACTIVE)} >ACTIVE</Button>
-      <Button onClick={() => buffer(OPEN)}   >OPEN  </Button>
-      <Button onClick={() => buffer(CLOSED)} >CLOSED</Button>
-      <Button onClick={() => buffer(SEARCH)} >SEARCH</Button>
-
+      <ButtonList>
+        <Button onClick={() => buffer(CREATE)} >CREATE</Button>
+        <Button onClick={() => buffer(ACTIVE)} >ACTIVE</Button>
+        <Button onClick={() => buffer(OPEN)}   >OPEN  </Button>
+        <Button onClick={() => buffer(CLOSED)} >CLOSED</Button>
+        <Button onClick={() => buffer(SEARCH)} >SEARCH</Button>
+      </ButtonList>
       {mode === LOADING && <Loading />}
       {mode === CREATE && (
         <CreateParlay

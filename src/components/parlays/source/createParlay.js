@@ -13,16 +13,17 @@ const Wrapper = styled.article`
  display: flex;
  flex-direction: column;
  justify-content:center;
-
  margin: 0 auto;
+
+ max-width: 600px;
 `
 
 const Title = styled.h1`
   text-align: center;
   max-width: 600px;
   width: 100%;
-  padding: 15px 20px;
-  margin: 20px auto;
+  padding: 15px 0;
+  margin: 0 0 20px;
   
   border-bottom: 1px solid #dbdbdb;
   background-color: #fff;
