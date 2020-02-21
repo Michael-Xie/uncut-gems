@@ -6,9 +6,12 @@ import { Link } from "react-router-dom"
 const Wrapper = styled.div`
   display: flex;
   margin: 20px auto 0;
-  width: 700px;
+  max-width: 600px;
+  width:100%;
 `
 const Video = styled.img`
+  max-width:200px;
+  width: 100%;
 `
 
 const Form = styled.form`

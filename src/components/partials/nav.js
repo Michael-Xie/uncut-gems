@@ -1,8 +1,12 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import UserButtons from "./userButtons"
+import NavButtons from "./navButtons"
+import LoggedOutMenu from "./loggedoutMenu"
 
 const Header = styled.header` 
+  
   background-color: #fff;
   width: 100%;
   height: 75px;
@@ -11,9 +15,11 @@ const Header = styled.header`
 
 const Nav = styled.nav`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   
+  max-width: 600px;
+  width:100%;
   padding: 15px 0;
   margin: 0 auto;
 `
@@ -31,6 +37,7 @@ const Logo = styled.div`
 const Links = styled.div`
   display: flex;
   align-items:center;
+  
 `
 
 const LinkStyle = styled(Link)`
@@ -45,8 +52,9 @@ const LinkStyle = styled(Link)`
 `
 
 const Userinfo = styled.div`
-  margin-right: 10px;
-  display:flex;
+  display: flex;
+ 
+
 `
 
 const User = styled.div`
@@ -67,33 +75,43 @@ export default function Navigation({ userid, username, userphoto, balance }) {
     <Header>
       <Nav>
         <Logo>
-          <svg viewBox="-34 0 512 512" width="35px" xmlns="http://www.w3.org/2000/svg"><path d="m221.703125 0-221.703125 128v256l221.703125 128 221.703125-128v-256zm0 0" fill="#96a0f0" /><path d="m374.6875 168.15625v176.660156l-152.984375 88.320313-152.984375-88.320313v-176.660156l152.984375-88.320312zm0 0" fill="#39689f" /><g fill="#75e1f7"><path d="m221.703125 0v79.832031l152.988281 88.328125 68.714844-40.160156zm0 0" /><path d="m443.40625 384-68.714844-39.1875-152.988281 88.328125v78.859375zm0 0" /><path d="m0 128 68.714844 40.160156v176.652344l-68.714844 39.1875zm0 0" /></g><path d="m374.6875 168.15625v176.660156l-152.984375 88.320313v-353.300781zm0 0" fill="#224370" /></svg>
-          &nbsp; &nbsp;
-          <LinkStyle to="/">Uncut Gems</LinkStyle>
+          <LinkStyle to="/">
+            <svg viewBox="-34 0 512 512" width="35px" xmlns="http://www.w3.org/2000/svg"><path d="m221.703125 0-221.703125 128v256l221.703125 128 221.703125-128v-256zm0 0" fill="#96a0f0" /><path d="m374.6875 168.15625v176.660156l-152.984375 88.320313-152.984375-88.320313v-176.660156l152.984375-88.320312zm0 0" fill="#39689f" /><g fill="#75e1f7"><path d="m221.703125 0v79.832031l152.988281 88.328125 68.714844-40.160156zm0 0" /><path d="m443.40625 384-68.714844-39.1875-152.988281 88.328125v78.859375zm0 0" /><path d="m0 128 68.714844 40.160156v176.652344l-68.714844 39.1875zm0 0" /></g><path d="m374.6875 168.15625v176.660156l-152.984375 88.320313v-353.300781zm0 0" fill="#224370" /></svg>
+          </LinkStyle>
+          {/* &nbsp; &nbsp;
+         Uncut Gems */}
         </Logo>
 
         <Links>
-          <LinkStyle to="/parlays">Parlays</LinkStyle>
-          <LinkStyle to="/games">Games</LinkStyle>
-          &nbsp; &nbsp;
+          
+
+
+
+
+
+
           {localStorage.getItem('user') ?
 
             <Userinfo>
-              <LinkStyle to="/pay">
+             <NavButtons />
+              {/* <User>
                 <img src="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/wallet.png" alt="wallet" height="24px" width="24px"></img>
                 {balance}
-              </LinkStyle>
-              <User>
-                <img src={userphoto} alt={username} height="24px" width="24px"></img>
-                {username}
-              </User>
-              <LinkStyle to="/logout">Logout</LinkStyle>
+              </User> */}
+              <UserButtons
+                username={username}
+                userPhoto={userphoto}
+                balance={balance}
+              />
+
+
+
             </Userinfo>
             :
-            <>
-              <LinkStyle to="/login"> Login </LinkStyle>
-              <LinkStyle to="/register"> Register </LinkStyle>
-            </>
+          
+             <LoggedOutMenu />
+         
+            
           }
         </Links>
       </Nav>
