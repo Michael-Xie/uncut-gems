@@ -34,14 +34,39 @@ const Parlay = styled.div`
 const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+ 
+  margin: 0 auto;
+
+`
+const Search = styled.input`
+  max-width: 400px;
+  height: 20px;
+  width: 100%;
+
+  margin-bottom: 20px;
+
+  font-size: 18px;
+  padding: 10px;
+
+  overflow:hidden;
+  resize: none;  
+
+  margin: 0 auto;
+
 `
 
 const ResultContainer = styled.div`
-  
+  margin: 0 auto;
+
+  max-width: 400px;
+  width:100%;
 `
 
-const SearchResult = styled.div`
+const SearchResult = styled.button`
+  max-width: 400px;
+  width: 100%;
+  padding: 5px 10px;
+ 
 `
 
 const ButtonList = styled.div`
@@ -274,12 +299,11 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
           <ResultContainer>
             {
               searchRes.map(search => {
-                return (
-                  <SearchResult>
-                    <button onClick={() => {
-                      buffer(JOIN)
-                    }}>{search.name}</button>
-                  </SearchResult>
+                return (                 
+                    <SearchResult onClick={() => {
+                      setSearchRes([search])
+                      transition(JOIN)
+                    }}>{search.name}</SearchResult>
                 )
               })
             }

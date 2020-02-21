@@ -2,12 +2,12 @@ import React from "react"
 import styled from "styled-components"
 
 const Wrapper = styled.div`
-  height: 75px;
+  height: 50px;
   
 `
 
 const Label = styled.label`
-  margin: auto 30px;
+  margin: auto 15px;
 `
 
 const Logo = styled.img`

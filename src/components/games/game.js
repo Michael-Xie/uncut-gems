@@ -91,26 +91,6 @@ export default function Game({ game, score }) {
         awayColor={awayTeam.colors}
         arena={homeTeam.arena}
       >
-        {/* <div className="teamNames">
-          {" "}
-        
-          <span>Team 1</span>
-          <span>Team 2</span>
-        </div>
-
-        <div className="scores">
-          <div className="score">
-            <div className="imgWrapper">
-              <img className="logo" />
-            </div>
-            <span>110</span>
-          </div>
-          <div className="status">FT</div>
-          <div className="score">
-            <img className="logo" />
-            <span>110</span>
-          </div>
-        </div> */}
 
         <Section>
           <TeamName>{game.away_team}</TeamName>
