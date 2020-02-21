@@ -18,7 +18,9 @@ const Application = () => {
   return (
     <Fragment>
       <Router>
-        <Navigation
+        
+       
+         <Navigation
           username={
             localStorage.getItem("user") !== null
               ? JSON.parse(localStorage.getItem("user")).user_name
@@ -31,7 +33,7 @@ const Application = () => {
           <Redirect to={{ pathname: "/games" }} />
         ) : (
           <Redirect to={{ pathname: "/login" }} />
-        )}
+        )} 
 
         <Switch>
           <Route path="/login">
@@ -51,16 +53,6 @@ const Application = () => {
                   />
                 );
               })}
-            {/* <StatsBox
-              homeFirstQ="12"
-              homeSecondQ="43"
-              homeThirdQ="0"
-              homeFourthQ="0"
-              awayFirstQ="12"
-              awaySecondQ="0"
-              awayThirdQ="0"
-              awayFourthQ="0"
-            /> */}
           </Route>
           <Route path="/parlays">
             <Parlays
