@@ -44,12 +44,10 @@ const Choose = styled.div`
     align-items:center;
    
 `
-
-export default function FillParlay({ user, parlay_id, games, onSubmit }) {
+export default function FillParlay({user, parlay_id, games, allBets, onSubmit, participants}) {
   // keep bets in state.
   const [bets, setBets] = useState([])
   const [betSelection, setBetSelection] = useState([])
-
 
   // checkboxes or sliders
   const checkboxes = ["race_to_100", "race_to_10", "pickem"]
@@ -65,21 +63,11 @@ export default function FillParlay({ user, parlay_id, games, onSubmit }) {
     points_th: "Total Points by Half Time"
   }
   // grab all the bets for the parlay.
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-
-    axios.get(`http://localhost:8001/api/parlay/bet/${parlay_id}`, {
-      cancelToken: source.token
+  useEffect(() => {  
+    allBets.map(bet => {
+      if (bet.parlay_id === parlay_id)
+        return setBets(prev => [...prev, bet])
     })
-      .then(res => setBets(prev => [...res.data]))
-      .catch(error => {
-        if (axios.isCancel(error))
-          console.log(error)
-        else throw error
-      })
-    return () => {
-      source.cancel()
-    }
   }, [parlay_id])
 
   const check = (team, betId, obj) => {
@@ -193,6 +181,7 @@ export default function FillParlay({ user, parlay_id, games, onSubmit }) {
         data={betSelection}
         expected={bets.length}
         onSubmit={onSubmit}
+        participants={participants}
       >
         Submit Bet
       </ParlaySubmit>
