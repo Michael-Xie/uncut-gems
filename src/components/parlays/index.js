@@ -72,7 +72,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
       return setSearchRes(["No results"])
     const parlayIds = userParlays()
     const results = parlays.filter(parlay => {
-      if (!parlayIds.includes(parlays.id)  &&
+      if (!(parlayIds.includes(parlay.id))  &&
           parlay.current_status === 'open' &&
           parlay.name.includes(value))
         return setSearchRes(prev => [...prev, parlay])
@@ -231,6 +231,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
                 games={games}
                 allBets={bets}
                 onSubmit={() => buffer(OPEN)}
+                participants={participants}
               />
             </Div>
           )
@@ -283,7 +284,11 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
                       parlay_id={parlay.id}
                       games={games}
                       allBets={bets}
-                      onSubmit={() => buffer(OPEN)}
+                      onSubmit={() => {
+                        buffer(OPEN)
+                        setSearchRes([])
+                      }}
+                      participants={participants}
                     />
                   </Div>
                 )

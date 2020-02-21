@@ -18,7 +18,6 @@ const Submit = styled.button`
   font-size: 16px;
 `
 
-
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -33,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ParlaySubmit({data, user, parlay_id, expected, onSubmit}) {
+export default function ParlaySubmit({data, user, parlay_id, expected, onSubmit, participants}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -47,22 +46,30 @@ export default function ParlaySubmit({data, user, parlay_id, expected, onSubmit}
 
   const handleSubmit = (bets) => {
     if (expected === data.length) {
-      axios.post("http://localhost:8001/api/parlays/participants", {
-        user_name: user.user_name,
-        parlay_id: parlay_id
+      // check to see if they are already a participant.
+      const filter = participants.filter(participant => {
+        if (participant.parlay_id === parlay_id &&
+            participant.user_name === user.user_name)
+          return participant
       })
-      .catch(err => console.log(err))
-
-      bets.map(bet => {
-        axios.post("http://localhost:8001/api/parlays/bets/fill", {
-          selection: bet.selection,
-          bet_id: bet.bet_id,
-          parlay_id: parlay_id,
-          user_id: user.id
+      if (filter.length === 0) {
+        axios.post("http://localhost:8001/api/parlays/participants", {
+          user_name: user.user_name,
+          parlay_id: parlay_id
         })
+        .then(() => console.log('here'))
         .catch(err => console.log(err))
-      })
 
+        bets.map(bet => {
+          axios.post("http://localhost:8001/api/parlays/bets/fill", {
+            selection: bet.selection,
+            bet_id: bet.bet_id,
+            parlay_id: parlay_id,
+            user_id: user.id
+          })
+          .catch(err => console.log(err))
+        })
+      }
     } else {
       alert("fill out the entire form!")
       return

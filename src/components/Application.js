@@ -70,7 +70,6 @@ const Application = () => {
               participants={state.participants}
               bets={state.bets}
               user_bets={state.user_bets}
-              dispatch={dispatch}
             />
           </Route>
             
