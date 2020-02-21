@@ -7,7 +7,7 @@ import Input from '@material-ui/core/Input';
 import styled from "styled-components"
 
 const Div = styled.div`
-  /* background-color: #fff; */
+  background-color: #fff;
 `
 
 

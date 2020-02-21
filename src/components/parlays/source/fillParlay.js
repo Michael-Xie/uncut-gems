@@ -150,7 +150,7 @@ export default function FillParlay({ user, parlay_id, games, onSubmit }) {
           return (
             <Game key={bet.id}>
 
-              {teams.homeTeam} vs {teams.awayTeam}
+              
               {
                 checkboxes.map(bType => {
                   if (bType === bet.type) {
