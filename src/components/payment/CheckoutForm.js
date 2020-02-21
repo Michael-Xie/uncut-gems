@@ -41,7 +41,8 @@ export default function CheckoutForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           payment_method_id: result.paymentMethod.id,
-          top_up: money
+          top_up: money,
+          user_id: JSON.parse(localStorage.getItem('user')).id
         }),
       });
 
