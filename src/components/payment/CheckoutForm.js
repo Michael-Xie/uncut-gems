@@ -1,7 +1,10 @@
-import React from 'react';
-import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
+import React, { useState } from 'react';
+import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+
+import CardSection from './CardSection';
 
 export default function CheckoutForm() {
+  const [money, setMoney] = useState(0)
   const stripe = useStripe();
   const elements = useElements();
 
@@ -9,12 +12,18 @@ export default function CheckoutForm() {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
 
     const result = await stripe.createPaymentMethod({
+      type: 'card',
       card: elements.getElement(CardElement),
       billing_details: {
         // Include any additional collected billing details.
-        name: 'Jenny Rosen',
+        name: 'Jenny Rosen'
       },
     });
 
@@ -27,11 +36,12 @@ export default function CheckoutForm() {
       // show `result.error.message` in the payment form.
     } else {
       // Otherwise send paymentMethod.id to your server (see Step 3)
-      const response = await fetch('http://localhost:8001/api/pay', {
+      const response = await fetch('http://localhost:8001/api/pay/card', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           payment_method_id: result.paymentMethod.id,
+          top_up: money
         }),
       });
 
@@ -45,23 +55,27 @@ export default function CheckoutForm() {
     if (serverResponse.error) {
       // An error happened when charging the card,
       // show the error in the payment form.
+      alert(serverResponse.error);
     } else {
       // Show a success message
-    }
-  };
-
-  const handleCardChange = (event) => {
-    if (event.error) {
-      // Show `event.error.message` in the payment form.
+      alert(`successfully charged card`);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <CardElement onChange={handleCardChange} />
-      <button type="submit" disabled={!stripe}>
-        Submit Payment
-      </button>
+      <label htmlFor="top-up">
+        Top-up Amount
+        <input
+          type='number'
+          name='top-up'
+          value={money}
+          onChange={(event) => { setMoney(event.target.value) }}
+        />
+      </label>
+
+      <CardSection />
+      <button disabled={!stripe}>Confirm order</button>
     </form>
   );
 }
