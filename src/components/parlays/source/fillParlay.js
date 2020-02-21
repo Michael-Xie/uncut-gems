@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 import axios from "axios"
 import teamData from "../../../helpers/teamData"
+import InputSlider from "../../partials/slider"
 
 import ParlaySubmit from '../../partials/parlaySubmit'
 import PickTeam from './pickTeam'
 import SlidePoints from './slidePoints'
 
 const Wrapper = styled.article`
+
+  
+
+
   max-width: 600px;
   width: 100%;
   background-color: #fff;
@@ -18,10 +23,7 @@ const Wrapper = styled.article`
 
 
 const Game = styled.div`
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items:center;
+
   padding: 10px 0;
 `
 
@@ -35,15 +37,22 @@ const Input = styled.input`
   box-sizing: border-box;
 `
 
-export default function FillParlay({user, parlay_id, games, onSubmit}) {
+const Choose = styled.div`
+    display: flex;
+
+    justify-content:center;
+    align-items:center;
+   
+`
+export default function FillParlay({user, parlay_id, games, allBets, onSubmit, participants}) {
   // keep bets in state.
   const [bets, setBets] = useState([])
   const [betSelection, setBetSelection] = useState([])
 
-
   // checkboxes or sliders
   const checkboxes = ["race_to_100", "race_to_10", "pickem"]
   const sliders = ["points_tf", "points_th"]
+
 
   // format the bet names for display purposes.
   const betKeys = {
@@ -55,20 +64,10 @@ export default function FillParlay({user, parlay_id, games, onSubmit}) {
   }
   // grab all the bets for the parlay.
   useEffect(() => {  
-    const source = axios.CancelToken.source();
-
-    axios.get(`http://localhost:8001/api/parlay/bet/${parlay_id}`, {
-      cancelToken: source.token   
+    allBets.map(bet => {
+      if (bet.parlay_id === parlay_id)
+        return setBets(prev => [...prev, bet])
     })
-      .then(res => setBets(prev => [...res.data]))
-      .catch(error => {
-        if (axios.isCancel(error))
-          console.log(error)
-        else throw error
-      })
-    return () => {
-      source.cancel()
-    }
   }, [parlay_id])
 
   const check = (team, betId, obj) => {
@@ -132,25 +131,29 @@ export default function FillParlay({user, parlay_id, games, onSubmit}) {
 
   return (
     <Wrapper>
+
       {
         bets.map(bet => {
-
+          const teams = findTeams(bet.game_id)
           return (
             <Game key={bet.id}>
+
+              
               {
                 checkboxes.map(bType => {
                   if (bType === bet.type) {
-                    const teams = findTeams(bet.game_id)
+
                     return (
-                      <div>
-                        <h3>{betKeys[bet.type]}</h3>
+                      <Choose>
+
+                        {betKeys[bet.type]}
                         <PickTeam
                           teams={teams}
                           getBetSelection={getBetSelection}
                           bet={bet}
                           check={check}
                         />
-                      </div>
+                      </Choose>
                     );
                   }
                 })
@@ -160,10 +163,10 @@ export default function FillParlay({user, parlay_id, games, onSubmit}) {
                   if (bType === bet.type) {
                     const teams = findTeams(bet.game_id)
                     return (
-                      <div>
-                        <h3>{betKeys[bet.type]}</h3>
+                      <Choose>
+                        {betKeys[bet.type]}
                         <Input key={bet.id} type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} />
-                      </div>
+                      </Choose>
                     )
                   }
                 })
@@ -172,12 +175,13 @@ export default function FillParlay({user, parlay_id, games, onSubmit}) {
           )
         })
       }
-      <ParlaySubmit 
-        parlay_id={parlay_id} 
-        user={user} 
-        data={betSelection} 
+      <ParlaySubmit
+        parlay_id={parlay_id}
+        user={user}
+        data={betSelection}
         expected={bets.length}
         onSubmit={onSubmit}
+        participants={participants}
       >
         Submit Bet
       </ParlaySubmit>

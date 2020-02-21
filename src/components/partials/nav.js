@@ -100,6 +100,15 @@ export default function Navigation({ userid, username, userphoto, balance }) {
                 userPhoto={userphoto}
               />
 
+              <LinkStyle to="/pay">
+                <img src="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/wallet.png" alt="wallet" height="24px" width="24px"></img>
+                {balance}
+              </LinkStyle>
+              <User>
+                <img src={userphoto} alt={username} height="24px" width="24px"></img>
+                {username}
+              </User>
+              <LinkStyle to="/logout">Logout</LinkStyle>
             </Userinfo>
             :
             <>
