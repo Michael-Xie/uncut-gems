@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function FormSubmit({data, onSubmit, user, buyIn, betName, games}) {
+export default function FormSubmit({data, onSubmit, user, buyIn, betName, games, dispatch}) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [startTime, setStartTime] = useState([])
@@ -47,7 +47,7 @@ export default function FormSubmit({data, onSubmit, user, buyIn, betName, games}
       alert("Form must be complete!")
       return;
     } else {
-      Promise.resolve(axios.post(`http://localhost:8001/api/parlay`, {
+      Promise.resolve(axios.post(`http://localhost:8001/api/parlays`, {
         admin: user.id,
         name: betName,
         fee: buyIn,
@@ -62,7 +62,7 @@ export default function FormSubmit({data, onSubmit, user, buyIn, betName, games}
           const game_id = result.game_id
           result.bets.forEach(bet => {
             if (bet.selected)
-              Promise.resolve(axios.post(`http://localhost:8001/api/parlay/bets`, {
+              Promise.resolve(axios.post(`http://localhost:8001/api/parlays/bets`, {
                 type:      bet.type,
                 parlay_id: id,
                 game_id:   game_id
@@ -82,14 +82,12 @@ export default function FormSubmit({data, onSubmit, user, buyIn, betName, games}
         if (is.selected)
           return true
       })
-      if (selected.length > 0)
-        axios.get(`http://localhost:8001/api/games/get/${game.game_id}`)
-          .then(res => {
-            res.data.map(game => {
-              setStartTime(prev => [...prev, game.timestamp])
-            })
-          })
-          .catch(err => console.log(err))
+      if (selected.length > 0) {
+        games.map(res => {
+          if (res.game_id === game.game_id) 
+            setStartTime(prev => [...prev, res.timestamp])
+        })
+      }
     })
   }, [data])
 
