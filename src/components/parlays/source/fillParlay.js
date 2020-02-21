@@ -54,10 +54,21 @@ export default function FillParlay({user, parlay_id, games, onSubmit}) {
     points_th: "Total Points by Half Time"
   }
   // grab all the bets for the parlay.
-  useEffect(() => {
-    axios.get(`http://localhost:8001/api/parlay/bet/${parlay_id}`)
+  useEffect(() => {  
+    const source = axios.CancelToken.source();
+
+    axios.get(`http://localhost:8001/api/parlay/bet/${parlay_id}`, {
+      cancelToken: source.token   
+    })
       .then(res => setBets(prev => [...res.data]))
-      .catch(err => console.log(err))
+      .catch(error => {
+        if (axios.isCancel(error))
+          console.log(error)
+        else throw error
+      })
+    return () => {
+      source.cancel()
+    }
   }, [parlay_id])
 
   const check = (team, betId, obj) => {

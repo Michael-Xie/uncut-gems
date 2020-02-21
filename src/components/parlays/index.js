@@ -120,14 +120,19 @@ const Parlays = ({user, games}) => {
     setUserParlays([])
     setSearchRes([])
     setOpenParlays([])
+    const source = axios.CancelToken.source();
     // check to see if the admin has filled out his parlay.
-    axios.get(`http://localhost:8001/api/parlays`)
+    axios.get(`http://localhost:8001/api/parlays`, {
+      cancelToken: source.token
+    })
       .then(res => {
         res.data.map(parlay => {
           const parlayInformation = {}
           // ensure that the user has filled out the bet form for his own parlays.
           if (parlay.admin === user.id) {
-            axios.get(`http://localhost:8001/api/parlay/${parlay.id}/bet/fill/${user.id}`)
+            axios.get(`http://localhost:8001/api/parlay/${parlay.id}/bet/fill/${user.id}`, {
+              cancelToken: source.token
+            })
               .then(res => {
                 if (res.data.length === 0) {
                   parlayInformation["state"] = "FILL"
@@ -137,15 +142,25 @@ const Parlays = ({user, games}) => {
                   showParlay(parlay, parlayInformation)
                 }
               })
+              .catch(error => {
+                if (axios.isCancel(error))
+                  console.log(error)
+                else throw error
+              })
           } else {
             showParlay(parlay, parlayInformation)
           }
           return null
         })
       })
+      .catch(error => {
+        if (axios.isCancel(error))
+          console.log("request cancelled")
+        else throw error
+      })
     // now update the parlays search table
     // where the user is not in the parlay
-    axios.get("http://localhost:8001/api/parlays/open")
+    axios.get("http://localhost:8001/api/parlays/open", {cancelToken: source.token})
       .then(res => {
         res.data.map(parlay => {
           axios.get(`http://localhost:8001/api/parlay/${parlay.id}/participants`)
@@ -160,6 +175,15 @@ const Parlays = ({user, games}) => {
           return null
         })
       })
+      .catch(error => {
+        if (axios.isCancel(error))
+          console.log("request cancelled")
+        else throw error
+      })
+    return () => {
+      source.cancel();
+    }
+      
   }, [mode === LOADING])
 
   // if user is not logged in return null [TODO] redirect.
