@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import { BrowserRouter as Router, Redirect, useHistory } from "react-router-dom"
 
 import CardSection from './CardSection';
 
@@ -7,6 +8,7 @@ export default function CheckoutForm() {
   const [money, setMoney] = useState(0)
   const stripe = useStripe();
   const elements = useElements();
+  let history = useHistory();
 
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
@@ -27,7 +29,8 @@ export default function CheckoutForm() {
       },
     });
 
-    handlePaymentMethodResult(result);
+    await handlePaymentMethodResult(result);
+    history.goBack();
   };
 
   const handlePaymentMethodResult = async (result) => {

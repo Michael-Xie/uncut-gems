@@ -21,6 +21,7 @@ const CARD_ELEMENT_OPTIONS = {
       iconColor: "#fa755a",
     },
   },
+  hidePostalCode: true
 };
 
 function CardSection() {
