@@ -19,7 +19,8 @@ const Bets = styled.div`
   flex-direction: column;
   justify-content: center;
 
-
+  max-width: 600px;
+  width: 100%;
 `
 
 export default function GameListItem({ game, setBet }) {
@@ -30,7 +31,7 @@ export default function GameListItem({ game, setBet }) {
   return (
     <Wrapper key={game.game_id}>
 
-      <Headline 
+      <Headline
         game={game}
       />
       <Bets>
