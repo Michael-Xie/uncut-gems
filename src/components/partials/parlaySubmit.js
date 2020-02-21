@@ -65,7 +65,7 @@ export default function ParlaySubmit({data, user, parlay_id, expected, onSubmit,
             selection: bet.selection,
             bet_id: bet.bet_id,
             parlay_id: parlay_id,
-            user_id: user.id
+            user_id: user.user_name
           })
           .catch(err => console.log(err))
         })
