@@ -38,12 +38,31 @@ const SearchContainer = styled.div`
   flex-direction: column;
   justify-content: center;
 `
+const Search = styled.input`
+  max-width: 400px;
+  height: 20px;
+  width: 100%;
 
-const ResultContainer = styled.div`
-  
+  margin-bottom: 20px;
+
+  font-size: 18px;
+  padding: 10px;
+
+  overflow:hidden;
+  resize: none;  
+
+  margin: 0 auto;
+
 `
 
-const SearchResult = styled.div`
+const ResultContainer = styled.div`
+  margin: 0 auto;
+`
+
+const SearchResult = styled.button`
+  max-width: 400px;
+  width: 100%;
+  padding: 5px 10px;
 `
 
 const Button = styled.button`
@@ -284,19 +303,19 @@ const Parlays = ({user, games}) => {
       {mode === SEARCH && (
         <Fragment>
           <SearchContainer>
-            <input type="text" onChange={(e) => search(e.target.value)} />
+            <Search type="text" onChange={(e) => search(e.target.value)} />
           </SearchContainer>
 
           <ResultContainer>
             {
               searchRes.map(search => {
                 return (
-                  <SearchResult>
-                    <button onClick={() => {
+                 
+                    <SearchResult onClick={() => {
                       setSearchRes([search])
                       transition(JOIN)
-                    }}>{search.name}</button>
-                  </SearchResult>
+                    }}>{search.name}</SearchResult>
+                  
                 )
               })
             }

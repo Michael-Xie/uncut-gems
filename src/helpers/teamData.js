@@ -22,7 +22,7 @@ const teamData = (team) => {
       colors: "28,14,93, 0.701"
     },
     Chicago_Bulls: {
-      logo: "http://www.nbateamslist.com/wp-content/themes/almost-spring-adsense-seo-02/images/logo_history/rockets.gif",
+      logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419cf6a6515b1e0ad75a6b.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/chicago.png",
       colors: "210,20,58, 0.701"
     },
