@@ -34,9 +34,7 @@ const Parlay = styled.div`
 const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
- 
   margin: 0 auto;
-
 `
 const Search = styled.input`
   max-width: 400px;

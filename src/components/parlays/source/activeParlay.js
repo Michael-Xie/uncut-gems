@@ -79,6 +79,12 @@ export default function ActiveParlay({name, bets, user_bets, participants, entry
   const [userScores, setUserScores] = useState({})
   const [rankings, setRankings] = useState({})
 
+  const paymentScheme = () => {
+    if      (participants.length <= 5)  return [100]
+    else if (participants.length <= 10) return [80, 20]
+    else                                return [70, 20, 10]
+  }
+
   const getGames = () => {
     const gamesId = []
     bets.map(bet => {
@@ -138,7 +144,8 @@ export default function ActiveParlay({name, bets, user_bets, participants, entry
         {
           rankings.length > 0 && (
             rankings.map(participant => {
-              const place = rankings.indexOf(participant) + 1
+              const place    = rankings.indexOf(participant) + 1
+              const winnings = paymentScheme()
               return (
                 <Participant>
                   <ParticipantInfo>
@@ -146,6 +153,13 @@ export default function ActiveParlay({name, bets, user_bets, participants, entry
                     <div>{participant}</div>
                     <div>Points: {userScores[participant]}</div>
                     <div>Ranked: {place}</div>
+                    <div>Pot: $
+                      {
+                        winnings.length <= place && 
+                        (winnings[place - 1] / 100 * participants.length * entry) || 0
+                      }
+                        .00
+                    </div>
                   </ParticipantInfo>
                 </Participant>
               )
