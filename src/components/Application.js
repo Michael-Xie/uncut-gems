@@ -11,7 +11,7 @@ import Logout from './sessions/logout'
 import useApplicationData from "../hooks/useApplicationData"
 
 import "./Application.css"
-
+import functions from "../helpers/functions";
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -34,7 +34,7 @@ const Application = () => {
               : ""
           }
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
-          balance="14.56"
+          balance={functions.localStorageUserObj()? functions.localStorageUserObj().wallet_amount : 0}
         />
         {localStorage.getItem("user") ? (
           <Redirect to={{ pathname: "/games" }} />
