@@ -242,7 +242,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants, scores}) 
           user={user}
           onSubmit={() => buffer(OPEN)}
           games={games.filter(game => {
-            if (game.status === "NS")
+            if (game.timestamp * 1000 > Date.now())
               return game
           })}
         />
@@ -323,6 +323,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants, scores}) 
               searchRes.map(search => {
                 return (                 
                     <SearchResult onClick={() => {
+                      setSearchRes([search])
                       buffer(JOIN)
                     }}>{search.name}</SearchResult>
                 )
