@@ -50,7 +50,7 @@ export default function Register({ dispatch }) {
   return (
     <>
       <h2>Register</h2>
-      <div className='announcement'>All new registrants will receive 20 opals. Limited time offer! </div>
+      <div className='announcement'>All new registrants will receive 20 opals! </div>
       <form onSubmit={handleRegister}>
         <div className="error-container">
           {error.map((msg, i) => {
