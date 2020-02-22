@@ -15,6 +15,9 @@ const showPointsIfActive = (pointsProp) => {
  */
 
 const Article = styled.article` 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   color: #fff;
   width: 100%;
   max-width: 600px;
@@ -27,47 +30,63 @@ const Article = styled.article`
     ),
    url(${props => props.arena ? props.arena : 'https://previews.123rf.com/images/enterline/enterline1311/enterline131100002/24220420-a-realistic-vector-hardwood-textured-basketball-court-.jpg'});
   background-blend-mode: multiply;
+  background-size: cover;
+  background-position: 50% 0;
   display: flex;
   cursor: pointer;
+  
   overflow: hidden;
 
   &:hover {
     box-shadow: 0 8px 6px -6px black;
   }
-
 `
 
-const Section = styled.section`
+const Teams = styled.section`
+  display:flex;
+  width:100%;
   justify-content: space-between;
-  width: 40%;
-  text-align: center;
+
 `
 
 const ScoreLogo = styled.div`
-  margin: 0 auto;
+  font-family: Orbitron, Helvetica, sans-serif;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   font-size: 2rem;
+
+  padding: 0 20px;
 `
 
 const GameInfo = styled.div`
   display: flex;
   align-items: center;
-  width: 20%;
   font-weight: bold;
 `
-const TeamName = styled.h1`
-  margin: 20px;
-`
+const TeamNames = styled.header`
+  display:flex;
+  justify-content: space-around;
 
+  background-color: rgba(0, 0, 0, 0.3);
+  
+`
+const Name = styled.h1`
+  font-size: 20px;
+  text-align: center;
+`
 const GameStatus = styled.h3`
   text-align: center;
   margin: 0 auto;
 `
 
+const Points = styled.div`
+  margin: 0 10px;
+
+
+`
 const Logo = styled.img`
   max-width: 100px;
+  width: 100%;
 `;
 // ---------------------------
 
@@ -91,28 +110,30 @@ export default function Game({ game, score }) {
         awayColor={awayTeam.colors}
         arena={homeTeam.arena}
       >
-
-        <Section>
-          <TeamName>{game.away_team}</TeamName>
+        <TeamNames>
+          <Name>{game.away_team}</Name>
+          <Name>{game.home_team}</Name>
+        </TeamNames>
+   
+        <Teams>
+          
 
           <ScoreLogo>
             <Logo src={awayTeam.logo} alt={game.away_team} />
-            {showPointsIfActive(score.away_total)}
+            <Points>{showPointsIfActive(score.away_total)}</Points>
           </ScoreLogo>
-        </Section>
-
+      
         <GameInfo>
           <GameStatus>{score.status}</GameStatus>
-          {/* <button type="button">Show More</button> */}
         </GameInfo>
-        <Section>
-          <TeamName>{game.home_team}</TeamName>
+     
+        
 
           <ScoreLogo>
-            {showPointsIfActive(score.home_total)}
+            <Points>{showPointsIfActive(score.home_total)}</Points>
             <Logo src={homeTeam.logo} alt={game.home_team} />
           </ScoreLogo>
-        </Section>
+        </Teams>
       </Article>
 
       {statsBoxVisible && (
