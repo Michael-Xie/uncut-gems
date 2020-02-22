@@ -3,16 +3,18 @@ import styled from "styled-components"
 
 
 const Wrapper = styled.article`
-  width: 600px;
+  max-width: 600px;
+  width:100%;
   background-color: #fff;
-  margin: 0 auto 30px;
   box-shadow: 0 8px 6px -6px black;
 `
 
 
 const QuarterPoints = styled.div`
   display:flex;
-  justify-content: space-evenly ;
+  justify-content: space-between;
+  
+  margin: 0 20%;
   padding: 5px 0;
 
 `
