@@ -84,6 +84,7 @@ export default function CheckoutForm() {
         Top-up Amount
         <input
           type='number'
+          min={0}
           name='top-up'
           value={money}
           onChange={(event) => { setMoney(event.target.value) }}
