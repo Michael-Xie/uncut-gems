@@ -229,6 +229,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants, scores, u
 
   return (
     <Container>
+      {mode === LOADING && <Loading />}
       <ButtonList>
         <Button onClick={() => buffer(CREATE)} >CREATE</Button>
         <Button onClick={() => buffer(ACTIVE)} >ACTIVE</Button>
@@ -236,7 +237,6 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants, scores, u
         <Button onClick={() => buffer(CLOSED)} >CLOSED</Button>
         <Button onClick={() => buffer(SEARCH)} >SEARCH</Button>
       </ButtonList>
-      {mode === LOADING && <Loading />}
       {mode === CREATE && (
         <CreateParlay
           user={user}
