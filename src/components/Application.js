@@ -75,6 +75,7 @@ const Application = () => {
               parlays={state.parlays}
               participants={state.participants}
               bets={state.bets}
+              users={state.users}
               user_bets={state.user_bets}
               scores={state.scores}
             />
