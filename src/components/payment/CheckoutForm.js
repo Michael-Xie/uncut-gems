@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { BrowserRouter as Router, Redirect, useHistory } from "react-router-dom"
+import functions from "../../helpers/functions";
 
 import CardSection from './CardSection';
 
@@ -57,7 +58,7 @@ export default function CheckoutForm() {
           user_id: JSON.parse(localStorage.getItem('user')).id
         }),
       });
-
+      functions.setWallet(money);
       const serverResponse = await response.json();
 
       handleServerResponse(serverResponse);
