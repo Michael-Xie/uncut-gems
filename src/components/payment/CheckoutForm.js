@@ -6,14 +6,18 @@ import CardSection from './CardSection';
 
 export default function CheckoutForm() {
   const [money, setMoney] = useState(0)
+  const [error, setError] = useState([]);
   const stripe = useStripe();
   const elements = useElements();
   let history = useHistory();
+  const errorMessages = [];
 
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
+    
     event.preventDefault();
+    
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
@@ -29,14 +33,19 @@ export default function CheckoutForm() {
       },
     });
 
-    await handlePaymentMethodResult(result);
-    history.goBack();
+    handlePaymentMethodResult(result);
   };
 
   const handlePaymentMethodResult = async (result) => {
+    setError([]);
+
     if (result.error) {
       // An error happened when collecting card details,
       // show `result.error.message` in the payment form.
+      
+      errorMessages.push(result.error.message);
+      setError(errorMessages);
+
     } else {
       // Otherwise send paymentMethod.id to your server (see Step 3)
       const response = await fetch('http://localhost:8001/api/pay/card', {
@@ -59,10 +68,13 @@ export default function CheckoutForm() {
     if (serverResponse.error) {
       // An error happened when charging the card,
       // show the error in the payment form.
-      alert(serverResponse.error);
+      errorMessages.push(serverResponse.error);
+      setError(errorMessages);
     } else {
       // Show a success message
       alert(`successfully charged card`);
+      history.goBack();
+
     }
   };
 
@@ -77,7 +89,9 @@ export default function CheckoutForm() {
           onChange={(event) => { setMoney(event.target.value) }}
         />
       </label>
-
+      {error.map((err, i) => {
+        return <div className='error-msg' key={i}>{err}</div>
+      })}
       <CardSection />
       <button disabled={!stripe}>Confirm order</button>
     </form>
