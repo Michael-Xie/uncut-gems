@@ -6,6 +6,7 @@ import Loading from "./source/loading"
 import CreateParlay from "./source/createParlay"
 import ShowParlay from "./source/showParlay"
 import FillParlay from "./source/fillParlay"
+import ActiveParlay from "./source/activeParlay"
 
 import axios from "axios"
 
@@ -14,7 +15,6 @@ const Container = styled.div`
   flex-direction: column;
   margin: 0 auto;
   width: 600px; */
-
 
 `
 
@@ -34,9 +34,7 @@ const Parlay = styled.div`
 const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
- 
   margin: 0 auto;
-
 `
 const Search = styled.input`
   max-width: 400px;
@@ -88,7 +86,7 @@ const Button = styled.button`
 `
 
 
-const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
+const Parlays = ({user, games, parlays, user_bets, bets, participants, scores}) => {
   // constants to handle visual transitions.
   const CREATE   = "CREATE"
   const ACTIVE   = "ACTIVE"
@@ -121,8 +119,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
     const filtered = participants.filter(participant => {
       if (parlay_id === participant.parlay_id)
         return participant
-    }).map(result => result.user_name)
-
+    })
     return filtered
   }
 
@@ -140,6 +137,19 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
   const getActiveParlays = () => {
     const parlayIds = userParlays()
     const activeParlays = parlays.filter(parlay => {
+      // check to see the differnce in dates.
+      if (parlay.current_status === 'open' && 
+          Date.now() >= (parlay.start_time * 1000)) {
+        axios.put(`http://localhost:8001/api/parlays/set_active/${parlay.id}`, {
+          current_status: 'in-progress'
+        })
+          .catch(err => console.log(err))
+        if (parlayIds.includes(parlay.id)) {
+          parlay.current_status = 'in-progress'
+          return parlay
+        }
+      }
+
       if (parlayIds.includes(parlay.id) &&
           parlay.current_status === 'in-progress')
         return parlay
@@ -187,6 +197,14 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
     return filtered
   }
 
+  const getUserBets = (parlay_id) => {
+    const filtered = user_bets.filter(bet => {
+      if (bet.parlay_id === parlay_id)
+        return bet
+    })
+    return filtered
+  }
+
   // helper function for the search feature.
   const search = (value) => {
     setSearchRes([])
@@ -224,7 +242,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
           user={user}
           onSubmit={() => buffer(OPEN)}
           games={games.filter(game => {
-            if (game.status === "NS")
+            if (game.timestamp * 1000 > Date.now())
               return game
           })}
         />
@@ -233,12 +251,16 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
         getActiveParlays().map(parlay => {
           return (
             <Div key={parlay.id}>
-              <ShowParlay 
+              <ActiveParlay 
                 name={parlay.name} 
-                bets={getBets(parlay.id).length}
-                participants={[...getParticipants(parlay.id)]}
-                entry={parlay.fee}
+                user_bets={getUserBets(parlay.id)}
+                bets={getBets(parlay.id)}
                 start_time={parlay.start_time}
+                participants={getParticipants(parlay.id)}
+                entry={parlay.fee}
+                parlay_id={parlay.id}
+                scores={scores}
+                games={games}
               />
             </Div>
           )
@@ -251,7 +273,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
               <ShowParlay 
                 name={parlay.name} 
                 bets={getBets(parlay.id).length}
-                participants={[...getParticipants(parlay.id)]}
+                participants={getParticipants(parlay.id)}
                 entry={parlay.fee}
                 start_time={parlay.start_time}
               />
@@ -302,7 +324,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants}) => {
                 return (                 
                     <SearchResult onClick={() => {
                       setSearchRes([search])
-                      transition(JOIN)
+                      buffer(JOIN)
                     }}>{search.name}</SearchResult>
                 )
               })

@@ -66,6 +66,12 @@ const useApplicationData = () => {
         return dispatch({...event, games})
       }
 
+      if (event.type === "UPDATE_PARLAYS") {
+        console.log("back-end parlays (update) update")
+        const parlays = event.parlays.sort((a, b) => a.id - b.id)
+        return dispatch({...event, parlays})
+      }
+
       if (event.type === "SET_PARLAYS") {
         console.log("back-end parlays update")
         const parlays = event.parlays.sort((a, b) => a.id - b.id)
