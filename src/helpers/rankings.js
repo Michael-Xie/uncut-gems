@@ -35,18 +35,31 @@ const getRankings = (participants, bets, user_bets, scores, parlays) => {
       // filter scores and calculate total.
       const total = score.home_total + score.away_total
       // allocate points based on le division
+      let number;
       user_bets.map(user_bet => {
-        let number = parseInt((1000 / Math.abs(user_bet.selection - total) || 1), 10)
-        results[user_bet.user_id] += number
+        if (user_bet.selection > 0) {
+          if (user_bet.selection - total === 0)
+            number = 1000
+          else
+            number = parseInt(500 / Math.abs(user_bet.selection - total), 10)
+          results[user_bet.user_id] += number
+        }
+  
       })            
     }
 
     if (bet.type === 'points_th') {
       const total = score.home_first + score.home_second + 
                     score.away_first + score.away_second
+      let number;
       user_bets.map(user_bet => {
-        let number = parseInt((500 / Math.abs(user_bet.selection - total || 1)), 10)
-        results[user_bet.user_id] += number
+        if (user_bet.selection > 0) {
+          if (user_bet.selection - total === 0)
+            number = 500
+          else 
+            number = parseInt(500 / Math.abs(user_bet.selection - total), 10)
+          results[user_bet.user_id] += number
+         }
       })            
     }
   })

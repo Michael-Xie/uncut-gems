@@ -86,7 +86,7 @@ const Button = styled.button`
 `
 
 
-const Parlays = ({user, games, parlays, user_bets, bets, participants, scores}) => {
+const Parlays = ({user, games, parlays, user_bets, bets, participants, scores, users}) => {
   // constants to handle visual transitions.
   const CREATE   = "CREATE"
   const ACTIVE   = "ACTIVE"
@@ -261,6 +261,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants, scores}) 
                 parlay_id={parlay.id}
                 parlays={parlays}
                 scores={scores}
+                users={users}
                 games={games}
               />
             </Div>

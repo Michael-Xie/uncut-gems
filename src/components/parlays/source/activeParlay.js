@@ -74,17 +74,44 @@ const ParticipantInfo = styled.div`
   justify-content: center;
   align-items: center;
   align-content: center;
-  
 `
 
-export default function ActiveParlay({name, bets, user_bets, participants, entry, parlay_id, games, scores, parlays}) {
+const PlayerImage = styled.img`
+  background-color: ${props => props.color};
+  border-radius: 50%;
+`
+
+export default function ActiveParlay({
+  name, bets, user_bets, participants, entry, 
+  parlay_id, games, scores, parlays, users
+  }) {
+
   const [userScores, setUserScores] = useState({})
   const [rankings, setRankings] = useState({})
 
   const paymentScheme = () => {
-    if      (participants.length <= 5)  return [100]
-    else if (participants.length <= 10) return [80, 20]
-    else                                return [70, 20, 10]
+    const split = splitPot()
+    if (participants.length <= 5) {
+      // one places unless tie.
+      return [100 / split[1]]
+    } else if (participants.length <= 10) {
+      if      (split[1] > 1)   return [100 / split[1]]
+      else if (split[2] > 1)   return [80, 20 / split[2]]
+      else                     return [80, 20]
+    } else {
+      if      (split[1] === 3) return [33]
+      else if (split[1] === 2 &&
+               split[2] === 1) return [35, 30]
+      else if (split[1] === 2 &&
+               split[2] > 1)   return [35, 30 / split[2]]
+      else if (split[1] === 1 &&
+               split[2] === 2) return [70, 15]
+      else if (split[1] === 1 &&
+               split[2] > 2)   return [70, 30 / split[2]]
+      else if (split[1] === 1 &&
+               split[2] === 1) return [70, 20, 10 / split[3]]
+      else                     return [70, 20, 10]
+    }
   }
 
   const getGames = () => {
@@ -106,8 +133,47 @@ export default function ActiveParlay({name, bets, user_bets, participants, entry
     })
   }
 
+  const splitPot = () => {
+    const result = {}
+    for (let index in rankings) {
+      const key = Object.values(rankings[index])
+      if (result[key]) result[key]++;
+      else             result[key] = 1
+    }
+    return result
+  }
+
   useEffect(() => {
+    // update the rankings
+    const ranked = getRankings(participants, bets, user_bets, scores)
+
+    Object.keys(ranked).map(participant => {
+      userScores[participant] = ranked[participant]
+      return setUserScores(() => ({...userScores}))
+    })
+
+    setRankings([]) // reset the rankings.
+    const orderScores = [...Object.keys(userScores).sort((a,b) => userScores[b] - userScores[a])]
+    orderScores.forEach(ranking => {
+      const userRank = {[ranking]: orderScores.indexOf(ranking) + 1}
+      return setRankings(prev => [...prev, userRank])
+    })
+
+    const checkTie = (rankings) => {
+      for (let i = 0; i < rankings.length - 1; i++) {
+        const user1  = Object.keys(rankings[i]    )[0]
+        const user2  = Object.keys(rankings[i + 1])[0]
+        if (userScores[user1] - userScores[user2] === 0) {
+          rankings[i + 1][user2] = rankings[i][user1]
+          setRankings(() => [...rankings])
+        }
+      }
+    }
+
+    checkTie(rankings)
+
     // check if parlay is still valid.
+    // if not, distribute winnings.
     parlays.map(parlay => {
       let bets_live = 0
       if (parlay.id === parlay_id) {
@@ -120,22 +186,24 @@ export default function ActiveParlay({name, bets, user_bets, participants, entry
           })  
         })
         if (bets_live === bets.length) {
-          axios.post(`http://localhost:8001/api/parlays/set_active/:id`, {
+          // change the status of the parlay to closed.
+          axios.put(`http://localhost:8001/api/parlays/set_active/:id`, {
             current_status: 'close'
           })
           .catch(err => console.log(err))
+          // update the user wallets with winnings.
+          const winnings = paymentScheme()
+          users.map(user => {
+            const place    = rankings.indexOf(user.user_name) + 1
+            if (participants.includes(user.user_name))
+              axios.put(`http://localhost:8001/api/users/update/${user.user_name}`, {
+                wallet_amount: parseInt(winnings[place - 1] * 100, 10)
+              })
+              .catch(err => console.log(err))
+          })
         }
       }
     })
-    
-
-    const ranked = getRankings(participants, bets, user_bets, scores)
-    // update the db to reflect winnings if it ended here.
-    Object.keys(ranked).map(participant => {
-      userScores[participant] = ranked[participant]
-      return setUserScores(() => ({...userScores}))
-    })
-    setRankings([...Object.keys(userScores).sort(function(a,b){return userScores[b]-userScores[a]})])
   }, [scores])
 
   return (
@@ -167,13 +235,20 @@ export default function ActiveParlay({name, bets, user_bets, participants, entry
         <Participants>
         {
           rankings.length > 0 && (
-            rankings.map(participant => {
-              const place    = rankings.indexOf(participant) + 1
-              const winnings = paymentScheme()
+            rankings.map(object => {
+              const participant = Object.keys(object)[0]
+              const place       = object[participant]
+              const winnings    = paymentScheme()
+              const background  = {1: '#FFD700', 2: '#C0C0C0', 3: '#cd7f32'}[place] || '#fff'
               return (
-                <Participant>
+                <Participant key={participant}>
                   <ParticipantInfo>
-                    <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
+                    <PlayerImage 
+                      color={background}
+                      src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png'                      alt='#' 
+                      height="30px" 
+                      width="30px" 
+                    />
                     <div>{participant}</div>
                     <div>Points: {userScores[participant]}</div>
                     <div>Ranked: {place}</div>
