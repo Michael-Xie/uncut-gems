@@ -1,8 +1,8 @@
-const getRankings = (participants, bets, user_bets, scores) => {
+const getRankings = (participants, bets, user_bets, scores, parlays) => {
 
   const results = {}
   participants.map(participant => {
-    results[participant.user_name] = [0,0,0,0,0]
+    results[participant.user_name] = 0
   })
 
   // --- validate bets ---
@@ -21,8 +21,13 @@ const getRankings = (participants, bets, user_bets, scores) => {
       else                 lead = 'none'
       // check the user_bets
       user_bets.map(user_bet => {
-        if (user_bet.selection === lead) results[user_bet.user_id][0] = 50
-        else                             results[user_bet.user_id][0] = 0
+        if (user_bet.selection === lead &&
+            user_bet.bet_id    === bet.id) {
+          results[user_bet.user_id] += 50
+        }
+        else {
+          results[user_bet.user_id] += 0
+        }
       })
     }
 
@@ -31,8 +36,8 @@ const getRankings = (participants, bets, user_bets, scores) => {
       const total = score.home_total + score.away_total
       // allocate points based on le division
       user_bets.map(user_bet => {
-        let number = parseInt((1000 / Math.abs(user_bet.selection - total || 1)), 10)
-        results[user_bet.user_id][2] = number
+        let number = parseInt((1000 / Math.abs(user_bet.selection - total) || 1), 10)
+        results[user_bet.user_id] += number
       })            
     }
 
@@ -41,7 +46,7 @@ const getRankings = (participants, bets, user_bets, scores) => {
                     score.away_first + score.away_second
       user_bets.map(user_bet => {
         let number = parseInt((500 / Math.abs(user_bet.selection - total || 1)), 10)
-        results[user_bet.user_id][2] = number
+        results[user_bet.user_id] += number
       })            
     }
   })

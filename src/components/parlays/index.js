@@ -259,6 +259,7 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants, scores}) 
                 participants={getParticipants(parlay.id)}
                 entry={parlay.fee}
                 parlay_id={parlay.id}
+                parlays={parlays}
                 scores={scores}
                 games={games}
               />

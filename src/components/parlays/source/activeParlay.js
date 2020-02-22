@@ -4,6 +4,8 @@ import styled from "styled-components"
 import teamData from "../../../helpers/teamData"
 import getRankings from "../../../helpers/rankings"
 
+import axios from "axios"
+
 const Article = styled.div`
   margin-top: 10px;
 `
@@ -75,7 +77,7 @@ const ParticipantInfo = styled.div`
   
 `
 
-export default function ActiveParlay({name, bets, user_bets, participants, entry, parlay_id, games, scores}) {
+export default function ActiveParlay({name, bets, user_bets, participants, entry, parlay_id, games, scores, parlays}) {
   const [userScores, setUserScores] = useState({})
   const [rankings, setRankings] = useState({})
 
@@ -105,10 +107,32 @@ export default function ActiveParlay({name, bets, user_bets, participants, entry
   }
 
   useEffect(() => {
+    // check if parlay is still valid.
+    parlays.map(parlay => {
+      let bets_live = 0
+      if (parlay.id === parlay_id) {
+        bets.map(bets => {
+          games.map(game => {
+            if (game.game_id === bets.game_id &&
+               (game.status === 'FT' || game.status === 'AOT')) {
+              bets_live++;
+            }
+          })  
+        })
+        if (bets_live === bets.length) {
+          axios.post(`http://localhost:8001/api/parlays/set_active/:id`, {
+            current_status: 'close'
+          })
+          .catch(err => console.log(err))
+        }
+      }
+    })
+    
+
     const ranked = getRankings(participants, bets, user_bets, scores)
     // update the db to reflect winnings if it ended here.
     Object.keys(ranked).map(participant => {
-      userScores[participant] = ranked[participant].reduce((count, sum) => count + sum, 0)
+      userScores[participant] = ranked[participant]
       return setUserScores(() => ({...userScores}))
     })
     setRankings([...Object.keys(userScores).sort(function(a,b){return userScores[b]-userScores[a]})])
@@ -154,10 +178,7 @@ export default function ActiveParlay({name, bets, user_bets, participants, entry
                     <div>Points: {userScores[participant]}</div>
                     <div>Ranked: {place}</div>
                     <div>Pot: $
-                      {
-                        winnings.length <= place && 
-                        (winnings[place - 1] / 100 * participants.length * entry) || 0
-                      }
+                      {parseInt(winnings[place - 1] / 100 * participants.length * entry, 10) || 0}
                         .00
                     </div>
                   </ParticipantInfo>
