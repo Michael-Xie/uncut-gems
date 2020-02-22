@@ -58,13 +58,26 @@ const Participants = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  align-content: center;
   width: 100%;
 `
 
-const Participant = styled.div
+const Participant = styled.div`
+  width: 33%;
+`
+
+const ParticipantInfo = styled.div`  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  
+`
 
 export default function ActiveParlay({name, bets, user_bets, participants, entry, parlay_id, games, scores}) {
-  const [rankings, setRankings] = useState([])
+  const [userScores, setUserScores] = useState({})
+  const [rankings, setRankings] = useState({})
 
   const getGames = () => {
     const gamesId = []
@@ -86,9 +99,13 @@ export default function ActiveParlay({name, bets, user_bets, participants, entry
   }
 
   useEffect(() => {
+    const ranked = getRankings(participants, bets, user_bets, scores)
     // update the db to reflect winnings if it ended here.
-    console.log(getRankings(participants, bets, user_bets, scores))
-
+    Object.keys(ranked).map(participant => {
+      userScores[participant] = ranked[participant].reduce((count, sum) => count + sum, 0)
+      return setUserScores(() => ({...userScores}))
+    })
+    setRankings([...Object.keys(userScores).sort(function(a,b){return userScores[b]-userScores[a]})])
   }, [scores])
 
   return (
@@ -119,15 +136,23 @@ export default function ActiveParlay({name, bets, user_bets, participants, entry
         </Games>
         <Participants>
         {
-          participants.map(participant => {
-            return (
-              Participant
-            )
-          })
+          rankings.length > 0 && (
+            rankings.map(participant => {
+              const place = rankings.indexOf(participant) + 1
+              return (
+                <Participant>
+                  <ParticipantInfo>
+                    <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
+                    <div>{participant}</div>
+                    <div>Points: {userScores[participant]}</div>
+                    <div>Ranked: {place}</div>
+                  </ParticipantInfo>
+                </Participant>
+              )
+            })
+          )
         }
         </Participants>
-        <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-        &nbsp;  &nbsp;
       </Parlay>
     </Article>
   );

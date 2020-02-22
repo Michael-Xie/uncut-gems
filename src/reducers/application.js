@@ -3,6 +3,7 @@ const SET_SCORES       = "SET_SCORES"
 const SET_USER         = "SET_USER"
 const SET_PARLAYS      = "SET_PARLAYS"
 const SET_USER_BETS    = "SET_USER_BETS"
+const UPDATE_PARLAYS   = "UPDATE_PARLAYS"
 const GLOBAL_UPDATE    = "GLOBAL_UPDATE"
 
 const handlers = {
@@ -13,6 +14,9 @@ const handlers = {
   },
   [SET_PARLAYS]: (prevState, action) => {
     return {...prevState, parlays: action.parlays, bets: action.bets}
+  },
+  [UPDATE_PARLAYS]: (prevState, action) => {
+    return {...prevState, parlays: action.parlays}
   },
   [SET_USER]: (prevState, action) => {
     return {...prevState, user: action.value}

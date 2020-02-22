@@ -16,7 +16,6 @@ const Container = styled.div`
   margin: 0 auto;
   width: 600px; */
 
-
 `
 
 const Div = styled.div`
@@ -140,6 +139,19 @@ const Parlays = ({user, games, parlays, user_bets, bets, participants, scores}) 
   const getActiveParlays = () => {
     const parlayIds = userParlays()
     const activeParlays = parlays.filter(parlay => {
+      // check to see the differnce in dates.
+      if (parlay.current_status === 'open' && 
+          Date.now() >= (parlay.start_time * 1000)) {
+        axios.put(`http://localhost:8001/api/parlays/set_active/${parlay.id}`, {
+          current_status: 'in-progress'
+        })
+          .catch(err => console.log(err))
+        if (parlayIds.includes(parlay.id)) {
+          parlay.current_status = 'in-progress'
+          return parlay
+        }
+      }
+
       if (parlayIds.includes(parlay.id) &&
           parlay.current_status === 'in-progress')
         return parlay
