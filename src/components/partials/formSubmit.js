@@ -19,6 +19,24 @@ const Checkout = styled.button`
   background-color: #000;
 `
 
+const Text = styled.div`
+  text-align: center;
+  margin-bottom: 10px;
+`
+
+const Button = styled.button`
+  background-color: #555555; /* Green */
+  border: 1px solid #fff;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+
+  cursor:pointer;
+`
+
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -124,14 +142,14 @@ export default function FormSubmit({data, onSubmit, user, buyIn, betName, games,
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <div>Hello World</div>
-            <button onClick={() => {
+            <Text>Are you sure?</Text>
+            <Button onClick={() => {
               handleSubmit(data) 
               handleClose()
             }}>
               Confirm
-            </button>
-            <button onClick={() => handleClose()}>Cancel</button>
+            </Button>
+            <Button onClick={() => handleClose()}>Cancel</Button>
           </div>
         </Fade>
       </Modal>
