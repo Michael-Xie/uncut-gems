@@ -82,11 +82,19 @@ const Button = styled.button`
   max-width: 600px;
   width:100%;
   
-  padding: 5px;
+  padding: 10px 5px;
 
-  border: 1px solid #000;
+  border-bottom: 1px solid #DBDBDB;
 
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: #DBDBDB;
+  }
 `
 
 

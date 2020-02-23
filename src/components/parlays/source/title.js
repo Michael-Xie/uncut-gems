@@ -8,6 +8,7 @@ const Text = styled.h1`
   width: 100%;
   padding: 15px 0;
   margin: 0 auto 20px;
+  font-size: 18px;
   
   border-bottom: 1px solid #dbdbdb;
   background-color: #fff;
