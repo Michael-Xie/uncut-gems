@@ -6,27 +6,22 @@ const Article = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  max-width: 300px;
+  max-width: 600px;
   width: 100%;
   height: 100px;
-  margin: 10px 0;
-  border: 1px solid rgba(219,219,219);
-  
-  cursor: pointer;
+  border: 1px solid #dbdbdb;
 
-  @media only screen and (min-width: 768px) {
-    width: 60vw;
-  }
-
-  &:active {
-    box-shadow:inset 0 0 10px #000000;
-  }
+  margin: 0 auto;
+`
+const Load = styled.img`
+ max-height: 20px;
+ height: 50%;
 `
 
 export default function Loading() {
   return (
     <Article>
-      <img src="https://i.gifer.com/YCZH.gif" alt="loading"/>
+      <Load src="http://cdn.lowgif.com/full/d9675675623d5f27-loading-gif-transparent-background-loading-gif.gif" alt="loading"/>
     </Article>
   );
 
