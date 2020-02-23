@@ -26,9 +26,6 @@ const Article = styled.article`
    background-blend-mode: multiply;
   overflow: hidden;
   color: #fff;
-  
-
-
 `
 
 const Section = styled.section`

@@ -17,7 +17,7 @@ const showPointsIfActive = (pointsProp) => {
 const Article = styled.article` 
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   color: #fff;
   width: 100%;
   max-width: 600px;
@@ -46,13 +46,14 @@ const Article = styled.article`
 const Teams = styled.section`
   display:flex;
   width:100%;
-  justify-content: space-between;
+  justify-content: space-around;
 
 `
 
 const ScoreLogo = styled.div`
   font-family: Orbitron, Helvetica, sans-serif;
   display: flex;
+
   align-items: center;
   font-size: 2rem;
 
@@ -68,10 +69,11 @@ const TeamNames = styled.header`
   display:flex;
   justify-content: space-around;
   text-shadow: 1px 1px #000;
-  
 `
 const Name = styled.h1`
-  font-size: 20px;
+  font-size: 16px;
+  text-align: center;
+  width: 40%;
   text-align: center;
 `
 const GameStatus = styled.h3`
@@ -85,7 +87,7 @@ const Points = styled.div`
 
 `
 const Logo = styled.img`
-  max-width: 100px;
+  max-width: 60px;
   width: 100%;
 `
 
@@ -115,26 +117,29 @@ export default function Game({ game, score }) {
           <Name>{game.away_team}</Name>
           <Name>{game.home_team}</Name>
         </TeamNames>
-   
+
         <Teams>
-          
+
 
           <ScoreLogo>
             <Logo src={awayTeam.logo} alt={game.away_team} />
             <Points>{showPointsIfActive(score.away_total)}</Points>
           </ScoreLogo>
-      
-        <GameInfo>
-          <GameStatus>{score.status}</GameStatus>
-        </GameInfo>
-     
-        
+
+          <GameInfo>
+            <GameStatus>{score.status}</GameStatus>
+          </GameInfo>
+
+
 
           <ScoreLogo>
+            
             <Points>{showPointsIfActive(score.home_total)}</Points>
             <Logo src={homeTeam.logo} alt={game.home_team} />
+
           </ScoreLogo>
         </Teams>
+        <div></div>
       </Article>
 
       {statsBoxVisible && (
