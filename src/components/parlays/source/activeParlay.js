@@ -88,7 +88,7 @@ const Bets = styled.div`
 `
 
 const Bet = styled.div`
-  width: 33%
+  width: 33%;
 `
 
 const BetTitle = styled.div`

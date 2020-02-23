@@ -15,7 +15,7 @@ const Article = styled.article`
   width: 100%;
   max-width: 600px;
   height: 100px;
-  margin: 30px auto 0;
+  margin: 0 auto ;
   background: linear-gradient(
       to left,
       rgba(${props => props.homeColor}),

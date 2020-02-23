@@ -7,6 +7,36 @@ import axios from 'axios';
 
 import styled from "styled-components"
 
+const Checkout = styled.button`
+  max-width: 600px;
+  width: 100%;
+  height: 40px;
+  
+  position:fixed;
+  bottom: 0;
+
+  color: #fff;
+  background-color: #000;
+`
+
+const Text = styled.div`
+  text-align: center;
+  margin-bottom: 10px;
+`
+
+const Button = styled.button`
+  background-color: #555555; /* Green */
+  border: 1px solid #fff;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+
+  cursor:pointer;
+`
+
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -22,6 +52,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function FormSubmit({data, onSubmit, user, buyIn, betName, games, dispatch}) {
+  
+  
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [startTime, setStartTime] = useState([])
@@ -93,9 +125,9 @@ export default function FormSubmit({data, onSubmit, user, buyIn, betName, games,
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        react-transition-group
-      </button>
+      <Checkout type="button" onClick={handleOpen}>
+        Checkout
+      </Checkout>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -110,14 +142,14 @@ export default function FormSubmit({data, onSubmit, user, buyIn, betName, games,
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <div>Hello World</div>
-            <button onClick={() => {
+            <Text>Are you sure?</Text>
+            <Button onClick={() => {
               handleSubmit(data) 
               handleClose()
             }}>
               Confirm
-            </button>
-            <button onClick={() => handleClose()}>Cancel</button>
+            </Button>
+            <Button onClick={() => handleClose()}>Cancel</Button>
           </div>
         </Fade>
       </Modal>

@@ -35,6 +35,7 @@ const Article = styled.article`
   display: flex;
   cursor: pointer;
   
+  margin: 0 auto;
   overflow: hidden;
 
   &:hover {

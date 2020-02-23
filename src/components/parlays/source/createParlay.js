@@ -50,6 +50,10 @@ const MoreInfo = styled.button`
   }
 `
 
+const Footer = styled.footer` 
+ height: 50px;
+`
+
 export default function CreateParlay({ games, onSubmit, user, dispatch }) {
   //  ------  Show InfoBox      ------  //
   const [infoBoxVisible, setInfoBoxVisible] = useState(false);
@@ -176,6 +180,7 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
         })
       }
       <FormSubmit
+        
         onSubmit={onSubmit} 
         user={user} 
         data={data} 
@@ -184,6 +189,7 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
         dispatch={dispatch} 
         games={games}
       />
+      <Footer></Footer>
     </Wrapper>
   );
 

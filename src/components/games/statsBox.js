@@ -7,6 +7,8 @@ const Wrapper = styled.article`
   width:100%;
   background-color: #fff;
   box-shadow: 0 8px 6px -6px black;
+
+  margin: 0 auto;
 `
 
 
