@@ -62,9 +62,9 @@ const Info = styled.h1`
 export default function ShowParlay({name, bets, participants, entry, start_time}) {
   return (
     <Article>
+      
+      {console.log(participants)}
       <Title>
-        <img src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' alt='#' height="30px" width="30px"></img>
-        &nbsp;  &nbsp;
        <h1>{name}</h1>
       </Title>
       <ParlayInfo>
