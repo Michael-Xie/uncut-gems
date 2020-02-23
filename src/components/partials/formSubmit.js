@@ -7,6 +7,18 @@ import axios from 'axios';
 
 import styled from "styled-components"
 
+const Checkout = styled.button`
+  max-width: 600px;
+  width: 100%;
+  height: 40px;
+  
+  position:fixed;
+  bottom: 0;
+
+  color: #fff;
+  background-color: #000;
+`
+
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -22,6 +34,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function FormSubmit({data, onSubmit, user, buyIn, betName, games, dispatch}) {
+  
+  
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [startTime, setStartTime] = useState([])
@@ -93,9 +107,9 @@ export default function FormSubmit({data, onSubmit, user, buyIn, betName, games,
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        react-transition-group
-      </button>
+      <Checkout type="button" onClick={handleOpen}>
+        Checkout
+      </Checkout>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
