@@ -242,13 +242,13 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
 
   return (
     <Container>
-      <ButtonList>
+      {/* <ButtonList>
         <Button onClick={() => buffer(CREATE)}>CREATE</Button>
         <Button onClick={() => buffer(ACTIVE)}>ACTIVE</Button>
         <Button onClick={() => buffer(OPEN)}>OPEN  </Button>
         <Button onClick={() => buffer(CLOSED)}>CLOSED</Button>
         <Button onClick={() => buffer(SEARCH)}>SEARCH</Button>
-      </ButtonList>
+      </ButtonList> */}
 
       {mode === LOADING && <Loading />}
       {mode === CREATE && (
@@ -272,7 +272,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         <Fragment>
           <Title
             title={'Active'}
-
+            buffer={buffer}
           />
           {
             getActiveParlays().map(parlay => {
@@ -302,6 +302,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         <Fragment>
           <Title
             title={'Open Parlays'}
+            buffer={buffer}
           />
 
 
@@ -347,6 +348,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         <Fragment>
           <Title
             title={'Closed'}
+            buffer={buffer}
           />
           {
             getClosedParlays().map(parlay => {
@@ -369,6 +371,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         <Fragment>
           <Title
             title={'Search'}
+            buffer={buffer}
           />
           <SearchContainer>
             <Search type="text" onChange={(e) => searching(e.target.value)} />

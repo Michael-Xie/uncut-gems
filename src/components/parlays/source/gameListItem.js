@@ -30,13 +30,11 @@ export default function GameListItem({ game, setBet }) {
 
   return (
     <Wrapper key={game.game_id}>
-
-      <Headline
-        game={game}
-      />
+      <Headline game={game} />
       <Bets>
         {game.bets.map(bet => (
           <Bet
+            key={bet.betName}
             betName={bet.betName}
             explanation={bet.explanation}
             betType={bet.betType}

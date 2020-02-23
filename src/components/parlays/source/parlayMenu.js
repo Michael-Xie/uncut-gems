@@ -14,7 +14,7 @@ const JOIN = "JOIN"
 
 const ITEM_HEIGHT = 48;
 
-export default function ParlayMenu( {buffer} ) {
+export default function ParlayMenu({ buffer }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -49,23 +49,23 @@ export default function ParlayMenu( {buffer} ) {
           },
         }}
       >
-    
-          <MenuItem onClick={() => buffer(CREATE)}>
-            Create
+
+        <MenuItem onClick={() => buffer(CREATE)}>
+          Create
           </MenuItem>
-          <MenuItem onClick={() => buffer(ACTIVE)}>
-            Active
+        <MenuItem onClick={() => buffer(ACTIVE)}>
+          Active
           </MenuItem>
-          <MenuItem onClick={() => buffer(OPEN)}>
-            Open
+        <MenuItem onClick={() => buffer(OPEN)}>
+          Open
           </MenuItem>
-          <MenuItem onClick={() => buffer(CLOSED)}>
-            Closed
+        <MenuItem onClick={() => buffer(CLOSED)}>
+          Closed
           </MenuItem>
-          <MenuItem onClick={() => buffer(SEARCH)}>
-            Search
+        <MenuItem onClick={() => buffer(SEARCH)}>
+          Search
           </MenuItem>
-     
+
       </Menu>
     </div>
   );
