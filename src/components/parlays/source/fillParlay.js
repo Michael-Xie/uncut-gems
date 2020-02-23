@@ -9,10 +9,6 @@ import PickTeam from './pickTeam'
 import SlidePoints from './slidePoints'
 
 const Wrapper = styled.article`
-
-  
-
-
   max-width: 600px;
   width: 100%;
   background-color: #fff;
@@ -28,7 +24,6 @@ const Game = styled.div`
 `
 
 const Input = styled.input`
-  
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -39,11 +34,10 @@ const Input = styled.input`
 
 const Choose = styled.div`
     display: flex;
-
     justify-content:center;
     align-items:center;
-   
 `
+
 export default function FillParlay({user, parlay_id, games, allBets, onSubmit, participants}) {
   // keep bets in state.
   const [bets, setBets] = useState([])
@@ -70,7 +64,7 @@ export default function FillParlay({user, parlay_id, games, allBets, onSubmit, p
     })
   }, [parlay_id])
 
-  const check = (team, betId, obj) => {
+  const check = (team, betId) => {
     if (betSelection.length === 0) {
       return setBetSelection([{ bet_id: betId, selection: team }])
     } else {
