@@ -8,13 +8,14 @@ const Article = styled.div`
   background-color: #fff;
   max-width: 600px;
   width: 100%;
-  height: 100px;
+  height: 50px;
   border: 1px solid #dbdbdb;
 
   margin: 0 auto;
 `
 const Load = styled.img`
  max-height: 20px;
+ max-width: 20px;
  height: 50%;
 `
 

@@ -243,11 +243,11 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
   return (
     <Container>
       <ButtonList>
-        <Button onClick={() => buffer(CREATE)} >CREATE</Button>
-        <Button onClick={() => buffer(ACTIVE)} >ACTIVE</Button>
+        <Button onClick={() => buffer(CREATE)}>CREATE</Button>
+        <Button onClick={() => buffer(ACTIVE)}>ACTIVE</Button>
         <Button onClick={() => buffer(OPEN)}>OPEN  </Button>
-        <Button onClick={() => buffer(CLOSED)} >CLOSED</Button>
-        <Button onClick={() => buffer(SEARCH)} >SEARCH</Button>
+        <Button onClick={() => buffer(CLOSED)}>CLOSED</Button>
+        <Button onClick={() => buffer(SEARCH)}>SEARCH</Button>
       </ButtonList>
 
       {mode === LOADING && <Loading />}
@@ -255,6 +255,8 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         <Fragment>
           <Title
             title={'Create a Parlay'}
+            buffer={buffer}
+            
           />
           <CreateParlay
             user={user}
@@ -270,6 +272,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         <Fragment>
           <Title
             title={'Active'}
+
           />
           {
             getActiveParlays().map(parlay => {
