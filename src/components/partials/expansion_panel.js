@@ -78,6 +78,7 @@ const UserBets = styled.div`
   align-items: center;
   width: 100%;
   background-color: ${props => props.background};
+  color: ${props => props.color};
 `
 
 const Name = styled.div`
@@ -205,6 +206,7 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
                 user_bets.map(user_bet => {
                   if (user_bet.bet_id === bet.id) {
                     let background = '#f00'
+                    let color = '#000'
                     let difference;
                     const result = getResult(bet.type)
                     if (bet.type === 'pickem' &&
@@ -212,11 +214,11 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
                       background = '#0f0'
                     } else {
                       difference = result - user_bet.selection
-                      if (Math.abs(difference) <= 10)
-                        background = '#0f0'
+                      if (Math.abs(difference) <= 10) background = '#0f0'
+                      else                            color      = '#fff'
                     }
                     return (
-                      <UserBets background={background} key={user_bet.user_name}>
+                      <UserBets color={color} background={background} key={user_bet.user_name}>
                         <Name>{user_bet.user_id}</Name> 
                         <Selection>{user_bet.selection}</Selection>
                         <Current>

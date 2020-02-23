@@ -11,6 +11,7 @@ const useApplicationData = () => {
     bets: [],
     user_bets: [],
     users: [],
+    rankings: {},
     user: {}
   })
 
@@ -34,8 +35,9 @@ const useApplicationData = () => {
         const bets         = res[0].data.bets.sort((a, b)         => a.parlay_id - b.parlay_id)
         const user_bets    = res[0].data.user_bets.sort((a, b)    => a.parlay_id - b.parlay_id)
         const users        = res[0].data.users
+        const rankings     = res[0].data.rankings
 
-        dispatch({type: "GLOBAL_UPDATE", games, scores, parlays, participants, bets, user_bets, users})
+        dispatch({type: "GLOBAL_UPDATE", games, scores, parlays, participants, bets, user_bets, users, rankings})
       })
       .catch(err => console.log(err))
   }, [])
@@ -59,8 +61,9 @@ const useApplicationData = () => {
         const participants = event.participants.sort((a, b) => a.parlay_id - b.parlay_id)
         const bets         = event.bets.sort((a, b)         => a.parlay_id - b.parlay_id)
         const user_bets    = event.user_bets.sort((a, b)    => a.parlay_id - b.parlay_id)
-        const users        = event.users
-        return dispatch({...event, games, scores, parlays, participants, bets, user_bets, users})
+        const users        = event.users.sort((a, b)        => a.id        - b.id)
+        const rankings     = event.rankings
+        return dispatch({...event, games, scores, parlays, participants, bets, user_bets, users, rankings})
       }
 
       if (event.type === "SET_GAMES") {
