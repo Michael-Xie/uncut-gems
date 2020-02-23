@@ -15,9 +15,10 @@ const Parlay = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 95vw;
+  width: 100vw;
   max-width: 600px;
-  border: 3px ridge #000;
+  margin-bottom: 10px;
+  border: 1px ridge #000;
 `
 
 const Games = styled.div`
