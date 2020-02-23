@@ -1,34 +1,41 @@
 import React from "react"
 import styled from "styled-components"
+import { makeStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
-const Article = styled.div` 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  max-width: 300px;
-  width: 100%;
-  height: 100px;
-  margin: 10px 0;
-  border: 1px solid rgba(219,219,219);
-  
-  cursor: pointer;
-
-  @media only screen and (min-width: 768px) {
-    width: 60vw;
-  }
-
-  &:active {
-    box-shadow:inset 0 0 10px #000000;
-  }
-`
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 export default function Loading() {
+  const classes = useStyles();
+  const [completed, setCompleted] = React.useState(0);
+
+  React.useEffect(() => {
+    function progress() {
+      setCompleted(oldCompleted => {
+        if (oldCompleted === 1000) {
+          return 0;
+        }
+        const diff = Math.random() * 10000;
+        return Math.min(oldCompleted + diff, 100);
+      });
+    }
+
+    const timer = setInterval(progress, 500);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   return (
-    <Article>
-      <img src="https://i.gifer.com/YCZH.gif" alt="loading"/>
-    </Article>
+    <div className={classes.root}>
+      <LinearProgress variant="determinate" value={completed} color="secondary" />
+    </div>
   );
-
 }
-

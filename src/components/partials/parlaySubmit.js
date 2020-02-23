@@ -57,7 +57,6 @@ export default function ParlaySubmit({data, user, parlay_id, expected, onSubmit,
           user_name: user.user_name,
           parlay_id: parlay_id
         })
-        .then(() => console.log('here'))
         .catch(err => console.log(err))
 
         bets.map(bet => {

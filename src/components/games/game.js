@@ -22,7 +22,7 @@ const Article = styled.article`
   width: 100%;
   max-width: 600px;
   height: 200px;
-  margin: 30px auto 0;
+  margin-bottom: 10px auto 0;
   background: linear-gradient(
       to left,
       rgba(${props => props.homeColor}),
@@ -66,8 +66,7 @@ const GameInfo = styled.div`
 const TeamNames = styled.header`
   display:flex;
   justify-content: space-around;
-
-  background-color: rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px #000;
   
 `
 const Name = styled.h1`
@@ -87,7 +86,8 @@ const Points = styled.div`
 const Logo = styled.img`
   max-width: 100px;
   width: 100%;
-`;
+`
+
 // ---------------------------
 
 export default function Game({ game, score }) {
