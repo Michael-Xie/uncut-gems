@@ -7,15 +7,23 @@ import axios from 'axios';
 
 import styled from "styled-components"
 
-const Submit = styled.button`
-  background-color: #4CAF50; /* Green */
-  border: none;
+const Button = styled.button`
+  background-color: #555555; /* Green */
+  border: 1px solid #fff;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+
+  cursor:pointer;
+`
+
+const Fee = styled.div`
+  margin-bottom:10px;
+
+  text-align:center;
 `
 
 const useStyles = makeStyles(theme => ({
@@ -32,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ParlaySubmit({data, user, parlay_id, expected, onSubmit, participants}) {
+export default function ParlaySubmit({data, user, parlay_id,parlay_fee, expected, onSubmit, participants}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -77,9 +85,9 @@ export default function ParlaySubmit({data, user, parlay_id, expected, onSubmit,
 
   return (
     <div>
-      <Submit type="button" onClick={handleOpen}>
-        Submit This Shit
-      </Submit>
+      <Button type="button" onClick={handleOpen}>
+        Submit Picks
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -94,15 +102,16 @@ export default function ParlaySubmit({data, user, parlay_id, expected, onSubmit,
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <div>Hello World</div>
-            <button onClick={() => {
+            <h1>Confirm Bet</h1>
+            <Fee>The entry fee is {parlay_fee} Gems</Fee>
+            <Button onClick={() => {
               handleSubmit(data) 
               handleClose()
               onSubmit()
             }}>
               Confirm
-            </button>
-            <button onClick={() => handleClose()}>Cancel</button>
+            </Button>
+            <Button onClick={() => handleClose()}>Cancel</Button>
           </div>
         </Fade>
       </Modal>
