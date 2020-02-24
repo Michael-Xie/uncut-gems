@@ -79,6 +79,11 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
 
     return x
   }
+
+
+
+
+  console.log('Participants', participants)
   console.log('Rankings', rankings)
 
   return (
@@ -96,14 +101,18 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
       {/* <div className="separator">{participants.length} participant(s)</div> */}
       <Rankings>
         {/* {console.log(displayRank('1'))} */}
-        {console.log(displayRank('1'))}
+        {console.log('Display Rank', displayRank('1'))}
         {
-          displayRank('1').map(player => {
+          displayRank(1).map(player => {
             const names = Object.keys(player)
-            for (let i = 0; i < names.length || i === 3; i++) {  
-              
+            for (let i = 0; i < names.length || i === 3; i++) {
+
               return (
-                <div>{names[i]}</div>
+                <div>
+                  <div>{names[i]}</div>
+                  <div>{player[names][0]}</div>
+                  <div>{player[names][1]}</div>
+                </div>
               )
             }
           })
