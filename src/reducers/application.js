@@ -21,25 +21,6 @@ const handlers = {
   [SET_USER]: (prevState, action) => {
     return {...prevState, user: action.value}
   },
-  /*
-  [SET_SCORES]: (prevState, action) => {
-    if (action.scores.length > 0)
-      return {...prevState, scores: action.scores}
-    return null
-  },
-  [SET_USER]: (prevState, action) => {
-    return {...prevState, user: action.value}
-  },
-  [SET_PARLAYS]: (prevState, action) => {
-    return {...prevState, parlays: action.parlays}
-  },
-  [SET_PARTICIPANTS]: (prevState, action) => {
-    return {...prevState, participants: action.parlays}
-  },
-  [SET_BETS]: (prevState, action) => {
-    return {...prevState, bets: action.bets}
-  },
-  */
   [SET_USER_BETS]: (prevState, action) => {
     return {...prevState, user_bets: action.user_bets, participants: action.participants}
   },
