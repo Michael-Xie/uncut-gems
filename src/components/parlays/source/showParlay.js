@@ -71,15 +71,15 @@ const Info = styled.h1`
 
 
 
-export default function ShowParlay({ name, bets, participants, entry, start_time , rankings}) {
- 
+export default function ShowParlay({ name, bets, participants, entry, start_time, rankings }) {
 
-  const displayRank= (rank) => {
+
+  const displayRank = (rank) => {
     const x = rankings[rank]
-    
+
     return x
-   }
-   console.log('Rankings',rankings)
+  }
+  console.log('Rankings', rankings)
 
   return (
 
@@ -92,30 +92,33 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
 
         <Info><img src="https://toppng.com/uploads/preview/em-svg-png-icon-free-download-gem-icon-11563228146u2haxp4svc.png" alt="gem-icon" height="20px" width="20px" /> {participants.length * entry} </Info>
       </Header>
-   
+
       {/* <div className="separator">{participants.length} participant(s)</div> */}
       <Rankings>
-      {/* {console.log(displayRank('1'))} */}
-      
+        {/* {console.log(displayRank('1'))} */}
+        {console.log(displayRank('1'))}
         {
-        displayRank('1').map(player => {
-          const names = Object.keys(player)
-          return (
-            <div>{names[0]}</div>
-          )   
-        })
+          displayRank('1').map(player => {
+            const names = Object.keys(player)
+            for (let i = 0; i < names.length || i === 3; i++) {  
+              
+              return (
+                <div>{names[i]}</div>
+              )
+            }
+          })
 
-      }
-      {
-        displayRank('2').map(player => {
-          const names = Object.keys(player)
-          return (
-            <div>{names[0]}</div>
-          )   
-        })
+        }
+        {/* {
+          displayRank('2').map(player => {
+            const names = Object.keys(player)
+            return (
+              <div>{names[0]}</div>
+            )
+          })
 
-      }
-    
+        } */}
+
 
         {/* {
           participants.map(player => {
