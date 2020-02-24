@@ -76,7 +76,6 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
 
   const displayRank = (rank) => {
     const x = rankings[rank]
-
     return x
   }
 
