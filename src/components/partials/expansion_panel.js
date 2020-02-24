@@ -78,8 +78,11 @@ const UserBets = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding: 5px;
+  font-size: 1.15em;
   background-color: ${props => props.background};
   color: ${props => props.color};
+  font-weght: extra-bold;
 `
 
 const Name = styled.div`
@@ -239,10 +242,11 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
             const home_short = game.home_team.split(' ').reverse()[0]
             const away_short = game.away_team.split(' ').reverse()[0]
             const score      = getScores(bet.game_id)[0]
+
             const getResult  = (type) => {
               if (type === 'pickem') {
-                if      (score.home_total > score.away_total) return 'home'
-                else if (score.home_total < score.away_total) return 'away'
+                if      (score.home_total > score.away_total) return game.home_team.split(' ').reverse()[0]
+                else if (score.home_total < score.away_total) return game.away_team.split(' ').reverse()[0]
                 else                                          return 'none'
               }
               if (type === 'points_th') {
