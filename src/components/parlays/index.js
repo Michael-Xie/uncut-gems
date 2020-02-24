@@ -98,7 +98,7 @@ const Button = styled.button`
 `
 
 
-const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, users }) => {
+const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, users, rankings }) => {
   // constants to handle visual transitions.
   const CREATE = "CREATE"
   const ACTIVE = "ACTIVE"
@@ -278,8 +278,8 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
             getActiveParlays().map(parlay => {
               return (
                 <Div key={parlay.id}>
-
                   <ActiveParlay
+                    rankings={rankings}
                     name={parlay.name}
                     user_bets={getUserBets(parlay.id)}
                     bets={getBets(parlay.id)}

@@ -44,6 +44,7 @@ const BetContain = styled.div`
 const Type = styled.div`
   display: flex;
   background-color: #444;
+  background-image: url("https://www.transparenttextures.com/patterns/blizzard.png");
   color: #fff;
   text-align: center;
 `
@@ -77,8 +78,12 @@ const UserBets = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 1.15em;
   background-color: ${props => props.background};
   color: ${props => props.color};
+  font-weght: extra-bold;
 `
 
 const Name = styled.div`
@@ -102,9 +107,65 @@ const Current = styled.div`
   width: 33%;
 `
 
+const Rankings = styled.div`
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #000;
+  background-image: url("https://www.transparenttextures.com/patterns/blizzard.png");
+  color: #fff;
+`
 
-export default function Expansion({games, bets, scores, rankings, teamData, userScores, user_bets}) {
-  const classes = useStyles();
+const Placement = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33%;
+`
+
+const UserImg = styled.img`
+  background-color: ${props => props.color};
+  border: 1px solid #000;
+  border-radius: 50%;
+  width: 20%;
+`
+
+const Player = styled.div`
+  font-size: 1.25em;
+  font-weight: bold;
+`
+
+const Rank = styled.span`
+  font-size: 1.5em;
+  font-weight: bold;
+  color: ${props => props.color};
+  text-shadow: 0.75px 0.75px #000;
+`
+
+const Points = styled.span`
+
+`
+
+const Participants = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0px 0px 10px 10px;
+  
+`
+
+const ParticipantStats = styled.span`
+  display: flex;
+  width: 100%;
+`
+
+const Div = styled.span`
+  width: 25%;
+`
+
+export default function Expansion({games, bets, scores, rankings, teamData, user_bets, user, parlay_id, participants}) {
+  const classes = useStyles()
 
   const getGames = () => {
     const gamesId = []
@@ -125,13 +186,19 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
     })
   }
 
-  const splitPot = () => {
-    const result = {}
-    for (let index in rankings) {
-      const key = Object.values(rankings[index])
-      if (result[key]) result[key]++
-      else             result[key] = 1
-    }
+  const getGSB = (parlay_id, limit) => {
+    const result = []
+    let places = 0
+    Object.keys(rankings).map(parlay => {
+      if (parlay_id === parseInt(parlay, 10)) {
+        Object.keys(rankings[parlay]).map(place => {
+          rankings[parlay][place].map(player => {
+            if (limit)       places++;
+            if (places <= 3) result.push([place, player])
+          })
+        })
+      }
+    })
     return result
   }
 
@@ -143,7 +210,7 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}>Games ({getGames().length})</Typography>
+          <Typography className={classes.heading}><b>Games</b> ({getGames().length})</Typography>
         </ExpansionPanelSummary>
         <GamesSummary>
         {
@@ -164,7 +231,7 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className={classes.heading}>Bets ({bets.length})</Typography>
+          <Typography className={classes.heading}><b>Bets</b> ({bets.length})</Typography>
         </ExpansionPanelSummary>
         <BetsSummary>
         {
@@ -176,10 +243,11 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
             const home_short = game.home_team.split(' ').reverse()[0]
             const away_short = game.away_team.split(' ').reverse()[0]
             const score      = getScores(bet.game_id)[0]
+
             const getResult  = (type) => {
               if (type === 'pickem') {
-                if      (score.home_total > score.away_total) return 'home'
-                else if (score.home_total < score.away_total) return 'away'
+                if      (score.home_total > score.away_total) return game.home_team.split(' ').reverse()[0]
+                else if (score.home_total < score.away_total) return game.away_team.split(' ').reverse()[0]
                 else                                          return 'none'
               }
               if (type === 'points_th') {
@@ -195,11 +263,17 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
               return null
             }
 
+            const convertBet = {
+              'pickem': 'Pick`Em',
+              'points_tf': 'Total Points (FT)',
+              'points_th': 'Total Points (HT)'
+            }
+
             return (
               <BetContain key={bet.id}>
                 <Type>
                   <Home><Logo src={home_data.logo} /></Home>
-                    <BetType>{bet.type}</BetType>
+                    <BetType>{convertBet[bet.type]}</BetType>
                   <Away><Logo src={away_data.logo} /></Away>
                 </Type>
               {
@@ -208,9 +282,13 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
                     let background = '#f00'
                     let color = '#000'
                     let difference;
+                    const convertTeam = {
+                      'home': game.home_team.split(' ').reverse()[0],
+                      'away': game.away_team.split(' ').reverse()[0]
+                    }
                     const result = getResult(bet.type)
                     if (bet.type === 'pickem' &&
-                        result   === user_bet.selection) {
+                        result   === convertTeam[user_bet.selection]) {
                       background = '#0f0'
                     } else {
                       difference = result - user_bet.selection
@@ -236,15 +314,60 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
         }
         </BetsSummary>
       </ExpansionPanel>
-      <ExpansionPanel disabled>
+      <ExpansionPanel>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
           id="panel3a-header"
         >
-          <Typography className={classes.heading}>Disabled Expansion Panel</Typography>
+          <Typography className={classes.heading}><b>Participants</b> ({participants.length})</Typography>
         </ExpansionPanelSummary>
+        <Participants>
+          <ParticipantStats>
+            <Div><b>Name</b></Div>
+            <Div><b>Total Points</b></Div>
+            <Div><b>Payout</b></Div>
+            <Div><b>Rank</b></Div>
+          </ParticipantStats>
+        {
+          getGSB(parlay_id, false).map(result => {
+            const player = Object.keys(result[1])[0]
+            return (
+              <ParticipantStats>
+                <Div>{player}</Div>
+                <Div>{result[1][player][0]} </Div>
+                <Div>{result[1][player][1]} </Div>
+                <Div>{result[0]}</Div>
+              </ParticipantStats>
+            )
+          })
+        }
+        </Participants>
+      {
+      }
       </ExpansionPanel>
+      <Rankings>
+      {
+        getGSB(parlay_id, true).map(result => {
+          const player = Object.keys(result[1])[0]
+          const getAbbrev = (place) => {
+            if      (place === '1') return [place + 'st', '#FFD700']
+            else if (place === '2') return [place + 'nd', '#C0C0C0']
+            else if (place === '3') return [place + 'rd', '#CD7F32']
+          }
+          return (
+            <Placement>
+              <UserImg color={getAbbrev(result[0])[1]} src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' />
+              <Player>{player}</Player>
+              <Div>
+                <Rank color={getAbbrev(result[0])[1]}>{getAbbrev(result[0])[0]}</Rank>&nbsp;/&nbsp;
+                <Points>{result[1][player][0]}&nbsp;pts</Points>
+              </Div>
+            </Placement>
+          )
+        })
+      }
+      </Rankings>
     </div>
   );
 }

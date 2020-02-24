@@ -11,7 +11,7 @@ justify-content: space-between;
 max-width: 600px;
 width: 100%;
 height: 50px;
-margin: 0 auto 20px;
+margin: 0 auto 0px;
 font-size: 16px;
 
 border-bottom: 1px solid #dbdbdb;
