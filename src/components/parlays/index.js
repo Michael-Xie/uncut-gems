@@ -256,7 +256,6 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
           <Title
             title={'Create a Parlay'}
             buffer={buffer}
-            
           />
           <CreateParlay
             user={user}
@@ -271,7 +270,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       {mode === ACTIVE && (
         <Fragment>
           <Title
-            title={'Active'}
+            title={`Active [${getActiveParlays().length}]`}
             buffer={buffer}
           />
           {
@@ -301,7 +300,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       {mode === OPEN && (
         <Fragment>
           <Title
-            title={'Open Parlays'}
+            title={`Open Parlays [${getOpenParlays().length}]`}
             buffer={buffer}
           />
 
@@ -347,7 +346,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       {mode === CLOSED && (
         <Fragment>
           <Title
-            title={'Closed'}
+            title={`Closed [${getClosedParlays().length}]`}
             buffer={buffer}
           />
           {
@@ -380,12 +379,14 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
           <ResultContainer>
             {
               searchRes.map(search => {
-                return (
-                  <SearchResult onClick={() => {
-                    setSearchRes([search])
-                    buffer(JOIN)
-                  }}>{search.name}</SearchResult>
-                )
+                console.log(search.name)
+                if (search.name)
+                  return (
+                    <SearchResult onClick={() => {
+                      setSearchRes([search])
+                      buffer(JOIN)
+                    }}>{search.name}</SearchResult>
+                  )
               })
             }
           </ResultContainer>
