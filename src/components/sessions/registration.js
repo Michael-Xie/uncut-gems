@@ -26,7 +26,6 @@ export default function Register({ dispatch }) {
       axios.post("http://localhost:8001/api/users", {
         user_name: user,
         password: password,
-        wallet_amount: null,
         stripe_charge_id: null
       })
         .then(res => {
@@ -51,6 +50,7 @@ export default function Register({ dispatch }) {
   return (
     <>
       <h2>Register</h2>
+      <div className='announcement'>All new registrants will receive 20 opals! </div>
       <form onSubmit={handleRegister}>
         <div className="error-container">
           {error.map((msg, i) => {
