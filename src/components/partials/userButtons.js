@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function UserButtons({ username, userPhoto, balance }) {
+export default function UserButtons({ username, userphoto, balance }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -76,7 +76,7 @@ export default function UserButtons({ username, userPhoto, balance }) {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          <img src={userPhoto} alt={username} height="40px" width="40px" />
+          <img src={userphoto} alt={username} height="40px" width="40px" />
           {username}
         </Button>
         <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>

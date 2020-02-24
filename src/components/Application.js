@@ -25,16 +25,23 @@ const Application = () => {
   return (
     <Fragment>
       <Router>
-        
-       
          <Navigation
           username={
             localStorage.getItem("user") !== null
               ? JSON.parse(localStorage.getItem("user")).user_name
               : ""
           }
-          userphoto="https://i.imgur.com/nz8PTXd.png"
-          balance={functions.localStorageUserObj()? functions.localStorageUserObj().wallet_amount : 0}
+
+          userphoto={
+            localStorage.getItem("user") !== null
+              ? JSON.parse(localStorage.getItem("user")).user_photo
+              : ""
+          }
+
+          balance={state.users.length > 0 && JSON.parse(localStorage.getItem("user")) !== null &&
+                   state.users.filter(user => JSON.parse(localStorage.getItem("user")).user_name === user.user_name)[0] &&
+                   `$` + (state.users.filter(user => JSON.parse(localStorage.getItem("user")).user_name === user.user_name)[0].wallet_amount / 100).toFixed(2)}
+
         />
         {localStorage.getItem("user") ? (
           <Redirect to={{ pathname: "/games" }} />

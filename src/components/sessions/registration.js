@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios"
 
+const randomUserPhoto = () => {
+  const x = ['https://i.imgur.com/3cIY14i.png','https://i.imgur.com/XhF02ie.png' ]
+  return x[Math.floor(Math.random() * (x.length))];
+}
+
 
 export default function Register({ dispatch }) {
   const [error, setError] = useState([]);
@@ -25,6 +30,7 @@ export default function Register({ dispatch }) {
     if (errors.length === 0) {
       axios.post("http://localhost:8001/api/users", {
         user_name: user,
+        user_photo: randomUserPhoto(),
         password: password,
         stripe_charge_id: null
       })

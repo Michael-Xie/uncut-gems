@@ -26,6 +26,13 @@ const Fee = styled.div`
   text-align:center;
 `
 
+const Error = styled.div`
+  font-family: fantasy;
+  color: #f00;
+  text-align: center;
+  padding: 10px;
+`
+
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -40,12 +47,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ParlaySubmit({data, user, parlay_id,parlay_fee, expected, onSubmit, participants}) {
+export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, expected, onSubmit, participants}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [error, setError] = React.useState('')
+
+  const userBalance = users.filter(res => res.user_name === user.user_name)[0].wallet_amount / 100
 
   const handleOpen = () => {
     setOpen(true);
+  };
+
+  const handleCancel = () => {
+    setOpen(false)
+    axios.delete(`http://localhost:8001/api/parlays/delete/${parlay_id}`)
+    onSubmit()
   };
 
   const handleClose = () => {
@@ -60,10 +76,20 @@ export default function ParlaySubmit({data, user, parlay_id,parlay_fee, expected
             participant.user_name === user.user_name)
           return participant
       })
-      if (filter.length === 0) {
+
+      // check user balance, if not ok popup alter.
+      if (userBalance - parlay_fee < 0) {
+        setError("Too much Gems!")
+        return false;
+      } else if (filter.length === 0) {
         axios.post("http://localhost:8001/api/parlays/participants", {
           user_name: user.user_name,
           parlay_id: parlay_id
+        })
+        .catch(err => console.log(err))
+
+        axios.put(`http://localhost:8001/api/users/update/${user.user_name}`, {
+          wallet_amount: parlay_fee * -100
         })
         .catch(err => console.log(err))
 
@@ -76,10 +102,11 @@ export default function ParlaySubmit({data, user, parlay_id,parlay_fee, expected
           })
           .catch(err => console.log(err))
         })
+        return true
       }
     } else {
-      alert("fill out the entire form!")
-      return
+      setError("Missing fields in the form")
+      return false;
     }
   }
 
@@ -87,6 +114,9 @@ export default function ParlaySubmit({data, user, parlay_id,parlay_fee, expected
     <div>
       <Button type="button" onClick={handleOpen}>
         Submit Picks
+      </Button>
+      <Button type="button" onClick={handleCancel}>
+        Cancel Parlay
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -103,15 +133,19 @@ export default function ParlaySubmit({data, user, parlay_id,parlay_fee, expected
         <Fade in={open}>
           <div className={classes.paper}>
             <h1>Confirm Bet</h1>
+            <Error>{error}</Error>
             <Fee>The entry fee is {parlay_fee} Gems</Fee>
             <Button onClick={() => {
-              handleSubmit(data) 
-              handleClose()
-              onSubmit()
+              const submit = handleSubmit(data)
+              if (submit)
+                onSubmit()      
             }}>
               Confirm
             </Button>
-            <Button onClick={() => handleClose()}>Cancel</Button>
+            <Button onClick={() => {
+              setError("")
+              handleClose()}
+            }>Cancel</Button>
           </div>
         </Fade>
       </Modal>

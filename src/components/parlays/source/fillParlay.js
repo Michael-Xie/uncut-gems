@@ -47,7 +47,7 @@ const BetType = styled.div`
   width: 100%;
 `
 
-export default function FillParlay({user, parlay_id, parlay_name, parlay_fee, parlay_admin, games, allBets, onSubmit, participants}) {
+export default function FillParlay({user, users, parlay_id, parlay_name, parlay_fee, parlay_admin, games, allBets, onSubmit, participants}) {
 
   
   
@@ -189,6 +189,7 @@ export default function FillParlay({user, parlay_id, parlay_name, parlay_fee, pa
         parlay_fee={parlay_fee}
         parlay_id={parlay_id}
         user={user}
+        users={users}
         data={betSelection}
         expected={bets.length}
         onSubmit={onSubmit}

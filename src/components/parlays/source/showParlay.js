@@ -1,5 +1,5 @@
-import React from "react"
-import styled from "styled-components"
+  import React from "react"
+  import styled from "styled-components"
 
 import ShowParticipants from './showParticipants'
 import { findAllByAltText } from "@testing-library/react"
@@ -8,9 +8,9 @@ const Article = styled.article`
   background-color: #fff;
   width: 600px;
 
-  margin: 30px auto 0;
-  border: 1px solid rgba(219,219,219);
-  
+    margin: 30px auto 0;
+    border: 1px solid rgba(219,219,219);
+    
 
   &:hover {
     box-shadow: 0 8px 6px -6px black;
@@ -30,20 +30,20 @@ const Title = styled.h1`
 
 `
 
-const Rankings = styled.section`
-  display: flex;
-  justify-content: center;
+  const Rankings = styled.section`
+    display: flex;
+    justify-content: center;
 
-  margin: 10px auto;
-`
+    margin: 10px auto;
+  `
 
-const User = styled.div`
-  display:flex;
-  flex-direction: column;
-  align-items:center;
-  align-content: flex-end;
-  padding: 0 10px;
-  cursor:pointer;
+  const User = styled.div`
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    align-content: flex-end;
+    padding: 0 10px;
+    cursor:pointer;
 
 `
 const Name = styled.div` 
@@ -56,18 +56,18 @@ const MoreUsers = styled.p`
   align-items:flex-end;
 `
 
-const ParlayInfo = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items:center;
+  const ParlayInfo = styled.section`
+    display: flex;
+    flex-direction: column;
+    align-items:center;
 
-  margin: 10px;
-  
-`
+    margin: 10px;
+    
+  `
 
-const Info = styled.h1`
-  margin: 5px;
-`
+  const Info = styled.h1`
+    margin: 5px;
+  `
 
 
 
