@@ -328,11 +328,16 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
 
           {
             getAdminParlays().map(parlay => {
+
+             
               return (
                 <Div key={parlay.fee * parlay.id}>
                   <FillParlay
                     user={user}
+                    parlay_name={parlay.name}
                     parlay_id={parlay.id}
+                    parlay_fee={parlay.fee}
+                    parlay_admin={parlay.admin}
                     games={games}
                     allBets={bets}
                     onSubmit={() => buffer(OPEN)}
@@ -392,6 +397,8 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         </Fragment>
       )}
       {mode === JOIN && (
+        
+        
         <Fragment>
           {
             searchRes.map(parlay => {

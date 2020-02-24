@@ -2,8 +2,60 @@ import React, { useState } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { BrowserRouter as Router, Redirect, useHistory } from "react-router-dom"
 import functions from "../../helpers/functions";
-
+import styled from 'styled-components'
 import CardSection from './CardSection';
+
+const Title = styled.div`
+display: flex;
+
+align-items: center;
+justify-content: center;
+max-width: 600px;
+width: 100%;
+height: 50px;
+margin: 0 auto 20px;
+font-size: 16px;
+font-weight: bold;
+border-bottom: 1px solid #dbdbdb;
+background-color: #fff;
+`
+
+const Form = styled.form` 
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  width:100%;
+  margin: 50px auto;
+`
+
+const Button = styled.button`
+  background-color: #000; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+
+  margin-top: 20px;
+  cursor:pointer;
+`
+const Label = styled.label` 
+  
+`
+
+
+
+const Input = styled.input`
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+`
 
 export default function CheckoutForm() {
   const [money, setMoney] = useState(0)
@@ -80,22 +132,25 @@ export default function CheckoutForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="top-up">
-        Top-up Amount
-        <input
+    <div>
+    <Title>Add More Gems</Title>
+    <Form onSubmit={handleSubmit}>
+      <Label htmlFor="top-up">
+        <div><strong>Top-up Amount</strong></div>
+        <Input
           type='number'
           min={0}
           name='top-up'
           value={money}
           onChange={(event) => { setMoney(event.target.value) }}
         />
-      </label>
+      </Label>
       {error.map((err, i) => {
         return <div className='error-msg' key={i}>{err}</div>
       })}
       <CardSection />
-      <button disabled={!stripe}>Confirm order</button>
-    </form>
+      <Button disabled={!stripe}>Confirm order</Button>
+    </Form>
+    </div>
   );
 }
