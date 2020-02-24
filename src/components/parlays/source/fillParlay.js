@@ -9,10 +9,6 @@ import PickTeam from './pickTeam'
 import SlidePoints from './slidePoints'
 
 const Wrapper = styled.article`
-
-  
-
-
   max-width: 600px;
   width: 100%;
   background-color: #fff;
@@ -23,12 +19,10 @@ const Wrapper = styled.article`
 
 
 const Game = styled.div`
-
   padding: 10px 0;
 `
 
 const Input = styled.input`
-  
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -38,13 +32,25 @@ const Input = styled.input`
 `
 
 const Choose = styled.div`
-    display: flex;
+  display: flex;
+  justify-content:space-evenly;
+  align-items:center;
 
-    justify-content:center;
-    align-items:center;
-   
+  max-width: 600px;
+  width: 100%;
 `
-export default function FillParlay({user, parlay_id, games, allBets, onSubmit, participants}) {
+
+const BetType = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  max-width: 100px;
+  width: 100%;
+`
+
+export default function FillParlay({user, parlay_id, parlay_name, parlay_fee, parlay_admin, games, allBets, onSubmit, participants}) {
+
+  
+  
   // keep bets in state.
   const [bets, setBets] = useState([])
   const [betSelection, setBetSelection] = useState([])
@@ -70,7 +76,7 @@ export default function FillParlay({user, parlay_id, games, allBets, onSubmit, p
     })
   }, [parlay_id])
 
-  const check = (team, betId, obj) => {
+  const check = (team, betId) => {
     if (betSelection.length === 0) {
       return setBetSelection([{ bet_id: betId, selection: team }])
     } else {
@@ -131,6 +137,9 @@ export default function FillParlay({user, parlay_id, games, allBets, onSubmit, p
 
   return (
     <Wrapper>
+            <h1>{parlay_name}</h1>
+            <div>{parlay_fee}</div>
+            <div>{parlay_admin}</div>
 
       {
         bets.map(bet => {
@@ -145,14 +154,14 @@ export default function FillParlay({user, parlay_id, games, allBets, onSubmit, p
 
                     return (
                       <Choose>
-
-                        {betKeys[bet.type]}
+                        <BetType>{betKeys[bet.type]}</BetType>
                         <PickTeam
                           teams={teams}
                           getBetSelection={getBetSelection}
                           bet={bet}
                           check={check}
                         />
+                        <div></div>
                       </Choose>
                     );
                   }
@@ -164,8 +173,9 @@ export default function FillParlay({user, parlay_id, games, allBets, onSubmit, p
                     const teams = findTeams(bet.game_id)
                     return (
                       <Choose>
-                        {betKeys[bet.type]}
+                       <BetType>{betKeys[bet.type]}</BetType>
                         <Input key={bet.id} type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} />
+                        <div></div>
                       </Choose>
                     )
                   }
@@ -176,6 +186,7 @@ export default function FillParlay({user, parlay_id, games, allBets, onSubmit, p
         })
       }
       <ParlaySubmit
+        parlay_fee={parlay_fee}
         parlay_id={parlay_id}
         user={user}
         data={betSelection}

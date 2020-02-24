@@ -15,7 +15,7 @@ const Article = styled.article`
   width: 100%;
   max-width: 600px;
   height: 100px;
-  margin: 30px auto 0;
+  margin: 0 auto ;
   background: linear-gradient(
       to left,
       rgba(${props => props.homeColor}),
@@ -24,11 +24,8 @@ const Article = styled.article`
    url(${props => props.arena ? props.arena : 'https://previews.123rf.com/images/enterline/enterline1311/enterline131100002/24220420-a-realistic-vector-hardwood-textured-basketball-court-.jpg'});
    background-position: 0px -50px;
    background-blend-mode: multiply;
-  
+  overflow: hidden;
   color: #fff;
-  
-
-
 `
 
 const Section = styled.section`

@@ -5,6 +5,7 @@ import InputSlider from "../../partials/slider"
 import FormSubmit from "../../partials/formSubmit"
 import teamData from "../../../helpers/teamData"
 
+import Title from './title'
 import GameListItem from "./gameListItem"
 import InfoBox from "./infobox"
 import ParlayName from './parlayName'
@@ -18,16 +19,6 @@ const Wrapper = styled.article`
  max-width: 600px;
 `
 
-const Title = styled.h1`
-  text-align: center;
-  max-width: 600px;
-  width: 100%;
-  padding: 15px 0;
-  margin: 0 0 20px;
-  
-  border-bottom: 1px solid #dbdbdb;
-  background-color: #fff;
-`
 const H2 = styled.h3`
   text-align: center;
   margin: 10px 0;
@@ -57,6 +48,10 @@ const MoreInfo = styled.button`
   &:hover {
     color: #fff;
   }
+`
+
+const Footer = styled.footer` 
+ height: 50px;
 `
 
 export default function CreateParlay({ games, onSubmit, user, dispatch }) {
@@ -149,7 +144,7 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
   return (
     <Wrapper>
 
-      <Title>Create a Parlay</Title>
+      
 
       {/* <MoreInfo onClick={() => setInfoBoxVisible(!infoBoxVisible)}>More Info</MoreInfo> */}
 
@@ -185,6 +180,7 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
         })
       }
       <FormSubmit
+        
         onSubmit={onSubmit} 
         user={user} 
         data={data} 
@@ -193,6 +189,7 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
         dispatch={dispatch} 
         games={games}
       />
+      <Footer></Footer>
     </Wrapper>
   );
 
