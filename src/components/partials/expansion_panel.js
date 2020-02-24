@@ -78,7 +78,8 @@ const UserBets = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   font-size: 1.15em;
   background-color: ${props => props.background};
   color: ${props => props.color};
@@ -262,11 +263,17 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
               return null
             }
 
+            const convertBet = {
+              'pickem': 'Pick`Em',
+              'points_tf': 'Total Points (FT)',
+              'points_th': 'Total Points (HT)'
+            }
+
             return (
               <BetContain key={bet.id}>
                 <Type>
                   <Home><Logo src={home_data.logo} /></Home>
-                    <BetType>{bet.type}</BetType>
+                    <BetType>{convertBet[bet.type]}</BetType>
                   <Away><Logo src={away_data.logo} /></Away>
                 </Type>
               {
@@ -275,9 +282,13 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
                     let background = '#f00'
                     let color = '#000'
                     let difference;
+                    const convertTeam = {
+                      'home': game.home_team.split(' ').reverse()[0],
+                      'away': game.away_team.split(' ').reverse()[0]
+                    }
                     const result = getResult(bet.type)
                     if (bet.type === 'pickem' &&
-                        result   === user_bet.selection) {
+                        result   === convertTeam[user_bet.selection]) {
                       background = '#0f0'
                     } else {
                       difference = result - user_bet.selection
