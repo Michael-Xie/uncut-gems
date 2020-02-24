@@ -76,11 +76,13 @@ const Logo = styled.img`
 const UserBets = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: -5px;
   align-items: center;
   width: 100%;
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 1.15em;
+  background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png");
   background-color: ${props => props.background};
   color: ${props => props.color};
   font-weght: extra-bold;

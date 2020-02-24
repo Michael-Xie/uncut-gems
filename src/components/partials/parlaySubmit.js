@@ -26,6 +26,13 @@ const Fee = styled.div`
   text-align:center;
 `
 
+const Error = styled.div`
+  font-family: fantasy;
+  color: #f00;
+  text-align: center;
+  padding: 10px;
+`
+
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -40,9 +47,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ParlaySubmit({data, user, parlay_id,parlay_fee, expected, onSubmit, participants}) {
+export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, expected, onSubmit, participants}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [error, setError] = React.useState('')
+
+  const userBalance = users.filter(res => res.user_name === user.user_name)[0].wallet_amount / 100
 
   const handleOpen = () => {
     setOpen(true);
@@ -60,12 +70,19 @@ export default function ParlaySubmit({data, user, parlay_id,parlay_fee, expected
             participant.user_name === user.user_name)
           return participant
       })
-      if (filter.length === 0) {
+      if (userBalance - parlay_fee < 0) {
+        setError("Too much Gems!")
+      } else if (filter.length === 0) {
         axios.post("/api/parlays/participants", {
           user_name: user.user_name,
           parlay_id: parlay_id
         },
         {baseURL: 'https://uncut-gems-api-server.herokuapp.com'})
+        .catch(err => console.log(err))
+
+        axios.put(`http://localhost:8001/api/users/update/${user.user_name}`, {
+          wallet_amount: parlay_fee * -100
+        })
         .catch(err => console.log(err))
 
         bets.map(bet => {
@@ -105,15 +122,19 @@ export default function ParlaySubmit({data, user, parlay_id,parlay_fee, expected
         <Fade in={open}>
           <div className={classes.paper}>
             <h1>Confirm Bet</h1>
+            <Error>{error}</Error>
             <Fee>The entry fee is {parlay_fee} Gems</Fee>
             <Button onClick={() => {
-              handleSubmit(data) 
-              handleClose()
-              onSubmit()
+              const submit = handleSubmit(data)
+              if (submit)
+                onSubmit()
             }}>
               Confirm
             </Button>
-            <Button onClick={() => handleClose()}>Cancel</Button>
+            <Button onClick={() => {
+              setError("")
+              handleClose()}
+            }>Cancel</Button>
           </div>
         </Fade>
       </Modal>
