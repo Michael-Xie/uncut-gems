@@ -97,6 +97,10 @@ const Button = styled.button`
   }
 `
 
+const TenOpen = styled.div`
+
+`
+
 
 const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, users, rankings }) => {
   // constants to handle visual transitions.
@@ -171,12 +175,21 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
   }
 
   // get open parlays the user has participated in.
-  const getOpenParlays = () => {
+  const getOpenParlays = (max) => {
     const parlayIds = userParlays()
+    let index = 0;
     const openParlays = parlays.filter(parlay => {
-      if (parlayIds.includes(parlay.id) &&
-        parlay.current_status === 'open')
-        return parlay
+      index++
+      if (max && index <= max) {
+        index++
+        if (parlayIds.includes(parlay.id) &&
+            parlay.current_status === 'open')
+          return parlay
+      } else {
+        if (parlayIds.includes(parlay.id) &&
+            parlay.current_status === 'open')
+          return parlay
+      }
     })
     return openParlays.sort((a, b) => b.id - a.id)
   }
@@ -382,8 +395,15 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
             buffer={buffer}
           />
           <SearchContainer>
-            <Search type="text" onChange={(e) => searching(e.target.value)} />
+            <Search placeholder='Search Open Parlays...' type="text" onChange={(e) => searching(e.target.value)} />
           </SearchContainer>
+          <TenOpen>
+          {
+            getOpenParlays(10).map(parlay => {
+              return <div>HELLO</div>
+            })
+          }
+          </TenOpen>
 
           <ResultContainer>
             {
@@ -410,7 +430,11 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
                 <Div key={parlay.fee * parlay.id}>
                   <FillParlay
                     user={user}
+                    users={users}
                     parlay_id={parlay.id}
+                    parlay_name={parlay.name}
+                    parlay_fee={parlay.fee}
+                    parlay_admin={parlay.admin}
                     games={games}
                     allBets={bets}
                     onSubmit={() => {
