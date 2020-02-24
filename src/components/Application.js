@@ -40,7 +40,7 @@ const Application = () => {
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
           balance={state.users.length > 0 && JSON.parse(localStorage.getItem("user")) !== null &&
                    state.users.filter(user => JSON.parse(localStorage.getItem("user")).user_name === user.user_name)[0] &&
-                   state.users.filter(user => JSON.parse(localStorage.getItem("user")).user_name === user.user_name)[0].wallet_amount}
+                   `$` + (state.users.filter(user => JSON.parse(localStorage.getItem("user")).user_name === user.user_name)[0].wallet_amount / 100).toFixed(2)}
         />
         {localStorage.getItem("user") ? (
           <Redirect to={{ pathname: "/games" }} />
