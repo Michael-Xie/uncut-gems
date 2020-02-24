@@ -58,6 +58,12 @@ export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, e
     setOpen(true);
   };
 
+  const handleCancel = () => {
+    setOpen(false)
+    axios.delete(`http://localhost:8001/api/parlays/delete/${parlay_id}`)
+    onSubmit()
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -74,6 +80,7 @@ export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, e
       // check user balance, if not ok popup alter.
       if (userBalance - parlay_fee < 0) {
         setError("Too much Gems!")
+        return false;
       } else if (filter.length === 0) {
         axios.post("http://localhost:8001/api/parlays/participants", {
           user_name: user.user_name,
@@ -95,10 +102,11 @@ export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, e
           })
           .catch(err => console.log(err))
         })
+        return true
       }
     } else {
-      alert("fill out the entire form!")
-      return
+      setError("Missing fields in the form")
+      return false;
     }
   }
 
@@ -106,6 +114,9 @@ export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, e
     <div>
       <Button type="button" onClick={handleOpen}>
         Submit Picks
+      </Button>
+      <Button type="button" onClick={handleCancel}>
+        Cancel Parlay
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -127,7 +138,7 @@ export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, e
             <Button onClick={() => {
               const submit = handleSubmit(data)
               if (submit)
-                onSubmit()
+                onSubmit()      
             }}>
               Confirm
             </Button>
