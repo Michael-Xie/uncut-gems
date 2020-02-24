@@ -146,7 +146,7 @@ const teamData = (team) => {
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/utah.png",
       colors: "11,35,64, 0.701"
     },
-    Washingtion_Wizards: {
+    Washington_Wizards: {
       logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c12a6515b1e0ad75a5b.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/washington.png",
       colors: "208,60,71, 0.701"
