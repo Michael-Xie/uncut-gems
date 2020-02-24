@@ -70,7 +70,7 @@ const User = styled.div`
 `
 
 export default function Navigation({ userid, username, userphoto, balance }) {
-
+  console.log(userphoto,' Photo')
   return (
     <Header>
       <Nav>
@@ -81,7 +81,7 @@ export default function Navigation({ userid, username, userphoto, balance }) {
           {/* &nbsp; &nbsp;
          Uncut Gems */}
         </Logo>
-
+         
         <Links>
           
 
@@ -100,7 +100,7 @@ export default function Navigation({ userid, username, userphoto, balance }) {
               </User> */}
               <UserButtons
                 username={username}
-                userPhoto={userphoto}
+                userphoto={userphoto}
                 balance={balance}
               />
 
