@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Redirect, useHistory } from "react-router-dom"
 import functions from "../../helpers/functions";
 import styled from 'styled-components'
 import CardSection from './CardSection';
-import axios from 'axios';
 
 const Title = styled.div`
 display: flex;
@@ -102,14 +101,16 @@ export default function CheckoutForm() {
 
     } else {
       // Otherwise send paymentMethod.id to your server (see Step 3)
-      const response = await axios('/api/pay/card', {
+
+      // NOTE: hardcoded to api-server
+      const response = await fetch('https://uncut-gems-api-server.herokuapp.com/api/pay/card', {
         method: 'POST',
-        // headers: { 'Content-Type': 'application/json' },
-        data: {
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           payment_method_id: result.paymentMethod.id,
           top_up: money,
           user_id: JSON.parse(localStorage.getItem('user')).id
-        },
+        }),
       });
       functions.setWallet(money);
       const serverResponse = await response.json();
