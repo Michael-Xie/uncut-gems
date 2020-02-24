@@ -76,7 +76,7 @@ export default function UserButtons({ username, userPhoto, balance }) {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          <img src={userPhoto} alt={username} height="20px" width="20px" />
+          <img src={userPhoto} alt={username} height="40px" width="40px" />
           {username}
         </Button>
         <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>

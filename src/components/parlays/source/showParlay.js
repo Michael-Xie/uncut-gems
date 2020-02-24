@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 import ShowParticipants from './showParticipants'
+import { findAllByAltText } from "@testing-library/react"
 
 const Article = styled.article` 
   background-color: #fff;
@@ -68,8 +69,18 @@ const Info = styled.h1`
   margin: 5px;
 `
 
+
+
 export default function ShowParlay({ name, bets, participants, entry, start_time , rankings}) {
-  console.log('rankings',rankings)
+ 
+
+  const displayRank= (rank) => {
+    const x = rankings[rank]
+    
+    return x
+   }
+   console.log('Rankings',rankings)
+
   return (
 
     <Article>
@@ -84,10 +95,29 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
    
       {/* <div className="separator">{participants.length} participant(s)</div> */}
       <Rankings>
-        
-        
-        
+      {/* {console.log(displayRank('1'))} */}
+      
         {
+        displayRank('1').map(player => {
+          const names = Object.keys(player)
+          return (
+            <div>{names[0]}</div>
+          )   
+        })
+
+      }
+      {
+        displayRank('2').map(player => {
+          const names = Object.keys(player)
+          return (
+            <div>{names[0]}</div>
+          )   
+        })
+
+      }
+    
+
+        {/* {
           participants.map(player => {
             return (
               <User key={player.user_name}>
@@ -98,10 +128,11 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
                   width="50px"
                 />
                 <Name>{player.user_name}</Name>
+           
               </User>
             )
           })
-        }
+        } */}
 
         <ShowParticipants />
 

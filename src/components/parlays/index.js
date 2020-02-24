@@ -99,7 +99,6 @@ const Button = styled.button`
 
 
 const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, users, rankings }) => {
-  console.log('YOYO', rankings)
   
   // constants to handle visual transitions.
   const CREATE = "CREATE"
@@ -202,6 +201,10 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         return parlay
     })
     return closedParlays
+  }
+
+  const getRankingsForParlays = (parlayID) => {
+    return rankings[parlayID]
   }
   // get bets for a given parlay
   const getBets = (parlay_id) => {
@@ -364,7 +367,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
                 <Div key={parlay.id}>
                   <ShowParlay
                     name={parlay.name}
-                    rankings={rankings}
+                    rankings={getRankingsForParlays(parlay.id)}
                     bets={getBets(parlay.id).length}
                     participants={[...getParticipants(parlay.id)]}
                     entry={parlay.fee}
