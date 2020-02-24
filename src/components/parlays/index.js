@@ -99,6 +99,8 @@ const Button = styled.button`
 
 
 const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, users, rankings }) => {
+  console.log('YOYO', rankings)
+  
   // constants to handle visual transitions.
   const CREATE = "CREATE"
   const ACTIVE = "ACTIVE"
@@ -355,12 +357,14 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
             title={'Closed'}
             buffer={buffer}
           />
+        
           {
             getClosedParlays().map(parlay => {
               return (
                 <Div key={parlay.id}>
                   <ShowParlay
                     name={parlay.name}
+                    rankings={rankings}
                     bets={getBets(parlay.id).length}
                     participants={[...getParticipants(parlay.id)]}
                     entry={parlay.fee}

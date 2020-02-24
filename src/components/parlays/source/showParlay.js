@@ -1,6 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 
+import ShowParticipants from './showParticipants'
+
 const Article = styled.article` 
   background-color: #fff;
   width: 600px;
@@ -14,11 +16,17 @@ const Article = styled.article`
     cursor: pointer;
   }
 `
-const Title = styled.div`
+
+const Header = styled.div`
   display:flex;
   align-items: center;
-  justify-content: center;
-  margin: 5px 0;
+  justify-content: space-between;
+  margin: 5px 20px;
+`
+
+const Title = styled.h1`
+ 
+
 `
 
 const Rankings = styled.section`
@@ -36,11 +44,12 @@ const User = styled.div`
   padding: 0 10px;
   cursor:pointer;
 
-
-  &:hover {
-    color: grey;
-  }
 `
+const Name = styled.div` 
+  font-size: 18px;
+  margin-top: 5px;
+`
+
 const MoreUsers = styled.p`
   display:flex;
   align-items:flex-end;
@@ -59,40 +68,43 @@ const Info = styled.h1`
   margin: 5px;
 `
 
-export default function ShowParlay({name, bets, participants, entry, start_time}) {
+export default function ShowParlay({ name, bets, participants, entry, start_time , rankings}) {
+  console.log('rankings',rankings)
   return (
-    <Article>
-      
-      {console.log(participants)}
-      <Title>
-       <h1>{name}</h1>
-      </Title>
-      <ParlayInfo>
-        {start_time > 1 && (
-          <Info>Start Time: {new Date(start_time * 1000).toTimeString().slice(0, 5)} </Info>
-        )}
-        <Info># of bets: {bets}</Info>
-        <Info>entry fee: ${entry}.00</Info>
-        <Info>total pot: ${participants.length * entry}.00</Info>
 
-      </ParlayInfo>
-      <div className="separator">{participants.length} participant(s)</div>
+    <Article>
+      <Header>
+        <Title>
+          {name}
+        </Title>
+        <div></div>
+
+        <Info><img src="https://toppng.com/uploads/preview/em-svg-png-icon-free-download-gem-icon-11563228146u2haxp4svc.png" alt="gem-icon" height="20px" width="20px" /> {participants.length * entry} </Info>
+      </Header>
+   
+      {/* <div className="separator">{participants.length} participant(s)</div> */}
       <Rankings>
+        
+        
+        
         {
           participants.map(player => {
             return (
               <User key={player.user_name}>
-                <img 
-                  src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' 
-                  alt='#' 
-                  height="30px" 
-                  width="30px" 
+                <img
+                  src='https://i.imgur.com/pYla8hh.png'
+                  alt='#'
+                  height="50px"
+                  width="50px"
                 />
-                {player.user_name}
+                <Name>{player.user_name}</Name>
               </User>
             )
           })
         }
+
+        <ShowParticipants />
+
       </Rankings>
     </Article>
   );
