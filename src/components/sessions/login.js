@@ -58,10 +58,12 @@ export default function Login({ dispatch }) {
 
     // reset error on next onSubmit
     setError([]);
-    axios.post("http://localhost:8001/api/login", {
+    
+    axios.post("/api/login", {
       user_name: user,
       password: password,
-    })
+    }, {baseURL: 'https://uncut-gems-api-server.herokuapp.com'}
+    )
       .then(res => {
         if (Object.keys(res.data).length > 0) {
           localStorage.setItem('user', JSON.stringify(res.data));

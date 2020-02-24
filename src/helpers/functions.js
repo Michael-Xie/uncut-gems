@@ -3,7 +3,7 @@ const localStorageUserObj = function() {
 }
 const setWallet = function (money) {
   const user = localStorageUserObj();
-  user.wallet_amount += money;
+  user.wallet_amount = Number(user.wallet_amount) + money*100;
   localStorage.setItem('user', JSON.stringify(user));
 }
 

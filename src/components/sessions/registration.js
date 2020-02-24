@@ -28,12 +28,13 @@ export default function Register({ dispatch }) {
       errors.push("Username is empty.");
     }
     if (errors.length === 0) {
-      axios.post("http://localhost:8001/api/users", {
+      axios.post("/api/users", {
         user_name: user,
         user_photo: randomUserPhoto(),
         password: password,
         stripe_charge_id: null
-      })
+      },
+      {baseURL: 'https://uncut-gems-api-server.herokuapp.com'})
         .then(res => {
           if (Object.keys(res.data).length > 0) {
             localStorage.setItem('user', JSON.stringify(res.data));
