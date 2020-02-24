@@ -33,7 +33,11 @@ const Application = () => {
               ? JSON.parse(localStorage.getItem("user")).user_name
               : ""
           }
-          userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
+          userphoto={
+            localStorage.getItem("user") !== null
+              ? JSON.parse(localStorage.getItem("user")).user_photo
+              : ""
+          }
           balance={functions.localStorageUserObj()? functions.localStorageUserObj().wallet_amount : 0}
         />
         {localStorage.getItem("user") ? (
