@@ -79,7 +79,7 @@ export default function FormSubmit({data, onSubmit, user, buyIn, betName, games,
       alert("Form must be complete!")
       return;
     } else {
-      Promise.resolve(axios.post(`http://localhost:8001/api/parlays`, {
+      Promise.resolve(axios.post(`/api/parlays`, {
         admin: user.id,
         name: betName,
         fee: buyIn,
@@ -94,7 +94,7 @@ export default function FormSubmit({data, onSubmit, user, buyIn, betName, games,
           const game_id = result.game_id
           result.bets.forEach(bet => {
             if (bet.selected)
-              Promise.resolve(axios.post(`http://localhost:8001/api/parlays/bets`, {
+              Promise.resolve(axios.post(`/api/parlays/bets`, {
                 type:      bet.type,
                 parlay_id: id,
                 game_id:   game_id

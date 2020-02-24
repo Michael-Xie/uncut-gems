@@ -18,14 +18,14 @@ const useApplicationData = () => {
   useEffect(() => {
     Promise.all([
       /*
-      Promise.resolve(axios.get("http://localhost:8001/api/games/0")),
-      Promise.resolve(axios.get("http://localhost:8001/api/scores")),
-      Promise.resolve(axios.get("http://localhost:8001/api/parlays/0")),
-      Promise.resolve(axios.get("http://localhost:8001/api/participants/0")),
-      Promise.resolve(axios.get("http://localhost:8001/api/bets/0")),
-      Promise.resolve(axios.get("http://localhost:8001/api/user_bets/0")),
+      Promise.resolve(axios.get("/api/games/0")),
+      Promise.resolve(axios.get("/api/scores")),
+      Promise.resolve(axios.get("/api/parlays/0")),
+      Promise.resolve(axios.get("/api/participants/0")),
+      Promise.resolve(axios.get("/api/bets/0")),
+      Promise.resolve(axios.get("/api/user_bets/0")),
       */
-      Promise.resolve(axios.get("http://localhost:8001/api/global/0"))
+      Promise.resolve(axios.get("/api/global/0"))
     ])
       .then(res => {
         const games        = res[0].data.games.sort((a, b)        => a.game_id   - b.game_id)
@@ -44,7 +44,7 @@ const useApplicationData = () => {
 
   // useEffect to establish a websocket connection on the client side.
   useEffect(() => {
-    const sock = new WebSocket('ws://localhost:8001')
+    const sock = new WebSocket('wss://uncut-gems-api-server.herokuapp.com/')
 
     sock.addEventListener("open", function() {
       console.log('Connection established...');

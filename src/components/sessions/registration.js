@@ -23,7 +23,7 @@ export default function Register({ dispatch }) {
       errors.push("Username is empty.");
     }
     if (errors.length === 0) {
-      axios.post("http://localhost:8001/api/users", {
+      axios.post("/api/users", {
         user_name: user,
         password: password,
         stripe_charge_id: null

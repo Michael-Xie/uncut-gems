@@ -58,7 +58,7 @@ export default function Login({ dispatch }) {
 
     // reset error on next onSubmit
     setError([]);
-    axios.post("http://localhost:8001/api/login", {
+    axios.post("/api/login", {
       user_name: user,
       password: password,
     })

@@ -153,7 +153,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       // check to see the differnce in dates.
       if (parlay.current_status === 'open' &&
         Date.now() >= (parlay.start_time * 1000)) {
-        axios.put(`http://localhost:8001/api/parlays/set_active/${parlay.id}`, {
+        axios.put(`/api/parlays/set_active/${parlay.id}`, {
           current_status: 'in-progress'
         })
           .catch(err => console.log(err))

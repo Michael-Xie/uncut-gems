@@ -101,7 +101,7 @@ export default function CheckoutForm() {
 
     } else {
       // Otherwise send paymentMethod.id to your server (see Step 3)
-      const response = await fetch('http://localhost:8001/api/pay/card', {
+      const response = await fetch('/api/pay/card', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

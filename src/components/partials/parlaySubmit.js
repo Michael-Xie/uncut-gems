@@ -61,14 +61,14 @@ export default function ParlaySubmit({data, user, parlay_id,parlay_fee, expected
           return participant
       })
       if (filter.length === 0) {
-        axios.post("http://localhost:8001/api/parlays/participants", {
+        axios.post("/api/parlays/participants", {
           user_name: user.user_name,
           parlay_id: parlay_id
         })
         .catch(err => console.log(err))
 
         bets.map(bet => {
-          axios.post("http://localhost:8001/api/parlays/bets/fill", {
+          axios.post("/api/parlays/bets/fill", {
             selection: bet.selection,
             bet_id: bet.bet_id,
             parlay_id: parlay_id,
