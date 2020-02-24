@@ -167,7 +167,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         parlay.current_status === 'in-progress')
         return parlay
     })
-    return activeParlays
+    return activeParlays.sort((a, b) => b.id - a.id)
   }
 
   // get open parlays the user has participated in.
@@ -178,7 +178,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         parlay.current_status === 'open')
         return parlay
     })
-    return openParlays
+    return openParlays.sort((a, b) => b.id - a.id)
   }
 
   const getAdminParlays = () => {
@@ -188,7 +188,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         !parlayIds.includes(parlay.id))
         return parlay
     })
-    return admin
+    return admin.sort((a, b) => b.id - a.id)
   }
 
   // get closed parlays the user has participated in.
@@ -199,7 +199,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         parlay.current_status === 'close')
         return parlay
     })
-    return closedParlays
+    return closedParlays.sort((a, b) => b.id - a.id)
   }
   // get bets for a given parlay
   const getBets = (parlay_id) => {
@@ -207,7 +207,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       if (bet.parlay_id === parlay_id)
         return bet
     })
-    return filtered
+    return filtered.sort((a, b) => b.id - a.id)
   }
 
   const getUserBets = (parlay_id) => {
@@ -215,7 +215,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       if (bet.parlay_id === parlay_id)
         return bet
     })
-    return filtered
+    return filtered.sort((a, b) => b.id - a.id)
   }
 
   // helper function for the search feature.
@@ -299,12 +299,42 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       )}
       {mode === OPEN && (
         <Fragment>
+          {
+            getAdminParlays().length > 0 && (
+              <Title
+                title={`Parlays to Fill [${getAdminParlays().length}]`}
+                buffer={buffer}
+              />
+            )
+          }
+          {
+            getAdminParlays().map(parlay => {
+              return (
+                <Div key={parlay.fee * parlay.id}>
+                  <FillParlay
+                    user={user}
+                    users={users}
+                    parlay_name={parlay.name}
+                    parlay_id={parlay.id}
+                    parlay_fee={parlay.fee}
+                    parlay_admin={parlay.admin}
+                    games={games}
+                    allBets={bets}
+                    onSubmit={() => buffer(OPEN)}
+                    participants={participants}
+                  />
+                </Div>
+              )
+            })
+          }
+        </Fragment>
+      )}
+      {mode === OPEN && (
+        <Fragment>
           <Title
             title={`Open Parlays [${getOpenParlays().length}]`}
             buffer={buffer}
           />
-
-
           {
             getOpenParlays().map(parlay => {
               return (
@@ -315,32 +345,6 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
                     participants={getParticipants(parlay.id)}
                     entry={parlay.fee}
                     start_time={parlay.start_time}
-                  />
-                </Div>
-              )
-            })
-          }
-        </Fragment>
-      )}
-      {mode === OPEN && (
-        <Fragment>
-
-          {
-            getAdminParlays().map(parlay => {
-
-             
-              return (
-                <Div key={parlay.fee * parlay.id}>
-                  <FillParlay
-                    user={user}
-                    parlay_name={parlay.name}
-                    parlay_id={parlay.id}
-                    parlay_fee={parlay.fee}
-                    parlay_admin={parlay.admin}
-                    games={games}
-                    allBets={bets}
-                    onSubmit={() => buffer(OPEN)}
-                    participants={participants}
                   />
                 </Div>
               )
@@ -384,7 +388,6 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
           <ResultContainer>
             {
               searchRes.map(search => {
-                console.log(search.name)
                 if (search.name)
                   return (
                     <SearchResult onClick={() => {
