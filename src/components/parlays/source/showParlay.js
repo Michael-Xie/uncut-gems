@@ -1,69 +1,67 @@
-import React from "react"
-import styled from "styled-components"
+  import React from "react"
+  import styled from "styled-components"
 
-const Article = styled.article` 
-  background-color: #fff;
-  width: 600px;
+  const Article = styled.article` 
+    background-color: #fff;
+    width: 600px;
 
-  margin: 30px auto 0;
-  border: 1px solid rgba(219,219,219);
-  
+    margin: 30px auto 0;
+    border: 1px solid rgba(219,219,219);
+    
 
-  &:hover {
-    box-shadow: 0 8px 6px -6px black;
-    cursor: pointer;
-  }
-`
-const Title = styled.div`
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  margin: 5px 0;
-`
+    &:hover {
+      box-shadow: 0 8px 6px -6px black;
+      cursor: pointer;
+    }
+  `
+  const Title = styled.div`
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+  `
 
-const Rankings = styled.section`
-  display: flex;
-  justify-content: center;
+  const Rankings = styled.section`
+    display: flex;
+    justify-content: center;
 
-  margin: 10px auto;
-`
+    margin: 10px auto;
+  `
 
-const User = styled.div`
-  display:flex;
-  flex-direction: column;
-  align-items:center;
-  align-content: flex-end;
-  padding: 0 10px;
-  cursor:pointer;
+  const User = styled.div`
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    align-content: flex-end;
+    padding: 0 10px;
+    cursor:pointer;
 
 
-  &:hover {
-    color: grey;
-  }
-`
-const MoreUsers = styled.p`
-  display:flex;
-  align-items:flex-end;
-`
+    &:hover {
+      color: grey;
+    }
+  `
+  const MoreUsers = styled.p`
+    display:flex;
+    align-items:flex-end;
+  `
 
-const ParlayInfo = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items:center;
+  const ParlayInfo = styled.section`
+    display: flex;
+    flex-direction: column;
+    align-items:center;
 
-  margin: 10px;
-  
-`
+    margin: 10px;
+    
+  `
 
-const Info = styled.h1`
-  margin: 5px;
-`
+  const Info = styled.h1`
+    margin: 5px;
+  `
 
-export default function ShowParlay({name, bets, participants, entry, start_time}) {
-  return (
-    <Article>
-      
-      {console.log(participants)}
+  export default function ShowParlay({name, bets, participants, entry, start_time}) {
+    return (
+      <Article>
       <Title>
        <h1>{name}</h1>
       </Title>
