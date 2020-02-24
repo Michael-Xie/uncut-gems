@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Redirect, useHistory } from "react-router-dom"
 import functions from "../../helpers/functions";
 import styled from 'styled-components'
 import CardSection from './CardSection';
+import axios from 'axios';
 
 const Title = styled.div`
 display: flex;
@@ -101,14 +102,14 @@ export default function CheckoutForm() {
 
     } else {
       // Otherwise send paymentMethod.id to your server (see Step 3)
-      const response = await fetch('/api/pay/card', {
+      const response = await axios('/api/pay/card', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        // headers: { 'Content-Type': 'application/json' },
+        data: {
           payment_method_id: result.paymentMethod.id,
           top_up: money,
           user_id: JSON.parse(localStorage.getItem('user')).id
-        }),
+        },
       });
       functions.setWallet(money);
       const serverResponse = await response.json();
