@@ -25,7 +25,7 @@ const useApplicationData = () => {
       Promise.resolve(axios.get("/api/bets/0")),
       Promise.resolve(axios.get("/api/user_bets/0")),
       */
-      Promise.resolve(axios.get("/api/global/0"))
+      Promise.resolve(axios.get("/api/global/0", {baseURL: 'https://uncut-gems-api-server.herokuapp.com'}))
     ])
       .then(res => {
         const games        = res[0].data.games.sort((a, b)        => a.game_id   - b.game_id)

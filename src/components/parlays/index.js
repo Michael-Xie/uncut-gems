@@ -155,7 +155,9 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         Date.now() >= (parlay.start_time * 1000)) {
         axios.put(`/api/parlays/set_active/${parlay.id}`, {
           current_status: 'in-progress'
-        })
+        }, 
+        {baseURL: 'https://uncut-gems-api-server.herokuapp.com'}
+        )
           .catch(err => console.log(err))
         if (parlayIds.includes(parlay.id)) {
           parlay.current_status = 'in-progress'

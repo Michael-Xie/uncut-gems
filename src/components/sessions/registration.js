@@ -27,7 +27,8 @@ export default function Register({ dispatch }) {
         user_name: user,
         password: password,
         stripe_charge_id: null
-      })
+      },
+      {baseURL: 'https://uncut-gems-api-server.herokuapp.com'})
         .then(res => {
           if (Object.keys(res.data).length > 0) {
             localStorage.setItem('user', JSON.stringify(res.data));
