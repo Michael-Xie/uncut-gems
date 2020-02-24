@@ -22,12 +22,6 @@ const stripePromise = loadStripe("pk_test_PmFe0RYTJwj04yOubxzvdSkQ00oIYKFC0L");
 const Application = () => {
   const { state, dispatch } = useApplicationData()
 
-  const getUserBalance = () => {
-    const user_name = JSON.parse(localStorage.getItem("user")).user_name
-    const findUser = state.users.filter(user => user_name === user.user_name)[0]
-    console.log(findUser)
-  }
-
   return (
     <Fragment>
       <Router>
