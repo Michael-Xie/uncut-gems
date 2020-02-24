@@ -22,11 +22,15 @@ const stripePromise = loadStripe("pk_test_PmFe0RYTJwj04yOubxzvdSkQ00oIYKFC0L");
 const Application = () => {
   const { state, dispatch } = useApplicationData()
 
+  const getUserBalance = () => {
+    const user_name = JSON.parse(localStorage.getItem("user")).user_name
+    const findUser = state.users.filter(user => user_name === user.user_name)[0]
+    console.log(findUser)
+  }
+
   return (
     <Fragment>
       <Router>
-        
-       
          <Navigation
           username={
             localStorage.getItem("user") !== null
@@ -34,7 +38,9 @@ const Application = () => {
               : ""
           }
           userphoto="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png"
-          balance={functions.localStorageUserObj()? functions.localStorageUserObj().wallet_amount : 0}
+          balance={state.users.length > 0 && JSON.parse(localStorage.getItem("user")) !== null &&
+                   state.users.filter(user => JSON.parse(localStorage.getItem("user")).user_name === user.user_name)[0] &&
+                   state.users.filter(user => JSON.parse(localStorage.getItem("user")).user_name === user.user_name)[0].wallet_amount}
         />
         {localStorage.getItem("user") ? (
           <Redirect to={{ pathname: "/games" }} />
