@@ -73,7 +73,7 @@ export default function ClosedParlay({ name, bets, participants, entry, start_ti
         </Title>
         <div></div>
 
-        <Info><img src="https://toppng.com/uploads/preview/em-svg-png-icon-free-download-gem-icon-11563228146u2haxp4svc.png" alt="gem-icon" height="20px" width="20px" /> {participants.length * entry} </Info>
+        <Info><img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="15px" width="15px" /> {participants.length * entry} </Info>
       </Header>
 
       <Rankings>

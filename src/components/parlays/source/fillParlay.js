@@ -173,7 +173,7 @@ export default function FillParlay({ user, users, parlay_id, parlay_name, parlay
         <h1>{parlay_name}</h1>
         <div></div>
 
-        <div><img src="https://toppng.com/uploads/preview/em-svg-png-icon-free-download-gem-icon-11563228146u2haxp4svc.png" alt="gem-icon" height="20px" width="20px" />{parlay_fee}</div>
+        <div><img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="15px" width="15px" />{parlay_fee}</div>
 
       </Header>
       <FillInfo>Fill out parlay</FillInfo>
