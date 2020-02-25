@@ -6,7 +6,6 @@ import NavButtons from "./navButtons"
 import LoggedOutMenu from "./loggedoutMenu"
 
 const Header = styled.header` 
-  
   background-color: #fff;
   width: 100%;
   height: 75px;
