@@ -91,7 +91,7 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
       }
     }
   }
-console.log(participants,'Parti')
+
   return (
     <Article>
       <Header>
