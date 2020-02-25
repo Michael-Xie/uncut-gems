@@ -148,7 +148,6 @@ export default function Register({ dispatch }) {
           Confirm Password
           <Input type="password" name="password_confirmation" />
         </Label>
-
         <Submit type="submit">Submit</Submit>
       </Form>
     </Wrapper>
