@@ -5,7 +5,7 @@ import styled from "styled-components"
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${props => props.rank === '1' ? 'gold' : props.rank === '2' ? 'silver' : props.rank === '3' ? '#cd7f32' : '#fff'};
+  background-color: ${props => props.rank === 1 ? 'gold' : props.rank === 2 ? 'silver' : props.rank === 3 ? '#cd7f32' : '#fff'};
 `
 
 const Left = styled.div`

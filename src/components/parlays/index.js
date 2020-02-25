@@ -219,6 +219,8 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
   const getRankingsForParlays = (parlayID) => {
     return rankings[parlayID]
   }
+
+  
   // get bets for a given parlay
   const getBets = (parlay_id) => {
     const filtered = bets.filter(bet => {
@@ -353,11 +355,13 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
             title={`Open Parlays [${getOpenParlays().length}]`}
             buffer={buffer}
           />
+         
           {
             getOpenParlays().map(parlay => {
               return (
                 <Div key={parlay.id}>
                   <ShowParlay
+                    users={users}
                     name={parlay.name}
                     bets={getBets(parlay.id).length}
                     participants={getParticipants(parlay.id)}
@@ -382,6 +386,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
               return (
                 <Div key={parlay.id}>
                   <ShowParlay
+                    users={users}
                     name={parlay.name}
                     rankings={getRankingsForParlays(parlay.id)}
                     bets={getBets(parlay.id).length}

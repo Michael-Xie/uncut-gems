@@ -71,12 +71,12 @@ const Info = styled.h1`
     margin: 5px;
   `
 
-export default function ShowParlay({ name, bets, participants, entry, start_time, rankings }) {
+export default function ShowParlay({ name, bets, participants, entry, start_time, rankings, users }) {
   
-  
+
   const displayRank = (rank) => {
-    const x = rankings[rank]
-    return x || [];
+    const rankObj = rankings[rank]
+    return rankObj || [];
   }
 
   return (
@@ -101,16 +101,17 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
               return (
                 <UserRanked 
                 username={names[i]}
-                rank={'1'} 
+                rank={1} 
                 userphoto={'https://i.imgur.com/XhF02ie.png'}
                 points={player[names][0]}
                 />
               )
             }
           })
+        
 
         }
-        {displayRank(1).length < 2 && 
+        {
           displayRank(2).map(player => {
             const names = Object.keys(player)
             for (let i = 0; i < names.length || i === 2; i++) {
@@ -118,7 +119,7 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
               return (
                 <UserRanked 
                 username={names[i]}
-                rank={'2'} 
+                rank={2} 
                 userphoto={'https://i.imgur.com/XhF02ie.png'}
                 points={player[names][0]}
                 />
@@ -129,7 +130,7 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
         }
         {
         
-        ((displayRank(1).length + displayRank(2).length) < 3) &&
+        
           displayRank(3).map(player => {
             const names = Object.keys(player)
             for (let i = 0; i < names.length; i++) {
@@ -137,7 +138,7 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
               return (
                 <UserRanked 
                 username={names[i]}
-                rank={'3'} 
+                rank={3} 
                 userphoto={'https://i.imgur.com/XhF02ie.png'}
                 points={player[names][0]}
                 />
