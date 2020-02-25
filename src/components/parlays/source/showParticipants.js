@@ -7,7 +7,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  margin: 0 auto;
+  display:flex;
+  justify-content: center;
 `
 
 const ShowMore = styled.div`
@@ -55,7 +56,7 @@ export default function ShowParticipants({ participants }) {
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <ShowMore>show all participants</ShowMore>
+        <ShowMore>show all {participants.length} participants</ShowMore>
       </Icon>
       <Menu
         id="long-menu"

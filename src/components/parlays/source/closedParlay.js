@@ -6,6 +6,7 @@ import { findAllByAltText } from "@testing-library/react"
 
 import UserRanked from './userRanked'
 
+
 const Article = styled.article` 
   background-color: #fff;
   width: 600px;
@@ -25,7 +26,7 @@ const Header = styled.div`
   display:flex;
   align-items: center;
   justify-content: space-between;
-  margin: 5px 20px;
+  margin: 5px 20px 0;
 `
 
 const Title = styled.h1`
@@ -40,47 +41,29 @@ const Rankings = styled.section`
     margin: 10px auto;
   `
 
-const User = styled.div`
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-    align-content: flex-end;
-    padding: 0 10px;
-    cursor:pointer;
 
-`
-const Name = styled.div` 
-  font-size: 18px;
-  margin-top: 5px;
-`
-
-const MoreUsers = styled.p`
-  display:flex;
-  align-items:flex-end;
-`
-
-const ParlayInfo = styled.section`
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-
-    margin: 10px;
-    
-  `
 
 const Info = styled.h1`
     margin: 5px;
   `
 
-export default function ClosedParlay({ name, bets, participants, entry, start_time, rankings, users }) {
+export default function ClosedParlay({ name, bets, participants, entry, start_time, rankings, users}) {
   
 
   const displayRank = (rank) => {
     const rankObj = rankings[rank]
     return rankObj || [];
   }
-  
-console.log(1)
+
+  //  ------ Find User By Name  ------  //
+  const findUserByName = (userName) => {
+    
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].user_name === userName) {
+        return users[i].user_photo
+      } 
+  }
+  }
   return (
 
     <Article>
@@ -104,7 +87,7 @@ console.log(1)
                 <UserRanked 
                 username={names[i]}
                 rank={1} 
-                userphoto={'https://i.imgur.com/XhF02ie.png'}
+                userphoto={findUserByName(names[i])}
                 points={player[names][0]}
                 />
               )
@@ -122,7 +105,7 @@ console.log(1)
                 <UserRanked 
                 username={names[i]}
                 rank={2} 
-                userphoto={'https://i.imgur.com/XhF02ie.png'}
+                userphoto={findUserByName(names[i])}
                 points={player[names][0]}
                 />
               )
@@ -141,7 +124,7 @@ console.log(1)
                 <UserRanked 
                 username={names[i]}
                 rank={3} 
-                userphoto={'https://i.imgur.com/XhF02ie.png'}
+                userphoto={findUserByName(names[i])}
                 points={player[names][0]}
                 />
               )

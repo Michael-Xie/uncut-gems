@@ -241,6 +241,8 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
     return filtered.sort((a, b) => b.id - a.id)
   }
 
+
+
   // helper function for the search feature.
   const search = (value) => {
     setSearchRes([])
