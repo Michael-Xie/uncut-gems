@@ -29,6 +29,11 @@ const Game = styled.div`
   padding: 10px 0;
 `
 
+const InputLogo = styled.div` 
+  display: flex;
+  align-items: center;
+`
+
 const Input = styled.input`
   padding: 12px 20px;
   margin: 8px 0;
@@ -36,7 +41,11 @@ const Input = styled.input`
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  width: 150px;
+  margin: 0 5px;
 `
+
+
 
 const Choose = styled.div`
   display: flex;
@@ -154,7 +163,7 @@ export default function FillParlay({ user, users, parlay_id, parlay_name, parlay
       <Header>
         <h1>{parlay_name}</h1>
         <div></div>
-        <div>{parlay_admin}</div>
+        <div>{parlay_fee}</div>
       </Header>
       {
         bets.map(bet => {
@@ -187,11 +196,18 @@ export default function FillParlay({ user, users, parlay_id, parlay_name, parlay
                   if (bType === bet.type) {
                     const teams = findTeams(bet.game_id)
                     return (
-                      <Choose>
-                        <BetType>{betKeys[bet.type]}</BetType>
-                        <Input key={bet.id} type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} />
-                        <div></div>
-                      </Choose>
+                      <div>
+                        
+                        <Choose>
+
+                          <BetType>{betKeys[bet.type]}</BetType>
+                          <InputLogo>
+                          <img src={teams.homeLogo} alt={teams.homeTeam} height="30px" width="30px"/>
+                          <Input key={bet.id} type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} placeholder="Enter total" />
+                          <img src={teams.awayLogo} alt={teams.awayTeam} height="30px" width="30px"/>
+                          </InputLogo>
+                        </Choose>
+                      </div>
                     )
                   }
                 })
@@ -200,20 +216,20 @@ export default function FillParlay({ user, users, parlay_id, parlay_name, parlay
           )
         })
       }
-     <Buttons>
-      <ParlaySubmit
-        parlay_fee={parlay_fee}
-        parlay_id={parlay_id}
-        user={user}
-        users={users}
-        data={betSelection}
-        expected={bets.length}
-        onSubmit={onSubmit}
-        participants={participants}
-      >
-        Submit Bet
+      <Buttons>
+        <ParlaySubmit
+          parlay_fee={parlay_fee}
+          parlay_id={parlay_id}
+          user={user}
+          users={users}
+          data={betSelection}
+          expected={bets.length}
+          onSubmit={onSubmit}
+          participants={participants}
+        >
+          Submit Bet
       </ParlaySubmit>
-      </Buttons> 
+      </Buttons>
     </Wrapper>
 
   );

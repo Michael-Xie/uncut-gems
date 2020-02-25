@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 const Wrapper = styled.div`
   height: 50px;
-  max-width: 200px;
+  max-width: 220px;
   width:100%;
   
 `
@@ -50,7 +50,6 @@ export default function PickTeam({ getBetSelection, bet, check, teams }) {
         <Logo
           src={teams.awayLogo}
           alt={teams.awayTeam}
-
         />
       </Label>
     
