@@ -5,6 +5,7 @@ import useVisualMode from "../../hooks/useVisualMode"
 import Loading from "./source/loading"
 import CreateParlay from "./source/createParlay"
 import ShowParlay from "./source/showParlay"
+import ClosedParlay from './source/closedParlay'
 import FillParlay from "./source/fillParlay"
 import ActiveParlay from "./source/activeParlay"
 
@@ -103,6 +104,7 @@ const TenOpen = styled.div`
 
 
 const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, users, rankings }) => {
+  
   // constants to handle visual transitions.
   const CREATE = "CREATE"
   const ACTIVE = "ACTIVE"
@@ -216,6 +218,12 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
     })
     return closedParlays.sort((a, b) => b.id - a.id)
   }
+
+  const getRankingsForParlays = (parlayID) => {
+    return rankings[parlayID]
+  }
+
+  
   // get bets for a given parlay
   const getBets = (parlay_id) => {
     const filtered = bets.filter(bet => {
@@ -232,6 +240,8 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
     })
     return filtered.sort((a, b) => b.id - a.id)
   }
+
+
 
   // helper function for the search feature.
   const search = (value) => {
@@ -350,11 +360,13 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
             title={`Open Parlays [${getOpenParlays().length}]`}
             buffer={buffer}
           />
+         
           {
             getOpenParlays().map(parlay => {
               return (
                 <Div key={parlay.id}>
                   <ShowParlay
+                    users={users}
                     name={parlay.name}
                     bets={getBets(parlay.id).length}
                     participants={getParticipants(parlay.id)}
@@ -373,12 +385,15 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
             title={`Closed [${getClosedParlays().length}]`}
             buffer={buffer}
           />
+        
           {
             getClosedParlays().map(parlay => {
               return (
                 <Div key={parlay.id}>
-                  <ShowParlay
+                  <ClosedParlay
+                    users={users}
                     name={parlay.name}
+                    rankings={getRankingsForParlays(parlay.id)}
                     bets={getBets(parlay.id).length}
                     participants={[...getParticipants(parlay.id)]}
                     entry={parlay.fee}

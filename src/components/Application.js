@@ -21,6 +21,7 @@ const stripePromise = loadStripe("pk_test_PmFe0RYTJwj04yOubxzvdSkQ00oIYKFC0L");
 
 const Application = () => {
   const { state, dispatch } = useApplicationData()
+  
 
   return (
     <Fragment>
@@ -35,7 +36,7 @@ const Application = () => {
           userphoto={
             localStorage.getItem("user") !== null
               ? JSON.parse(localStorage.getItem("user")).user_photo
-              : ""
+              : "https://i.imgur.com/XhF02ie.png"
           }
 
           balance={state.users.length > 0 && JSON.parse(localStorage.getItem("user")) !== null &&

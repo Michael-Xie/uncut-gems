@@ -167,9 +167,11 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
         />
 
       </Center>
-      <H2>Select Your Bets</H2>
+      
+    
+
       {
-        data.map(game => {
+       data.map(game => {
           if (game)
             return (
             <GameListItem
@@ -177,6 +179,7 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
               setBet={setBet}
             />
             )
+          
         })
       }
       <FormSubmit
