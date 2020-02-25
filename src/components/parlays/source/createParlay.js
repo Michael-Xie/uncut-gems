@@ -27,7 +27,7 @@ const H2 = styled.h3`
 const Center = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 0  auto 15px;
 `
 
 const MoreInfo = styled.button`
@@ -103,19 +103,8 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
             betName: 'Points By Half',
             explanation: 'Select the combined total of points scored by half-time.',
             selected: false,
-          },
-          {
-            betName: 'Race to 10',
-            explanation: 'Select which team will score 10 points first.',
-            type: "race_to_10",
-            selected: false,
-          },
-          {
-            betName: 'Race to 100',
-            explanation: 'Select which team will score 100 points first.',
-            type: "race_to_100",
-            selected: false,
           }
+
         ]
       };
   }))
