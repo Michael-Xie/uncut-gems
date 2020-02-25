@@ -39,7 +39,7 @@ const SearchContainer = styled.div`
   margin: 0 auto;
 `
 const Search = styled.input`
-  max-width: 400px;
+  max-width: 600px;
   height: 20px;
   width: 100%;
 
@@ -57,16 +57,19 @@ const Search = styled.input`
 
 const ResultContainer = styled.div`
   margin: 0 auto;
-
-  max-width: 400px;
-  width:100%;
+  width: 100%;
+  height: 20px;
+  max-width: 600px;
 `
 
 const SearchResult = styled.button`
-  max-width: 400px;
   width: 100%;
-  padding: 5px 10px;
- 
+  background: #000;
+  padding: 10px;
+  max-width: 600px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
 `
 
 const ButtonList = styled.div`
@@ -75,8 +78,6 @@ const ButtonList = styled.div`
   max-width: 600px;
   width:100%;
   margin: 0 auto;
-
-
 `
 
 const Button = styled.button`
@@ -97,11 +98,6 @@ const Button = styled.button`
     background-color: #DBDBDB;
   }
 `
-
-const TenOpen = styled.div`
-
-`
-
 
 const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, users, rankings }) => {
   
@@ -131,21 +127,6 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
         parlay.name.includes(value))
         return setSearchRes(prev => [...prev, parlay])
     })
-  }
-
-  // get open parlays the participant is not in (search)
-  const getOtherParlays = (max) => {
-    let index = 0
-    const parlayIds = userParlays()
-    const results = parlays.filter(parlay => {
-      if (!parlayIds.includes(parlay.id)   &&
-           parlay.current_status === 'open' &&
-           max > index) {
-        index++
-        return parlay
-      }
-    })
-    return results
   }
 
   // get participants given a parlay id
@@ -421,16 +402,6 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
           <SearchContainer>
             <Search placeholder='Search Open Parlays...' type="text" onChange={(e) => searching(e.target.value)} />
           </SearchContainer>
-          <TenOpen>
-          {
-            getOtherParlays(10).map(parlay => {
-              return (
-                <div>TODO FILL PUT BUTTONS HERE</div>
-              )
-            })
-          }
-          </TenOpen>
-
           <ResultContainer>
             {
               searchRes.map(search => {
