@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Redirect, useHistory } from "react-router-dom"
 import functions from "../../helpers/functions";
 import styled from 'styled-components'
 import CardSection from './CardSection';
+import axios from "axios"
 
 const Title = styled.div`
 display: flex;
@@ -127,7 +128,7 @@ export default function CheckoutForm() {
       setError(errorMessages);
     } else {
       // Show a success message
-      alert(`successfully charged card`);
+      axios.get(`http://uncut-gems-api-server.herokuapp.com/api/global/1`)
       history.goBack();
 
     }
