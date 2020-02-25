@@ -345,6 +345,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
                   <FillParlay
                     user={user}
                     users={users}
+                    cancelled={true}
                     parlay_name={parlay.name}
                     parlay_id={parlay.id}
                     parlay_fee={parlay.fee}
@@ -456,6 +457,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
                   <FillParlay
                     user={user}
                     users={users}
+                    cancelled={false}
                     parlay_id={parlay.id}
                     parlay_name={parlay.name}
                     parlay_fee={parlay.fee}
