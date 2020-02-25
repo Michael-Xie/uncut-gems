@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, expected, onSubmit, participants}) {
+export default function ParlaySubmit({data, user, users, cancelled, parlay_id,parlay_fee, expected, onSubmit, participants}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [error, setError] = React.useState('')
@@ -60,7 +60,8 @@ export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, e
 
   const handleCancel = () => {
     setOpen(false)
-    axios.delete(`https://uncut-gems-api-server.herokuapp.com/api/parlays/delete/${parlay_id}`)
+    if (cancelled)
+      axios.delete(`https://uncut-gems-api-server.herokuapp.com/api/parlays/delete/${parlay_id}`)
     onSubmit()
   };
 
