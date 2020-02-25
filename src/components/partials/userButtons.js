@@ -92,7 +92,7 @@ export default function UserButtons({ username, userphoto, balance }) {
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <MenuItem>
                       <LinkStyle to="/pay">
-                        <img src="https://raw.githubusercontent.com/JKaram/react-components/master/src/images/wallet.png" alt="wallet" height="24px" width="24px"></img>
+                        <img src="https://i.imgur.com/NhP56Q2.png" alt="wallet" height="13px" width="13px"></img>
                         {balance}
                       </LinkStyle>
                     </MenuItem>

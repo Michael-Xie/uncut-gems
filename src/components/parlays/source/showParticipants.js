@@ -9,6 +9,7 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
   display:flex;
   justify-content: center;
+  margin: 10px 0;
 `
 
 const ShowMore = styled.div`
@@ -20,17 +21,10 @@ const ShowMore = styled.div`
 const Icon = styled.button`
   background-color:transparent;
   border: none;
-  color: #DBDBDB;
+  color: #000;
   transition: color .5s;
 
   cursor: pointer;
-
-  &:hover {
-    color: #000;
-  }
-
-
-
 `
 
 const ITEM_HEIGHT = 48;

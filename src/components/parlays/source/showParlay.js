@@ -1,10 +1,13 @@
 
-  import React from "react"
-  import styled from "styled-components"
+import React from "react"
+import styled from "styled-components"
 
-  const Article = styled.article` 
+import ShowParticipants from './showParticipants'
+
+const Article = styled.article` 
     background-color: #fff;
-    width: 600px;
+    max-width: 600px;
+    width:100%;
     margin: 30px auto 0;
     border: 1px solid rgba(219,219,219);
     
@@ -13,80 +16,136 @@
       cursor: pointer;
     }
   `
-  const Title = styled.div`
+const Header = styled.header` 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 15px;
+`
+
+const Title = styled.div`
     display:flex;
     align-items: center;
     justify-content: center;
     margin: 5px 0;
   `
 
-  const Rankings = styled.section`
+const Rankings = styled.section`
     display: flex;
-    justify-content: center;
-    margin: 10px auto;
+    justify-content: space-evenly;
+     margin: 15px 0;
   `
 
-  const User = styled.div`
+const Fees = styled.div` 
+  display: flex;
+  
+`
+const User = styled.div`
     display:flex;
     flex-direction: column;
     align-items:center;
     align-content: flex-end;
-    padding: 0 10px;
+   
     cursor:pointer;
-    &:hover {
-      color: grey;
-    }
+  
   `
-  const MoreUsers = styled.p`
+const MoreUsers = styled.p`
     display:flex;
     align-items:flex-end;
   `
 
-  const ParlayInfo = styled.section`
+const ParlayInfo = styled.section`
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
     align-items:center;
-    margin: 10px;
-    
   `
 
-  const Info = styled.h1`
-    margin: 5px;
+const Time = styled.h1`
+    font-size: 12px;
   `
 
-  export default function ShowParlay({name, bets, participants, entry, start_time}) {
-    return (
-      <Article>
-      <Title>
-       <h1>{name}</h1>
-      </Title>
-      <ParlayInfo>
+
+const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Top = styled.div`
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+
+  font-weight: bold;
+`
+
+const Bottom = styled.div`
+
+  margin-bottom: 5px;
+`
+
+export default function ShowParlay({ name, bets, participants, entry, start_time, users }) {
+  const findUserByName = (userName) => {
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].user_name === userName) {
+        return users[i].user_photo
+      }
+    }
+  }
+
+  return (
+    <Article>
+      <Header>
+        <Title>
+          <h1>{name}</h1>
+        </Title>
         {start_time > 1 && (
-          <Info>Start Time: {new Date(start_time * 1000).toTimeString().slice(0, 5)} </Info>
+          <Time>{new Date(start_time * 1000).toTimeString().slice(0, 5)} start time</Time>
         )}
-        <Info># of bets: {bets}</Info>
-        <Info>entry fee: ${entry}.00</Info>
-        <Info>total pot: ${participants.length * entry}.00</Info>
+      </Header>
+      <ParlayInfo>
+        <Info>
+          <Bottom>Number of bets</Bottom>
+          <Top>{bets}</Top>
+
+        </Info>
+        <Info>
+          <Bottom>Entry Fee</Bottom>
+          <Top><img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="15px" width="15px" />  {entry}</Top>
+
+        </Info>
+
+        <Info>
+
+          <Bottom>Total Pot</Bottom>
+          <Top><img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="15px" width="15px" /> {participants.length * entry}</Top>
+
+        </Info>
 
       </ParlayInfo>
       <div className="separator">{participants.length} participant(s)</div>
       <Rankings>
         {
-          participants.map(player => {
+          participants.sort().slice(0, 4).map(player => {
             return (
               <User key={player.user_name}>
-                <img 
-                  src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' 
-                  alt='#' 
-                  height="30px" 
-                  width="30px" 
+                <img
+                  src={findUserByName(player.user_name)}
+                  alt={player.user_name}
+                  height="40px"
+                  width="40px"
                 />
                 {player.user_name}
               </User>
             )
           })
         }
+
+
+        
       </Rankings>
+      <ShowParticipants 
+        participants={participants}
+      />
     </Article>
   );
 

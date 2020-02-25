@@ -24,31 +24,35 @@ const Quarter = styled.h4`
 `
 
 
-export default function StatsBox ({ homeFirstQ, homeSecondQ, homeThirdQ, homeFourthQ, awayFirstQ, awaySecondQ, awayThirdQ, awayFourthQ }) {
+export default function StatsBox({ homeFirstQ, homeSecondQ, homeThirdQ, homeFourthQ, awayFirstQ, awaySecondQ, awayThirdQ, awayFourthQ }) {
   return (
     <Wrapper>
       <QuarterPoints>
-        {homeFirstQ}
-        <Quarter>First Quarter</Quarter>
         {awayFirstQ}
+
+        <Quarter>First Quarter</Quarter>
+        {homeFirstQ}
       </QuarterPoints>
 
       <QuarterPoints>
-        {homeSecondQ}
-        <Quarter>Second Quarter</Quarter>
         {awaySecondQ}
+        <Quarter>Second Quarter</Quarter>
+
+        {homeSecondQ}
       </QuarterPoints>
 
       <QuarterPoints>
-        {homeThirdQ}
-        <Quarter>Third Quarter</Quarter>
         {awayThirdQ}
+        <Quarter>Third Quarter</Quarter>
+
+        {homeThirdQ}
       </QuarterPoints>
 
       <QuarterPoints>
-        {homeFourthQ}
-        <Quarter>Fourth Quarter</Quarter>
         {awayFourthQ}
+        <Quarter>Fourth Quarter</Quarter>
+
+        {homeFourthQ}
       </QuarterPoints>
     </Wrapper>
 
