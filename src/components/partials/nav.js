@@ -53,6 +53,7 @@ const LinkStyle = styled(Link)`
 
 const Userinfo = styled.div`
   display: flex;
+  align-items: center;
  
 
 `
