@@ -5,40 +5,60 @@ import { Link } from "react-router-dom"
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 20px auto 0;
+  flex-direction: column;
+  margin: 0 auto;
   max-width: 600px;
   width:100%;
+  
+  
 `
 const Video = styled.img`
-  max-width:200px;
+  max-width:320px;
+  max-height: 100px;
+  height: 100%;
   width: 100%;
+ 
+  opacity: 0.5;
+`
+
+const Title = styled.h1` 
+  text-align:center;
+  padding: 50px;
+ 
+  font-size:36px;
+  color: #fff;
+  height: 100px;
+  background-image: url('https://www.nba.com/images/cms/2019-07/20190722_KOBE_DUNK.jpg?w=1920&h=1080');
+  background-size: cover;
+  text-shadow: 2px 1px #000;
+
 `
 
 const Form = styled.form`
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding-left: 25px;
   padding-right: 25px;
 
-  border: 1px solid #000;
-
-  background-color: #fff;
 
 `
 
 const Label = styled.label`
   display: flex;
   flex-direction: column;
+  font-weight: bold;
   
 `
 
 const Input = styled.input`
   padding: 10px;
   font-size: 18px;
+  margin: 10px 0;
 `
 const Submit = styled.button`
-  background-color: #4CAF50; /* Green */
+  background-color: #14191A; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -46,6 +66,9 @@ const Submit = styled.button`
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+
+  margin-top: 20px;
+  cursor:pointer;
 `
 
 export default function Login({ dispatch }) {
@@ -82,13 +105,13 @@ export default function Login({ dispatch }) {
   }
   return (
     <Wrapper>
-      <Video  src="https://raw.githubusercontent.com/pizzani/uncut-gems-client/master/images/login_page.gif" />
+      {/* <Video  src="https://raw.githubusercontent.com/pizzani/uncut-gems-client/master/images/login_page.gif" /> */}
      
-
+      <Title>Welcome to Uncut Gems</Title>
       
 
         <Form onSubmit={handleLogin}>
-        <h1>Welcome to Uncut Gems</h1>
+        
           <div className="error-container">
             {error.map((msg, i) => {
               return <div key={i} className="error-message">{msg}</div>

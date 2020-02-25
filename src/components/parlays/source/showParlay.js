@@ -1,14 +1,13 @@
+
   import React from "react"
   import styled from "styled-components"
 
   const Article = styled.article` 
     background-color: #fff;
     width: 600px;
-
     margin: 30px auto 0;
     border: 1px solid rgba(219,219,219);
     
-
     &:hover {
       box-shadow: 0 8px 6px -6px black;
       cursor: pointer;
@@ -24,7 +23,6 @@
   const Rankings = styled.section`
     display: flex;
     justify-content: center;
-
     margin: 10px auto;
   `
 
@@ -35,8 +33,6 @@
     align-content: flex-end;
     padding: 0 10px;
     cursor:pointer;
-
-
     &:hover {
       color: grey;
     }
@@ -50,7 +46,6 @@
     display: flex;
     flex-direction: column;
     align-items:center;
-
     margin: 10px;
     
   `
@@ -96,4 +91,3 @@
   );
 
 }
-
