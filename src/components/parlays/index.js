@@ -133,6 +133,21 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
     })
   }
 
+  // get open parlays the participant is not in (search)
+  const getOtherParlays = (max) => {
+    let index = 0
+    const parlayIds = userParlays()
+    const results = parlays.filter(parlay => {
+      if (!parlayIds.includes(parlay.id)   &&
+           parlay.current_status === 'open' &&
+           max > index) {
+        index++
+        return parlay
+      }
+    })
+    return results
+  }
+
   // get participants given a parlay id
   const getParticipants = (parlay_id) => {
     const filtered = participants.filter(participant => {
@@ -181,19 +196,10 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
   // get open parlays the user has participated in.
   const getOpenParlays = (max) => {
     const parlayIds = userParlays()
-    let index = 0;
     const openParlays = parlays.filter(parlay => {
-      index++
-      if (max && index <= max) {
-        index++
-        if (parlayIds.includes(parlay.id) &&
-            parlay.current_status === 'open')
-          return parlay
-      } else {
-        if (parlayIds.includes(parlay.id) &&
-            parlay.current_status === 'open')
-          return parlay
-      }
+      if (parlayIds.includes(parlay.id) &&
+          parlay.current_status === 'open')
+        return parlay
     })
     return openParlays.sort((a, b) => b.id - a.id)
   }
@@ -416,8 +422,10 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
           </SearchContainer>
           <TenOpen>
           {
-            getOpenParlays(10).map(parlay => {
-              return <div>HELLO</div>
+            getOtherParlays(10).map(parlay => {
+              return (
+                <div>TODO FILL PUT BUTTONS HERE</div>
+              )
             })
           }
           </TenOpen>

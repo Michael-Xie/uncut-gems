@@ -35,7 +35,7 @@ const Title = styled.h3`
   width: 100%;
   border-bottom: 1px solid #000;
   color: #fff;
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   background-color: #000;
   background-image: url("https://www.transparenttextures.com/patterns/blizzard.png");
 `
