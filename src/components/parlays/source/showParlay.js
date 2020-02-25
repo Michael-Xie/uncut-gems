@@ -1,162 +1,93 @@
-import React, { useState } from "react";
-import styled from "styled-components"
 
-import ShowParticipants from './showParticipants'
-import { findAllByAltText } from "@testing-library/react"
+  import React from "react"
+  import styled from "styled-components"
 
-import UserRanked from './userRanked'
-
-const Article = styled.article` 
-  background-color: #fff;
-  width: 600px;
-
+  const Article = styled.article` 
+    background-color: #fff;
+    width: 600px;
     margin: 30px auto 0;
     border: 1px solid rgba(219,219,219);
     
+    &:hover {
+      box-shadow: 0 8px 6px -6px black;
+      cursor: pointer;
+    }
+  `
+  const Title = styled.div`
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+  `
 
-  &:hover {
-    box-shadow: 0 8px 6px -6px black;
-    cursor: pointer;
-  }
-`
-
-const Header = styled.div`
-  display:flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 5px 20px;
-`
-
-const Title = styled.h1`
- 
-
-`
-
-const Rankings = styled.section`
+  const Rankings = styled.section`
     display: flex;
     justify-content: center;
-
     margin: 10px auto;
   `
 
-const User = styled.div`
+  const User = styled.div`
     display:flex;
     flex-direction: column;
     align-items:center;
     align-content: flex-end;
     padding: 0 10px;
     cursor:pointer;
+    &:hover {
+      color: grey;
+    }
+  `
+  const MoreUsers = styled.p`
+    display:flex;
+    align-items:flex-end;
+  `
 
-`
-const Name = styled.div` 
-  font-size: 18px;
-  margin-top: 5px;
-`
-
-const MoreUsers = styled.p`
-  display:flex;
-  align-items:flex-end;
-`
-
-const ParlayInfo = styled.section`
+  const ParlayInfo = styled.section`
     display: flex;
     flex-direction: column;
     align-items:center;
-
     margin: 10px;
     
   `
 
-const Info = styled.h1`
+  const Info = styled.h1`
     margin: 5px;
   `
 
-export default function ShowParlay({ name, bets, participants, entry, start_time, rankings, users }) {
-  
+  export default function ShowParlay({name, bets, participants, entry, start_time}) {
+    return (
+      <Article>
+      <Title>
+       <h1>{name}</h1>
+      </Title>
+      <ParlayInfo>
+        {start_time > 1 && (
+          <Info>Start Time: {new Date(start_time * 1000).toTimeString().slice(0, 5)} </Info>
+        )}
+        <Info># of bets: {bets}</Info>
+        <Info>entry fee: ${entry}.00</Info>
+        <Info>total pot: ${participants.length * entry}.00</Info>
 
-  const displayRank = (rank) => {
-    const rankObj = rankings[rank]
-    return rankObj || [];
-  }
-
-  return (
-
-    <Article>
-      <Header>
-        <Title>
-          {name}
-        </Title>
-        <div></div>
-
-        <Info><img src="https://toppng.com/uploads/preview/em-svg-png-icon-free-download-gem-icon-11563228146u2haxp4svc.png" alt="gem-icon" height="20px" width="20px" /> {participants.length * entry} </Info>
-      </Header>
-
+      </ParlayInfo>
+      <div className="separator">{participants.length} participant(s)</div>
       <Rankings>
-       
         {
-          displayRank(1).map(player => {
-            const names = Object.keys(player)
-            for (let i = 0; i < names.length || i === 3; i++) {
-
-              return (
-                <UserRanked 
-                username={names[i]}
-                rank={1} 
-                userphoto={'https://i.imgur.com/XhF02ie.png'}
-                points={player[names][0]}
+          participants.map(player => {
+            return (
+              <User key={player.user_name}>
+                <img 
+                  src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' 
+                  alt='#' 
+                  height="30px" 
+                  width="30px" 
                 />
-              )
-            }
+                {player.user_name}
+              </User>
+            )
           })
-        
-
         }
-        {
-          displayRank(2).map(player => {
-            const names = Object.keys(player)
-            for (let i = 0; i < names.length || i === 2; i++) {
-
-              return (
-                <UserRanked 
-                username={names[i]}
-                rank={2} 
-                userphoto={'https://i.imgur.com/XhF02ie.png'}
-                points={player[names][0]}
-                />
-              )
-            }
-          })
-
-        }
-        {
-        
-        
-          displayRank(3).map(player => {
-            const names = Object.keys(player)
-            for (let i = 0; i < names.length; i++) {
-
-              return (
-                <UserRanked 
-                username={names[i]}
-                rank={3} 
-                userphoto={'https://i.imgur.com/XhF02ie.png'}
-                points={player[names][0]}
-                />
-              )
-            }
-          })
-
-        } 
-        
-
-
-        <ShowParticipants 
-          participants={participants}
-        />
-
       </Rankings>
     </Article>
   );
 
 }
-

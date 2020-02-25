@@ -6,8 +6,29 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import styled from 'styled-components'
 
+const Wrapper = styled.div`
+  margin: 0 auto;
+`
+
 const ShowMore = styled.div`
   font-size: 12px;
+
+
+`
+
+const Icon = styled.button`
+  background-color:transparent;
+  border: none;
+  color: #DBDBDB;
+  transition: color .5s;
+
+  cursor: pointer;
+
+  &:hover {
+    color: #000;
+  }
+
+
 
 `
 
@@ -25,16 +46,17 @@ export default function ShowParticipants({ participants }) {
     setAnchorEl(null);
   };
 
+  console.log(participants)
   return (
-    <div>
-      <IconButton
+    <Wrapper>
+      <Icon
         aria-label="more"
         aria-controls="long-menu"
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <ShowMore>.. 3 more</ShowMore>
-      </IconButton>
+        <ShowMore>show all participants</ShowMore>
+      </Icon>
       <Menu
         id="long-menu"
         anchorEl={anchorEl}
@@ -48,15 +70,18 @@ export default function ShowParticipants({ participants }) {
           },
         }}
       >
-     {/* participants.map((participant) => {
-          return (
-       
-        <MenuItem >
-         participant.name
-          </MenuItem>
-          )
-     })  */}
+        {
+
+          participants.map((participant) => {
+            return (
+
+              <MenuItem>
+                {participant.user_name}
+              </MenuItem>
+            )
+          })
+        }
       </Menu>
-    </div>
+    </Wrapper>
   );
 }

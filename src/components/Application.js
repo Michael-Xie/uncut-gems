@@ -21,7 +21,7 @@ const stripePromise = loadStripe("pk_test_PmFe0RYTJwj04yOubxzvdSkQ00oIYKFC0L");
 
 const Application = () => {
   const { state, dispatch } = useApplicationData()
-  console.log('Paticipatns', state.participants)
+  
 
   return (
     <Fragment>
