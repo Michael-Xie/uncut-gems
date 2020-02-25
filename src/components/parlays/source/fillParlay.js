@@ -79,7 +79,7 @@ const Buttons = styled.div`
   justify-content: center;
 `
 
-export default function FillParlay({ user, users, parlay_id, parlay_name, parlay_fee, parlay_admin, games, allBets, onSubmit, participants }) {
+export default function FillParlay({ user, users, cancelled, parlay_id, parlay_name, parlay_fee, parlay_admin, games, allBets, onSubmit, participants }) {
 
 
 
@@ -183,8 +183,6 @@ export default function FillParlay({ user, users, parlay_id, parlay_name, parlay
             const teams = findTeams(bet.game_id)
             return (
               <Game key={bet.id}>
-
-
                 {
                   checkboxes.map(bType => {
                     if (bType === bet.type) {
@@ -240,6 +238,7 @@ export default function FillParlay({ user, users, parlay_id, parlay_name, parlay
           parlay_id={parlay_id}
           user={user}
           users={users}
+          cancelled={cancelled}
           data={betSelection}
           expected={bets.length}
           onSubmit={onSubmit}
