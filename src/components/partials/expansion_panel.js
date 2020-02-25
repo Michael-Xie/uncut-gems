@@ -49,7 +49,7 @@ const Type = styled.div`
   text-align: center;
 `
 
-const BetType = styled.h3`
+const BetType = styled.h5`
   display: flex;
   width: 33%;
   justify-content: center;
@@ -123,10 +123,13 @@ const Placement = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 33%;
+  width: 30%;
 `
 
 const UserImg = styled.img`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: ${props => props.color};
   border: 1px solid #000;
   border-radius: 50%;
@@ -134,19 +137,20 @@ const UserImg = styled.img`
 `
 
 const Player = styled.div`
-  font-size: 1.25em;
   font-weight: bold;
 `
 
 const Rank = styled.span`
-  font-size: 1.5em;
   font-weight: bold;
   color: ${props => props.color};
   text-shadow: 0.75px 0.75px #000;
 `
 
 const Points = styled.span`
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
 `
 
 const Participants = styled.div`
@@ -154,7 +158,6 @@ const Participants = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 0px 0px 10px 10px;
-  
 `
 
 const ParticipantStats = styled.span`
@@ -163,6 +166,9 @@ const ParticipantStats = styled.span`
 `
 
 const Div = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 25%;
 `
 
@@ -304,7 +310,7 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
                         <Current>
                           {getResult(bet.type)} 
                           {bet.type !== 'pickem' && <span>&nbsp;({difference})</span>}
-                          </Current>
+                        </Current>
                       </UserBets>
                     )
                   }

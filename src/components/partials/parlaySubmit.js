@@ -60,7 +60,7 @@ export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, e
 
   const handleCancel = () => {
     setOpen(false)
-    axios.delete(`http://localhost:8001/api/parlays/delete/${parlay_id}`)
+    axios.delete(`https://uncut-gems-api-server.herokuapp.com/api/parlays/delete/${parlay_id}`)
     onSubmit()
   };
 
@@ -87,7 +87,7 @@ export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, e
         {baseURL: 'https://uncut-gems-api-server.herokuapp.com'})
         .catch(err => console.log(err))
 
-        axios.put(`http://localhost:8001/api/users/update/${user.user_name}`, {
+        axios.put(`https://uncut-gems-api-server.herokuapp.com/api/users/update/${user.user_name}`, {
           wallet_amount: parlay_fee * -100
         })
         .catch(err => console.log(err))
