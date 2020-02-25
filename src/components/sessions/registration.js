@@ -78,6 +78,10 @@ export default function Register({ dispatch }) {
         </label>
 
         <button type="submit">Submit</button>
+
+
+
+        
       </form>
     </>
   )
