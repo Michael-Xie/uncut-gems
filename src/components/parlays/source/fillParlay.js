@@ -163,7 +163,9 @@ export default function FillParlay({ user, users, parlay_id, parlay_name, parlay
       <Header>
         <h1>{parlay_name}</h1>
         <div></div>
-        <div>{parlay_fee}</div>
+        
+        <div><img src="https://toppng.com/uploads/preview/em-svg-png-icon-free-download-gem-icon-11563228146u2haxp4svc.png" alt="gem-icon" height="20px" width="20px" />{parlay_fee}</div>
+
       </Header>
       {
         bets.map(bet => {
