@@ -17,9 +17,7 @@ const Wrapper = styled.article`
   font-size: 18px;
 `
 const AllBets = styled.div` 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+
 `
 const Header = styled.header`
   display: flex;
@@ -56,7 +54,7 @@ const Input = styled.input`
 const Choose = styled.div`
   display: flex;
   align-items:center;
-  justify-content: space-around;
+  justify-content: center;
 
   max-width: 600px;
   width: 100%;
