@@ -16,14 +16,20 @@ const Wrapper = styled.article`
   box-shadow: 0 8px 6px -6px black;
   font-size: 18px;
 `
-
+const AllBets = styled.div` 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-content: center;
   padding: 20px;
 `
-
+const FillInfo = styled.h4`
+  text-align: center;
+`
 
 const Game = styled.div`
   padding: 10px 0;
@@ -35,13 +41,13 @@ const InputLogo = styled.div`
 `
 
 const Input = styled.input`
-  padding: 12px 20px;
+  padding: 12px 12px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  width: 150px;
+  width: 100px;
   margin: 0 5px;
 `
 
@@ -49,18 +55,23 @@ const Input = styled.input`
 
 const Choose = styled.div`
   display: flex;
-  justify-content:space-evenly;
   align-items:center;
+  justify-content: space-around;
 
   max-width: 600px;
   width: 100%;
 `
 
-const BetType = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  max-width: 100px;
+const Logos = styled.img` 
+  max-width: 30px;
   width: 100%;
+`
+
+const BetType = styled.div`
+  max-width: 150px;
+  width: 100%;
+
+  font-size:16px;
 `
 
 const Buttons = styled.div` 
@@ -89,7 +100,7 @@ export default function FillParlay({ user, users, parlay_id, parlay_name, parlay
     race_to_10: "Race to 10",
     pickem: "Pick`Em",
     points_tf: "Total Points",
-    points_th: "Total Points by Half Time"
+    points_th: "Total Points by Half"
   }
   // grab all the bets for the parlay.
   useEffect(() => {
@@ -163,61 +174,68 @@ export default function FillParlay({ user, users, parlay_id, parlay_name, parlay
       <Header>
         <h1>{parlay_name}</h1>
         <div></div>
-        
+
         <div><img src="https://toppng.com/uploads/preview/em-svg-png-icon-free-download-gem-icon-11563228146u2haxp4svc.png" alt="gem-icon" height="20px" width="20px" />{parlay_fee}</div>
 
       </Header>
-      {
-        bets.map(bet => {
-          const teams = findTeams(bet.game_id)
-          return (
-            <Game key={bet.id}>
+      <FillInfo>Fill out parlay</FillInfo>
+      <AllBets>
+        {
+          bets.map(bet => {
+            const teams = findTeams(bet.game_id)
+            return (
+              <Game key={bet.id}>
 
 
-              {
-                checkboxes.map(bType => {
-                  if (bType === bet.type) {
+                {
+                  checkboxes.map(bType => {
+                    if (bType === bet.type) {
 
-                    return (
-                      <Choose>
-                        <BetType>{betKeys[bet.type]}</BetType>
-                        <PickTeam
-                          teams={teams}
-                          getBetSelection={getBetSelection}
-                          bet={bet}
-                          check={check}
-                        />
-                        <div></div>
-                      </Choose>
-                    );
-                  }
-                })
-              }
-              {
-                sliders.map(bType => {
-                  if (bType === bet.type) {
-                    const teams = findTeams(bet.game_id)
-                    return (
-                      <div>
-                        
+                      return (
                         <Choose>
-
                           <BetType>{betKeys[bet.type]}</BetType>
-                          <InputLogo>
-                          <img src={teams.homeLogo} alt={teams.homeTeam} height="30px" width="30px"/>
-                          <Input key={bet.id} type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} placeholder="Enter total" />
-                          <img src={teams.awayLogo} alt={teams.awayTeam} height="30px" width="30px"/>
-                          </InputLogo>
+                          <PickTeam
+                            teams={teams}
+                            getBetSelection={getBetSelection}
+                            bet={bet}
+                            check={check}
+                          />
+                          <div></div>
                         </Choose>
-                      </div>
-                    )
-                  }
-                })
-              }
-            </Game>
-          )
-        })
-      }
+                      );
+                    }
+                  })
+                }
+                {
+                  sliders.map(bType => {
+                    if (bType === bet.type) {
+                      const teams = findTeams(bet.game_id)
+                      return (
+                        <div>
+
+                          <Choose>
+
+                            <BetType>{betKeys[bet.type]}</BetType>
+                            <InputLogo>
+                              <Logos src={teams.homeLogo} alt={teams.homeTeam} />
+                              <Input key={bet.id} type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} placeholder="Enter total" />
+                              <Logos src={teams.awayLogo} alt={teams.awayTeam} />
+                            </InputLogo>
+                          </Choose>
+                        </div>
+                      )
+                    }
+                  })
+                }
+
+              </Game>
+
+            )
+
+          })
+
+        }
+      </AllBets>
       <Buttons>
         <ParlaySubmit
           parlay_fee={parlay_fee}

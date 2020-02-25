@@ -23,6 +23,7 @@ const Left = styled.div`
 `
 
 const Text = styled.h1`
+font-size: 24px;
   
 `
 const Right = styled.div`
