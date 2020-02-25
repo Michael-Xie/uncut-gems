@@ -2,19 +2,21 @@ import React from "react"
 import styled from "styled-components"
 
 const Wrapper = styled.div`
+  display: flex;
+
   height: 50px;
-  max-width: 200px;
+  max-width: 120px;
   width:100%;
-  
 `
 
 const Label = styled.label`
-  margin: auto 15px;
 `
 
 const Logo = styled.img`
-  height: 100%;
-  
+  width: 100%;
+  max-width: 50px;
+
+  margin: 0 10px;
   opacity:0.6;
 
   cursor: pointer;
@@ -24,7 +26,7 @@ const Logo = styled.img`
 export default function PickTeam({ getBetSelection, bet, check, teams }) {
   return (
     <Wrapper>
-     
+     <div>
       <Label>
         <input
           type="radio"
@@ -38,7 +40,8 @@ export default function PickTeam({ getBetSelection, bet, check, teams }) {
           alt={teams.homeTeam}
         />
       </Label>
-      
+      </div>
+     <div>
       <Label>
         <input
           type="radio"
@@ -50,10 +53,9 @@ export default function PickTeam({ getBetSelection, bet, check, teams }) {
         <Logo
           src={teams.awayLogo}
           alt={teams.awayTeam}
-
         />
       </Label>
-    
+      </div>
     </Wrapper>
   )
 }

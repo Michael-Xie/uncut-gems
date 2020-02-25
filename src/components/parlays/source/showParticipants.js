@@ -47,7 +47,7 @@ export default function ShowParticipants({ participants }) {
     setAnchorEl(null);
   };
 
-  console.log(participants)
+  
   return (
     <Wrapper>
       <Icon

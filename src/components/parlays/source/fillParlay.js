@@ -12,45 +12,77 @@ const Wrapper = styled.article`
   max-width: 600px;
   width: 100%;
   background-color: #fff;
-  margin: 0 auto 30px;
+  margin: 10px auto 30px;
   box-shadow: 0 8px 6px -6px black;
   font-size: 18px;
 `
+const AllBets = styled.div` 
 
+`
+const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding: 20px;
+`
+const FillInfo = styled.h4`
+  text-align: center;
+`
 
 const Game = styled.div`
   padding: 10px 0;
 `
 
+const InputLogo = styled.div` 
+  display: flex;
+  align-items: center;
+`
+
 const Input = styled.input`
-  padding: 12px 20px;
+  padding: 12px 12px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  width: 100px;
+  margin: 0 5px;
 `
+
+
 
 const Choose = styled.div`
   display: flex;
-  justify-content:space-evenly;
   align-items:center;
+  justify-content: center;
 
   max-width: 600px;
   width: 100%;
 `
 
-const BetType = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  max-width: 100px;
+const Logos = styled.img` 
+  max-width: 30px;
   width: 100%;
 `
 
-export default function FillParlay({user, users, parlay_id, parlay_name, parlay_fee, parlay_admin, games, allBets, onSubmit, participants}) {
+const BetType = styled.div`
+  max-width: 150px;
+  width: 100%;
 
-  
-  
+  font-size:16px;
+`
+
+const Buttons = styled.div` 
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display:flex;
+  justify-content: center;
+`
+
+export default function FillParlay({ user, users, parlay_id, parlay_name, parlay_fee, parlay_admin, games, allBets, onSubmit, participants }) {
+
+
+
   // keep bets in state.
   const [bets, setBets] = useState([])
   const [betSelection, setBetSelection] = useState([])
@@ -66,10 +98,10 @@ export default function FillParlay({user, users, parlay_id, parlay_name, parlay_
     race_to_10: "Race to 10",
     pickem: "Pick`Em",
     points_tf: "Total Points",
-    points_th: "Total Points by Half Time"
+    points_th: "Total Points by Half"
   }
   // grab all the bets for the parlay.
-  useEffect(() => {  
+  useEffect(() => {
     allBets.map(bet => {
       if (bet.parlay_id === parlay_id)
         return setBets(prev => [...prev, bet])
@@ -137,66 +169,85 @@ export default function FillParlay({user, users, parlay_id, parlay_name, parlay_
 
   return (
     <Wrapper>
-            <h1>{parlay_name}</h1>
-            <div>{parlay_fee}</div>
-            <div>{parlay_admin}</div>
+      <Header>
+        <h1>{parlay_name}</h1>
+        <div></div>
 
-      {
-        bets.map(bet => {
-          const teams = findTeams(bet.game_id)
-          return (
-            <Game key={bet.id}>
+        <div><img src="https://toppng.com/uploads/preview/em-svg-png-icon-free-download-gem-icon-11563228146u2haxp4svc.png" alt="gem-icon" height="20px" width="20px" />{parlay_fee}</div>
 
-              
-              {
-                checkboxes.map(bType => {
-                  if (bType === bet.type) {
+      </Header>
+      <FillInfo>Fill out parlay</FillInfo>
+      <AllBets>
+        {
+          bets.map(bet => {
+            const teams = findTeams(bet.game_id)
+            return (
+              <Game key={bet.id}>
 
-                    return (
-                      <Choose>
-                        <BetType>{betKeys[bet.type]}</BetType>
-                        <PickTeam
-                          teams={teams}
-                          getBetSelection={getBetSelection}
-                          bet={bet}
-                          check={check}
-                        />
-                        <div></div>
-                      </Choose>
-                    );
-                  }
-                })
-              }
-              {
-                sliders.map(bType => {
-                  if (bType === bet.type) {
-                    const teams = findTeams(bet.game_id)
-                    return (
-                      <Choose>
-                       <BetType>{betKeys[bet.type]}</BetType>
-                        <Input key={bet.id} type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} />
-                        <div></div>
-                      </Choose>
-                    )
-                  }
-                })
-              }
-            </Game>
-          )
-        })
-      }
-      <ParlaySubmit
-        parlay_fee={parlay_fee}
-        parlay_id={parlay_id}
-        user={user}
-        users={users}
-        data={betSelection}
-        expected={bets.length}
-        onSubmit={onSubmit}
-        participants={participants}
-      >
-        Submit Bet
+
+                {
+                  checkboxes.map(bType => {
+                    if (bType === bet.type) {
+
+                      return (
+                        <Choose>
+                          <BetType>{betKeys[bet.type]}</BetType>
+                          <PickTeam
+                            teams={teams}
+                            getBetSelection={getBetSelection}
+                            bet={bet}
+                            check={check}
+                          />
+                          <div></div>
+                        </Choose>
+                      );
+                    }
+                  })
+                }
+                {
+                  sliders.map(bType => {
+                    if (bType === bet.type) {
+                      const teams = findTeams(bet.game_id)
+                      return (
+                        <div>
+
+                          <Choose>
+
+                            <BetType>{betKeys[bet.type]}</BetType>
+                            <InputLogo>
+                              <Logos src={teams.homeLogo} alt={teams.homeTeam} />
+                              <Input key={bet.id} type="number" onChange={(e) => updateNumber(e.target.value, bet.id)} placeholder="Enter total" />
+                              <Logos src={teams.awayLogo} alt={teams.awayTeam} />
+                            </InputLogo>
+                          </Choose>
+                        </div>
+                      )
+                    }
+                  })
+                }
+
+              </Game>
+
+            )
+
+          })
+
+        }
+      </AllBets>
+      <Buttons>
+        <ParlaySubmit
+          parlay_fee={parlay_fee}
+          parlay_id={parlay_id}
+          user={user}
+          users={users}
+          data={betSelection}
+          expected={bets.length}
+          onSubmit={onSubmit}
+          participants={participants}
+        >
+          Submit Bet
       </ParlaySubmit>
+      </Buttons>
     </Wrapper>
 
   );
