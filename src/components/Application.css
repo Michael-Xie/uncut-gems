@@ -81,7 +81,7 @@ body {
 }
 
 .link {
-  background-color: #4CAF50; /* Green */
+  background-color: #14191A; /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -89,6 +89,9 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+
+  margin-top: 20px;
+  cursor:pointer;
 }
 
  /* Radio Buttons */
