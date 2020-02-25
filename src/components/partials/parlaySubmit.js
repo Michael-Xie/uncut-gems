@@ -60,7 +60,7 @@ export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, e
 
   const handleCancel = () => {
     setOpen(false)
-    axios.delete(`http://localhost:8001/api/parlays/delete/${parlay_id}`)
+    axios.delete(`https://uncut-gems-api-server.herokuapp.com/api/parlays/delete/${parlay_id}`)
     onSubmit()
   };
 
@@ -80,26 +80,24 @@ export default function ParlaySubmit({data, user, users, parlay_id,parlay_fee, e
         setError("Too much Gems!")
         return false;
       } else if (filter.length === 0) {
-        axios.post("/api/parlays/participants", {
+        axios.post("https://uncut-gems-api-server.herokuapp.com/api/parlays/participants", {
           user_name: user.user_name,
           parlay_id: parlay_id
-        },
-        {baseURL: 'https://uncut-gems-api-server.herokuapp.com'})
+        })
         .catch(err => console.log(err))
 
-        axios.put(`http://localhost:8001/api/users/update/${user.user_name}`, {
+        axios.put(`https://uncut-gems-api-server.herokuapp.com/api/users/update/${user.user_name}`, {
           wallet_amount: parlay_fee * -100
         })
         .catch(err => console.log(err))
 
         bets.map(bet => {
-          axios.post("/api/parlays/bets/fill", {
+          axios.post("https://uncut-gems-api-server.herokuapp.com/api/parlays/bets/fill", {
             selection: bet.selection,
             bet_id: bet.bet_id,
             parlay_id: parlay_id,
             user_id: user.user_name
-          },
-          {baseURL: 'https://uncut-gems-api-server.herokuapp.com'})
+          })
           .catch(err => console.log(err))
         })
         return true
