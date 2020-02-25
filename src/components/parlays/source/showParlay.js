@@ -1,8 +1,10 @@
-  import React from "react"
-  import styled from "styled-components"
+import React, { useState } from "react";
+import styled from "styled-components"
 
 import ShowParticipants from './showParticipants'
 import { findAllByAltText } from "@testing-library/react"
+
+import UserRanked from './userRanked'
 
 const Article = styled.article` 
   background-color: #fff;
@@ -30,14 +32,14 @@ const Title = styled.h1`
 
 `
 
-  const Rankings = styled.section`
+const Rankings = styled.section`
     display: flex;
     justify-content: center;
 
     margin: 10px auto;
   `
 
-  const User = styled.div`
+const User = styled.div`
     display:flex;
     flex-direction: column;
     align-items:center;
@@ -56,7 +58,7 @@ const MoreUsers = styled.p`
   align-items:flex-end;
 `
 
-  const ParlayInfo = styled.section`
+const ParlayInfo = styled.section`
     display: flex;
     flex-direction: column;
     align-items:center;
@@ -65,25 +67,17 @@ const MoreUsers = styled.p`
     
   `
 
-  const Info = styled.h1`
+const Info = styled.h1`
     margin: 5px;
   `
 
-
-
 export default function ShowParlay({ name, bets, participants, entry, start_time, rankings }) {
-
-
+  
+  
   const displayRank = (rank) => {
     const x = rankings[rank]
-    return x
+    return x || [];
   }
-
-
-
-
-  console.log('Participants', participants)
-  console.log('Rankings', rankings)
 
   return (
 
@@ -97,55 +91,67 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
         <Info><img src="https://toppng.com/uploads/preview/em-svg-png-icon-free-download-gem-icon-11563228146u2haxp4svc.png" alt="gem-icon" height="20px" width="20px" /> {participants.length * entry} </Info>
       </Header>
 
-      {/* <div className="separator">{participants.length} participant(s)</div> */}
       <Rankings>
-        {/* {console.log(displayRank('1'))} */}
-        {console.log('Display Rank', displayRank('1'))}
+       
         {
           displayRank(1).map(player => {
             const names = Object.keys(player)
             for (let i = 0; i < names.length || i === 3; i++) {
 
               return (
-                <div>
-                  <div>{names[i]}</div>
-                  <div>{player[names][0]}</div>
-                  <div>{player[names][1]}</div>
-                </div>
+                <UserRanked 
+                username={names[i]}
+                rank={'1'} 
+                userphoto={'https://i.imgur.com/XhF02ie.png'}
+                points={player[names][0]}
+                />
               )
             }
           })
 
         }
-        {/* {
-          displayRank('2').map(player => {
+        {displayRank(1).length < 2 && 
+          displayRank(2).map(player => {
             const names = Object.keys(player)
-            return (
-              <div>{names[0]}</div>
-            )
-          })
+            for (let i = 0; i < names.length || i === 2; i++) {
 
-        } */}
-
-
-        {/* {
-          participants.map(player => {
-            return (
-              <User key={player.user_name}>
-                <img
-                  src='https://i.imgur.com/pYla8hh.png'
-                  alt='#'
-                  height="50px"
-                  width="50px"
+              return (
+                <UserRanked 
+                username={names[i]}
+                rank={'2'} 
+                userphoto={'https://i.imgur.com/XhF02ie.png'}
+                points={player[names][0]}
                 />
-                <Name>{player.user_name}</Name>
-           
-              </User>
-            )
+              )
+            }
           })
-        } */}
 
-        <ShowParticipants />
+        }
+        {
+        
+        ((displayRank(1).length + displayRank(2).length) < 3) &&
+          displayRank(3).map(player => {
+            const names = Object.keys(player)
+            for (let i = 0; i < names.length; i++) {
+
+              return (
+                <UserRanked 
+                username={names[i]}
+                rank={'3'} 
+                userphoto={'https://i.imgur.com/XhF02ie.png'}
+                points={player[names][0]}
+                />
+              )
+            }
+          })
+
+        } 
+        
+
+
+        <ShowParticipants 
+          participants={participants}
+        />
 
       </Rankings>
     </Article>
