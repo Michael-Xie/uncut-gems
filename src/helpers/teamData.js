@@ -150,7 +150,7 @@ const teamData = (team) => {
       logo: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_Logos/58419c12a6515b1e0ad75a5b.png",
       arena: "https://raw.githubusercontent.com/pizzani/uncut-gems/master/images/nba_citys/washington.png",
       colors: "208,60,71, 0.701"
-    }
+    },
 
   }
   return data[team]
