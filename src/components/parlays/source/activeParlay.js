@@ -36,8 +36,8 @@ const Title = styled.h3`
   border-bottom: 1px solid #000;
   color: #fff;
   font-size: 1.15rem;
-  background-color: #000;
-  background-image: url("https://www.transparenttextures.com/patterns/blizzard.png");
+  background-color: #415058;
+  /* background-image: url("https://www.transparenttextures.com/patterns/blizzard.png"); */
 `
 
 const Name = styled.span`
@@ -107,9 +107,10 @@ export default function ActiveParlay({
       <Parlay>
         <Title>
           <Name>{name}</Name>
-          <Prize> <img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="15px" width="15px" />{entry} / <img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="15px" width="15px" />{participants.length * entry}</Prize>
+          <Prize> <img src="https://i.imgur.com/cB1xBGj.png" alt="gem-icon" height="15px" width="15px" />{entry} / <img src="https://i.imgur.com/cB1xBGj.png" alt="gem-icon" height="15px" width="15px" />{participants.length * entry}</Prize>
         </Title>
         <Expansion
+          users={users}
           parlay_id={parlay_id}
           participants={participants}
           rankings={rankings}
