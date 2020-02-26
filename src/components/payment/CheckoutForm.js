@@ -128,7 +128,7 @@ export default function CheckoutForm() {
       setError(errorMessages);
     } else {
       // Show a success message
-      axios.get(`http://uncut-gems-api-server.herokuapp.com/api/global/1`)
+      axios.get(`https://uncut-gems-api-server.herokuapp.com/api/global/1`)
            .catch(err => console.log(err))
       history.goBack();
 

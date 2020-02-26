@@ -123,7 +123,7 @@ export default function Register({ dispatch }) {
 
           }
         })
-        .then(() => axios.get(`http://uncut-gems-api-server.herokuapp.com/api/global/1`))
+        .then(() => axios.get(`https://uncut-gems-api-server.herokuapp.com/api/global/1`))
         .catch(err => console.log(err))
     }
     setError(errors);
