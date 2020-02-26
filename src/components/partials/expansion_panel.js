@@ -20,11 +20,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const GamesSummary = styled.div`
-  display-flex;
+  display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0;
-  margin: 0;
+
 `
 
 const GameView = styled.div`
@@ -43,33 +42,35 @@ const BetContain = styled.div`
 
 const Type = styled.div`
   display: flex;
-  background-color: #444;
-  background-image: url("https://www.transparenttextures.com/patterns/blizzard.png");
-  color: #fff;
-  text-align: center;
+  justify-content: space-around;
+  align-items:center;
+  height: 60px;
+  background-color: #F4F4F2;
+  /* background-image: url("https://www.transparenttextures.com/patterns/blizzard.png"); */
+  color: #000;
+
 `
 
 const BetType = styled.h5`
   display: flex;
-  width: 33%;
   justify-content: center;
   align-items: center;
 `
 
-const Away = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 33%;
-`
+// const Away = styled.div`
+//   display: flex;
+//   justify-content: flex-end;
 
-const Home = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  width: 33%;
-`
+// `
+
+// const Home = styled.div`
+//   display: flex;
+//   justify-content: flex-start;
+ 
+// `
 
 const Logo = styled.img`
-  width: 30%;
+
 `
 
 // UserBets, Name, Selection, Current
@@ -82,10 +83,10 @@ const UserBets = styled.div`
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 1.15em;
-  background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png");
+  /* background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png"); */
   background-color: ${props => props.background};
   color: ${props => props.color};
-  font-weght: extra-bold;
+  font-weight: extra-bold;
 `
 
 const Name = styled.div`
@@ -280,14 +281,14 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
             return (
               <BetContain key={bet.id}>
                 <Type>
-                  <Home><Logo src={home_data.logo} /></Home>
+                  <Logo src={away_data.logo} height="45px" width="45px"/>
                     <BetType>{convertBet[bet.type]}</BetType>
-                  <Away><Logo src={away_data.logo} /></Away>
+                  <Logo src={home_data.logo} height="45px" width="45px"/>
                 </Type>
               {
                 user_bets.map(user_bet => {
                   if (user_bet.bet_id === bet.id) {
-                    let background = '#f00'
+                    let background = '#E23636'
                     let color = '#000'
                     let difference;
                     const convertTeam = {
@@ -297,10 +298,10 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
                     const result = getResult(bet.type)
                     if (bet.type === 'pickem' &&
                         result   === convertTeam[user_bet.selection]) {
-                      background = '#0f0'
+                      background = '#9DFF89'
                     } else {
                       difference = result - user_bet.selection
-                      if (Math.abs(difference) <= 10) background = '#0f0'
+                      if (Math.abs(difference) <= 10) background = '#9DFF89'
                       else                            color      = '#fff'
                     }
                     return (

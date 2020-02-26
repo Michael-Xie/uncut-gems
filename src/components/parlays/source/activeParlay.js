@@ -107,7 +107,7 @@ export default function ActiveParlay({
       <Parlay>
         <Title>
           <Name>{name}</Name>
-          <Prize> ${entry}.00 / ${participants.length * entry}.00 </Prize>
+          <Prize> <img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="15px" width="15px" />{entry} / <img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="15px" width="15px" />{participants.length * entry}</Prize>
         </Title>
         <Expansion
           parlay_id={parlay_id}
