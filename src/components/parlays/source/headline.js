@@ -12,6 +12,7 @@ import styled from "styled-components"
 const Article = styled.article` 
   display: flex;
   justify-content: space-evenly;
+  flex-direction: column;
   width: 100%;
   max-width: 600px;
   height: 100px;
@@ -30,24 +31,25 @@ const Article = styled.article`
 
 const Section = styled.section`
   display: flex;
+  justify-content: space-around;
   align-items:center;
-  justify-content: space-between;
 `
 
+const TeamName = styled.div`
+  display: flex;
+  justify-content: space-around;
+`
+const Team = styled.div` 
 
-const TeamName = styled.h1`
- margin: 0 10px;
 `
 
 const Logo = styled.img`
+  max-width: 60px;
+  width: 100%;
 `
 // ---------------------------
 
 export default function Headline({ game }) {
-
-
-
-
 
   if (game.home_team === undefined || game.away_team === undefined)
     return <div></div>
@@ -59,28 +61,24 @@ export default function Headline({ game }) {
       awayColor={game.away_team.colors}
       arena={game.home_team.arena}
     >
+      <TeamName>
+        <h1>{game.away_team.name}</h1>
+        <h1>{game.home_team.name}</h1>
+      </TeamName>
 
       <Section>
-        <Logo
-          src={game.away_team.logo}
-          alt={game.away_team.name}
-          height="75px"
-          width="auto"
-        />
-
-        <TeamName>{game.away_team.name}</TeamName>
-      </Section>
-
-
-      <Section>
-        <TeamName>{game.home_team.name}</TeamName>
-
-        <Logo
-          src={game.home_team.logo}
-          alt={game.home_team.name}
-          height="75px"
-          width="auto"
-        />
+        <Team>
+          <Logo
+            src={game.away_team.logo}
+            alt={game.away_team.name}
+          />
+        </Team>
+        <Team>
+          <Logo
+            src={game.home_team.logo}
+            alt={game.home_team.name}
+          />
+        </Team>
       </Section>
 
     </Article>

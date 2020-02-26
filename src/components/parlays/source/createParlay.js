@@ -172,7 +172,6 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
         })
       }
       <FormSubmit
-        
         onSubmit={onSubmit} 
         user={user} 
         data={data} 

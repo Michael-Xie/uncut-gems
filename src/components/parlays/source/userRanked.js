@@ -23,8 +23,12 @@ const Photo = styled.img`
 `
 
 const Text = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content:center;
   text-align: center;
   font-size: 12px;
+  margin: 3px 0;
 `
 const Right = styled.div`
   
@@ -38,7 +42,7 @@ export default function UserRanked({ username, rank, userphoto, points, payout }
       <Photo  src={userphoto} alt={username} height="50px" width="50px" />
       <Text>{username}</Text>
       <Text>{points} points</Text>
-      <Text>{payout} <img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="18px" width="18px" /></Text>
+      <Text>{payout}&nbsp; <img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="18px" width="18px" /></Text>
     </Wrapper>
   )
 }
