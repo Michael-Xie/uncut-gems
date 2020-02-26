@@ -51,15 +51,10 @@ const Teams = styled.section`
 `
 
 const ScoreLogo = styled.div`
-  font-family: Orbitron, Helvetica, sans-serif;
   display: flex;
-
   align-items: center;
   font-size: 2rem;
-
-  padding: 0 20px;
 `
-
 const GameInfo = styled.div`
   display: flex;
   align-items: center;
@@ -83,8 +78,6 @@ const GameStatus = styled.h3`
 
 const Points = styled.div`
   margin: 0 10px;
-
-
 `
 const Logo = styled.img`
   max-width: 60px;
