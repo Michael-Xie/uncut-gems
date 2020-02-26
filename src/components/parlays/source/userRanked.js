@@ -24,6 +24,7 @@ const Photo = styled.img`
 
 const Text = styled.div`
   text-align: center;
+  font-size: 18px;
 `
 const Right = styled.div`
   
@@ -34,9 +35,10 @@ const Right = styled.div`
 export default function UserRanked({ username, rank, userphoto, points, payout }) {
   return (
     <Wrapper rank={rank} >
-      <Photo  src={userphoto} alt={username} height="40px" width="40px" />
+      <Photo  src={userphoto} alt={username} height="50px" width="50px" />
       <Text>{username}</Text>
       <Text>{points} points</Text>
+      <Text>{payout} <img src="https://i.imgur.com/cB1xBGj.png" alt="gem-icon" height="18px" width="18px" /></Text>
     </Wrapper>
   )
 }
