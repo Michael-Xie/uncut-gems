@@ -20,11 +20,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const GamesSummary = styled.div`
-  display-flex;
+  display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0;
-  margin: 0;
+
 `
 
 const GameView = styled.div`
@@ -43,33 +42,35 @@ const BetContain = styled.div`
 
 const Type = styled.div`
   display: flex;
-  background-color: #444;
-  background-image: url("https://www.transparenttextures.com/patterns/blizzard.png");
-  color: #fff;
-  text-align: center;
+  justify-content: space-around;
+  align-items:center;
+  height: 60px;
+  background-color: #F4F4F2;
+  /* background-image: url("https://www.transparenttextures.com/patterns/blizzard.png"); */
+  color: #000;
+
 `
 
 const BetType = styled.h5`
   display: flex;
-  width: 33%;
   justify-content: center;
   align-items: center;
 `
 
-const Away = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 33%;
-`
+// const Away = styled.div`
+//   display: flex;
+//   justify-content: flex-end;
 
-const Home = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  width: 33%;
-`
+// `
+
+// const Home = styled.div`
+//   display: flex;
+//   justify-content: flex-start;
+
+// `
 
 const Logo = styled.img`
-  width: 30%;
+
 `
 
 // UserBets, Name, Selection, Current
@@ -82,10 +83,10 @@ const UserBets = styled.div`
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 1.15em;
-  background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png");
+  /* background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png"); */
   background-color: ${props => props.background};
   color: ${props => props.color};
-  font-weght: extra-bold;
+  font-weight: extra-bold;
 `
 
 const Name = styled.div`
@@ -111,10 +112,11 @@ const Current = styled.div`
 
 const Rankings = styled.div`
   display: flex;
+  justify-content: space-evenly;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #000;
-  background-image: url("https://www.transparenttextures.com/patterns/blizzard.png");
+  background-color:#415058;
+  /* background-image: url("https://www.transparenttextures.com/patterns/blizzard.png"); */
   color: #fff;
 `
 
@@ -123,17 +125,12 @@ const Placement = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30%;
+
 `
 
 const UserImg = styled.img`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${props => props.color};
-  border: 1px solid #000;
-  border-radius: 50%;
-  width: 20%;
+  max-width: 50px;
+  width: 100%;
 `
 
 const Player = styled.div`
@@ -163,6 +160,7 @@ const Participants = styled.div`
 const ParticipantStats = styled.span`
   display: flex;
   width: 100%;
+  margin: 4px 0;
 `
 
 const Div = styled.span`
@@ -172,9 +170,18 @@ const Div = styled.span`
   width: 25%;
 `
 
-export default function Expansion({games, bets, scores, rankings, teamData, user_bets, user, parlay_id, participants}) {
+export default function Expansion({ games, bets, scores, rankings, teamData, user_bets, users, parlay_id, participants }) {
   const classes = useStyles()
 
+  //  ------ Find User By Name  ------  //
+  const findUserByName = (userName) => {
+
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].user_name === userName) {
+        return users[i].user_photo
+      }
+    }
+  }
   const getGames = () => {
     const gamesId = []
     bets.map(bet => {
@@ -201,7 +208,7 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
       if (parlay_id === parseInt(parlay, 10)) {
         Object.keys(rankings[parlay]).map(place => {
           rankings[parlay][place].map(player => {
-            if (limit)       places++;
+            if (limit) places++;
             if (places <= 3) result.push([place, player])
           })
         })
@@ -221,16 +228,16 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
           <Typography className={classes.heading}><b>Games</b> ({getGames().length})</Typography>
         </ExpansionPanelSummary>
         <GamesSummary>
-        {
-          getGames().map(game => {
-            const score = scores.filter(score => score.game_id === game.game_id)[0]
-            return (
-              <GameView>
-                <Game game={game} score={score} key={game.id} />
-              </GameView>
-            )
-          })
-        }
+          {
+            getGames().map(game => {
+              const score = scores.filter(score => score.game_id === game.game_id)[0]
+              return (
+                <GameView>
+                  <Game game={game} score={score} key={game.id} />
+                </GameView>
+              )
+            })
+          }
         </GamesSummary>
       </ExpansionPanel>
       <ExpansionPanel>
@@ -242,84 +249,84 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
           <Typography className={classes.heading}><b>Bets</b> ({bets.length})</Typography>
         </ExpansionPanelSummary>
         <BetsSummary>
-        {
-          bets.map(bet => {
-            const game       = games.filter(game => game.game_id === bet.game_id)[0]
+          {
+            bets.map(bet => {
+              const game = games.filter(game => game.game_id === bet.game_id)[0]
 
-            const home_data  = teamData(game.home_team)
-            const away_data  = teamData(game.away_team)
-            const home_short = game.home_team.split(' ').reverse()[0]
-            const away_short = game.away_team.split(' ').reverse()[0]
-            const score      = getScores(bet.game_id)[0]
+              const home_data = teamData(game.home_team)
+              const away_data = teamData(game.away_team)
+              const home_short = game.home_team.split(' ').reverse()[0]
+              const away_short = game.away_team.split(' ').reverse()[0]
+              const score = getScores(bet.game_id)[0]
 
-            const getResult  = (type) => {
-              if (type === 'pickem') {
-                if      (score.home_total > score.away_total) return game.home_team.split(' ').reverse()[0]
-                else if (score.home_total < score.away_total) return game.away_team.split(' ').reverse()[0]
-                else                                          return 'none'
+              const getResult = (type) => {
+                if (type === 'pickem') {
+                  if (score.home_total > score.away_total) return game.home_team.split(' ').reverse()[0]
+                  else if (score.home_total < score.away_total) return game.away_team.split(' ').reverse()[0]
+                  else return 'none'
+                }
+                if (type === 'points_th') {
+                  const home_score = score.home_first + score.home_second
+                  const away_score = score.away_first + score.away_second
+                  return home_score + away_score
+                }
+                if (type === 'points_tf') {
+                  const home_score = score.home_total
+                  const away_score = score.away_total
+                  return home_score + away_score
+                }
+                return null
               }
-              if (type === 'points_th') {
-                const home_score = score.home_first + score.home_second
-                const away_score = score.away_first + score.away_second
-                return home_score + away_score
-              }
-              if (type === 'points_tf') {
-                const home_score = score.home_total
-                const away_score = score.away_total
-                return home_score + away_score
-              }
-              return null
-            }
 
-            const convertBet = {
-              'pickem': 'Pick`Em',
-              'points_tf': 'Total Points (FT)',
-              'points_th': 'Total Points (HT)'
-            }
+              const convertBet = {
+                'pickem': 'Pick`Em',
+                'points_tf': 'Total Points (FT)',
+                'points_th': 'Total Points (HT)'
+              }
 
-            return (
-              <BetContain key={bet.id}>
-                <Type>
-                  <Home><Logo src={home_data.logo} /></Home>
+              return (
+                <BetContain key={bet.id}>
+                  <Type>
+                    <Logo src={away_data.logo} height="45px" width="45px" />
                     <BetType>{convertBet[bet.type]}</BetType>
-                  <Away><Logo src={away_data.logo} /></Away>
-                </Type>
-              {
-                user_bets.map(user_bet => {
-                  if (user_bet.bet_id === bet.id) {
-                    let background = '#f00'
-                    let color = '#000'
-                    let difference;
-                    const convertTeam = {
-                      'home': game.home_team.split(' ').reverse()[0],
-                      'away': game.away_team.split(' ').reverse()[0]
-                    }
-                    const result = getResult(bet.type)
-                    if (bet.type === 'pickem' &&
-                        result   === convertTeam[user_bet.selection]) {
-                      background = '#0f0'
-                    } else {
-                      difference = result - user_bet.selection
-                      if (Math.abs(difference) <= 10) background = '#0f0'
-                      else                            color      = '#fff'
-                    }
-                    return (
-                      <UserBets color={color} background={background} key={user_bet.user_name}>
-                        <Name>{user_bet.user_id}</Name> 
-                        <Selection>{user_bet.selection}</Selection>
-                        <Current>
-                          {getResult(bet.type)} 
-                          {bet.type !== 'pickem' && <span>&nbsp;({difference})</span>}
-                        </Current>
-                      </UserBets>
-                    )
+                    <Logo src={home_data.logo} height="45px" width="45px" />
+                  </Type>
+                  {
+                    user_bets.map(user_bet => {
+                      if (user_bet.bet_id === bet.id) {
+                        let background = '#E23636'
+                        let color = '#000'
+                        let difference;
+                        const convertTeam = {
+                          'home': game.home_team.split(' ').reverse()[0],
+                          'away': game.away_team.split(' ').reverse()[0]
+                        }
+                        const result = getResult(bet.type)
+                        if (bet.type === 'pickem' &&
+                          result === convertTeam[user_bet.selection]) {
+                          background = '#9DFF89'
+                        } else {
+                          difference = result - user_bet.selection
+                          if (Math.abs(difference) <= 10) background = '#9DFF89'
+                          else color = '#fff'
+                        }
+                        return (
+                          <UserBets color={color} background={background} key={user_bet.user_name}>
+                            <Name>{user_bet.user_id}</Name>
+                            <Selection>{user_bet.selection}</Selection>
+                            <Current>
+                              {getResult(bet.type)}
+                              {bet.type !== 'pickem' && <span>&nbsp;({difference})</span>}
+                            </Current>
+                          </UserBets>
+                        )
+                      }
+                    })
                   }
-                })
-              }
-              </BetContain>
-            )
-          })
-        }
+                </BetContain>
+              )
+            })
+          }
         </BetsSummary>
       </ExpansionPanel>
       <ExpansionPanel>
@@ -337,44 +344,44 @@ export default function Expansion({games, bets, scores, rankings, teamData, user
             <Div><b>Payout</b></Div>
             <Div><b>Rank</b></Div>
           </ParticipantStats>
+          {
+            getGSB(parlay_id, false).map(result => {
+              const player = Object.keys(result[1])[0]
+              return (
+                <ParticipantStats>
+                  <Div>{player}</Div>
+                  <Div>{result[1][player][0]} </Div>
+                  <Div><img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="13px" width="13px" />&nbsp; {result[1][player][1]} </Div>
+                  <Div>{result[0]}</Div>
+                </ParticipantStats>
+              )
+            })
+          }
+        </Participants>
         {
-          getGSB(parlay_id, false).map(result => {
+        }
+      </ExpansionPanel>
+      <Rankings>
+        {
+          getGSB(parlay_id, true).map(result => {
             const player = Object.keys(result[1])[0]
+            const getAbbrev = (place) => {
+              if (place === '1') return [place + 'st', '#FFD700']
+              else if (place === '2') return [place + 'nd', '#C0C0C0']
+              else if (place === '3') return [place + 'rd', '#CD7F32']
+            }
             return (
-              <ParticipantStats>
-                <Div>{player}</Div>
-                <Div>{result[1][player][0]} </Div>
-                <Div>{result[1][player][1]} </Div>
-                <Div>{result[0]}</Div>
-              </ParticipantStats>
+              <Placement>
+                <UserImg src={findUserByName(player)} />
+                <Player>{player}</Player>
+                <Div>
+                  <Rank color={getAbbrev(result[0])[1]}>{getAbbrev(result[0])[0]}</Rank>&nbsp;/&nbsp;
+                <Points>{result[1][player][0]}&nbsp;pts</Points>
+                </Div>
+              </Placement>
             )
           })
         }
-        </Participants>
-      {
-      }
-      </ExpansionPanel>
-      <Rankings>
-      {
-        getGSB(parlay_id, true).map(result => {
-          const player = Object.keys(result[1])[0]
-          const getAbbrev = (place) => {
-            if      (place === '1') return [place + 'st', '#FFD700']
-            else if (place === '2') return [place + 'nd', '#C0C0C0']
-            else if (place === '3') return [place + 'rd', '#CD7F32']
-          }
-          return (
-            <Placement>
-              <UserImg color={getAbbrev(result[0])[1]} src='https://raw.githubusercontent.com/JKaram/react-components/master/src/images/img_98061.png' />
-              <Player>{player}</Player>
-              <Div>
-                <Rank color={getAbbrev(result[0])[1]}>{getAbbrev(result[0])[0]}</Rank>&nbsp;/&nbsp;
-                <Points>{result[1][player][0]}&nbsp;pts</Points>
-              </Div>
-            </Placement>
-          )
-        })
-      }
       </Rankings>
     </div>
   );
