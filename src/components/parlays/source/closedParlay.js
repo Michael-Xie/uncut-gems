@@ -89,6 +89,7 @@ export default function ClosedParlay({ name, bets, participants, entry, start_ti
                 rank={1} 
                 userphoto={findUserByName(names[i])}
                 points={player[names][0]}
+                payout={player[names][1]}
                 />
               )
             }
