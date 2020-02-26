@@ -98,6 +98,9 @@ export default function Register({ dispatch }) {
     if (user.length === 0) {
       errors.push("Username is empty.");
     }
+    if (user.length > 12) {
+      errors.push("Username too long (max 12 characters)")
+    }
     if (errors.length === 0) {
       axios.post("/api/users", {
         user_name: user,
@@ -120,6 +123,7 @@ export default function Register({ dispatch }) {
 
           }
         })
+        .then(() => axios.get(`https://uncut-gems-api-server.herokuapp.com/api/global/1`))
         .catch(err => console.log(err))
     }
     setError(errors);

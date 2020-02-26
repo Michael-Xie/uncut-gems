@@ -91,7 +91,14 @@ export default function ParlaySubmit({data, user, users, cancelled, parlay_id,pa
         axios.put(`https://uncut-gems-api-server.herokuapp.com/api/users/update/${user.user_name}`, {
           wallet_amount: parlay_fee * -100
         })
+          .then(() => {
+            axios.get(`https://uncut-gems-api-server.herokuapp.com/api/global/1`)
+              .catch(err => console.log(err))
+          })
         .catch(err => console.log(err))
+
+        axios.get(`https://uncut-gems-api-server.herokuapp.com/api/global/1`)
+          .catch(err => console.log(err))
 
         bets.map(bet => {
           axios.post("/api/parlays/bets/fill", {
