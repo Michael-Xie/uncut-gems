@@ -99,7 +99,6 @@ export default function Game({ game, score }) {
   let time = moment(parseInt(game.timestamp) * 1000).format('h:mm a');
   // let time = moment(parseInt(game.timestamp) * 1000).calendar();
 
-  // console.log('time', time.format('h:mm a'));
   if (game.length === 0 || !score)
     return <div></div>
 
