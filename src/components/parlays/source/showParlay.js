@@ -4,6 +4,8 @@ import styled from "styled-components"
 
 import ShowParticipants from './showParticipants'
 
+const moment = require('moment');
+
 const Article = styled.article` 
     background-color: #fff;
     max-width: 600px;
@@ -91,7 +93,7 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
       }
     }
   }
-
+  console.log('start time', start_time);
   return (
     <Article>
       <Header>
