@@ -4,6 +4,8 @@ import teamData from "../../helpers/teamData"
 
 import StatsBox from './statsBox'
 
+const moment = require('moment');
+
 const showPointsIfActive = (pointsProp) => {
   if (pointsProp) return pointsProp;
   return 0
@@ -83,12 +85,21 @@ const Logo = styled.img`
   max-width: 60px;
   width: 100%;
 `
-
+const Time = styled.h1`
+font-size: 16px;
+text-align: center;
+width: 40%;
+text-align: center;
+`
 // ---------------------------
 
 export default function Game({ game, score }) {
   const [statsBoxVisible, setStatsBoxVisible] = useState(false);
+  console.log('game', game);
+  let time = moment(parseInt(game.timestamp) * 1000).format('h:mm a');
+  // let time = moment(parseInt(game.timestamp) * 1000).calendar();
 
+  // console.log('time', time.format('h:mm a'));
   if (game.length === 0 || !score)
     return <div></div>
 
@@ -108,6 +119,7 @@ export default function Game({ game, score }) {
       >
         <TeamNames>
           <Name>{game.away_team}</Name>
+          <Time>{time}</Time>
           <Name>{game.home_team}</Name>
         </TeamNames>
 
@@ -126,7 +138,7 @@ export default function Game({ game, score }) {
 
 
           <ScoreLogo>
-            
+
             <Points>{showPointsIfActive(score.home_total)}</Points>
             <Logo src={homeTeam.logo} alt={game.home_team} />
 
