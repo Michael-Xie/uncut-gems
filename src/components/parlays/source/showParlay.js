@@ -94,6 +94,8 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
     }
   }
   console.log('start time', start_time);
+  let time = moment(parseInt(start_time) * 1000).format('h:mm a');
+
   return (
     <Article>
       <Header>
@@ -101,7 +103,7 @@ export default function ShowParlay({ name, bets, participants, entry, start_time
           <h1>{name}</h1>
         </Title>
         {start_time > 1 && (
-          <Time>{new Date(start_time * 1000).toTimeString().slice(0, 5)} start time</Time>
+          <Time>{time} start time</Time>
         )}
       </Header>
       <ParlayInfo>
