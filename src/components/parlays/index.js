@@ -266,7 +266,7 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       {mode === CREATE && (
         <Fragment>
           <Title
-            title={'Create a Parlay'}
+            title={'Create Parlay'}
             buffer={buffer}
           />
           <CreateParlay
@@ -282,8 +282,9 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       {mode === ACTIVE && (
         <Fragment>
           <Title
-            title={`Active [${getActiveParlays().length}]`}
+            title={`Active Parlays`}
             buffer={buffer}
+            number={getActiveParlays().length}
           />
           {
             getActiveParlays().map(parlay => {
@@ -314,8 +315,9 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
           {
             getAdminParlays().length > 0 && (
               <Title
-                title={`Parlays to Fill [${getAdminParlays().length}]`}
+                title={`Parlays To Fill`}
                 buffer={buffer}
+                number={getAdminParlays().length}
               />
             )
           }
@@ -345,8 +347,9 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       {mode === OPEN && (
         <Fragment>
           <Title
-            title={`Open Parlays [${getOpenParlays().length}]`}
+            title={`Open Parlays`}
             buffer={buffer}
+            number={getOpenParlays().length}
           />
          
           {
@@ -370,8 +373,9 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       {mode === CLOSED && (
         <Fragment>
           <Title
-            title={`Closed [${getClosedParlays().length}]`}
+            title={`Closed Parlays`}
             buffer={buffer}
+            number={getClosedParlays().length}
           />
         
           {

@@ -22,17 +22,25 @@ const Left = styled.div`
   
 `
 
-const Text = styled.h1`
-font-size: 24px;
-  
+const Text = styled.span`
+  font-size: 1.25rem;
 `
 const Right = styled.div`
   width: 36px;
 `
 
+const Numbers = styled.span`
+  font-size: 1.30rem;
+  color: #444;
+  padding: 5px;
+  margin-right: 5px;
+  font-weight: bolder;
+  
+`
 
 
-export default function Title({ title, buffer }) {
+
+export default function Title({ title, buffer, number }) {
   return (
     <Wrapper>
       <Left>
@@ -41,7 +49,7 @@ export default function Title({ title, buffer }) {
         />
       </Left>
 
-      <Text>{title}</Text>
+      <Text><Numbers>{number}</Numbers>{title}</Text>
       <Right></Right>
     </Wrapper>
   )
