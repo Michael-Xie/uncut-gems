@@ -6,11 +6,6 @@ import StatsBox from './statsBox'
 
 const moment = require('moment');
 
-const showPointsIfActive = (pointsProp) => {
-  if (pointsProp) return pointsProp;
-  return 0
-}
-
 /* ---------------------------
  *    start of styled CSS 
  * ---------------------------
@@ -95,9 +90,21 @@ text-align: center;
 
 export default function Game({ game, score }) {
   const [statsBoxVisible, setStatsBoxVisible] = useState(false);
-  console.log('game', game);
-  let time = moment(parseInt(game.timestamp) * 1000).format('h:mm a');
-  // let time = moment(parseInt(game.timestamp) * 1000).calendar();
+
+  // format date and time
+  let time = moment(parseInt(game.timestamp) * 1000).format('h:mm a')
+  let date = moment(parseInt(game.timestamp) * 1000).format('YY/MM/DD')
+
+  // reformat game status.
+  const gameStatus = {
+    NS: 'vs.',
+    Q1: 'First Quarter',
+    Q2: 'Second Quarter',
+    Q3: 'Third Quarter',
+    Q4: 'Fourth Quarter',
+    FT: 'Full Time',
+    AOT: 'Full Time'
+  }
 
   if (game.length === 0 || !score)
     return <div></div>
@@ -118,7 +125,7 @@ export default function Game({ game, score }) {
       >
         <TeamNames>
           <Name>{game.away_team}</Name>
-          <Time>{time}</Time>
+          <Time>{time} - {date}</Time>
           <Name>{game.home_team}</Name>
         </TeamNames>
 
@@ -127,18 +134,18 @@ export default function Game({ game, score }) {
 
           <ScoreLogo>
             <Logo src={awayTeam.logo} alt={game.away_team} />
-            <Points>{showPointsIfActive(score.away_total)}</Points>
+            <Points>{score.status !== 'NS' && score.away_total}</Points>
           </ScoreLogo>
 
           <GameInfo>
-            <GameStatus>{score.status}</GameStatus>
+            <GameStatus>{gameStatus[score.status]}</GameStatus>
           </GameInfo>
 
 
 
           <ScoreLogo>
 
-            <Points>{showPointsIfActive(score.home_total)}</Points>
+            <Points>{score.status !== 'NS' && score.home_total}</Points>
             <Logo src={homeTeam.logo} alt={game.home_team} />
 
           </ScoreLogo>
