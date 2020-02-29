@@ -11,6 +11,7 @@ import ActiveParlay from "./source/activeParlay"
 
 import Title from './source/title'
 import axios from "axios"
+import moment from "moment"
 
 const Container = styled.div`
   /* display: flex;
@@ -273,7 +274,13 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
             user={user}
             onSubmit={() => buffer(OPEN)}
             games={games.filter(game => {
-              if (game.timestamp * 1000 > Date.now())
+              const today = [moment().day(), moment().month()]
+              const gameDate = [
+                new Date(game.timestamp * 1000).getDay(),
+                new Date(game.timestamp * 1000).getMonth()
+              ]
+              if (today[0] === gameDate[0] &&
+                  today[1] === gameDate[1])
                 return game
             })}
           />
