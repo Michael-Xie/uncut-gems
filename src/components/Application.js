@@ -14,6 +14,7 @@ import "./Application.css"
 import functions from "../helpers/functions";
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import moment from "moment"
 
 import CheckoutForm from './payment/CheckoutForm';
 
@@ -67,13 +68,25 @@ const Application = () => {
           <Route path="/games">
             {state.games.length > 0 &&
               state.games.map(game => {
-                return (
-                  <Game
-                    key={game.game_id}
-                    game={game}
-                    score={state.scores[state.games.indexOf(game)]}
-                  />
-                );
+                const yesterday = [
+                  moment().subtract(1, 'days').day(),
+                  moment().subtract(1, 'days').month()
+                ]
+                const gameDate = [
+                  new Date(game.timestamp * 1000).getDay(),
+                  new Date(game.timestamp * 1000).getMonth()
+                ]
+
+                if (gameDate[1] === yesterday[1] &&
+                    gameDate[0] - yesterday[0] > -1) {
+                  return (
+                    <Game
+                      key={game.game_id}
+                      game={game}
+                      score={state.scores[state.games.indexOf(game)]}
+                    />
+                  );
+                }
               })}
           </Route>
           <Route path="/parlays">
