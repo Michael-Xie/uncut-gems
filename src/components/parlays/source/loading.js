@@ -11,7 +11,6 @@ const Article = styled.div`
   max-width: 600px;
   width: 100%;
   height: 50px;
-  border: 1px solid #dbdbdb;
 
   margin: 0 auto;
 `
