@@ -124,7 +124,7 @@ export default function Game({ game, score }) {
       >
         <TeamNames>
           <Name>{game.away_team}</Name>
-          <Time>{time}</Time>
+          <Time>{score.status === 'NS' && time || score.status !== 'NS' && <span>Live!</span>}</Time>
           <Name>{game.home_team}</Name>
         </TeamNames>
 
