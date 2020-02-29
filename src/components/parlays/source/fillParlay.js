@@ -66,7 +66,7 @@ const Logos = styled.img`
 `
 
 const BetType = styled.div`
-  max-width: 400px;
+  max-width: 100px;
   width: 100%;
   font-size:16px;
 `

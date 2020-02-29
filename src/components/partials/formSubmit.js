@@ -17,11 +17,17 @@ const Checkout = styled.button`
   position:fixed;
   bottom: 0;
 
+  border: none;
+
   color: #fff;
   text-shadow: 0.5px 0.5px #000;
   font-weight: bold;
   font-size: 1.25rem;
-  background-color: #2f2;
+  background-color: #4f4;
+
+  &:hover {
+    color: #000;
+  }
 `
 
 const Text = styled.div`
