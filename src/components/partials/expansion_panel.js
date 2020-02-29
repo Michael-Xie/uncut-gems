@@ -351,7 +351,7 @@ export default function Expansion({ games, bets, scores, rankings, teamData, use
                 <ParticipantStats>
                   <Div>{player}</Div>
                   <Div>{result[1][player][0]} </Div>
-                  <Div><img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="13px" width="13px" />&nbsp; {result[1][player][1]} </Div>
+                  <Div><img src="https://i.imgur.com/NhP56Q2.png" alt="gem-icon" height="13px" width="13px" />&nbsp; {result[1][player][1] / 100} </Div>
                   <Div>{result[0]}</Div>
                 </ParticipantStats>
               )
