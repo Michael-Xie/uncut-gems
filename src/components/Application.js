@@ -68,17 +68,17 @@ const Application = () => {
           <Route path="/games">
             {state.games.length > 0 &&
               state.games.map(game => {
-                const yesterday = [
-                  moment().subtract(1, 'days').day(),
-                  moment().subtract(1, 'days').month()
+                const today = [
+                  moment().day(),
+                  moment().month()
                 ]
                 const gameDate = [
                   new Date(game.timestamp * 1000).getDay(),
                   new Date(game.timestamp * 1000).getMonth()
                 ]
 
-                if (gameDate[1] === yesterday[1] &&
-                    gameDate[0] - yesterday[0] > -1) {
+                if (gameDate[1] === today[1] &&
+                    gameDate[0] === today[0]) {
                   return (
                     <Game
                       key={game.game_id}

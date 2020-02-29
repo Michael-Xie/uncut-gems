@@ -93,7 +93,6 @@ export default function Game({ game, score }) {
 
   // format date and time
   let time = moment(parseInt(game.timestamp) * 1000).format('h:mm a')
-  let date = moment(parseInt(game.timestamp) * 1000).format('YY/MM/DD')
 
   // reformat game status.
   const gameStatus = {
@@ -125,7 +124,7 @@ export default function Game({ game, score }) {
       >
         <TeamNames>
           <Name>{game.away_team}</Name>
-          <Time>{date}<br/>{time}</Time>
+          <Time>{time}</Time>
           <Name>{game.home_team}</Name>
         </TeamNames>
 
