@@ -81,7 +81,7 @@ const Logo = styled.img`
   width: 100%;
 `
 const Time = styled.h1`
-font-size: 16px;
+font-size: 14px;
 text-align: center;
 width: 40%;
 text-align: center;
@@ -125,7 +125,7 @@ export default function Game({ game, score }) {
       >
         <TeamNames>
           <Name>{game.away_team}</Name>
-          <Time>{time} - {date}</Time>
+          <Time>{date}<br/>{time}</Time>
           <Name>{game.home_team}</Name>
         </TeamNames>
 
