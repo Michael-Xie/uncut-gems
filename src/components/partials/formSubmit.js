@@ -12,13 +12,22 @@ import styled from "styled-components"
 const Checkout = styled.button`
   max-width: 600px;
   width: 100%;
-  height: 40px;
+  height: 50px;
   
   position:fixed;
   bottom: 0;
 
+  border: none;
+
   color: #fff;
-  background-color: #000;
+  text-shadow: 0.5px 0.5px #000;
+  font-weight: bold;
+  font-size: 1.25rem;
+  background-color: #4f4;
+
+  &:hover {
+    color: #000;
+  }
 `
 
 const Text = styled.div`
@@ -131,7 +140,7 @@ export default function FormSubmit({data, onSubmit, user, buyIn, betName, games,
   return (
     <div>
       <Checkout type="button" onClick={handleOpen}>
-        Checkout
+        Checkout!
       </Checkout>
       <Modal
         aria-labelledby="transition-modal-title"

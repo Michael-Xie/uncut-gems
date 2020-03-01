@@ -11,6 +11,7 @@ import ActiveParlay from "./source/activeParlay"
 
 import Title from './source/title'
 import axios from "axios"
+import moment from "moment"
 
 const Container = styled.div`
   /* display: flex;
@@ -266,14 +267,20 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       {mode === CREATE && (
         <Fragment>
           <Title
-            title={'Create a Parlay'}
+            title={'Create Parlay'}
             buffer={buffer}
           />
           <CreateParlay
             user={user}
             onSubmit={() => buffer(OPEN)}
             games={games.filter(game => {
-              if (game.timestamp * 1000 > Date.now())
+              const today = [moment().day(), moment().month()]
+              const gameDate = [
+                new Date(game.timestamp * 1000).getDay(),
+                new Date(game.timestamp * 1000).getMonth()
+              ]
+              if (today[0] === gameDate[0] &&
+                  today[1] === gameDate[1])
                 return game
             })}
           />
@@ -282,8 +289,9 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       {mode === ACTIVE && (
         <Fragment>
           <Title
-            title={`Active [${getActiveParlays().length}]`}
+            title={`Active Parlays`}
             buffer={buffer}
+            number={getActiveParlays().length}
           />
           {
             getActiveParlays().map(parlay => {
@@ -314,8 +322,9 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
           {
             getAdminParlays().length > 0 && (
               <Title
-                title={`Parlays to Fill [${getAdminParlays().length}]`}
+                title={`Parlays To Fill`}
                 buffer={buffer}
+                number={getAdminParlays().length}
               />
             )
           }
@@ -345,8 +354,9 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       {mode === OPEN && (
         <Fragment>
           <Title
-            title={`Open Parlays [${getOpenParlays().length}]`}
+            title={`Open Parlays`}
             buffer={buffer}
+            number={getOpenParlays().length}
           />
          
           {
@@ -370,8 +380,9 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
       {mode === CLOSED && (
         <Fragment>
           <Title
-            title={`Closed [${getClosedParlays().length}]`}
+            title={`Closed Parlays`}
             buffer={buffer}
+            number={getClosedParlays().length}
           />
         
           {

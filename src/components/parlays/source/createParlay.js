@@ -156,9 +156,6 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
         />
 
       </Center>
-      
-    
-
       {
        data.map(game => {
           if (game)
