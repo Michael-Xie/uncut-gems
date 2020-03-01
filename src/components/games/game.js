@@ -37,12 +37,6 @@ const Article = styled.article`
 
   margin: 0 auto;
   overflow: hidden;
-
-  &:hover {
-    box-shadow: 0 8px 6px -6px black;
-    transform: scale(1.15);
-    transition: .5s;
-  }
 `;
 
 const Teams = styled.section`
