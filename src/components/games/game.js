@@ -37,6 +37,8 @@ const Article = styled.article`
 
   &:hover {
     box-shadow: 0 8px 6px -6px black;
+    transform: scale(1.15);
+    transition: .5s;
   }
 `
 
