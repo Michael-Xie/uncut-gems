@@ -13,7 +13,7 @@ const Article = styled.article`
   flex-direction: column;
   width: 100%;
   max-width: 600px;
-  height: 100px;
+  height: 125px;
   margin: 0 auto;
   background: linear-gradient(
       to left,
@@ -46,6 +46,20 @@ const Logo = styled.img`
   max-width: 60px;
   width: 100%;
 `;
+
+const Time = styled.h1`
+font-size: 14px;
+text-align: center;
+width: 40%;
+text-align: center;
+`
+
+const Name = styled.h1`
+  font-size: 16px;
+  text-align: center;
+  width: 40%;
+  text-align: center;
+`
 // ---------------------------
 
 export default function Headline({ game }) {
@@ -60,9 +74,9 @@ export default function Headline({ game }) {
         arena={game.home_team.arena}
       >
         <TeamName>
-          <h1>{game.away_team.name}</h1>
-          <h1>{time}</h1>
-          <h1>{game.home_team.name}</h1>
+          <Name>{game.away_team.name}</Name>
+          <Time>{time}</Time>
+          <Name>{game.home_team.name}</Name>
         </TeamName>
 
         <Section>
