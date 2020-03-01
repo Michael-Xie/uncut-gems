@@ -1,3 +1,43 @@
+# Uncut Gems - Sports betting for peers
+
+Uncut Gems is a sports betting application for peers, where users create parlays and bet against their peers. Currently, it supports basketball.
+
+On the client side, it uses React, Styled Components, and Material UI. On the backend, it uses Node, Express, and PostgreSQL. APIs used are Rapidapi for basketball data, and Stripe for payment processing. This page is for the Client server.
+
+[Uncut Gems API Server](https://github.com/pizzani/uncut-gems-server)
+
+## Final Product
+
+!["Login Page"](https://github.com/pizzani/uncut-gems-client/blob/master/docs/login-page.png)
+!["Games Page"](https://github.com/pizzani/uncut-gems-client/blob/master/docs/games-page.png)
+
+## Dependencies
+
+- @material-ui/core: ^4.9.2,
+- @material-ui/icons: ^4.9.1,
+- @stripe/react-stripe-js: ^1.0.2,
+- @stripe/stripe-js: ^1.0.0,
+- @testing-library/jest-dom: ^4.2.4,
+- @testing-library/react: ^9.3.2,
+- @testing-library/user-event: ^7.1.2,
+- axios: ^0.19.2,
+- moment: ^2.24.0,
+- query-string-object: ^0.2.5,
+- react: ^16.12.0,
+- react-dom: ^16.12.0,
+- react-radio-buttons: ^1.2.2,
+- react-router: ^5.1.2,
+- react-router-dom: ^5.1.2,
+- react-scripts: 3.3.1,
+- react-stripe-elements: ^6.0.1,
+- styled-components: ^5.0.1
+
+## Getting Started
+
+- Install all dependencies (using the `npm install` command).
+- Run the development web server using the `npm start` command.
+
+<!-- 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -65,4 +105,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 ### `yarn build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify -->
