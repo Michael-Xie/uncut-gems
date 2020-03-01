@@ -75,7 +75,6 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
   //  ------  Choose Parlays  ------  //
   const [data, setData] = useState((games || []).map(game => {
     if (game)
-      console.log("game", game);
       return {
         home_team: {
           ...teamData(game.home_team),
