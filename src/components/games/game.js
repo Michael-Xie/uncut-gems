@@ -105,7 +105,6 @@ export default function Game({ game, score }) {
     FT: "Full Time",
     AOT: "Full Time"
   };
-  console.log("status", score.status);
   if (game.length === 0 || !score) return <div></div>;
 
   const homeTeam = teamData(game.home_team);
