@@ -280,7 +280,8 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
                 new Date(game.timestamp * 1000).getMonth()
               ]
               if (today[0] === gameDate[0] &&
-                  today[1] === gameDate[1])
+                  today[1] === gameDate[1] &&
+                  game.status === 'NS')
                 return game
             })}
           />
