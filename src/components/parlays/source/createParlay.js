@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, Fragment } from "react"
 import styled from "styled-components"
 
 import InputSlider from "../../partials/slider"
@@ -22,6 +22,11 @@ const Wrapper = styled.article`
 const H2 = styled.h3`
   text-align: center;
   margin: 10px 0;
+`
+
+const NoGames = styled.div`
+  margin-top: 10px;
+  font-size: 1.25em;
 `
 
 const Center = styled.div`
@@ -80,6 +85,7 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
           ...teamData(game.home_team),
           name: game.home_team
         },
+        timestamp: game.timestamp,
         away_team: {
           ...teamData(game.away_team),
           name: game.away_team
@@ -132,29 +138,31 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
 
   return (
     <Wrapper>
-
-      
-
-      {/* <MoreInfo onClick={() => setInfoBoxVisible(!infoBoxVisible)}>More Info</MoreInfo> */}
-
-      {/* {infoBoxVisible && (<InfoBox />)} */}
-
       <Center>
-       
-        <H2>Parlay Name</H2>
-        <ParlayName
-          value={nameValue}
-          setName={setNameValue}
-        />
-       
-        <H2>Buy-In amount</H2>
-        <InputSlider
-          value={value}
-          setValue={setValue}
-          handleSliderChange={handleSliderChange}
-          handleInputChange={handleInputChange}
-        />
-
+      { 
+        games.length > 0 && (
+          <Fragment>
+            <H2>Parlay Name</H2>
+            <ParlayName
+              value={nameValue}
+              setName={setNameValue}
+            />
+           
+            <H2>Buy-In amount</H2>
+            <InputSlider
+              value={value}
+              setValue={setValue}
+              handleSliderChange={handleSliderChange}
+              handleInputChange={handleInputChange}
+            />
+          </Fragment>
+        )
+      }
+      {
+        games.length === 0 && (
+          <NoGames>No Games Available</NoGames> 
+        )
+      }
       </Center>
       {
        data.map(game => {
@@ -168,15 +176,18 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
           
         })
       }
-      <FormSubmit
-        onSubmit={onSubmit} 
-        user={user} 
-        data={data} 
-        betName={nameValue} 
-        buyIn={value} 
-        dispatch={dispatch} 
-        games={games}
-      />
+      { games.length > 0 && (
+          <FormSubmit
+            onSubmit={onSubmit} 
+            user={user} 
+            data={data} 
+            betName={nameValue} 
+            buyIn={value} 
+            dispatch={dispatch} 
+            games={games}
+          />
+        )
+      }
       <Footer></Footer>
     </Wrapper>
   );
