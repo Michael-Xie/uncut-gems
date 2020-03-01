@@ -1,3 +1,29 @@
+# Uncut Gems - Sports betting for peers
+
+Uncut Gems is a sports betting application for peers. Currently, it supports basketball. On the client side, it uses React, Styled Components, and Material UI. On the backend, it uses Node, Express, and PostgreSQL. APIs used are Rapidapi for basketball data, and Stripe for payment processing. This page is for the Client server.
+
+[Un-cut Gems API Server](https://github.com/pizzani/uncut-gems-server)
+
+## Final Product
+
+!["screenshot description"](#)
+!["screenshot description"](#)
+
+## Dependencies
+
+- Node.js
+- Express
+- EJS
+- bcrypt
+- body-parser
+- cookie-session
+
+## Getting Started
+
+- Install all dependencies (using the `npm install` command).
+- Run the development web server using the `npm start` command.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
