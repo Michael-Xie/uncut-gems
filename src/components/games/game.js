@@ -40,6 +40,8 @@ const Article = styled.article`
 
   &:hover {
     box-shadow: 0 8px 6px -6px black;
+    transform: scale(1.15);
+    transition: .5s;
   }
 `;
 
@@ -71,6 +73,7 @@ const Name = styled.h1`
   text-align: center;
 `;
 const GameStatus = styled.h3`
+  text-shadow: 0.75px 0.75px #000;
   text-align: center;
   margin: 0 auto;
 `;
@@ -105,7 +108,6 @@ export default function Game({ game, score }) {
     FT: "Full Time",
     AOT: "Full Time"
   };
-  if (game.length === 0 || !score) return <div></div>;
 
   const homeTeam = teamData(game.home_team);
   const awayTeam = teamData(game.away_team);
@@ -122,10 +124,10 @@ export default function Game({ game, score }) {
       >
         <TeamNames>
           <Name>{game.away_team}</Name>
-          <Time>
-            {(score.status === "NS" && time) ||
-              ((score.status !== "NS" && score.status !== "FT") && <span>Live!</span>)}
-          </Time>
+          <Time>{score.status === 'NS' && time || 
+                 ['AOT', 'FT'].includes(score.status) && <span>Game Over!</span> ||
+                 score.status !== 'NS' && <span>Live!</span>
+          }</Time>
           <Name>{game.home_team}</Name>
         </TeamNames>
 

@@ -85,8 +85,8 @@ export default function NavButtons({ username, userPhoto }) {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem><LinkStyle to="/parlays">Parlays</LinkStyle></MenuItem>
-                    <MenuItem><LinkStyle to="/games">Games</LinkStyle></MenuItem>
+                    <MenuItem><LinkStyle onClick={(e) => handleClose(e)} to="/parlays">Parlays</LinkStyle></MenuItem>
+                    <MenuItem><LinkStyle onClick={(e) => handleClose(e)} to="/games">Games</LinkStyle></MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

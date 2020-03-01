@@ -14,11 +14,6 @@ import axios from "axios"
 import moment from "moment"
 
 const Container = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 600px; */
-
 `
 
 const Div = styled.div`
@@ -255,14 +250,6 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
 
   return (
     <Container>
-      {/* <ButtonList>
-        <Button onClick={() => buffer(CREATE)}>CREATE</Button>
-        <Button onClick={() => buffer(ACTIVE)}>ACTIVE</Button>
-        <Button onClick={() => buffer(OPEN)}>OPEN  </Button>
-        <Button onClick={() => buffer(CLOSED)}>CLOSED</Button>
-        <Button onClick={() => buffer(SEARCH)}>SEARCH</Button>
-      </ButtonList> */}
-
       {mode === LOADING && <Loading />}
       {mode === CREATE && (
         <Fragment>
@@ -280,7 +267,8 @@ const Parlays = ({ user, games, parlays, user_bets, bets, participants, scores, 
                 new Date(game.timestamp * 1000).getMonth()
               ]
               if (today[0] === gameDate[0] &&
-                  today[1] === gameDate[1])
+                  today[1] === gameDate[1] &&
+                  game.status === 'NS')
                 return game
             })}
           />

@@ -91,13 +91,13 @@ export default function UserButtons({ username, userphoto, balance }) {
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <MenuItem>
-                      <LinkStyle to="/pay">
+                      <LinkStyle onClick={(e) => handleClose(e)} to="/pay">
                         <img src="https://i.imgur.com/NhP56Q2.png" alt="wallet" height="13px" width="13px"></img>
                         {balance}
                       </LinkStyle>
                     </MenuItem>
                     <MenuItem>
-                      <LinkStyle to="/logout">Logout</LinkStyle>
+                      <LinkStyle onClick={(e) => handleClose(e)} to="/logout">Logout</LinkStyle>
                     </MenuItem>
 
                   </MenuList>
