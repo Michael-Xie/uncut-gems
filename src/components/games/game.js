@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import styled from "styled-components"
-import teamData from "../../helpers/teamData"
+import styled from "styled-components";
+import teamData from "../../helpers/teamData";
 
-import StatsBox from './statsBox'
+import StatsBox from "./statsBox";
 
-const moment = require('moment');
+const moment = require("moment");
 
 /* ---------------------------
- *    start of styled CSS 
+ *    start of styled CSS
  * ---------------------------
  */
 
-const Article = styled.article` 
+const Article = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -23,15 +23,18 @@ const Article = styled.article`
   background: linear-gradient(
       to left,
       rgba(${props => props.homeColor}),
-      rgba(${props => props.awayColor})  
+      rgba(${props => props.awayColor})
     ),
-   url(${props => props.arena ? props.arena : 'https://previews.123rf.com/images/enterline/enterline1311/enterline131100002/24220420-a-realistic-vector-hardwood-textured-basketball-court-.jpg'});
+    url(${props =>
+      props.arena
+        ? props.arena
+        : "https://previews.123rf.com/images/enterline/enterline1311/enterline131100002/24220420-a-realistic-vector-hardwood-textured-basketball-court-.jpg"});
   background-blend-mode: multiply;
   background-size: cover;
   background-position: 50% 0;
   display: flex;
   cursor: pointer;
-  
+
   margin: 0 auto;
   overflow: hidden;
 
@@ -40,82 +43,76 @@ const Article = styled.article`
     transform: scale(1.15);
     transition: .5s;
   }
-`
+`;
 
 const Teams = styled.section`
-  display:flex;
-  width:100%;
+  display: flex;
+  width: 100%;
   justify-content: space-around;
-
-`
+`;
 
 const ScoreLogo = styled.div`
   display: flex;
   align-items: center;
   font-size: 2rem;
-`
+`;
 const GameInfo = styled.div`
   display: flex;
   align-items: center;
   font-weight: bold;
-`
+`;
 const TeamNames = styled.header`
-  display:flex;
+  display: flex;
   justify-content: space-around;
   text-shadow: 1px 1px #000;
-`
+`;
 const Name = styled.h1`
   font-size: 16px;
   text-align: center;
   width: 40%;
   text-align: center;
-`
+`;
 const GameStatus = styled.h3`
   text-shadow: 0.75px 0.75px #000;
   text-align: center;
   margin: 0 auto;
-`
+`;
 
 const Points = styled.div`
   margin: 0 10px;
-`
+`;
 const Logo = styled.img`
   max-width: 60px;
   width: 100%;
-`
+`;
 const Time = styled.h1`
-font-size: 14px;
-text-align: center;
-width: 40%;
-text-align: center;
-`
+  font-size: 14px;
+  text-align: center;
+  width: 40%;
+  text-align: center;
+`;
 // ---------------------------
 
 export default function Game({ game, score }) {
   const [statsBoxVisible, setStatsBoxVisible] = useState(false);
   // format date and time
-  let time = moment(parseInt(game.timestamp) * 1000).format('h:mm a')
+  let time = moment(parseInt(game.timestamp) * 1000).format("h:mm a");
 
   // reformat game status.
   const gameStatus = {
-    NS: 'vs.',
-    Q1: 'Quarter 1',
-    Q2: 'Quarter 2',
-    HT: 'Half Time',
-    Q3: 'Quarter 3',
-    Q4: 'Quarter 4',
-    FT: 'Full Time',
-    AOT: 'Full Time'
-  }
+    NS: "vs.",
+    Q1: "First Quarter",
+    Q2: "Second Quarter",
+    Q3: "Third Quarter",
+    Q4: "Fourth Quarter",
+    FT: "Full Time",
+    AOT: "Full Time"
+  };
 
-  if (game.length === 0 || !score)
-    return <div></div>
+  const homeTeam = teamData(game.home_team);
+  const awayTeam = teamData(game.away_team);
 
-  const homeTeam = teamData(game.home_team)
-  const awayTeam = teamData(game.away_team)
-
-  if (homeTeam === undefined || awayTeam === undefined)
-    return <div></div>
+  if (homeTeam === undefined || awayTeam === undefined) return <div></div>;
 
   return (
     <div>
@@ -135,24 +132,18 @@ export default function Game({ game, score }) {
         </TeamNames>
 
         <Teams>
-
-
           <ScoreLogo>
             <Logo src={awayTeam.logo} alt={game.away_team} />
-            <Points>{score.status !== 'NS' && score.away_total}</Points>
+            <Points>{score.status !== "NS" && score.away_total}</Points>
           </ScoreLogo>
 
           <GameInfo>
             <GameStatus>{gameStatus[score.status]}</GameStatus>
           </GameInfo>
 
-
-
           <ScoreLogo>
-
-            <Points>{score.status !== 'NS' && score.home_total}</Points>
+            <Points>{score.status !== "NS" && score.home_total}</Points>
             <Logo src={homeTeam.logo} alt={game.home_team} />
-
           </ScoreLogo>
         </Teams>
         <div></div>
@@ -172,6 +163,4 @@ export default function Game({ game, score }) {
       )}
     </div>
   );
-
 }
-
