@@ -90,7 +90,6 @@ text-align: center;
 
 export default function Game({ game, score }) {
   const [statsBoxVisible, setStatsBoxVisible] = useState(false);
-
   // format date and time
   let time = moment(parseInt(game.timestamp) * 1000).format('h:mm a')
 
