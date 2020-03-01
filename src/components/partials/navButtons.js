@@ -6,6 +6,8 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import PortraitIcon from '@material-ui/icons/Portrait';
+import SportsBasketballIcon from '@material-ui/icons/SportsBasketball';
 import { makeStyles } from '@material-ui/core/styles';
 
 import styled from "styled-components"
@@ -16,9 +18,10 @@ const LinkStyle = styled(Link)`
   padding-right: 15px;
   text-decoration: none;
   color: #000;
+  background: none;
 
   &:hover {
-    color: grey;
+    color: #000;
   }
 `
 
@@ -85,8 +88,16 @@ export default function NavButtons({ username, userPhoto }) {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem><LinkStyle onClick={(e) => handleClose(e)} to="/parlays">Parlays</LinkStyle></MenuItem>
-                    <MenuItem><LinkStyle onClick={(e) => handleClose(e)} to="/games">Games</LinkStyle></MenuItem>
+                    <MenuItem>
+                      <LinkStyle onClick={(e) => handleClose(e)} to="/parlays">
+                        Parlays &nbsp; <PortraitIcon />
+                      </LinkStyle>
+                    </MenuItem>
+                    <MenuItem>
+                      <LinkStyle onClick={(e) => handleClose(e)} to="/games">
+                        Games &nbsp; <SportsBasketballIcon />
+                      </LinkStyle>
+                    </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

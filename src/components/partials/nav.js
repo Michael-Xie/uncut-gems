@@ -8,6 +8,7 @@ import LoggedOutMenu from "./loggedoutMenu"
 const Header = styled.header` 
   background-color: #fff;
   background-image: url("https://www.transparenttextures.com/patterns/gplay.png");
+  border-bottom: 1px ridge #ccc;
   width: 100%;
   height: 75px;
 `

@@ -4,18 +4,16 @@ import styled from "styled-components"
 import ParlayMenu from './parlayMenu'
 
 const Wrapper = styled.div`
-display: flex;
+  display: flex;
 
-align-items: center;
-justify-content: space-between;
-max-width: 600px;
-width: 100%;
-height: 50px;
-margin: 0 auto 0px;
-font-size: 16px;
-
-border-bottom: 1px solid #dbdbdb;
-background-color: #fff;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 600px;
+  width: 100%;
+  height: 50px;
+  margin: 0 auto 0px;
+  font-size: 16px;
+  font-weight: bold;
 `
 
 const Left = styled.div`

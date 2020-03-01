@@ -1,7 +1,13 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
+import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import ControlPointIcon from '@material-ui/icons/ControlPoint';
+import SearchIcon from '@material-ui/icons/Search';
+import TvIcon from '@material-ui/icons/Tv';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import LockIcon from '@material-ui/icons/Lock';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const CREATE = "CREATE"
@@ -26,45 +32,56 @@ export default function ParlayMenu({ buffer }) {
     setAnchorEl(null);
   };
 
+  const StyledMenuItem = withStyles(theme => ({
+    root: {
+      padding: '10px',
+      fontWeight: 'bold',
+      '&:hover': {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white,
+      }
+    }
+  }))(MenuItem)
+
   return (
     <div>
       <IconButton
-        aria-label="more"
-        aria-controls="long-menu"
-        aria-haspopup="true"
+        color="primary"
+        size="medium"
         onClick={handleClick}
       >
         <MoreVertIcon />
       </IconButton>
       <Menu
-        id="long-menu"
         anchorEl={anchorEl}
         keepMounted
         open={open}
         onClose={handleClose}
         PaperProps={{
           style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: 200,
+            maxHeight: ITEM_HEIGHT * 6,
+            width: 160,
+            marginLeft: -10,
+            marginTop: 10
           },
         }}
       >
 
-        <MenuItem onClick={() => buffer(CREATE)}>
-          Create
-          </MenuItem>
-        <MenuItem onClick={() => buffer(ACTIVE)}>
-          Active
-          </MenuItem>
-        <MenuItem onClick={() => buffer(OPEN)}>
-          Open
-          </MenuItem>
-        <MenuItem onClick={() => buffer(CLOSED)}>
-          Closed
-          </MenuItem>
-        <MenuItem onClick={() => buffer(SEARCH)}>
-          Search
-          </MenuItem>
+        <StyledMenuItem onClick={() => buffer(CREATE)}>
+          Create Parlay &nbsp;&nbsp;&nbsp; <ControlPointIcon />
+          </StyledMenuItem>
+        <StyledMenuItem onClick={() => buffer(ACTIVE)}>
+          Active Parlays &nbsp;&nbsp; <TvIcon />
+          </StyledMenuItem>
+        <StyledMenuItem onClick={() => buffer(OPEN)}>
+          Open Parlays &nbsp;&nbsp;&nbsp;&nbsp; <LockOpenIcon />
+          </StyledMenuItem>
+        <StyledMenuItem onClick={() => buffer(CLOSED)}>
+          Closed Parlays &nbsp; <LockIcon />
+          </StyledMenuItem>
+        <StyledMenuItem onClick={() => buffer(SEARCH)}>
+          Search Parlays &nbsp; <SearchIcon />
+          </StyledMenuItem>
 
       </Menu>
     </div>
