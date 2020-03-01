@@ -96,10 +96,11 @@ export default function Game({ game, score }) {
   // reformat game status.
   const gameStatus = {
     NS: 'vs.',
-    Q1: 'First Quarter',
-    Q2: 'Second Quarter',
-    Q3: 'Third Quarter',
-    Q4: 'Fourth Quarter',
+    Q1: 'Quarter 1',
+    Q2: 'Quarter 2',
+    HT: 'Half Time',
+    Q3: 'Quarter 3',
+    Q4: 'Quarter 4',
     FT: 'Full Time',
     AOT: 'Full Time'
   }
@@ -123,7 +124,7 @@ export default function Game({ game, score }) {
       >
         <TeamNames>
           <Name>{game.away_team}</Name>
-          <Time>{score.status === 'NS' && time || score.status !== 'NS' && <span>Live!</span>}</Time>
+          <Time>{['NS', 'FT', 'AOT'].includes(score.status) && time || score.status !== 'NS' && <span>Live!</span>}</Time>
           <Name>{game.home_team}</Name>
         </TeamNames>
 
