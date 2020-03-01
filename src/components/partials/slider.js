@@ -14,6 +14,7 @@ const Div = styled.div`
 const useStyles = makeStyles({
   root: {
     width: 250,
+    background: 'none',
   },
   input: {
     width: 42,
@@ -50,7 +51,7 @@ export default function InputSlider({ value, setValue, handleSliderChange, handl
           <Input
             className={classes.input}
             value={value}
-            margin="dense"
+            margin="none"
             onChange={handleInputChange}
             onBlur={handleBlur}
             inputProps={{

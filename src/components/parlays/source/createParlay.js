@@ -142,13 +142,12 @@ export default function CreateParlay({ games, onSubmit, user, dispatch }) {
       { 
         games.length > 0 && (
           <Fragment>
-            <H2>Parlay Name</H2>
             <ParlayName
               value={nameValue}
               setName={setNameValue}
             />
            
-            <H2>Buy-In amount</H2>
+            <H2>Buy-In Amount</H2>
             <InputSlider
               value={value}
               setValue={setValue}
