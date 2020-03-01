@@ -69,6 +69,7 @@ const Name = styled.h1`
   text-align: center;
 `
 const GameStatus = styled.h3`
+  text-shadow: 0.75px 0.75px #000;
   text-align: center;
   margin: 0 auto;
 `
@@ -124,7 +125,10 @@ export default function Game({ game, score }) {
       >
         <TeamNames>
           <Name>{game.away_team}</Name>
-          <Time>{['NS', 'FT', 'AOT'].includes(score.status) && time || score.status !== 'NS' && <span>Live!</span>}</Time>
+          <Time>{score.status === 'NS' && time || 
+                 ['AOT', 'FT'].includes(score.status) && <span>Game Over!</span> ||
+                 score.status !== 'NS' && <span>Live!</span>
+          }</Time>
           <Name>{game.home_team}</Name>
         </TeamNames>
 
