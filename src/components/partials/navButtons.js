@@ -14,6 +14,9 @@ import styled from "styled-components"
 import { Link } from "react-router-dom"
 
 const LinkStyle = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor:pointer;
   padding-right: 15px;
   text-decoration: none;
@@ -95,7 +98,7 @@ export default function NavButtons({ username, userPhoto }) {
                     </MenuItem>
                     <MenuItem>
                       <LinkStyle onClick={(e) => handleClose(e)} to="/games">
-                        Games &nbsp; <SportsBasketballIcon />
+                        Games &nbsp;&nbsp; <SportsBasketballIcon />
                       </LinkStyle>
                     </MenuItem>
                   </MenuList>
