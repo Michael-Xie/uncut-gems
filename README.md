@@ -8,8 +8,8 @@ On the client side, it uses React, Styled Components, and Material UI. On the ba
 
 ## Final Product
 
-!["Login Page"](https://github.com/Michael-Xie/uncut-gems-client/blob/master/docs/login-page.png)
-!["Games Page"](https://github.com/Michael-Xie/uncut-gems-client/blob/master/docs/games-page.png)
+!["Login Page"](https://github.com/Michael-Xie/uncut-gems/blob/master/docs/login-page.png)
+!["Games Page"](https://github.com/Michael-Xie/uncut-gems/blob/master/docs/games-page.png)
 
 ## Dependencies
 
